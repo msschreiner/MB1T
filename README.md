@@ -10,4 +10,4 @@ The basic outline is that there are two steps: merging of all data sets and the 
 
 Metadata
 
-The list of participating labs can be found here: https://docs.google.com/spreadsheets/d/1Sk-pRu5YcvdvTiRxeGOt2creV5sIerHgiUidSDlYJtY/edit#gid=0
+The list of participating labs can be found here: https://docs.google.com/spreadsheets/d/1jDvb0xL1U6YbXrpPZ1UyfyQ7yYK9aXo002UaArqy35U/edit#gid=0
