@@ -1,8 +1,6 @@
 # MB1T
 
-mb1 test-retest reliability-analysis
-
-ManyBabies 1 Analysis Code
+ManyBabies1 test-retest analysis code
 
 Pipeline Description
 
