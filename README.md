@@ -4,8 +4,9 @@
 
 Analyzing MB1T data involves two steps:
 
-1 Merging of all data sets with resulting in the df_all file
-2 Preprocessing and analyses
+1. Merging of all data sets within the df_all file
+
+2. Preprocessing and analyses
 
 ## Metadata
 
