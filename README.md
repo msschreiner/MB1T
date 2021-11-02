@@ -2,10 +2,13 @@
 
 ManyBabies1 test-retest analysis code
 
-Pipeline Description
+Analyzing MB1T data involves two steps.
 
-The basic outline is that there are two steps: merging of all data sets and the analyses, which include preprocessing which is very minor compared to the original MB1 study. 
+1 Merging of all data sets with resulting in the df_all file
+2 Preprocessing and analyses
 
 Metadata
 
 The list of participating labs can be found here: https://docs.google.com/spreadsheets/d/1jDvb0xL1U6YbXrpPZ1UyfyQ7yYK9aXo002UaArqy35U/edit#gid=0
+
+A list of deviations from the preregistration is collected here: https://docs.google.com/document/d/1XCOY5FanSl7PCIl0UyLj5EqeE79C47xYyvq4vqGYQe8/edit
