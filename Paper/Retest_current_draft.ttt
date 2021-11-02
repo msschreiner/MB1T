@@ -1,0 +1,15 @@
+\begin{longtable}[t]{lrrll}
+\caption{\label{tab:labs}Statistics of the included labs. n refers to the number of infants included in the final analysis.}\\
+\toprule
+Lab & Mean age (days) & N & Method & Language\\
+\midrule
+babylab-potsdam & 227 & 22 & HPP & German\\
+babyling-oslo & 249 & 10 & Eyetracking & Norwegian\\
+brookes-babylab & 264 & 15 & central fixation & English\\
+InfantCog-UBC & 137 & 5 & central fixation & English\\
+infantll-madison & 231 & 31 & HPP & English\\
+\addlinespace
+lancslab & 236 & 16 & Eyetracking & English\\
+wsi-goettingen & 269 & 55 & central fixation, HPP & German\\
+\bottomrule
+\end{longtable}
