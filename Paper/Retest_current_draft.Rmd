@@ -86,7 +86,7 @@ A call was issued to all labs participating in the original MB1 study on January
 
 ```{r,message=FALSE,warning=FALSE}
 # importing dataset
-df_all<-read.csv2("df_all.csv", row.names=1)
+df_all<-read_csv(here("data","processed","df_all.csv"))
 
 # Calculating the variable days between the two test sessions
 df_all<-df_all %>% group_by(Subject,Lab) %>% mutate(days_between_sessions=max(Age)-min(Age)) %>%

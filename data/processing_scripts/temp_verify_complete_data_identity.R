@@ -1,0 +1,7 @@
+df_all <- read.csv(here("data","processed","df_all.csv")) %>% select(-Subject_Unique)
+df_all_old <- read.csv2(here("data","processed","df_all_old.csv"),row.names=1)
+df_all_old <- df_all_old %>% filter(!is.na(Subject))
+temp <- anti_join(df_all_old,df_all)
+temp_new <- anti_join(df_all,df_all_old)
+setdiff(df_all,df_all_old)
+setdiff(df_all_old,df_all)
