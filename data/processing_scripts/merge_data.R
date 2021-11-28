@@ -57,7 +57,7 @@ df_all <- df_trial %>%
   left_join(lab_metadata) %>%
   mutate(
     preterm = case_when(
-      correct_preterm == "y" & preterm %in% c("Y","N") ~ "N",
+      correct_preterm == "y" & preterm %in% c("Y","N") ~ "term",
       correct_preterm == "y" ~ "term",
       is.na(correct_preterm) ~ preterm
     )

@@ -89,21 +89,21 @@ A call was issued to all labs participating in the original MB1 study on January
 df_all<-read_csv(here("data","processed","df_all.csv"))
 
 # Calculating the variable days between the two test sessions
-df_all<-df_all %>% group_by(Subject,Lab) %>% mutate(days_between_sessions=max(Age)-min(Age)) %>%
+df_all<-df_all %>% 
+  group_by(Subject,Lab) %>% 
+  mutate(days_between_sessions=max(Age)-min(Age)) %>%
   ungroup() 
 
 # Truncating the looking times per trial at 18 seconds
-
-df_all<-df_all %>% mutate(LT=ifelse(LT>18,18,LT))
-
-# Fixing different spelling issues for the method central fixation
-df_all<-df_all %>% mutate(Method=as.character(Method),Method=ifelse(Method%in% c("single-screen","SingleScreen","single screen","Single Screen"),"central fixation",Method))
+# consistent with decision from MB1
+df_all<-df_all %>% 
+  mutate(LT=ifelse(LT>18,18,LT)) 
 
 
 # Excluding all children with session errors
 excludeID<-unique(df_all$Subject[df_all$session_error=="error"])
-
-df_all<-df_all %>% filter(!Subject%in%excludeID)
+df_all<-df_all %>% 
+  filter(!Subject %in% excludeID)
 
 # Relabeling preterm values "N" and "Y" into "term" and "preterm"
 df_all<-df_all %>% mutate(preterm=as.character(preterm),
@@ -116,13 +116,12 @@ df_all<-df_all %>% mutate(preterm=as.character(preterm),
 #df_all<-df_all %>% filter(preterm!="preterm")
 
 # exclude trials with trial error
-
-df_all<-df_all %>% filter(!trial_error%in%c("error","erorr"))
+df_all<-df_all %>% filter(trial_error == "error")
 
 # number of labs
 n_labs = length(unique(df_all$Lab))
 # number of excluded infants
-n_exlude = length(excludeID)
+n_exclude = length(excludeID)
 
 ```
 

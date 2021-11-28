@@ -65,6 +65,18 @@ read_participant_file <- function(path,fname) {
       lab== "babylab-brookes" ~ "brookes-babylab",
       TRUE ~ lab
     )) %>%
+    mutate(session_error = case_when( #unify session error
+      session_error %in% c("noerror","nonerror") ~ "noerror",
+      session_error %in% c("error") ~ "error"
+    )) %>%
+    mutate(method=case_when(
+      # Fixing different spelling issues for the method central fixation
+      method %in% c("single-screen","SingleScreen","single screen","Single Screen") ~ "central fixation",
+      TRUE ~ method)) %>%
+    mutate(participant_gender=case_when(
+      participant_gender %in% c("f","F") ~ "F",
+      participant_gender %in% c("m","M") ~ "M"
+    )) %>%
     mutate(age_days = as.numeric(age_days)) %>%
     mutate(days_preterm = as.num(days_preterm)) %>%
     group_by(subid) %>%
@@ -91,6 +103,10 @@ read_trial_file <- function(path,fname) {
       total_trial_time = as.num(as.character(total_trial_time)),
       trial_num=round(as.numeric(trial_num),digits = 0) #ensure trial numbers are integers
     )  %>%
+    mutate(trial_error = case_when( #unify trial error
+      trial_error %in% c("noerror","no error","noerror (LT is zero, but no trial error?)") ~ "noerror",
+      trial_error %in% c("error","erorr") ~ "error"
+    )) %>%
     mutate(subid_unique = paste0(lab, ":", subid)) #add unique subject identifier (in case different labs used the same subject id format)
   
   td
