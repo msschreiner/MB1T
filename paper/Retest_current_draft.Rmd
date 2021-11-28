@@ -99,16 +99,10 @@ df_all<-df_all %>%
 df_all<-df_all %>% 
   mutate(LT=ifelse(LT>18,18,LT)) 
 
-
 # Excluding all children with session errors
 excludeID<-unique(df_all$Subject[df_all$session_error=="error"])
 df_all<-df_all %>% 
   filter(!Subject %in% excludeID)
-
-# Relabeling preterm values "N" and "Y" into "term" and "preterm"
-df_all<-df_all %>% mutate(preterm=as.character(preterm),
-                          preterm=ifelse(preterm=="N","term",
-                                          ifelse(preterm=="Y","preterm",preterm)))
 
 #not needed as there are no premies? Checking preterm babies from Priya
 #exclude preterms
