@@ -98,23 +98,23 @@ A call was issued to all labs participating in the original MB1 study on January
 
 ```{r,message=FALSE,warning=FALSE}
 # importing dataset
-df_all<-read_csv(here("data","processed","df_all.csv"))
+df_all <- read_csv(here("data","processed","df_all.csv"))
 
 # Calculating the variable days between the two test sessions
-df_all<-df_all %>% 
-  group_by(Subject,Lab) %>% 
+df_all <- df_all %>% 
+  group_by(Subject,Subject_Unique,Lab) %>% 
   mutate(days_between_sessions=max(Age)-min(Age)) %>%
   ungroup() 
 
 # Truncating the looking times per trial at 18 seconds
 # consistent with decision from MB1
-df_all<-df_all %>% 
+df_all <- df_all %>% 
   mutate(LT=ifelse(LT>18,18,LT)) 
 
 # Excluding all children with session errors
-excludeID<-unique(df_all$Subject[df_all$session_error=="error"])
-df_all<-df_all %>% 
-  filter(!Subject %in% excludeID)
+excludeID <- unique(df_all$Subject_Unique[df_all$session_error=="error"])
+df_all <- df_all %>% 
+  filter(!Subject_Unique %in% excludeID)
 
 #not needed as there are no premies? Checking preterm babies from Priya
 #exclude preterms
@@ -122,13 +122,13 @@ df_all<-df_all %>%
 #df_all<-df_all %>% filter(preterm!="preterm")
 
 # exclude trials with trial error
-df_all<-df_all %>% filter(trial_error == "noerror")
+df_all <- df_all %>% 
+  filter(trial_error == "noerror")
 
 # number of labs
-n_labs = length(unique(df_all$Lab))
+n_labs <- length(unique(df_all$Lab))
 # number of excluded infants
-n_exclude = length(excludeID)
-
+n_exclude <- length(excludeID)
 ```
 
 ```{r,message=FALSE,warning=FALSE}
@@ -140,59 +140,80 @@ min_trials_per_type <- 1  # min trials per type for inclusion
 # cleaning data by using minimum LT for inclusion, outlier threshold and minimum number of 1 trial per condition
 # log-transformation of LT
 data_clean <- df_all %>%
-  filter(LT >= lt_min) %>%
   filter(Condition != "training") %>%
-  group_by(Subject,Session,Lab) %>%
+  group_by(Subject, Subject_Unique,Session,Lab) %>%
   mutate(log_lt = log(LT), 
-         .scaled_log_lt = as.numeric(langcog::scale(log_lt))) %>%
+         scaled_log_lt = as.numeric(langcog::scale(log_lt))) %>% #MZ: why scale within subject and session?
  # filter(abs(.scaled_log_lt) < z_threshold) %>%
-  group_by(Subject,Session,Lab) %>%
-  mutate(.N_IDS = sum(Condition == "IDS"),
-         .N_ADS = sum(Condition == "ADS")) %>%  
+  mutate(
+    N_below_threshold_lt = sum(LT < lt_min)
+  ) %>%
+  filter(LT >= lt_min) %>%
   mutate(N_IDS = sum(Condition == "IDS"),
-         N_ADS = sum(Condition == "ADS")) %>%
-  filter(.N_IDS >= min_trials_per_type & 
-           .N_ADS >= min_trials_per_type) %>%
-  select(-starts_with("."))
-
+         N_ADS = sum(Condition == "ADS"),
+         total_trial_n = N_IDS + N_ADS) %>%
+  filter(N_IDS >= min_trials_per_type & 
+           N_ADS >= min_trials_per_type)
 
 # aggregating log_lt for each Subject, Session and Condition
 agg_subjects <- data_clean %>%
-  group_by(Lab, Method, Subject, Language, Condition, Age,Session) %>%
+  group_by(Lab, Method, Subject, Subject_Unique,Language, Condition, Age,Session,total_trial_n) %>%
   summarise(MeanLogLT = mean(log_lt)) %>%
   mutate(ConditionC = ifelse(Condition == "IDS", .5, -.5)) %>%
-  mutate(Native = ifelse(Language == "American English", TRUE, FALSE))
+  mutate(language_recoded = case_when(
+    Lab %in% c("InfantCog-UBC","infantll-madison") & Language == "English" ~ "American English",
+    TRUE ~ Language
+  )) %>%
+  mutate(Native = ifelse(language_recoded == "American English", TRUE, FALSE))
 
 # creating a wide format of the dataset and calculating difference in log_lt for IDS and ADS and the proportion of IDS looking
 all_agg_subjects_paired <- agg_subjects %>%
   select(-ConditionC) %>% 
-  spread(Condition,MeanLogLT) %>%
+  pivot_wider(names_from = Condition, values_from = MeanLogLT) %>%
   mutate(Diff = IDS - ADS, 
-         Prop = IDS / (IDS + ADS))
+         Prop = IDS / (IDS + ADS),
+         binary_pref = case_when(
+           is.na(Diff) ~ NA_character_,
+           Diff > 0 ~ "IDS_preference",
+           Diff < 0 ~ "ADS_preference",
+           Diff == 0 ~ "no_preference"
+         ))
 
 # creating a wide format of the dataset that the difference scores for each Session become a separate variable, calculating the number of days between test and retest session, and mean Age for both testing sessions
-all_agg_subjects_paired_retest<-all_agg_subjects_paired%>%
-  group_by(Lab,Subject,Method,Language) %>%  spread(Session,Diff) %>% 
+all_agg_subjects_paired_retest <- all_agg_subjects_paired %>%
+  group_by(Lab,Subject,Subject_Unique,Method,Language) %>%  
+  pivot_wider(names_from=Session,values_from=Diff,names_prefix="session_") %>% 
   mutate(days_between_sessions=max(Age)-min(Age)) %>% 
-  summarise(Diff_1=mean(`1`,na.rm=T),Diff_2=mean(`2`,na.rm=T),days_between_sessions=mean(days_between_sessions),Age=mean(Age,na.rm=T))
+  summarise(
+    Diff_1=mean(session_1,na.rm=T),
+    Diff_2=mean(session_2,na.rm=T),
+    days_between_sessions=mean(days_between_sessions),
+    Age=mean(Age,na.rm=T))
 
-# filtering subjects that have no data for the difference scores
-all_agg_subjects_paired_retest<-all_agg_subjects_paired_retest %>% 
-  filter(!is.na(Diff_1)) %>% filter(!is.na(Diff_2))
+# filtering out subjects that have no data for the difference scores
+all_agg_subjects_paired_retest <- all_agg_subjects_paired_retest %>% 
+  filter(!is.na(Diff_1)) %>% 
+  filter(!is.na(Diff_2))
 
 # filtering out those subjects in the paired data frame
-all_agg_subjects_paired<-all_agg_subjects_paired %>% filter(Subject %in%all_agg_subjects_paired_retest$Subject )
+all_agg_subjects_paired<-all_agg_subjects_paired %>% 
+  filter(Subject_Unique %in% all_agg_subjects_paired_retest$Subject_Unique )
 
 # Getting the number of final participants
-n = length(unique(all_agg_subjects_paired$Subject)) # Final sample of participants
-n_exclude_session = length(unique(df_all$Subject))-n # Calculating Participants lost due to missing valid trial in either session 1 or session 2
+n <- length(unique(all_agg_subjects_paired$Subject_Unique)) # Final sample of participants
+n_exclude_session <- length(unique(df_all$Subject_Unique))-n # Calculating Participants lost due to missing valid trial in either session 1 or session 2
 
 # mean, minimum, and maximum age across both testing sessions
-age_stats<-all_agg_subjects_paired_retest %>% ungroup() %>%select(Age) %>% summarise_at(vars(Age),funs(mean,min,max))
+age_stats <- all_agg_subjects_paired_retest %>% 
+  ungroup() %>%
+  select(Age) %>% 
+  summarise_at(vars(Age),funs(mean,min,max))
 
 # Stats on number of days between test and retest
-stats_daysbetween <- all_agg_subjects_paired_retest %>% ungroup() %>% select(days_between_sessions) %>% summarise_at(vars(days_between_sessions),funs(mean,min,max))
-
+stats_daysbetween <- all_agg_subjects_paired_retest %>% 
+  ungroup() %>% 
+  select(days_between_sessions) %>% 
+  summarise_at(vars(days_between_sessions),funs(mean,min,max))
 ```
 
 Contributing labs were asked to re-recruit their monolingual participants between the ages of 6 to 12 months who had already participated in the MB1 project. If participating labs had not committed to testing either of these age groups, they were also allowed to re-recruit participants from the youngest age group of 3- to 6-month-olds and/or the oldest age group of 12- to 15-month-olds. Labs were asked to contribute half (*n*=16) or full blocks (*n*=32), however, a lab's data was included in the study regardless of the number of included infants. The study was approved by each lab's respective ethics committee and parental consent was obtained for each infant prior to participation in the study.
