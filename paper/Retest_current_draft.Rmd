@@ -171,13 +171,7 @@ all_agg_subjects_paired <- agg_subjects %>%
   select(-ConditionC) %>% 
   pivot_wider(names_from = Condition, values_from = MeanLogLT) %>%
   mutate(Diff = IDS - ADS, 
-         Prop = IDS / (IDS + ADS),
-         binary_pref = case_when(
-           is.na(Diff) ~ NA_character_,
-           Diff > 0 ~ "IDS_preference",
-           Diff < 0 ~ "ADS_preference",
-           Diff == 0 ~ "no_preference"
-         ))
+         Prop = IDS / (IDS + ADS))
 
 # creating a wide format of the dataset that the difference scores for each Session become a separate variable, calculating the number of days between test and retest session, and mean Age for both testing sessions
 all_agg_subjects_paired_retest <- all_agg_subjects_paired %>%
@@ -239,8 +233,10 @@ A child was excluded if they had a session error. Trials were excluded if they w
 ```{r labs, results="asis", message=FALSE, warning=FALSE}
 
 # Summarize mean Age and number of Subjects for each lab, method, and language
-lab_stats<-all_agg_subjects_paired_retest %>% select(Lab,Subject,Method,Age,Language) %>% group_by(Lab,Method,Language) %>% 
-  summarise(Age=mean(Age),N=length(unique(Subject)))
+lab_stats<-all_agg_subjects_paired_retest %>% 
+  select(Lab,Subject_Unique,Method,Age,Language) %>% 
+  group_by(Lab,Method,Language) %>% 
+  summarise(Age=mean(Age),N=length(unique(Subject_Unique)))
 
 # Assign column label to column 4
 names(lab_stats)[4]<-"Mean age (days)"
@@ -268,16 +264,11 @@ diff_session <- lmer(Diff ~ Session +
 
 diff_session_coefs<-summary(diff_session)$coefficients
 
-# Subsetting to session 1 for t-test
-all_agg_subjects_paired_s1 <- subset(all_agg_subjects_paired, all_agg_subjects_paired$Session=="1")
+# session 1 for t-test
+ttestSession1<-t.test(all_agg_subjects_paired_retest$Diff_1)
 
-ttestSession1<-t.test(all_agg_subjects_paired_s1$Diff)
-
-# Subsetting to session 2 for t-test
-
-all_agg_subjects_paired_s2 <- subset(all_agg_subjects_paired, all_agg_subjects_paired$Session=="2")
-
-ttestSession2 = t.test(all_agg_subjects_paired_s2$Diff)
+# session 2 for t-test
+ttestSession2 = t.test(all_agg_subjects_paired_retest$Diff_2)
 
 # Hier berechnen wir das Durchschnittsalter auf Grundlage beider Testzeitpunkte... Kann raus, oder?
 #age_stats_paired<-all_agg_subjects_paired %>% ungroup() %>% select(Age) %>% #summarise_at(vars(Age),funs(mean,min,max))
