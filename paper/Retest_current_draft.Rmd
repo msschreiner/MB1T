@@ -171,11 +171,17 @@ all_agg_subjects_paired <- agg_subjects %>%
   select(-ConditionC) %>% 
   pivot_wider(names_from = Condition, values_from = MeanLogLT) %>%
   mutate(Diff = IDS - ADS, 
-         Prop = IDS / (IDS + ADS))
+         Prop = IDS / (IDS + ADS),
+         binary_pref = case_when(
+           is.na(Diff) ~ NA_character_,
+           Diff > 0 ~ "IDS_preference",
+           Diff < 0 ~ "ADS_preference",
+           Diff == 0 ~ "no_preference"
+         ))
 
 # creating a wide format of the dataset that the difference scores for each Session become a separate variable, calculating the number of days between test and retest session, and mean Age for both testing sessions
 all_agg_subjects_paired_retest <- all_agg_subjects_paired %>%
-  group_by(Lab,Subject,Subject_Unique,Method,Language) %>%  
+  group_by(Lab,Subject,Subject_Unique,Method,Language, language_recoded) %>%  
   pivot_wider(names_from=Session,values_from=Diff,names_prefix="session_") %>% 
   mutate(days_between_sessions=max(Age)-min(Age)) %>% 
   summarise(
@@ -292,7 +298,7 @@ days_coefs<-summary(mod_lmer2)$coefficients
 
 # Differences in test-retest reliability between English and non-English learning infants
 # Assigning 1 to UBC and Madison as NAE labs. Remaining labs are non-NAE and are coded as 0.
-all_agg_subjects_paired_retest$NAE<-ifelse(all_agg_subjects_paired_retest$Lab=="InfantCog-UBC"| all_agg_subjects_paired_retest$Lab=="infantll-madison", 1, 0)
+all_agg_subjects_paired_retest$NAE<-ifelse(all_agg_subjects_paired_retest$language_recoded=="American English", 1, 0)
 
 # Adding NAE to model
 mod_lmer3 <- lmer(Diff_2 ~ Diff_1*NAE+(1|Lab),
@@ -330,53 +336,50 @@ We also tested for the possibility that the Time between sessions might have an 
 As NAE-learning infants showed greater IDS preferences than their non-NAE counterparts in the original study, we also assessed if test-retest reliability interacted with children’s native language. A multilevel analysis with Lab as random intercept, predicting the IDS preference in Session 2 based on the IDS preference in Session 1, NAE and the interaction of these two variables, revealed no main effect of NAE, $\beta$=`r round(nae_coefs[3,1],3)`,  *SE*=`r round(nae_coefs[3,2],2)`, *p*=`r printp(nae_coefs[3,5])`, and no interaction, $\beta$=`r round(nae_coefs[4,1],3)`, *SE*=`r round(nae_coefs[4,2],2)`, *p*=`r printp(nae_coefs[4,5])` (see Figure 1).
 
 ```{r results="asis",warning=FALSE,message=FALSE}
-
-# Computing lmm for each method separately
-Method<-unique(all_agg_subjects_paired_retest$Method)
-estimate<-rep(NA,3)
-SE<-rep(NA,3)
-pvalue<-rep(NA,3)
-cor<-rep(NA,3)
-pvalue2<-rep(NA,3)
-
-df<-as.data.frame(cbind(Method,estimate,SE,pvalue,cor,pvalue2))
-df[,2:6]<-as.numeric(as.character(df[,2:6]))
-
-counter = 0
-for (M in unique(all_agg_subjects_paired_retest$Method)){
+#function for computing coefficient table from lmer model and correlation reliability
+compute_coefs_reliability <- function(dataset) {
+  #fit lmer reliability model
+  mod_lmer <- lmer(Diff_2 ~ Diff_1 + (1|Lab),data=dataset,REML=T)
+  #extract coefficients
+  coef <- summary(mod_lmer)$coef %>%
+    as_data_frame %>%
+    mutate_at(c("Estimate","Std. Error","df", "t value", "Pr(>|t|)"), 
+              function (x) signif(x, digits = 3)) %>%
+    rename(SE = `Std. Error`, 
+           t = `t value`,
+           pvalue = `Pr(>|t|)`,
+           estimate = Estimate) %>%
+    #keep just main coefficient estimate
+    slice(2) %>%
+    #keep most important columns
+    select(estimate, SE, pvalue)
   
-  counter=counter+1
-
-  data<-all_agg_subjects_paired_retest[all_agg_subjects_paired_retest$Method==M,]
-  mod_lmer <- lmer(Diff_2 ~ Diff_1 + (1|Lab),
-              data=data,REML=T)
-
-
-coefs <- summary(mod_lmer)$coef %>%
-  as_data_frame %>%
-  mutate_at(c("Estimate","Std. Error","df", "t value", "Pr(>|t|)"), 
-            function (x) signif(x, digits = 3)) %>%
-  rename(SE = `Std. Error`, 
-         t = `t value`,
-         p = `Pr(>|t|)`) %>%
-  select(-df)
-         
-rownames(coefs) <- c("Intercept", "Session One")
+  #compute correlation and add to summarized data
+  correlation<-cor.test(dataset$Diff_1,dataset$Diff_2) 
+  summarized_data <- coef %>%
+    mutate(cor=as.numeric(correlation$estimate),
+           pvalue2=as.numeric(correlation$p.value))
   
-  correlation<-cor.test(data$Diff_1,data$Diff_2)
-  
-  df$estimate[counter]<-as.numeric(coefs$Estimate)[2]  
-  df$SE[counter]<-as.numeric(coefs$SE)[2]
-  df$pvalue[counter]<-as.numeric(coefs$p)[2]
-  df$cor[counter]<-as.numeric(correlation$estimate)
-  df$pvalue2[counter]<-as.numeric(correlation$p.value)
+  #return
+  summarized_data
 }
 
-papaja::apa_table(df, 
+coef_table <- all_agg_subjects_paired_retest %>%
+  group_by(Method) %>%
+  nest() %>%
+  #compute coefficients
+  mutate(coef_table = purrr::map(data, compute_coefs_reliability)) %>%
+  #remove data
+  select(-data) %>%
+  #unpack
+  unnest(cols=c(coef_table))
+  
+papaja::apa_table(coef_table, 
                   caption = "Coefficient estimates from a linear mixed effects model predicting IDS preference in Session 2 for each method separately.", 
                   format.args = list(digits = 3))
 
 ```
+
 ```{r fig1, fig.cap = "Infants' preference in Session 1 and Session 2 with individual data points and regression lines color-coded by method (central fixation, eye tracking, or HPP). Results are plotted separately for North American English-learning infants (right panel) and infants learning other languages and dialects (right panel)."}
 
 # Plotting IDS preference in Session 1 and Session 2 split by NAE
