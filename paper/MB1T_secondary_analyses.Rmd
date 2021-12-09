@@ -96,6 +96,82 @@ cor_trials
 
 ```
 
+# Preference reversal
+```{r,message=FALSE,warning=FALSE}
+
+lt_min <- 2                # minumum LT for inclusion
+z_threshold <- 3           # outlier threshold (sds)
+min_trials_per_type <- 1  # min trials per type for inclusion
+
+# cleaning data by using minimum LT for inclusion, outlier threshold and minimum number of 1 trial per condition
+# log-transformation of LT
+data_clean <- df_all %>%
+  filter(Condition != "training") %>%
+  group_by(Subject, Subject_Unique,Session,Lab) %>%
+  mutate(log_lt = log(LT))  %>% #, 
+         #scaled_log_lt = as.numeric(langcog::scale(log_lt))) %>% #MZ: why scale within subject and session?
+ # filter(abs(.scaled_log_lt) < z_threshold) %>%
+  mutate(
+    N_below_threshold_lt = sum(LT < lt_min)
+  ) %>%
+  filter(LT >= lt_min) %>%
+  mutate(N_IDS = sum(Condition == "IDS"),
+         N_ADS = sum(Condition == "ADS"),
+         total_trial_n = N_IDS + N_ADS) %>%
+  filter(N_IDS >= min_trials_per_type & 
+           N_ADS >= min_trials_per_type)
+
+# aggregating log_lt for each Subject, Session and Condition
+agg_subjects <- data_clean %>%
+  group_by(Lab, Method, Subject, Subject_Unique,Language, Condition, Age,Session,total_trial_n) %>%
+  summarise(MeanLogLT = mean(log_lt)) %>%
+  mutate(ConditionC = ifelse(Condition == "IDS", .5, -.5)) %>%
+  mutate(language_recoded = case_when(
+    Lab %in% c("InfantCog-UBC","infantll-madison") & Language == "English" ~ "American English",
+    TRUE ~ Language
+  )) %>%
+  mutate(Native = ifelse(language_recoded == "American English", TRUE, FALSE))
+
+# creating a wide format of the dataset and calculating difference in log_lt for IDS and ADS and the proportion of IDS looking
+all_agg_subjects_paired <- agg_subjects %>%
+  select(-ConditionC) %>% 
+  pivot_wider(names_from = Condition, values_from = MeanLogLT) %>%
+  mutate(Diff = IDS - ADS, 
+         Prop = IDS / (IDS + ADS),
+         binary_pref = case_when(
+           is.na(Diff) ~ NA_character_,
+           Diff > 0 ~ "IDS_preference",
+           Diff < 0 ~ "ADS_preference",
+           Diff == 0 ~ "no_preference"
+         ))
+
+reversal <- all_agg_subjects_paired %>%
+  select(Subject_Unique, Session, binary_pref)
+
+reversal <- reversal[,c(2, 6:8)]
+
+reversal <- reversal %>%
+  group_by(Subject_Unique) %>%
+  pivot_wider(names_from = Session, values_from = binary_pref)
+
+names(reversal) <- c("Method", "Subject_Unique","Pref_Test" , "Pref_Retest")
+  
+reversal <- reversal %>%
+  group_by(Subject_Unique) %>%
+  mutate(reversal = case_when((Pref_Test == "IDS_preference" & Pref_Retest == "IDS_preference")  ~ 0,
+                              (Pref_Test == "ADS_preference" & Pref_Retest == "ADS_preference")  ~ 0,
+                              (Pref_Test == "IDS_preference" & Pref_Retest == "ADS_preference")  ~ 1,
+                              (Pref_Test == "ADS_preference" & Pref_Retest == "IDS_preference")  ~ 1))
+
+n_reversal <- length(reversal$reversal[reversal$reversal==1])
+n_total <- length(reversal$reversal)
+
+perc_reversal <- n_reversal/n_total
+```
+
+`r perc_reversal` percent of the infants had a preference reversal from test to retest session.
+
+
 \begingroup
 \setlength{\parindent}{-0.5in}
 \setlength{\leftskip}{0.5in}
