@@ -166,7 +166,7 @@ reversal <- reversal %>%
 n_reversal <- length(reversal$reversal[reversal$reversal==1])
 n_total <- length(reversal$reversal)
 
-perc_reversal <- n_reversal/n_total
+perc_reversal <- n_reversal/n_total*100
 ```
 
 `r perc_reversal` percent of the infants had a preference reversal from test to retest session.
