@@ -1,0 +1,104 @@
+---
+title             : "Manybabies1 test-retest secondary analyses"
+shorttitle        : "MB1T secondary analyses"
+
+figsintext        : yes
+floatsintext      : no
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+linenumbers       : yes
+mask              : no
+draft             : no
+
+documentclass     : "apa6"
+classoption       : "man"
+output            : papaja::apa6_pdf
+---
+
+```{r setup, include = FALSE}
+library(papaja)
+library(dplyr)
+library(tidyr)
+library(readxl)
+library(lme4)
+library(readr)
+library(langcog)
+library(ggthemes)
+library(tidyverse)
+library(here)
+library(knitr)
+library(kableExtra)
+library("langcog")
+library(lmerTest)
+library(ggplot2)
+```
+
+```{r analysis-preferences}
+# Seed for random number generation
+set.seed(42)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+```
+
+# Relationship of number of trials infants contribute per session
+
+```{r,message=FALSE,warning=FALSE}
+# importing dataset
+df_all <- read_csv(here("data","processed","df_all.csv"))
+
+#unique(data_all$Subject_Unique)
+
+# looking at correlation between number of trials in test and retest session
+# do we only want to look at trials that were without error and with LTs longer than 2s?
+
+  lt_min <- 2                # minimum LT for inclusion
+
+df_all <- df_all %>%
+  filter(Condition != "training") %>%
+  filter(LT >= lt_min)%>% 
+  mutate(LT=ifelse(LT>18,18,LT)) # Truncating the looking times per trial at 18 seconds - consistent with decision from MB1
+
+
+
+# Excluding all children with session errors
+excludeID <- unique(df_all$Subject_Unique[df_all$session_error=="error"])
+df_all <- df_all %>% 
+  filter(!Subject_Unique %in% excludeID)
+
+# exclude trials with trial error
+df_all <- df_all %>% 
+  filter(trial_error == "noerror")
+
+# calculate number of trials that each participant contributes per session
+
+df_all_trials <- df_all %>%
+  group_by(Subject_Unique,Session, Method) %>%
+  summarise(N_trials = length(trial_num))
+
+df_all_trials$N_trials <- as.numeric(df_all_trials$N_trials)
+df_all_trials$Session <- as.factor(df_all_trials$Session)
+df_all_trials$Method <- as.factor(df_all_trials$Method)
+
+df_all_trials <- df_all_trials %>% pivot_wider(names_from = Session, values_from = N_trials)
+
+names(df_all_trials) <- c("Subject_Unique", "Method", "Test", "Retest")
+
+# I jittered individual data points in order to make overlapping data points visible
+trials <- ggplot(df_all_trials, aes(x=Test, y=Retest))+
+  geom_smooth(method=lm, colour= "black")+
+  geom_jitter(aes(colour = factor(Method)))
+
+trials
+
+cor_trials <- cor.test(df_all_trials$Test,df_all_trials$Retest)
+
+cor_trials
+
+```
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+<div id = "refs"></div>
+\endgroup
