@@ -301,7 +301,14 @@ days_coefs<-summary(mod_lmer2)$coefficients
 all_agg_subjects_paired_retest$NAE<-ifelse(all_agg_subjects_paired_retest$language_recoded=="American English", 1, 0)
 
 # Adding NAE to model
+all_agg_subjects_paired_retest <- all_agg_subjects_paired_retest %>%
+  ungroup() %>%
+  mutate(Diff_1_c=Diff_1-mean(Diff_1))
+
 mod_lmer3 <- lmer(Diff_2 ~ Diff_1*NAE+(1|Lab),
+              data=all_agg_subjects_paired_retest,REML=T) 
+
+mod_lmer3_c <- lmer(Diff_2 ~ Diff_1_c*NAE+(1|Lab),
               data=all_agg_subjects_paired_retest,REML=T) 
 
 nae_coefs<-summary(mod_lmer3)$coefficients
