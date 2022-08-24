@@ -44,7 +44,7 @@ set.seed(42)
 knitr::opts_chunk$set(cache.extra = knitr::rand_seed,echo = FALSE, warning = FALSE, message = FALSE)
 ```
 
-## Relationship between the number of trials infants contribute in each session
+## S1: Relationship between the number of trials infants contribute in each session
 
 ```{r}
 # importing dataset (after excluding session and trial errors)
@@ -78,6 +78,20 @@ cor_trials <- cor.test(df_all_trials$Test,df_all_trials$Retest)
 cor_trials_out <- apa_print(cor_trials)
 ```
 
+```{r sfig1, fig.cap = "Correlation between the number of trials contributed in session 1 and session 2. Each data point represents one infant. Colored lines represent linear fits for each method."}
+# jittering individual data points in order to make overlapping data points visible
+trials <- ggplot(df_all_trials, aes(x=Test, y=Retest))+
+  geom_jitter(width=0.5,height=0.5,aes(colour = Method),alpha=0.5)+
+  geom_smooth(aes(colour = Method,group=Method),method=lm, se=FALSE,alpha=0.3)+
+  geom_smooth(method=lm, colour= "black")+
+  scale_x_continuous(seq(0,16,2),name="Number of Trials During Session 1")+
+  scale_y_continuous(seq(0,16,2),name="Number of Trials During Session 2")+
+  theme_cowplot()+
+  theme(legend.position=c(0.02,0.8))
+#plot
+trials
+```
+
 Are there stable individual differences in how likely an infant is to contribute a high number of trials?
 To answer this question, we conducted an exploratory analysis investigating whether there is a relationship between the number of trials an infant contributed in session 1 and session 2. 
 Do infants who contribute a higher number of trials during their first testing session also tend to contribute more trials during their second testing session? 
@@ -89,20 +103,7 @@ This result suggests that if infants contribute a higher number of trials in one
 This finding is consistent with the hypothesis that how attentive infants are throughout an experiment (and hence how many trials they contribute) is a stable individual difference, at least for some infant looking time tasks.
 Researchers should therefore be mindful of the fact that decisions about including or excluding infants based on trials contributed may selectively sample a specific sub-set of the infant population they are studying [@debolt2020robust;@byers2021six].
 
-```{r sfig1, fig.cap = "Correlation between the number of trials contributed in session 1 and session 2. Each data point represents one infant. Colored lines represent linear fits for each method."}
-# jittering individual data points in order to make overlapping data points visible
-trials <- ggplot(df_all_trials, aes(x=Test, y=Retest))+
-  geom_jitter(width=0.5,height=0.5,aes(colour = Method),alpha=0.5)+
-  geom_smooth(aes(colour = Method,group=Method),method=lm, se=FALSE,alpha=0.3)+
-  geom_smooth(method=lm, colour= "black")+
-  scale_x_continuous(seq(0,16,2),name="Number of Trials During Session 1")+
-  scale_y_continuous(seq(0,16,2),name="Number of Trials During Session 2")+
-  theme_cowplot()
-#plot
-trials
-```
-
-## Preference reversal
+## S2: Preference reversal
 ```{r,message=FALSE,warning=FALSE}
 
 lt_min <- 2                # minumum LT for inclusion
@@ -176,6 +177,14 @@ perc_reversal <- n_reversal/n_total*100
 ```
 
 `r perc_reversal` percent of the infants had a preference reversal from test to retest session.
+
+## S3: Deviations from the preregistration
+
+Below, we document all deviations from the preregistered methods and analyses [https://osf.io/v5f8t](https://osf.io/v5f8t).
+
+- All infants with usable data for both test and retest session were included in the analyses, regardless of the number of total of infants a lab was able to contribute after exclusion. This decision is consistent with past decisions in ManyBabies projects to be as inclusive about data inclusion as possible [@manybabies2020quantifying].
+- A small number of infants with a time between sessions above 31 days were also included in the analyses (n=2).
+- Consistent with analytic decisions in ManyBabies 1 [@manybabies2020quantifying], total looking times were truncated at 18 seconds (the maximum trial time) in the small number of cases where recorded looking times were slightly greater than 18s (presumably due to small measurement error in recording infant looking times).
 
 
 \newpage
