@@ -54,6 +54,7 @@ library(knitr)
 library(kableExtra)
 library("langcog")
 library(lmerTest)
+library(metafor)
 ```
 
 ```{r analysis-preferences}
@@ -624,7 +625,7 @@ eval(parse(text = paste('all_agg_subjects_paired_retest',i, ' = all_agg_subjects
 ```
 
 ## Results with different inclusion criteria
-To this point, all analyses were performed on data with the inclusion criteria from MB1. For this, infants needed only 1 out of 8 valid trial pairs (i.e., any combination of an IDS and ADS trial) to be included in the analyses. Given that the use of more stringent inclusion criteria yielded larger effects sizes within the original MB1 study, we also assessed test-retest reliability by applying stricter inclusion criteria and thereby increasing test length to 2, 4, 6, and 8 included test trial pairs per condition. Applying a stricter criterion - and thereby increasing test length - increased reliability numerically from r = .02 to r = .38 (Figure 3). However, in part likely due to the decrease in sample size, none of these correlations was statistically significant: 2 valid trial pairs, `r apa_print(simplyOverallCorr2)$statistic `; 4 valid trial pairs, `r apa_print(simplyOverallCorr4)$statistic `; 6 valid trial pairs, `r apa_print(simplyOverallCorr6)$statistic `; 8 valid trial pairs - all trials on both testing days - `r apa_print(simplyOverallCorr8)$statistic `. Nevertheless, the analyses show that stricter inclusion criteria might lead to higher test-retest reliability but at the same time comes with tremendous decreases in sample size.
+To this point, all analyses were performed on data with the inclusion criteria from MB1. For this, infants needed only 1 out of 8 valid trial pairs (i.e., any combination of an IDS and ADS trial) to be included in the analyses. Given that the use of more stringent inclusion criteria yielded larger effects sizes within the original MB1 study, we also assessed test-retest reliability by applying stricter inclusion criteria and thereby increasing test length to 2, 4, 6, and 8 included test trial pairs per condition. Applying a stricter criterion - and thereby increasing test length - increased reliability numerically from r = .02 to r = .38 (Figure 2). However, in part likely due to the decrease in sample size, none of these correlations was statistically significant: 2 valid trial pairs, `r apa_print(simplyOverallCorr2)$statistic `; 4 valid trial pairs, `r apa_print(simplyOverallCorr4)$statistic `; 6 valid trial pairs, `r apa_print(simplyOverallCorr6)$statistic `; 8 valid trial pairs - all trials on both testing days - `r apa_print(simplyOverallCorr8)$statistic `. Nevertheless, the analyses show that stricter inclusion criteria might lead to higher test-retest reliability but at the same time comes with tremendous decreases in sample size.
 
 ```{r fig.cap="IDS preferences of both sessions plotted against each other for each inclusion criterion. n indicates the number of included infants, r is the Pearson correlation coefficient as the indicator for reliability.", fig.align="center",out.width = "5in",fig.height = 12, fig.width = 8}
 

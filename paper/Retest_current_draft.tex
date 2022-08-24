@@ -3,12 +3,7 @@
 \PassOptionsToPackage{hyphens}{url}
 %
 \documentclass[
-  english,
   man,floatsintext]{apa6}
-\title{Assessing test-retest reliability of the infant preference measures}
-\author{Melanie S. Schreiner\textsuperscript{1,2} \& the ManyBabies Test-Retest Consortium\textsuperscript{}}
-\date{}
-
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
 \usepackage{iftex}
@@ -38,16 +33,6 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  pdftitle={Assessing test-retest reliability of the infant preference measures},
-  pdfauthor={Melanie S. Schreiner1,2 \& the ManyBabies Test-Retest Consortium},
-  pdflang={en-EN},
-  pdfkeywords={language acquisition; speech perception; infant-directed speech; adult-directed speech, test-retest reliability},
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
 \usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -97,6 +82,15 @@
 \newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{english}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
 % Manuscript styling
 \usepackage{upgreek}
 \captionsetup{font=singlespacing,justification=justified}
@@ -127,6 +121,20 @@
 % \setlength{\parindent}{0.5in}
 % \setlength{\parskip}{0pt plus 0pt minus 0pt}
 
+% Overwrite redefinition of paragraph and subparagraph by the default LaTeX template
+% See https://github.com/crsh/papaja/issues/292
+\makeatletter
+\renewcommand{\paragraph}{\@startsection{paragraph}{4}{\parindent}%
+  {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries\itshape\typesectitle}}
+
+\renewcommand{\subparagraph}[1]{\@startsection{subparagraph}{5}{1em}%
+  {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
+  {-\z@\relax}%
+  {\normalfont\normalsize\itshape\hspace{\parindent}{#1}\textit{\addperi}}{\relax}}
+\makeatother
+
 % \usepackage{etoolbox}
 \makeatletter
 \patchcmd{\HyOrg@maketitle}
@@ -138,7 +146,15 @@
   {\section*{\protect\normalfont{\@title}}}
   {}{\typeout{Failed to patch title.}}
 \makeatother
-\shorttitle{test-retest reliability of the infant preference measures}
+
+\usepackage{xpatch}
+\makeatletter
+\xapptocmd\appendix
+  {\xapptocmd\section
+    {\addcontentsline{toc}{section}{\appendixname\ifoneappendix\else~\theappendix\fi\\: #1}}
+    {}{\InnerPatchFailed}%
+  }
+{}{\PatchFailed}
 \keywords{language acquisition; speech perception; infant-directed speech; adult-directed speech, test-retest reliability\newline\indent Word count: 4072}
 \DeclareDelayedFloatFlavor{ThreePartTable}{table}
 \DeclareDelayedFloatFlavor{lltable}{table}
@@ -150,24 +166,36 @@
 
 \linenumbers
 \usepackage{csquotes}
-\ifXeTeX
-  % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
-  \usepackage{polyglossia}
-  \setmainlanguage[]{english}
-\else
-  \usepackage[main=english]{babel}
-% get rid of language-specific shorthands (see #6817):
-\let\LanguageShortHands\languageshorthands
-\def\languageshorthands#1{}
-\fi
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Assessing test-retest reliability of the infant preference measures},
+  pdfauthor={Melanie S. Schreiner1,2 \& the ManyBabies Test-Retest Consortium},
+  pdflang={en-EN},
+  pdfkeywords={language acquisition; speech perception; infant-directed speech; adult-directed speech, test-retest reliability},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
 
+\title{Assessing test-retest reliability of the infant preference measures}
+\author{Melanie S. Schreiner\textsuperscript{1,2} \& the ManyBabies Test-Retest Consortium\textsuperscript{}}
+\date{}
+
+
+\shorttitle{test-retest reliability of the infant preference measures}
+
+\authornote{
+
+Correspondence concerning this article should be addressed to Melanie S. Schreiner, Gosslerstr. 14, 37073 Göttingen. E-mail: \href{mailto:melanie.schreiner@psych.uni-goettingen.de}{\nolinkurl{melanie.schreiner@psych.uni-goettingen.de}}
+
+}
 
 \affiliation{\vspace{0.5cm}\textsuperscript{1} University of Goettingen\\\textsuperscript{2} Leibniz Science Campus PrimateCognition}
 
-\abstract{
+\abstract{%
 The ManyBabies1 collaborative research project (hereafter, MB1; Frank et al., 2017; ManyBabies Consortium, 2020) explores the reproducibility of the well-studied and robust phenomenon of infants' preference of infant-directed speech (hereafter, IDS) over adult-directed speech (hereafter, ADS; Cooper \& Aslin, 1990). The current study is a follow-on project aiming at further investigating the test-retest reliability of infant speech preference measures. In particular, labs of the original study were asked to bring in tested babies for a second appointment retesting infants on their IDS preference. This allows us to estimate test-retest reliability for the three different methods used to investigate preferential listening in infancy: The head-turn preference procedure, central fixation, and eye-tracking. Our results suggest that the test-retest reliability of infants' speech preference measures is rather low. While increasing the number of trials that infants needed to contribute for inclusion in the analysis from 2 to 8 trial pairs revealed a descriptive growth in test-retest reliability, it also considerably reduced the study's effective sample size. Therefore, future research on infant development should take into account that not all experimental measures might be appropriate to assess individual differences between infants, and hence, the interpretation of findings needs to be treated with caution.
 }
 
@@ -197,7 +225,7 @@ Against this background, the current study attempts to further explore test-rete
 Our study was faced with a critical design choice: what stimulus to use to assess test-retest reliability. A first constraint of our study was that, since it was a follow-on to MB1, any stimulus we used would always be presented after the MB1 stimuli. One option would be simply to bring back infants and have them hear exactly the same stimulus materials. A weakness of this design would be the potential for stimulus familiarity effects, however, since infants would have heard the materials before. Further confusing matters, infants might show a preference for or against a familiar stimulus depending on their age (Hunter \& Ames, 1988). The ideal solution then would be to create a brand new stimulus set with the same characteristics. Unfortunately, because of the process of creating the MB1 stimuli, we did not have enough normed raw recordings available to make brand new stimulus items that conformed to the same standards as the MB1 stimuli.
 
 Given this situation, we chose an intermediate path: we reversed the ordering of MB1 stimuli. Average looking times in MB1 were always lower than 9s per trial, even for the youngest children on the earliest trials (the group who looked the longest on average). So most children in MB1 did not hear the second half of most trials. Thus, by reversing the order, we had a perfectly matched stimulus set that was relatively unfamiliar to most infants. The disadvantage of this design was that infants who looked longer might be more likely to hear a familiar clip that they had heard in the previous study. If infants then showed a familiarity preference -- an assumption which might not be true -- the end result could be to inflate our estimates of test-retest reliability slightly, since longer lookers would on average look a bit longer at retest due to their familiarity preference. We view this risk as relatively low, but do note that it is a limitation of our design.\\
-The MB1 study was also interested in effects of experimental method on infant-directed speech preference. Using central fixation (hereafter, CF), eye-tracking, and the head-turn preference procedure (hereafter, HPP), the current study also explores whether there are any differences in test-retest reliability between the three widely used methods. Exploring differences in CF, eye-tracking, and HPP, Junge et al. (2020) provide some evidence in favor of using the HPP in speech segmentation tasks. In addition, their re-analysis of the meta-analysis on infant speech segmentation conducted by Bergmann and Cristia (2016) also suggested numerically larger effect sizes for HPP than for eye-tracking. Similarly, the MB1 project reported an increase in the effect size for HPP compared to CF and eye-tracking (Consortium, 2020). HPP requires gross motor movements relative to other methods, such as CF and eye-tracking paradigms, for which subtle eye movements towards a monitor located in front of the child are sufficient. One possible explanation for the stronger effects with HPP may be a higher sensitivity to the contingency of the presentation of auditory stimuli and infants' head turns away from the typical forward-facing position. While these findings suggest that HPP may be a more sensitive index of infant preference, they do not translate into higher reliability for individual infants' performance using the different methods. Hence, it remains an open question whether the same measures that produce larger effect sizes at the group-level also have higher test-retest reliability for individual infants (Byers-Heinlein et al., 2021). Therefore, assessing the test-retest reliability of the different preference measures is crucial, so that researchers can make informed decisions about the appropriate methods for their particular research question. Critically, only measures with high test-retest reliability should be used for studies of individual differences.
+The MB1 study was also interested in effects of experimental method on infant-directed speech preference. Using central fixation (hereafter, CF), eye-tracking, and the head-turn preference procedure (hereafter, HPP), the current study also explores whether there are any differences in test-retest reliability between the three widely used methods. Exploring differences in CF, eye-tracking, and HPP, Junge et al. (2020) provide some evidence in favor of using the HPP in speech segmentation tasks. In addition, their re-analysis of the meta-analysis on infant speech segmentation conducted by Bergmann and Cristia (2016) also suggested numerically larger effect sizes for HPP than for eye-tracking. Similarly, the MB1 project reported an increase in the effect size for HPP compared to CF and eye-tracking (Consortium, 2020). HPP requires gross motor movements relative to other methods, such as CF and eye-tracking paradigms, for which subtle eye movements towards a monitor located in front of the child are sufficient. One possible explanation for the stronger effects with HPP may be a higher sensitivity to the contingency of the presentation of auditory stimuli and infants' head turns away from the typical forward-facing position. While these findings suggest that HPP may be a more sensitive index of infant preference, they do not translate into higher reliability for individual infants' performance using the different methods. Hence, it remains an open question whether the same measures that produce larger effect sizes at the group-level also have higher test-retest reliability for individual infants (Byers-Heinlein, Bergmann, et al., 2021). Therefore, assessing the test-retest reliability of the different preference measures is crucial, so that researchers can make informed decisions about the appropriate methods for their particular research question. Critically, only measures with high test-retest reliability should be used for studies of individual differences.
 
 Preregistration. Prior to the start of data collection, we preregistered the current study on the Open Science Framework (OSF; see \url{https://osf.io/v5f8t}). We also had secondary planned analyses which were not run in the end as we had fewer participants than originally expected.
 
@@ -211,7 +239,7 @@ A call was issued to all labs participating in the original MB1 study on January
 
 Contributing labs were asked to re-recruit their monolingual participants between the ages of 6 to 12 months who had already participated in the MB1 project. If participating labs had not committed to testing either of these age groups, they were also allowed to re-recruit participants from the youngest age group of 3- to 6-month-olds and/or the oldest age group of 12- to 15-month-olds. Labs were asked to contribute half (\emph{n}=16) or full sample (\emph{n}=32), however, a lab's data was included in the study regardless of the number of included infants. The study was approved by each lab's respective ethics committee and parental consent was obtained for each infant prior to participation in the study.
 
-Our final sample consisted of 158 monolingual infants from 7 different labs. In order to be included in the study, infants needed a minimum of 90\% first language exposure, to be born full term with no known developmental disorders, and normal hearing and vision. We excluded 11 participants due to session errors and 11 participants who did not have at least one valid trial per condition (IDS and ADS) at their first or second session. The mean age of infants included in the study was 245 days (range: 108 -- 373 days). Further information on labs and participants are provided in Table 1.
+Our final sample consisted of 156 monolingual infants from 7 different labs. In order to be included in the study, infants needed a minimum of 90\% first language exposure, to be born full term with no known developmental disorders, and normal hearing and vision. We excluded 14 participants due to session errors and 11 participants who did not have at least one valid trial per condition (IDS and ADS) at their first or second session. The mean age of infants included in the study was 245 days (range: 108 -- 373 days). Further information on labs and participants are provided in Table 1.
 
 \hypertarget{materials}{%
 \subsection{Materials}\label{materials}}
@@ -254,9 +282,9 @@ Lab & \multicolumn{1}{c}{Method} & \multicolumn{1}{c}{Language} & \multicolumn{1
 \midrule
 babylab-potsdam & HPP & German & 227 & 22\\
 babyling-oslo & Eyetracking & Norwegian & 249 & 10\\
-brookes-babylab & central fixation & English & 267 & 18\\
+brookes-babylab & central fixation & English & 264 & 15\\
 InfantCog-UBC & central fixation & English & 147 & 7\\
-infantll-madison & HPP & English & 230 & 30\\
+infantll-madison & HPP & English & 231 & 31\\
 lancslab & Eyetracking & English & 236 & 16\\
 wsi-goettingen & central fixation & German & 280 & 39\\
 wsi-goettingen & HPP & German & 242 & 16\\
@@ -271,7 +299,7 @@ wsi-goettingen & HPP & German & 242 & 16\\
 \hypertarget{ids-preference}{%
 \subsection{IDS preference}\label{ids-preference}}
 
-First, we examined infants' preferences for IDS in both sessions. Two two-samples t-tests revealed that the children in Session 1, \(t(157) = 6.16\), \(p < .001\), and in Session 2, \(t(157) = 4.55\), \(p < .001\), showed a preference of IDS over ADS (see Table 2 for the looking times in each session). In the first session, 67.09 percent of the children showed a preference for IDS, and in the second session, 63.92 percent of the children showed a numerical preference for IDS. In other words, we replicated the previous finding from the main MB1 study. There was no difference in the strength of the preference effect, as a multilevel analysis with a random slope and random intercept for session on the lab level revealed no significant impact of session on infants' preference, with an estimate of zero and very small variance, \(\beta\)=-0.01, \emph{SE}=0.04, \emph{p}=.756.
+First, we examined infants' preferences for IDS in both sessions. Two two-samples t-tests revealed that the children in Session 1, \(t(155) = 5.93\), \(p < .001\), and in Session 2, \(t(155) = 4.51\), \(p < .001\), showed a preference of IDS over ADS (see Table 2 for the looking times in each session). In the first session, 66.67 percent of the children showed a preference for IDS, and in the second session, 64.10 percent of the children showed a numerical preference for IDS. In other words, we replicated the previous finding from the main MB1 study. There was no difference in the strength of the preference effect, as a multilevel analysis with a random slope and random intercept for session on the lab level revealed no significant impact of session on infants' preference, with an estimate of zero and very small variance, \(\beta\)=0.00, \emph{SE}=0.05, \emph{p}=.986.
 
 \begin{table}[tbp]
 
@@ -284,8 +312,8 @@ First, we examined infants' preferences for IDS in both sessions. Two two-sample
 \toprule
 Trial type & Session 1 $Mean$ & Session 1 $SD$ & Session 2 $Mean$ & Session 2 $SD$\\
 \midrule
-ADS & 7.90 & 4.61 & 7.09 & 4.66\\
-IDS & 8.94 & 4.90 & 7.93 & 4.82\\
+ADS & 7.95 & 4.62 & 7.10 & 4.68\\
+IDS & 8.94 & 4.88 & 7.91 & 4.83\\
 \bottomrule
 \end{tabular}
 
@@ -308,8 +336,8 @@ IDS & 8.94 & 4.90 & 7.93 & 4.82\\
 \toprule
  & \multicolumn{1}{c}{Estimate} & \multicolumn{1}{c}{SE} & \multicolumn{1}{c}{t} & \multicolumn{1}{c}{p}\\
 \midrule
-Intercept & 0.143 & 0.070 & 2.050 & 0.086\\
-Session One & -0.060 & 0.089 & -0.677 & 0.499\\
+Intercept & 0.146 & 0.072 & 2.020 & 0.091\\
+Session One & -0.029 & 0.092 & -0.318 & 0.751\\
 \bottomrule
 \end{tabular}
 
@@ -318,11 +346,11 @@ Session One & -0.060 & 0.089 & -0.677 & 0.499\\
 
 \end{table}
 
-We assessed test-retest reliability in two ways. First, we conducted a multilevel analysis, with Lab as random intercept, predicting the IDS preference in Session 2 based on the IDS preference in Session 1. The results revealed that we could not predict the preference score in Session 2 based on Session 1 (see Table 2). Second, we calculated the Pearson correlation coefficient. While a simple correlation coefficient might overestimate the test-retest reliability in our sample because it does not control for the differences between different labs and methods (HPP, CF, and eye-tracking), we felt it was important to also conduct a Pearson correlation as it is commonly used to assess reliability. Again, the size of the correlation coefficient was not statistically different from zero and the estimate was, in fact, approaching nil, \(r = .03\), 95\% CI \([-.12\), \(.19]\), \(t(156) = 0.43\), \(p = .670\). Furthermore, we calculated the percentage of preference reversal between test and retest counting the number of participants for whom the preference changed between test and retest, and dividing it by the number of all participants. The results revealed that 46.20 percent of the infants had a preference reversal from test to retest session. Taken together, our results lead us to conclude that there is no overall test-retest reliability for the three infant preference measures used within the current study.
+We assessed test-retest reliability in two ways. First, we conducted a multilevel analysis, with Lab as random intercept, predicting the IDS preference in Session 2 based on the IDS preference in Session 1. The results revealed that we could not predict the preference score in Session 2 based on Session 1 (see Table 2). Second, we calculated the Pearson correlation coefficient. While a simple correlation coefficient might overestimate the test-retest reliability in our sample because it does not control for the differences between different labs and methods (HPP, CF, and eye-tracking), we felt it was important to also conduct a Pearson correlation as it is commonly used to assess reliability. Again, the size of the correlation coefficient was not statistically different from zero and the estimate was, in fact, approaching nil, \(r = .04\), 95\% CI \([-.12, .19]\), \(t(154) = 0.47\), \(p = .637\). Furthermore, we calculated the percentage of preference reversal between test and retest counting the number of participants for whom the preference changed between test and retest, and dividing it by the number of all participants. The results revealed that 46.15 percent of the infants had a preference reversal from test to retest session. Taken together, our results lead us to conclude that there is no overall test-retest reliability for the three infant preference measures used within the current study.
 
 To test whether the results were different for a specific method, we calculated the Pearson correlation coefficients and the multilevel analyses for the three different methods, HPP, central fixation and eye-tracking, separately (see Table 3). Splitting the data per method also did not lead to different results. Neither the Pearson correlation coefficients nor the coefficients of the multilevel analysis were significant, all \emph{p-values} \textgreater{} .286.
-We also tested for the possibility that the Time between sessions might have an impact on the reliability. The subsequent multilevel analysis, with Lab as random intercept, predicting the IDS preference in Session 2 based on the IDS preference in Session 1, the number of days between Session 1 and Session 2 and the interaction of these two variables, did not indicate that Time between sessions had an effect. Neither the main effect of Time between sessions, \(\beta\)=0.00, \emph{SE}=0, \emph{p}=.740, nor the interaction term, \(\beta\)=-0.02, \emph{SE}=0.02, \emph{p}=.277, showed significant effects.
-As NAE-learning infants showed greater IDS preferences than their non-NAE counterparts in the original study, we also assessed if test-retest reliability interacted with children's native language. A multilevel analysis with Lab as random intercept, predicting the IDS preference in Session 2 based on the IDS preference in Session 1, NAE and the interaction of these two variables, revealed no interaction, \(\beta\)=0.24, \emph{SE}=0.19, \emph{p}=.214 (see Figure 1).
+We also tested for the possibility that the Time between sessions might have an impact on the reliability. The subsequent multilevel analysis, with Lab as random intercept, predicting the IDS preference in Session 2 based on the IDS preference in Session 1, the number of days between Session 1 and Session 2 and the interaction of these two variables, did not indicate that Time between sessions had an effect. Neither the main effect of Time between sessions, \(\beta\)=0.00, \emph{SE}=0, \emph{p}=.785, nor the interaction term, \(\beta\)=-0.02, \emph{SE}=0.02, \emph{p}=.347, showed significant effects.
+As NAE-learning infants showed greater IDS preferences than their non-NAE counterparts in the original study, we also assessed if test-retest reliability interacted with children's native language. A multilevel analysis with Lab as random intercept, predicting the IDS preference in Session 2 based on the IDS preference in Session 1, NAE and the interaction of these two variables, revealed no interaction, \(\beta\)=0.26, \emph{SE}=0.20, \emph{p}=.190 (see Figure 1).
 
 \begin{table}[tbp]
 
@@ -335,9 +363,9 @@ As NAE-learning infants showed greater IDS preferences than their non-NAE counte
 \toprule
 Method & \multicolumn{1}{c}{estimate} & \multicolumn{1}{c}{SE} & \multicolumn{1}{c}{pvalue} & \multicolumn{1}{c}{cor} & \multicolumn{1}{c}{pvalue2}\\
 \midrule
-HPP & 0.005 & 0.138 & 0.968 & 0.005 & 0.968\\
+HPP & 0.032 & 0.141 & 0.820 & 0.028 & 0.820\\
 Eyetracking & -0.190 & 0.238 & 0.432 & -0.161 & 0.432\\
-central fixation & -0.197 & 0.132 & 0.142 & 0.120 & 0.345\\
+central fixation & -0.149 & 0.138 & 0.286 & 0.111 & 0.394\\
 \bottomrule
 \end{tabular}
 
@@ -355,7 +383,7 @@ central fixation & -0.197 & 0.132 & 0.142 & 0.120 & 0.345\\
 \hypertarget{results-with-different-inclusion-criteria}{%
 \subsection{Results with different inclusion criteria}\label{results-with-different-inclusion-criteria}}
 
-To this point, all analyses were performed on data with the inclusion criteria from MB1. For this, infants needed only 1 out of 8 valid trial pairs (i.e., any combination of an IDS and ADS trial) to be included in the analyses. Given that the use of more stringent inclusion criteria yielded larger effects sizes within the original MB1 study, we also assessed test-retest reliability by applying stricter inclusion criteria and thereby increasing test length to 2, 4, 6, and 8 included test trial pairs per condition. Applying a stricter criterion - and thereby increasing test length - increased reliability numerically from r = .02 to r = .38 (Figure 3). However, in part likely due to the decrease in sample size, none of these correlations was statistically significant: 2 valid trial pairs, \(t(152) = 0.27\), \(p = .789\); 4 valid trial pairs, \(t(143) = 0.51\), \(p = .611\); 6 valid trial pairs, \(t(98) = 1.90\), \(p = .061\); 8 valid trial pairs - all trials on both testing days - \(t(22) = 1.93\), \(p = .067\). Nevertheless, the analyses show that stricter inclusion criteria might lead to higher test-retest reliability but at the same time comes with tremendous decreases in sample size.
+To this point, all analyses were performed on data with the inclusion criteria from MB1. For this, infants needed only 1 out of 8 valid trial pairs (i.e., any combination of an IDS and ADS trial) to be included in the analyses. Given that the use of more stringent inclusion criteria yielded larger effects sizes within the original MB1 study, we also assessed test-retest reliability by applying stricter inclusion criteria and thereby increasing test length to 2, 4, 6, and 8 included test trial pairs per condition. Applying a stricter criterion - and thereby increasing test length - increased reliability numerically from r = .02 to r = .38 (Figure 2). However, in part likely due to the decrease in sample size, none of these correlations was statistically significant: 2 valid trial pairs, \(t(149) = 0.16\), \(p = .873\); 4 valid trial pairs, \(t(140) = 0.41\), \(p = .683\); 6 valid trial pairs, \(t(96) = 1.72\), \(p = .088\); 8 valid trial pairs - all trials on both testing days - \(t(22) = 1.93\), \(p = .067\). Nevertheless, the analyses show that stricter inclusion criteria might lead to higher test-retest reliability but at the same time comes with tremendous decreases in sample size.
 
 \begin{figure}
 
@@ -412,13 +440,13 @@ The data and materials that support the findings of the current study are openly
 Bergmann, C., \& Cristia, A. (2016). Development of infants' segmentation of words from native speech: A meta-analytic approach. \emph{Developmental Science}, \emph{19}(6), 901--917.
 
 \leavevmode\vadjust pre{\hypertarget{ref-byers2021six}{}}%
-Byers-Heinlein, K., Bergmann, C., \& Savalei, V. (2021). Six solutions for more reliable infant research.
+Byers-Heinlein, K., Bergmann, C., \& Savalei, V. (2021). Six solutions for more reliable infant research. \emph{Infant and Child Development}, e2296.
 
 \leavevmode\vadjust pre{\hypertarget{ref-byers2021multilab}{}}%
-Byers-Heinlein, K., Tsui, A. S. M., Bergmann, C., Black, A. K., Brown, A., Carbajal, M. J., \ldots{} others. (2021). A multilab study of bilingual infants: Exploring the preference for infant-directed speech. \emph{Advances in Methods and Practices in Psychological Science}, \emph{4}(1), 2515245920974622.
+Byers-Heinlein, K., Tsui, A. S. M., Bergmann, C., Black, A. K., Brown, A., Carbajal, M. J., et al.others. (2021). A multilab study of bilingual infants: Exploring the preference for infant-directed speech. \emph{Advances in Methods and Practices in Psychological Science}, \emph{4}(1), 2515245920974622.
 
 \leavevmode\vadjust pre{\hypertarget{ref-byers2021development}{}}%
-Byers-Heinlein, K., Tsui, R. K.-Y., Van Renswoude, D., Black, A. K., Barr, R., Brown, A., \ldots{} others. (2021). The development of gaze following in monolingual and bilingual infants: A multi-laboratory study. \emph{Infancy}, \emph{26}(1), 4--38.
+Byers-Heinlein, K., Tsui, R. K.-Y., Van Renswoude, D., Black, A. K., Barr, R., Brown, A., et al.others. (2021). The development of gaze following in monolingual and bilingual infants: A multi-laboratory study. \emph{Infancy}, \emph{26}(1), 4--38.
 
 \leavevmode\vadjust pre{\hypertarget{ref-colombo1988infant}{}}%
 Colombo, J., Mitchell, D. W., \& Horowitz, F. D. (1988). Infant visual attention in the paired-comparison paradigm: Test-retest and attention-performance relations. \emph{Child Development}, 1198--1210.
@@ -472,7 +500,7 @@ Houston, D. M., Horn, D. L., Qi, R., Ting, J. Y., \& Gao, S. (2007). Assessing s
 Hunter, M. A., \& Ames, E. W. (1988). A multifactor model of infant preferences for novel and familiar stimuli. \emph{Advances in Infancy Research}, \emph{5}, 69--95.
 
 \leavevmode\vadjust pre{\hypertarget{ref-johnson2010using}{}}%
-Johnson, E., \& Zamuner, T. (2010). Using infant and toddler testing methods in language acquisition research.
+Johnson, E., \& Zamuner, T. (2010). \emph{Using infant and toddler testing methods in language acquisition research.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-junge2020contrasting}{}}%
 Junge, C., Everaert, E., Porto, L., Fikkert, P., Klerk, M. de, Keij, B., \& Benders, T. (2020). Contrasting behavioral looking procedures: A case study on infant speech segmentation. \emph{Infant Behavior and Development}, \emph{60}, 101448.
