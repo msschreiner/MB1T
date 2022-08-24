@@ -18,7 +18,7 @@ path_to_participant_data <- here("data","raw","participants")
 path_to_trial_data <- here("data","raw","trial")
 write_path <- here("data","processed")
 cols_to_keep <- c("subid","subid_unique","age_days","participant_gender","method","preterm","test","trial_type",
-"trial_num","looking_time","trial_error","session_error","lang1","lab") #columns to retain for main analysis
+"trial_num","looking_time","trial_error","session_error","session_error_type","lang1","lab") #columns to retain for main analysis
 
 ##read in metadata files
 lab_metadata <- read_csv(here("data","raw","metadata","lab_metadata.csv"))
