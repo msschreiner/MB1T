@@ -1,6 +1,6 @@
 ---
-title             : "Manybabies1 test-retest secondary analyses"
-shorttitle        : "MB1T secondary analyses"
+title             : "Manybabies1 Test-Retest Supplementary Information"
+shorttitle        : "MB1T supplementary"
 
 figsintext        : yes
 floatsintext      : no
@@ -11,8 +11,10 @@ linenumbers       : yes
 mask              : no
 draft             : no
 
+bibliography      : ["r-references.bib"]
+
 documentclass     : "apa6"
-classoption       : "man"
+classoption       : "man, donotrepeattitle"
 output            : papaja::apa6_pdf
 ---
 
@@ -32,71 +34,75 @@ library(kableExtra)
 library("langcog")
 library(lmerTest)
 library(ggplot2)
+library(cowplot)
+
 ```
 
 ```{r analysis-preferences}
 # Seed for random number generation
 set.seed(42)
-knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed,echo = FALSE, warning = FALSE, message = FALSE)
 ```
 
-# Relationship of number of trials infants contribute per session
+## Relationship between the number of trials infants contribute in each session
 
-```{r,message=FALSE,warning=FALSE}
-# importing dataset
-df_all <- read_csv(here("data","processed","df_all.csv"))
+```{r}
+# importing dataset (after excluding session and trial errors)
+df_all <- read_csv(here("data","processed","df_all_after_exclusions.csv"))
 
-#unique(data_all$Subject_Unique)
-
-# looking at correlation between number of trials in test and retest session
-# do we only want to look at trials that were without error and with LTs longer than 2s?
-
-  lt_min <- 2                # minimum LT for inclusion
-
+lt_min <- 2                # minimum LT for inclusion
 df_all <- df_all %>%
   filter(Condition != "training") %>%
-  filter(LT >= lt_min)%>% 
+  filter(LT >= lt_min) %>% 
   mutate(LT=ifelse(LT>18,18,LT)) # Truncating the looking times per trial at 18 seconds - consistent with decision from MB1
 
-
-
-# Excluding all children with session errors
-excludeID <- unique(df_all$Subject_Unique[df_all$session_error=="error"])
-df_all <- df_all %>% 
-  filter(!Subject_Unique %in% excludeID)
-
-# exclude trials with trial error
-df_all <- df_all %>% 
-  filter(trial_error == "noerror")
-
 # calculate number of trials that each participant contributes per session
-
 df_all_trials <- df_all %>%
   group_by(Subject_Unique,Session, Method) %>%
-  summarise(N_trials = length(trial_num))
+  summarise(N_trials = length(trial_num)) %>%
+  mutate(
+    N_trials = as.numeric(N_trials), #probably not needed, just to be safe
+    Method = as.factor(Method)) %>%
+  mutate(
+    Session = case_when(
+      Session==1 ~ "Test",
+      Session==2 ~ "Retest"
+    )
+  )
 
-df_all_trials$N_trials <- as.numeric(df_all_trials$N_trials)
-df_all_trials$Session <- as.factor(df_all_trials$Session)
-df_all_trials$Method <- as.factor(df_all_trials$Method)
+df_all_trials <- df_all_trials %>% 
+  pivot_wider(names_from = Session,values_from = N_trials)
 
-df_all_trials <- df_all_trials %>% pivot_wider(names_from = Session, values_from = N_trials)
-
-names(df_all_trials) <- c("Subject_Unique", "Method", "Test", "Retest")
-
-# I jittered individual data points in order to make overlapping data points visible
-trials <- ggplot(df_all_trials, aes(x=Test, y=Retest))+
-  geom_smooth(method=lm, colour= "black")+
-  geom_jitter(aes(colour = factor(Method)))
-
-trials
-
+#compute correlation
 cor_trials <- cor.test(df_all_trials$Test,df_all_trials$Retest)
-
-cor_trials
-
+cor_trials_out <- apa_print(cor_trials)
 ```
 
-# Preference reversal
+Are there stable individual differences in how likely an infant is to contribute a high number of trials?
+To answer this question, we conducted an exploratory analysis investigating whether there is a relationship between the number of trials an infant contributed in session 1 and session 2. 
+Do infants who contribute a higher number of trials during their first testing session also tend to contribute more trials during their second testing session? 
+A positive correlation between trial numbers during the first and second session would indicate that their is some stability in a given infants' likelihood of remaining attentive throughout the experiment.
+On the other hand, the absence of a correlation would indicate that the number of trials a given infant contributes is not predictive of how many trials they might contribute during their next session.
+
+We found a strong positive correlation between number of trials contributed during the first and the second session `r cor_trials_out$full_result` (see Figure 1). 
+This result suggests that if infants contribute a higher number of trials in one session, compared to other infants, they are likely to contribute a higher number of trials in their next session.
+This finding is consistent with the hypothesis that how attentive infants are throughout an experiment (and hence how many trials they contribute) is a stable individual difference, at least for some infant looking time tasks.
+Researchers should therefore be mindful of the fact that decisions about including or excluding infants based on trials contributed may selectively sample a specific sub-set of the infant population they are studying [@debolt2020robust;@byers2021six].
+
+```{r sfig1, fig.cap = "Correlation between the number of trials contributed in session 1 and session 2. Each data point represents one infant. Colored lines represent linear fits for each method."}
+# jittering individual data points in order to make overlapping data points visible
+trials <- ggplot(df_all_trials, aes(x=Test, y=Retest))+
+  geom_jitter(width=0.5,height=0.5,aes(colour = Method),alpha=0.5)+
+  geom_smooth(aes(colour = Method,group=Method),method=lm, se=FALSE,alpha=0.3)+
+  geom_smooth(method=lm, colour= "black")+
+  scale_x_continuous(seq(0,16,2),name="Number of Trials During Session 1")+
+  scale_y_continuous(seq(0,16,2),name="Number of Trials During Session 2")+
+  theme_cowplot()
+#plot
+trials
+```
+
+## Preference reversal
 ```{r,message=FALSE,warning=FALSE}
 
 lt_min <- 2                # minumum LT for inclusion
@@ -171,6 +177,13 @@ perc_reversal <- n_reversal/n_total*100
 
 `r perc_reversal` percent of the infants had a preference reversal from test to retest session.
 
+
+\newpage
+
+# References
+```{r create_r-references}
+r_refs(file = "r-references.bib")
+```
 
 \begingroup
 \setlength{\parindent}{-0.5in}

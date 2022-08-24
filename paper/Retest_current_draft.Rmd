@@ -55,6 +55,8 @@ library(kableExtra)
 library("langcog")
 library(lmerTest)
 library(metafor)
+
+write_path <- here("data","processed")
 ```
 
 ```{r analysis-preferences}
@@ -110,15 +112,24 @@ df_all <- df_all %>%
 df_all <- df_all %>% 
   mutate(LT=ifelse(LT>18,18,LT)) 
 
+
+#### Processing exclusions ####
 # Excluding all children with session errors
+# Based on the preregistration, participants must meet the inclusion criteria for both test and retest sessions, so we exclude participants who have a session error during either test session
 excludeID <- unique(df_all$Subject_Unique[df_all$session_error=="error"])
 
+#tabulate session errors
 df_all_exclude <- df_all %>% 
   filter(Subject_Unique %in% excludeID)
 
-df_all_exclude_type <- df_all_exclude %>% filter(session_error=="error")
+df_all_exclude_type <- df_all_exclude %>% filter(session_error=="error") %>%
+  select(session_error_type) %>%
+  distinct()
 
-df_all_exclude_type <- unique(df_all_exclude_type$session_error_type)
+df_all_exclude_counts <- df_all_exclude %>%
+  group_by(Subject_Unique,Session) %>%
+  select(session_error,session_error_type) %>%
+  distinct()
 
 df_all <- df_all %>% 
   filter(!Subject_Unique %in% excludeID)
@@ -131,6 +142,9 @@ df_all <- df_all %>%
 # exclude trials with trial error
 df_all <- df_all %>% 
   filter(trial_error == "noerror")
+
+#save data after removing exclusions
+write_csv(df_all,here(write_path,"df_all_after_exclusions.csv"))
 
 # number of labs
 n_labs <- length(unique(df_all$Lab))
@@ -149,9 +163,7 @@ min_trials_per_type <- 1  # min trials per type for inclusion
 data_clean <- df_all %>%
   filter(Condition != "training") %>%
   group_by(Subject, Subject_Unique,Session,Lab) %>%
-  mutate(log_lt = log(LT))  %>% #, 
-         #scaled_log_lt = as.numeric(langcog::scale(log_lt))) %>% #MZ: why scale within subject and session?
- # filter(abs(.scaled_log_lt) < z_threshold) %>%
+  mutate(log_lt = log(LT))  %>% 
   mutate(
     N_below_threshold_lt = sum(LT < lt_min)
   ) %>%
