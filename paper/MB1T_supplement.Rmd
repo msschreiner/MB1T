@@ -107,17 +107,14 @@ Researchers should therefore be mindful of the fact that decisions about includi
 ```{r,message=FALSE,warning=FALSE}
 
 lt_min <- 2                # minumum LT for inclusion
-z_threshold <- 3           # outlier threshold (sds)
 min_trials_per_type <- 1  # min trials per type for inclusion
 
-# cleaning data by using minimum LT for inclusion, outlier threshold and minimum number of 1 trial per condition
+# cleaning data by using minimum LT for inclusion and minimum number of 1 trial per condition
 # log-transformation of LT
 data_clean <- df_all %>%
   filter(Condition != "training") %>%
   group_by(Subject, Subject_Unique,Session,Lab) %>%
-  mutate(log_lt = log(LT))  %>% #, 
-         #scaled_log_lt = as.numeric(langcog::scale(log_lt))) %>% #MZ: why scale within subject and session?
- # filter(abs(.scaled_log_lt) < z_threshold) %>%
+  mutate(log_lt = log(LT))  %>% 
   mutate(
     N_below_threshold_lt = sum(LT < lt_min)
   ) %>%
@@ -131,7 +128,8 @@ data_clean <- df_all %>%
 # aggregating log_lt for each Subject, Session and Condition
 agg_subjects <- data_clean %>%
   group_by(Lab, Method, Subject, Subject_Unique,Language, Condition, Age,Session,total_trial_n) %>%
-  summarise(MeanLogLT = mean(log_lt)) %>%
+  summarise(MeanLogLT = mean(log_lt),
+            mean_lt = mean(LT)) %>%
   mutate(ConditionC = ifelse(Condition == "IDS", .5, -.5)) %>%
   mutate(language_recoded = case_when(
     Lab %in% c("InfantCog-UBC","infantll-madison") & Language == "English" ~ "American English",
@@ -142,7 +140,9 @@ agg_subjects <- data_clean %>%
 # creating a wide format of the dataset and calculating difference in log_lt for IDS and ADS and the proportion of IDS looking
 all_agg_subjects_paired <- agg_subjects %>%
   select(-ConditionC) %>% 
-  pivot_wider(names_from = Condition, values_from = MeanLogLT) %>%
+  #pivot_wider(names_from = Condition, values_from = MeanLogLT) %>%
+  select(-MeanLogLT) %>%
+  pivot_wider(names_from = Condition, values_from = mean_lt) %>%
   mutate(Diff = IDS - ADS, 
          Prop = IDS / (IDS + ADS),
          binary_pref = case_when(

@@ -155,10 +155,9 @@ n_exclude <- length(excludeID)
 ```{r,message=FALSE,warning=FALSE}
 
 lt_min <- 2                # minumum LT for inclusion
-z_threshold <- 3           # outlier threshold (sds)
 min_trials_per_type <- 1  # min trials per type for inclusion
 
-# cleaning data by using minimum LT for inclusion, outlier threshold and minimum number of 1 trial per condition
+# cleaning data by using minimum LT for inclusion and minimum number of 1 trial per condition
 # log-transformation of LT
 data_clean <- df_all %>%
   filter(Condition != "training") %>%
@@ -422,7 +421,7 @@ simplyOverallCorr<-cor.test(all_agg_subjects_paired_retest$Diff_1,
 
 We assessed test-retest reliability in two ways. First, we conducted a multilevel analysis, with Lab as random intercept, predicting the IDS preference in Session 2 based on the IDS preference in Session 1. The results revealed that we could not predict the preference score in Session 2 based on Session 1 (see Table 2). Second, we calculated the Pearson correlation coefficient. While a simple correlation coefficient might overestimate the test-retest reliability in our sample because it does not control for the differences between different labs and methods (HPP, CF, and eye-tracking), we felt it was important to also conduct a Pearson correlation as it is commonly used to assess reliability. Again, the size of the correlation coefficient was not statistically different from zero and the estimate was, in fact, approaching nil, `r apa_print(simplyOverallCorr)$full_result`. Furthermore, we calculated the percentage of preference reversal between test and retest counting the number of participants for whom the preference changed between test and retest, and dividing it by the number of all participants. The results revealed that `r perc_reversal` percent of the infants had a preference reversal from test to retest session. Taken together, our results lead us to conclude that there is no overall test-retest reliability for the three infant preference measures used within the current study.
 
-To test whether the results were different for a specific method, we calculated the Pearson correlation coefficients and the multilevel analyses for the three different methods, HPP, central fixation and eye-tracking, separately (see Table 3). Splitting the data per method also did not lead to different results. Neither the Pearson correlation coefficients nor the coefficients of the multilevel analysis were significant, all *p-values* > .286.
+To test whether the results were different for a specific method, we calculated the Pearson correlation coefficients and the multilevel analyses for the three different methods, HPP, central fixation and eye-tracking, separately (see Table 4). Splitting the data per method also did not lead to different results. Neither the Pearson correlation coefficients nor the coefficients of the multilevel analysis were significant, all *p*-values > .286.
 We also tested for the possibility that the Time between sessions might have an impact on the reliability. The subsequent multilevel analysis, with Lab as random intercept, predicting the IDS preference in Session 2 based on the IDS preference in Session 1, the number of days between Session 1 and Session 2 and the interaction of these two variables, did not indicate that Time between sessions had an effect. Neither the main effect of Time between sessions, $\beta$=`r round(days_coefs[3,1],3)`, *SE*=`r round(days_coefs[3,2],2)`, *p*=`r printp(days_coefs[3,5])`, nor the interaction term, $\beta$=`r round(days_coefs[4,1],3)`, *SE*=`r round(days_coefs[4,2],2)`, *p*=`r printp(days_coefs[4,5])`, showed significant effects.
 As NAE-learning infants showed greater IDS preferences than their non-NAE counterparts in the original study, we also assessed if test-retest reliability interacted with children’s native language. A multilevel analysis with Lab as random intercept, predicting the IDS preference in Session 2 based on the IDS preference in Session 1, NAE and the interaction of these two variables, revealed no interaction, $\beta$=`r round(nae_coefs[4,1],3)`, *SE*=`r round(nae_coefs[4,2],2)`, *p*=`r printp(nae_coefs[4,5])` (see Figure 1).
 
@@ -485,52 +484,46 @@ age <- ggplot(d, aes(y=Diff, x=Age))+
 ```
 
 ```{r results="asis",warning=FALSE,message=FALSE}
-
-# Computing lmm for each method separately
-Method<-unique(all_agg_subjects_paired_retest$Method)
-estimate<-rep(NA,3)
-SE<-rep(NA,3)
-pvalue<-rep(NA,3)
-cor<-rep(NA,3)
-pvalue2<-rep(NA,3)
-
-df<-as.data.frame(cbind(Method,estimate,SE,pvalue,cor,pvalue2))
-df[,2:6]<-as.numeric(as.character(df[,2:6]))
-
-counter = 0
-for (M in unique(all_agg_subjects_paired_retest$Method)){
+#function for computing coefficient table from lmer model and correlation reliability
+compute_coefs_reliability <- function(dataset) {
+  #fit lmer reliability model
+  mod_lmer <- lmer(Diff_2 ~ Diff_1 + (1|Lab),data=dataset,REML=T)
+  #extract coefficients
+  coef <- summary(mod_lmer)$coef %>%
+    as_data_frame %>%
+    mutate_at(c("Estimate","Std. Error","df", "t value", "Pr(>|t|)"), 
+              function (x) signif(x, digits = 3)) %>%
+    rename(SE = `Std. Error`, 
+           t = `t value`,
+           pvalue = `Pr(>|t|)`,
+           estimate = Estimate) %>%
+    #keep just main coefficient estimate
+    slice(2) %>%
+    #keep most important columns
+    select(estimate, SE, pvalue)
   
-  counter=counter+1
-
-  data<-all_agg_subjects_paired_retest[all_agg_subjects_paired_retest$Method==M,]
-  mod_lmer <- lmer(Diff_2 ~ Diff_1 + (1|Lab),
-              data=data,REML=T)
-
-
-coefs <- summary(mod_lmer)$coef %>%
-  as_data_frame %>%
-  mutate_at(c("Estimate","Std. Error","df", "t value", "Pr(>|t|)"), 
-            function (x) signif(x, digits = 3)) %>%
-  rename(SE = `Std. Error`, 
-         t = `t value`,
-         p = `Pr(>|t|)`) %>%
-  select(-df)
-         
-rownames(coefs) <- c("Intercept", "Session One")
+  #compute correlation and add to summarized data
+  correlation<-cor.test(dataset$Diff_1,dataset$Diff_2) 
+  summarized_data <- coef %>%
+    mutate(cor=as.numeric(correlation$estimate),
+           pvalue2=as.numeric(correlation$p.value))
   
-  correlation<-cor.test(data$Diff_1,data$Diff_2)
-  
-  df$estimate[counter]<-as.numeric(coefs$Estimate)[2]  
-  df$SE[counter]<-as.numeric(coefs$SE)[2]
-  df$pvalue[counter]<-as.numeric(coefs$p)[2]
-  df$cor[counter]<-as.numeric(correlation$estimate)
-  df$pvalue2[counter]<-as.numeric(correlation$p.value)
+  #return
+  summarized_data
 }
-
-papaja::apa_table(df, 
+coef_table <- all_agg_subjects_paired_retest %>%
+  group_by(Method) %>%
+  nest() %>%
+  #compute coefficients
+  mutate(coef_table = purrr::map(data, compute_coefs_reliability)) %>%
+  #remove data
+  select(-data) %>%
+  #unpack
+  unnest(cols=c(coef_table))
+  
+papaja::apa_table(coef_table, 
                   caption = "Coefficient estimates from a linear mixed effects model predicting IDS preference in Session 2 for each method separately.", 
                   format.args = list(digits = 3))
-
 ```
 ```{r fig1, fig.cap = "Infants' preference in Session 1 and Session 2 with individual data points and regression lines color-coded by method (central fixation, eye-tracking, or HPP). Results are plotted separately for North American English-learning infants (right panel) and infants learning other languages and dialects (right panel)."}
 
