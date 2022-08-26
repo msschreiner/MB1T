@@ -21,7 +21,7 @@ abstract: |
   
   
 keywords          : "language acquisition; speech perception; infant-directed speech; adult-directed speech, test-retest reliability"
-wordcount         : "4072"
+wordcount         : "4468"
 
 bibliography      : ["r-references.bib"]
 
@@ -154,24 +154,45 @@ n_exclude <- length(excludeID)
 
 ```{r,message=FALSE,warning=FALSE}
 
-lt_min <- 2                # minumum LT for inclusion
-min_trials_per_type <- 1  # min trials per type for inclusion
+LT_MIN <- 2                # minumum LT for inclusion
+MIN_TRIALS_PER_TYPE <- 1  # min trials per type for inclusion
 
-# cleaning data by using minimum LT for inclusion and minimum number of 1 trial per condition
-# log-transformation of LT
-data_clean <- df_all %>%
-  filter(Condition != "training") %>%
-  group_by(Subject, Subject_Unique,Session,Lab) %>%
-  mutate(log_lt = log(LT))  %>% 
-  mutate(
-    N_below_threshold_lt = sum(LT < lt_min)
-  ) %>%
-  filter(LT >= lt_min) %>%
-  mutate(N_IDS = sum(Condition == "IDS"),
-         N_ADS = sum(Condition == "ADS"),
-         total_trial_n = N_IDS + N_ADS) %>%
-  filter(N_IDS >= min_trials_per_type & 
-           N_ADS >= min_trials_per_type)
+# function for cleaning data 
+# by using minimum LT for inclusion and minimum number of trials per condition,
+# and removing training trials.
+# also adding new columns: log-transformed looking data, number of looking trials below threshold
+clean_data <- function(dataset, minimum_looking_time, minimum_trials_per_type, file_path) {
+  data_clean <- dataset %>%
+    #remove training trials
+    filter(Condition != "training") %>%
+    group_by(Subject, Subject_Unique,Session,Lab) %>%
+    # log-transformation of LT
+    mutate(log_lt = log(LT))  %>% 
+    mutate(
+      N_below_threshold_lt = sum(LT < minimum_looking_time)
+      ) %>%
+    #remove looking times below minimum looking time
+    filter(LT >= minimum_looking_time) %>%
+    #compute number of remaining trials of each type
+    mutate(N_IDS = sum(Condition == "IDS"),
+           N_ADS = sum(Condition == "ADS"),
+           total_trial_n = N_IDS + N_ADS) %>%
+    #remove rows where the number of IDS or ADS trials is below the minimum number of required trials
+    filter(N_IDS >= minimum_trials_per_type & 
+           N_ADS >= minimum_trials_per_type)
+  
+  #write the resulting data file
+  write_csv(data_clean, file_path)
+  
+  return(data_clean)
+}
+
+#clean data based on minimum looking time and number of minimum trials
+data_clean <- clean_data(df_all,
+                         minimum_looking_time=LT_MIN,
+                         minimum_trials_per_type=MIN_TRIALS_PER_TYPE,
+                         file_path=here(write_path,"clean_data_minimum_trials_per_type_1.csv"))
+
 
 # calculating mean lt in seconds for Session and Condition
 
