@@ -608,13 +608,35 @@ ggplot(all_agg_subjects_paired_retest, aes(x = Diff_1, y = Diff_2, col = Method)
 
 ```{r,message=FALSE,warning=FALSE}
 
+#helper function to combine all aggregation steps, with minimum number of trial pairs exclusion criterion applied
+aggregate_complete <- function(dataset,min_trials) {
+  
+  cur_agg_subjects_paired_retest <- dataset %>%
+    clean_data(minimum_looking_time=LT_MIN,minimum_trials_per_type=min_trials,file_path=here(write_path,paste0("clean_data_minimum_trials_per_type_",min_trials,".csv"))) %>%
+    aggregate_by_subject(file_path=here(write_path,paste0("agg_subjects_minimum_trials_per_type_",min_trials,".csv"))) %>%
+    aggregate_by_subject_paired(file_path=here(write_path,paste0("all_agg_subjects_paired_minimum_trials_per_type_",min_trials,".csv"))) %>%
+    aggregate_by_subject_paired_retest(file_path=here(write_path,paste0("all_agg_subjects_paired_retest_minimum_trials_per_type_",min_trials,".csv")))
+  
+  return(cur_agg_subjects_paired_retest)
+}
+
 # Creating data sets for different number of minimum trial pairs included: 2, 4, 6, and 8
-min_trials<-c(2,4,6,8) # define min_trials for Loop
+min_trials<-c(2,4,6,8)
+
+# create paired retest dataframes for each participant inclusion level based on the minimum number of trial pairs
+paired_retest_df_by_trial_exclusions <- df_all %>%
+  #expand and then nest data frame for each level of minimum trial pairs
+  expand_grid(min_trials=min_trials) %>%
+  group_by(min_trials) %>%
+  nest() %>%
+  mutate(
+    all_agg_subjects_paired_retest = purrr::map2(data,min_trials,aggregate_complete)
+  ) %>%
+  select(-data)
 
 for (i in min_trials){
   
   lt_min <- 2                # minumum LT for inclusion
-  z_threshold <- 3           # outlier threshold (sds)
   min_trials_per_type <- i  # min trials per type for inclusion
 
 
@@ -622,9 +644,7 @@ data_clean <- df_all %>%
   filter(LT >= lt_min) %>%
   filter(Condition != "training") %>%
   group_by(Subject,Session,Lab) %>%
-  mutate(log_lt = log(LT))  %>%#, 
-         #.scaled_log_lt = as.numeric(langcog::scale(log_lt))) %>%
- # filter(abs(.scaled_log_lt) < z_threshold) %>%
+  mutate(log_lt = log(LT))  %>%
   group_by(Subject,Session,Lab) %>%
   mutate(.N_IDS = sum(Condition == "IDS"),
          .N_ADS = sum(Condition == "ADS")) %>%  
@@ -656,10 +676,6 @@ all_agg_subjects_paired_retest<-all_agg_subjects_paired_retest %>%
   filter(!is.na(Diff_1)) %>% filter(!is.na(Diff_2))
 
 all_agg_subjects_paired<-all_agg_subjects_paired %>% filter(Subject %in%all_agg_subjects_paired_retest$Subject )
-
-all_agg_subjects_pairedsum<-all_agg_subjects_paired %>% group_by(Lab) %>% 
-  summarise(N=n())
-
 
 overallCorrelation<-cor.test(all_agg_subjects_paired_retest$Diff_1,
          all_agg_subjects_paired_retest$Diff_2)

@@ -1,0 +1,25 @@
+Lab,Subject,Subject_Unique,Method,Language,Diff_1,Diff_2,days_between_sessions,Age
+babylab-potsdam,b7033,babylab-potsdam:b7033,HPP,German,0.4180851785646247,-0.008376648433080058,21,228.5
+babylab-potsdam,b7145,babylab-potsdam:b7145,HPP,German,0.26139588478322673,0.21653982435906083,9,258.5
+babylab-potsdam,b7146,babylab-potsdam:b7146,HPP,German,0.17901757766691917,-0.09547067138979237,10,225
+babylab-potsdam,b7147,babylab-potsdam:b7147,HPP,German,0.026425038088145003,0.05454450289826629,7,213.5
+babylab-potsdam,b7155,babylab-potsdam:b7155,HPP,German,0.07557002298609561,-0.2222971277911161,10,212
+brookes-babylab,MB_42,brookes-babylab:MB_42,central fixation,English,0.43950301238844114,0.7070459459643008,7,231.5
+brookes-babylab,MB_80,brookes-babylab:MB_80,central fixation,English,0.134216563467771,0.44302314131777876,12,276
+InfantCog-UBC,AD42,InfantCog-UBC:AD42,central fixation,English,0.21819998961406428,0.059378351059700796,11,163.5
+lancslab,P07,lancslab:P07,Eyetracking,English,0.10694741200768343,0.11419469517445746,7,213.5
+lancslab,P10,lancslab:P10,Eyetracking,English,-8.031448786085527e-4,0.16699817951081553,7,232.5
+lancslab,P11,lancslab:P11,Eyetracking,English,0.35719552119715514,0.08887008578183053,7,238.5
+wsi-goettingen,M220,wsi-goettingen:M220,central fixation,German,0.12065038311754317,0.02377595612521244,16,213
+wsi-goettingen,M221,wsi-goettingen:M221,central fixation,German,-0.01362691019047979,0.06441153658563303,1,259.5
+wsi-goettingen,M227,wsi-goettingen:M227,central fixation,German,0.16126064698965625,0.10824611607442591,8,240
+wsi-goettingen,M230,wsi-goettingen:M230,central fixation,German,-0.4291109470913823,8.18370420483383e-4,7,203.5
+wsi-goettingen,M329,wsi-goettingen:M329,central fixation,German,0.4404452395893348,0.1526058721016086,6,342
+wsi-goettingen,M331,wsi-goettingen:M331,central fixation,German,0.12302064787978773,-0.42491547412262265,6,286
+wsi-goettingen,M504,wsi-goettingen:M504,HPP,German,0.07602084443219592,0.1013940661886803,7,231.5
+wsi-goettingen,M506,wsi-goettingen:M506,HPP,German,0.8314084689960008,0.34106865187389346,7,255.5
+wsi-goettingen,M511,wsi-goettingen:M511,HPP,German,0.3056130294731587,0.7302267857095406,8,208
+wsi-goettingen,M514,wsi-goettingen:M514,HPP,German,0.32828098979653886,0.17943795247724714,19,245.5
+wsi-goettingen,M515,wsi-goettingen:M515,HPP,German,-0.12194378280415252,0.1820135349366172,15,211.5
+wsi-goettingen,M516,wsi-goettingen:M516,HPP,German,0.04146644321977355,-0.24567792413560463,7,231.5
+wsi-goettingen,M518,wsi-goettingen:M518,HPP,German,0.1444192071685717,0.009035877727311403,6,269
