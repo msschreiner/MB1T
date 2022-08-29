@@ -153,7 +153,6 @@ n_exclude <- length(excludeID)
 ```
 
 ```{r,message=FALSE,warning=FALSE}
-
 LT_MIN <- 2                # minumum LT for inclusion
 MIN_TRIALS_PER_TYPE <- 1  # min trials per type for inclusion
 
@@ -193,20 +192,11 @@ data_clean <- clean_data(df_all,
                          minimum_trials_per_type=MIN_TRIALS_PER_TYPE,
                          file_path=here(write_path,"clean_data_minimum_trials_per_type_1.csv"))
 
-
-# calculating mean lt in seconds for Session and Condition
-
-agg_subjects_lt <- data_clean %>%
-  group_by(Condition, Session) %>%
-  summarise(MeanLT = mean(LT),
-            SD_LT = sd(LT)) %>%
-  pivot_wider(names_from=Session,values_from=c(MeanLT, SD_LT),names_prefix="session_") %>%
-  relocate(SD_LT_session_1, .before = MeanLT_session_2)
-
-# aggregating log_lt for each Subject, Session and Condition
+# aggregating LT and log_lt for each Subject, Session and Condition
 agg_subjects <- data_clean %>%
   group_by(Lab, Method, Subject, Subject_Unique,Language, Condition, Age,Session,total_trial_n) %>%
-  summarise(MeanLogLT = mean(log_lt)) %>%
+  summarise(MeanLogLT = mean(log_lt),
+            mean_lt = mean(LT)) %>%
   mutate(ConditionC = ifelse(Condition == "IDS", .5, -.5)) %>%
   mutate(language_recoded = case_when(
     Lab %in% c("InfantCog-UBC","infantll-madison") & Language == "English" ~ "American English",
@@ -214,9 +204,18 @@ agg_subjects <- data_clean %>%
   )) %>%
   mutate(Native = ifelse(language_recoded == "American English", TRUE, FALSE))
 
+#summarize looking time across subjects
+# calculating mean lt in seconds for Session and Condition
+agg_subjects_lt <- agg_subjects %>%
+  group_by(Condition, Session) %>%
+  summarise(MeanLT = mean(mean_lt),
+            SD_LT = sd(mean_lt)) %>%
+  pivot_wider(names_from=Session,values_from=c(MeanLT, SD_LT),names_prefix="session_") %>%
+  relocate(SD_LT_session_1, .before = MeanLT_session_2)
+
 # creating a wide format of the dataset and calculating difference in log_lt for IDS and ADS and the proportion of IDS looking
 all_agg_subjects_paired <- agg_subjects %>%
-  select(-ConditionC) %>% 
+  select(-ConditionC,-mean_lt) %>% 
   pivot_wider(names_from = Condition, values_from = MeanLogLT) %>%
   mutate(Diff = IDS - ADS, 
          Prop = IDS / (IDS + ADS),
