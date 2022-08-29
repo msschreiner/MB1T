@@ -192,17 +192,28 @@ data_clean <- clean_data(df_all,
                          minimum_trials_per_type=MIN_TRIALS_PER_TYPE,
                          file_path=here(write_path,"clean_data_minimum_trials_per_type_1.csv"))
 
-# aggregating LT and log_lt for each Subject, Session and Condition
-agg_subjects <- data_clean %>%
-  group_by(Lab, Method, Subject, Subject_Unique,Language, Condition, Age,Session,total_trial_n) %>%
-  summarise(MeanLogLT = mean(log_lt),
-            mean_lt = mean(LT)) %>%
-  mutate(ConditionC = ifelse(Condition == "IDS", .5, -.5)) %>%
-  mutate(language_recoded = case_when(
-    Lab %in% c("InfantCog-UBC","infantll-madison") & Language == "English" ~ "American English",
-    TRUE ~ Language
-  )) %>%
-  mutate(Native = ifelse(language_recoded == "American English", TRUE, FALSE))
+# function for aggregating LT and log_lt for each Subject, Session and Condition
+aggregate_by_subject <- function(cleaned_data, file_path) {
+  agg_subjects <- cleaned_data %>%
+    group_by(Lab, Method, Subject, Subject_Unique,Language, Condition, Age,Session,total_trial_n) %>%
+    summarise(MeanLogLT = mean(log_lt),
+              mean_lt = mean(LT)) %>%
+    mutate(ConditionC = ifelse(Condition == "IDS", .5, -.5)) %>%
+    mutate(language_recoded = case_when(
+      Lab %in% c("InfantCog-UBC","infantll-madison") & Language == "English" ~ "American English",
+      TRUE ~ Language
+      )) %>%
+    mutate(Native = ifelse(language_recoded == "American English", TRUE, FALSE))
+  
+  #write the resulting data file
+  write_csv(agg_subjects, file_path)
+  
+  return(agg_subjects)
+}
+
+#aggregate data by-participant
+agg_subjects <- aggregate_by_subject(data_clean,file_path=here(write_path,"agg_subjects_minimum_trials_per_type_1.csv"))
+
 
 #summarize looking time across subjects
 # calculating mean lt in seconds for Session and Condition
