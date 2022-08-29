@@ -601,18 +601,6 @@ data_clean <- df_all %>%
            .N_ADS >= min_trials_per_type) %>%
   select(-starts_with("."))
 
-agg_subjects <- data_clean %>%
-  group_by(Lab, Method, Subject, Language, Condition, Age,Session) %>%
-  summarise(MeanLogLT = mean(log_lt)) %>%
-  mutate(ConditionC = ifelse(Condition == "IDS", .5, -.5)) %>%
-  mutate(Native = ifelse(Language == "American English", TRUE, FALSE))
-
-agg_subjects_paired <- agg_subjects %>%
-  select(-ConditionC) %>% 
-  spread(Condition,MeanLogLT) %>%
-  mutate(Diff = IDS - ADS, 
-         Prop = IDS / (IDS + ADS))
-
 all_agg_subjects <- data_clean %>%
   group_by(Lab, Method, Session, Subject, Language, Condition, Age) %>%
   summarise(MeanLogLT = mean(log_lt)) %>%
