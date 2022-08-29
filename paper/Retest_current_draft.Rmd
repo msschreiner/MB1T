@@ -255,19 +255,30 @@ aggregate_by_subject_paired <- function(aggregated_subjects, file_path) {
   return(all_agg_subjects_paired)
 }
 
-#create wide format summarize data per participant
+#create wide format summarizing data per participant
 all_agg_subjects_paired <- aggregate_by_subject_paired(agg_subjects,file_path=here(write_path,"all_agg_subjects_paired_minimum_trials_per_type_1.csv"))
 
-# creating a wide format of the dataset that the difference scores for each Session become a separate variable, calculating the number of days between test and retest session, and mean Age for both testing sessions
-all_agg_subjects_paired_retest <- all_agg_subjects_paired %>%
-  group_by(Lab,Subject,Subject_Unique,Method,Language) %>%  
-  pivot_wider(names_from=Session,values_from=Diff,names_prefix="session_") %>% 
-  mutate(days_between_sessions=max(Age)-min(Age)) %>% 
-  summarise(
-    Diff_1=mean(session_1,na.rm=T),
-    Diff_2=mean(session_2,na.rm=T),
-    days_between_sessions=mean(days_between_sessions),
-    Age=mean(Age,na.rm=T))
+# function for creating a wide format of the dataset such that the difference scores for each Session become a separate variable, calculating the number of days between test and retest session, and mean Age for both testing sessions
+aggregate_by_subject_paired_retest <- function(aggregated_subjects_paired, file_path) {
+  
+  all_agg_subjects_paired_retest <- aggregated_subjects_paired %>%
+    group_by(Lab,Subject,Subject_Unique,Method,Language) %>%
+    pivot_wider(names_from=Session,values_from=Diff,names_prefix="session_") %>% 
+    mutate(days_between_sessions=max(Age)-min(Age)) %>% 
+    summarise(
+      Diff_1=mean(session_1,na.rm=T),
+      Diff_2=mean(session_2,na.rm=T),
+      days_between_sessions=mean(days_between_sessions),
+      Age=mean(Age,na.rm=T))
+  
+  #write data
+  write_csv(all_agg_subjects_paired_retest, file_path)
+  
+  return(all_agg_subjects_paired_retest)
+}
+
+#create wide format summarizing differences scores by session per participant
+all_agg_subjects_paired_retest <- aggregate_by_subject_paired_retest(all_agg_subjects_paired,file_path=here(write_path,"all_agg_subjects_paired_retest_minimum_trials_per_type_1.csv"))
 
 # Getting the number of final participants
 n <- length(unique(all_agg_subjects_paired$Subject_Unique)) # Final sample of participants
