@@ -620,8 +620,8 @@ aggregate_complete <- function(dataset,min_trials) {
   return(cur_agg_subjects_paired_retest)
 }
 
-# Creating data sets for different number of minimum trial pairs included: 2, 4, 6, and 8
-min_trials<-c(2,4,6,8)
+# Creating data sets for different number of minimum trial pairs included: 1, 2, 4, 6, and 8
+min_trials<-c(1,2,4,6,8)
 
 # create paired retest dataframes for each participant inclusion level based on the minimum number of trial pairs
 paired_retest_df_by_trial_exclusions <- df_all %>%
@@ -684,11 +684,23 @@ eval(parse(text = paste('simplyOverallCorr',i, ' = overallCorrelation', sep=''))
 eval(parse(text = paste('all_agg_subjects_paired_retest',i, ' = all_agg_subjects_paired_retest', sep='')))
   
 }
+##### function for computing and printing test-retest correlation
+print_test_retest_correlation <- function(df,minimum_trials=1) {
+  #create the dataset based on the minimum trial inclusion criterion
+  filtered_data <- df %>%
+    filter(min_trials==minimum_trials) %>%
+    unnest(cols = c(all_agg_subjects_paired_retest))
+  #compute the test-retest correlation
+  correlation <- cor.test(filtered_data$Diff_1,filtered_data$Diff_2)
+  #print the correlation
+  apa_print(correlation)$statistic
+}
+  
 
 ```
 
 ## Results with different inclusion criteria
-To this point, all analyses were performed on data with the inclusion criteria from MB1. For this, infants needed only 1 out of 8 valid trial pairs (i.e., any combination of an IDS and ADS trial) to be included in the analyses. Given that the use of more stringent inclusion criteria yielded larger effects sizes within the original MB1 study, we also assessed test-retest reliability by applying stricter inclusion criteria and thereby increasing test length to 2, 4, 6, and 8 included test trial pairs per condition. Applying a stricter criterion - and thereby increasing test length - increased reliability numerically from r = .02 to r = .38 (Figure 2). However, in part likely due to the decrease in sample size, none of these correlations was statistically significant: 2 valid trial pairs, `r apa_print(simplyOverallCorr2)$statistic `; 4 valid trial pairs, `r apa_print(simplyOverallCorr4)$statistic `; 6 valid trial pairs, `r apa_print(simplyOverallCorr6)$statistic `; 8 valid trial pairs - all trials on both testing days - `r apa_print(simplyOverallCorr8)$statistic `. Nevertheless, the analyses show that stricter inclusion criteria might lead to higher test-retest reliability but at the same time comes with tremendous decreases in sample size.
+To this point, all analyses were performed on data with the inclusion criteria from MB1. For this, infants needed only 1 out of 8 valid trial pairs (i.e., any combination of an IDS and ADS trial) to be included in the analyses. Given that the use of more stringent inclusion criteria yielded larger effects sizes within the original MB1 study, we also assessed test-retest reliability by applying stricter inclusion criteria and thereby increasing test length to 2, 4, 6, and 8 included test trial pairs per condition. Applying a stricter criterion - and thereby increasing test length - increased reliability numerically from r = .02 to r = .38 (Figure 2). However, in part likely due to the decrease in sample size, none of these correlations was statistically significant: 2 valid trial pairs, `r print_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=2)`; 4 valid trial pairs, `r print_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=4)`; 6 valid trial pairs, `r print_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=6)`; 8 valid trial pairs - all trials on both testing days - `r print_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=8)`. Nevertheless, the analyses show that stricter inclusion criteria might lead to higher test-retest reliability but at the same time comes with tremendous decreases in sample size.
 
 ```{r fig.cap="IDS preferences of both sessions plotted against each other for each inclusion criterion. n indicates the number of included infants, r is the Pearson correlation coefficient as the indicator for reliability.", fig.align="center",out.width = "5in",fig.height = 12, fig.width = 8}
 
@@ -713,12 +725,6 @@ legend("topleft",legend = paste("r = ",round(simplyOverallCorr6$estimate,2),"; n
 plot(all_agg_subjects_paired_retest8$Diff_1,all_agg_subjects_paired_retest8$Diff_2,xlab = "IDS preference in first session",ylab= "IDS preference in second session",main = "Inclusion criterion: 8 trial pairs",xlim = Limaxes,ylim = Limaxes)
 abline(lm(all_agg_subjects_paired_retest8$Diff_2~all_agg_subjects_paired_retest8$Diff_1),col="red")
 legend("topleft",legend = paste("r = ",round(simplyOverallCorr8$estimate,2),"; n = ",simplyOverallCorr8$parameter+2,sep=""))
-
-table1 <- all_agg_subjects_paired_s1 %>% group_by(Method) %>% summarise(length(Method))
-table2 <- all_agg_subjects_paired_retest2 %>% group_by(Method) %>% summarise(length(Method))
-table4 <- all_agg_subjects_paired_retest4 %>% group_by(Method) %>% summarise(length(Method))
-table6 <- all_agg_subjects_paired_retest6 %>% group_by(Method) %>% summarise(length(Method))
-table8 <- all_agg_subjects_paired_retest8 %>% group_by(Method) %>% summarise(length(Method))
 
 ```
 
