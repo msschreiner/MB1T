@@ -629,74 +629,34 @@ paired_retest_df_by_trial_exclusions <- df_all %>%
   expand_grid(min_trials=min_trials) %>%
   group_by(min_trials) %>%
   nest() %>%
+  #now aggregate data for each minimum trial exclusion level
   mutate(
     all_agg_subjects_paired_retest = purrr::map2(data,min_trials,aggregate_complete)
   ) %>%
   select(-data)
 
-for (i in min_trials){
-  
-  lt_min <- 2                # minumum LT for inclusion
-  min_trials_per_type <- i  # min trials per type for inclusion
-
-
-data_clean <- df_all %>%
-  filter(LT >= lt_min) %>%
-  filter(Condition != "training") %>%
-  group_by(Subject,Session,Lab) %>%
-  mutate(log_lt = log(LT))  %>%
-  group_by(Subject,Session,Lab) %>%
-  mutate(.N_IDS = sum(Condition == "IDS"),
-         .N_ADS = sum(Condition == "ADS")) %>%  
-  mutate(N_IDS = sum(Condition == "IDS"),
-         N_ADS = sum(Condition == "ADS")) %>%
-  filter(.N_IDS >= min_trials_per_type & 
-           .N_ADS >= min_trials_per_type) %>%
-  select(-starts_with("."))
-
-all_agg_subjects <- data_clean %>%
-  group_by(Lab, Method, Session, Subject, Language, Condition, Age) %>%
-  summarise(MeanLogLT = mean(log_lt)) %>%
-  mutate(ConditionC = ifelse(Condition == "IDS", .5, -.5)) %>%
-  mutate(Native = ifelse(Language == "American English", TRUE, FALSE))
-
-all_agg_subjects_paired <- all_agg_subjects %>%
-  select(-ConditionC) %>%
-  spread(Condition, MeanLogLT) %>%
-  mutate(Diff = IDS - ADS, 
-         Prop = IDS / (IDS + ADS))
-
-# notperfect, but works
-all_agg_subjects_paired_retest<-all_agg_subjects_paired %>% spread(Session,Diff) %>% 
-  group_by(Lab,Subject,Method,Language) %>%
-  mutate(days_between_sessions=max(Age)-min(Age)) %>% 
-  summarise(Diff_1=mean(`1`,na.rm=T),Diff_2=mean(`2`,na.rm=T),days_between_sessions=mean(days_between_sessions))
-
-all_agg_subjects_paired_retest<-all_agg_subjects_paired_retest %>% 
-  filter(!is.na(Diff_1)) %>% filter(!is.na(Diff_2))
-
-all_agg_subjects_paired<-all_agg_subjects_paired %>% filter(Subject %in%all_agg_subjects_paired_retest$Subject )
-
-overallCorrelation<-cor.test(all_agg_subjects_paired_retest$Diff_1,
-         all_agg_subjects_paired_retest$Diff_2)
-
-eval(parse(text = paste('simplyOverallCorr',i, ' = overallCorrelation', sep='')))
-eval(parse(text = paste('all_agg_subjects_paired_retest',i, ' = all_agg_subjects_paired_retest', sep='')))
-  
-}
-##### function for computing and printing test-retest correlation
-print_test_retest_correlation <- function(df,minimum_trials=1) {
+##### functions for computing and printing test-retest correlation
+create_exclusion_dataset <- function(df, minimum_trials=1) {
   #create the dataset based on the minimum trial inclusion criterion
   filtered_data <- df %>%
     filter(min_trials==minimum_trials) %>%
     unnest(cols = c(all_agg_subjects_paired_retest))
+  return(filtered_data)
+}
+
+compute_test_retest_correlation <- function(df,minimum_trials=1) {
+  #create the dataset based on the minimum trial inclusion criterion
+  filtered_data <- create_exclusion_dataset(df,minimum_trials=minimum_trials)
   #compute the test-retest correlation
   correlation <- cor.test(filtered_data$Diff_1,filtered_data$Diff_2)
-  #print the correlation
+  correlation
+}
+
+print_test_retest_correlation <- function(df,minimum_trials=1) {
+  #compute and print the correlation
+  correlation <- compute_test_retest_correlation(df,minimum_trials=minimum_trials)
   apa_print(correlation)$statistic
 }
-  
-
 ```
 
 ## Results with different inclusion criteria
@@ -705,27 +665,21 @@ To this point, all analyses were performed on data with the inclusion criteria f
 ```{r fig.cap="IDS preferences of both sessions plotted against each other for each inclusion criterion. n indicates the number of included infants, r is the Pearson correlation coefficient as the indicator for reliability.", fig.align="center",out.width = "5in",fig.height = 12, fig.width = 8}
 
 # Creating scatterplot for each inclusion criterion
-
-Limaxes<-c(-0.5,1.5)
+plot_exclusion_dataset <- function(df,minimum_trials=1,Limaxes=c(-0.5,1.5)) {
+  #create the dataset based on the minimum trial inclusion criterion
+  current_dataset <- create_exclusion_dataset(df,minimum_trials=minimum_trials)
+  current_correlation <- compute_test_retest_correlation(df,minimum_trials=minimum_trials)
+  main_message <- paste0("Inclusion criterion: ",minimum_trials," trial pairs")
+  plot(current_dataset$Diff_1,current_dataset$Diff_2,xlab = "IDS preference in first session",ylab= "IDS preference in second session",main = main_message,xlim = Limaxes,ylim = Limaxes)
+abline(lm(current_dataset$Diff_2~current_dataset$Diff_1),col="red")
+legend("topleft",legend = paste("r = ",round(current_correlation$estimate,2),"; n = ",current_correlation$parameter+2,sep=""))
+}
 
 par(mfrow = c(2, 2))
-plot(all_agg_subjects_paired_retest2$Diff_1,all_agg_subjects_paired_retest2$Diff_2,xlab = "IDS preference in first session",ylab= "IDS preference in second session",main = "Inclusion criterion: 2 trial pairs",xlim = Limaxes,ylim = Limaxes)
-abline(lm(all_agg_subjects_paired_retest2$Diff_2~all_agg_subjects_paired_retest2$Diff_1),col="red")
-legend("topleft",legend = paste("r = ",round(simplyOverallCorr2$estimate,2),"; n = ",simplyOverallCorr2$parameter+2,sep=""))
-
-
-plot(all_agg_subjects_paired_retest4$Diff_1,all_agg_subjects_paired_retest4$Diff_2,xlab = "IDS preference in first session",ylab= "IDS preference in second session",main = "Inclusion criterion: 4 trial pairs",xlim = Limaxes,ylim = Limaxes)
-abline(lm(all_agg_subjects_paired_retest4$Diff_2~all_agg_subjects_paired_retest4$Diff_1),col="red")
-legend("topleft",legend = paste("r = ",round(simplyOverallCorr4$estimate,2),"; n = ",simplyOverallCorr4$parameter+2,sep=""))
-
-plot(all_agg_subjects_paired_retest6$Diff_1,all_agg_subjects_paired_retest6$Diff_2,xlab = "IDS preference in first session",ylab= "IDS preference in second session",main = "Inclusion criterion: 6 trial pairs",xlim = Limaxes,ylim = Limaxes)
-abline(lm(all_agg_subjects_paired_retest6$Diff_2~all_agg_subjects_paired_retest6$Diff_1),col="red")
-legend("topleft",legend = paste("r = ",round(simplyOverallCorr6$estimate,2),"; n = ",simplyOverallCorr6$parameter+2,sep=""))
-
-plot(all_agg_subjects_paired_retest8$Diff_1,all_agg_subjects_paired_retest8$Diff_2,xlab = "IDS preference in first session",ylab= "IDS preference in second session",main = "Inclusion criterion: 8 trial pairs",xlim = Limaxes,ylim = Limaxes)
-abline(lm(all_agg_subjects_paired_retest8$Diff_2~all_agg_subjects_paired_retest8$Diff_1),col="red")
-legend("topleft",legend = paste("r = ",round(simplyOverallCorr8$estimate,2),"; n = ",simplyOverallCorr8$parameter+2,sep=""))
-
+plot_exclusion_dataset(paired_retest_df_by_trial_exclusions,minimum_trials=2)
+plot_exclusion_dataset(paired_retest_df_by_trial_exclusions,minimum_trials=4)
+plot_exclusion_dataset(paired_retest_df_by_trial_exclusions,minimum_trials=6)
+plot_exclusion_dataset(paired_retest_df_by_trial_exclusions,minimum_trials=8)
 ```
 
 # General Discussion
