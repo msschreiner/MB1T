@@ -160,7 +160,7 @@ d <- all_agg_subjects_paired_retest %>%
   select(Diff_1,Diff_2)
 
 kclusts <- 
-  tibble(k = 1:9) %>%
+  tibble(k = 1:6) %>%
   mutate(
     kclust = map(k, ~kmeans(d, .x)),
     tidied = map(kclust, tidy),
@@ -189,22 +189,25 @@ clusterings <-
 p1 <- 
   ggplot(assignments, aes(x = Diff_1, y = Diff_2)) +
   geom_point(aes(color = .cluster), alpha = 0.8) + 
-  facet_wrap(~ k)+
+  facet_wrap(~ k,ncol =2)+
   geom_hline(yintercept=0)+
   geom_vline(xintercept=0)+
   geom_hline(yintercept=assignments$mean_diff_2[1],linetype="dotted")+
   geom_vline(xintercept=assignments$mean_diff_1[1],linetype="dotted")+
   xlab("IDS preference in first session")+
-  ylab("IDS preference in second session")
+  ylab("IDS preference in second session")+
+  scale_color_brewer(name ="cluster", palette="Set1")+
+  theme_cowplot()
 
 p2 <- ggplot(clusterings, aes(k, tot.withinss)) +
   geom_line() +
   geom_point()+
   xlab("Number of clusters")+
   scale_x_continuous(breaks=seq(1,10))+
-  ylab("Total within-cluster sum of squares")
+  ylab("Total within-cluster sum of squares")+
+  theme_cowplot()
 
-plot_grid(p1,p2,labels=c("A","B"),rel_widths=c(2,1))
+plot_grid(p1,p2,labels=c("A","B"),rel_widths=c(1.5,1))
 ```
 
 
