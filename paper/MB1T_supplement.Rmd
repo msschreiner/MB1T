@@ -35,7 +35,9 @@ library("langcog")
 library(lmerTest)
 library(ggplot2)
 library(cowplot)
+library(tidymodels)
 
+read_path <- here("data","processed")
 ```
 
 ```{r analysis-preferences}
@@ -48,13 +50,13 @@ knitr::opts_chunk$set(cache.extra = knitr::rand_seed,echo = FALSE, warning = FAL
 
 ```{r}
 # importing dataset (after excluding session and trial errors)
-df_all <- read_csv(here("data","processed","df_all_after_exclusions.csv"))
+df_all <- read_csv(here(read_path,"df_all_after_exclusions.csv"))
 
-lt_min <- 2                # minimum LT for inclusion
+#some minor data cleaning
+#not cleaning based on minimum number of trials in order to see even infants contributing at least one trial
 df_all <- df_all %>%
   filter(Condition != "training") %>%
-  filter(LT >= lt_min) %>% 
-  mutate(LT=ifelse(LT>18,18,LT)) # Truncating the looking times per trial at 18 seconds - consistent with decision from MB1
+  filter(LT >= 2) # minimum LT for inclusion
 
 # calculate number of trials that each participant contributes per session
 df_all_trials <- df_all %>%
@@ -103,80 +105,108 @@ This result suggests that if infants contribute a higher number of trials in one
 This finding is consistent with the hypothesis that how attentive infants are throughout an experiment (and hence how many trials they contribute) is a stable individual difference, at least for some infant looking time tasks.
 Researchers should therefore be mindful of the fact that decisions about including or excluding infants based on trials contributed may selectively sample a specific sub-set of the infant population they are studying [@debolt2020robust;@byers2021six].
 
-## S2: Preference reversal
+## S2: Patterns of preference across sessions
 ```{r,message=FALSE,warning=FALSE}
 
-lt_min <- 2                # minumum LT for inclusion
-min_trials_per_type <- 1  # min trials per type for inclusion
-
-# cleaning data by using minimum LT for inclusion and minimum number of 1 trial per condition
-# log-transformation of LT
-data_clean <- df_all %>%
-  filter(Condition != "training") %>%
-  group_by(Subject, Subject_Unique,Session,Lab) %>%
-  mutate(log_lt = log(LT))  %>% 
-  mutate(
-    N_below_threshold_lt = sum(LT < lt_min)
-  ) %>%
-  filter(LT >= lt_min) %>%
-  mutate(N_IDS = sum(Condition == "IDS"),
-         N_ADS = sum(Condition == "ADS"),
-         total_trial_n = N_IDS + N_ADS) %>%
-  filter(N_IDS >= min_trials_per_type & 
-           N_ADS >= min_trials_per_type)
-
-# aggregating log_lt for each Subject, Session and Condition
-agg_subjects <- data_clean %>%
-  group_by(Lab, Method, Subject, Subject_Unique,Language, Condition, Age,Session,total_trial_n) %>%
-  summarise(MeanLogLT = mean(log_lt),
-            mean_lt = mean(LT)) %>%
-  mutate(ConditionC = ifelse(Condition == "IDS", .5, -.5)) %>%
-  mutate(language_recoded = case_when(
-    Lab %in% c("InfantCog-UBC","infantll-madison") & Language == "English" ~ "American English",
-    TRUE ~ Language
-  )) %>%
-  mutate(Native = ifelse(language_recoded == "American English", TRUE, FALSE))
-
-# creating a wide format of the dataset and calculating difference in log_lt for IDS and ADS and the proportion of IDS looking
-all_agg_subjects_paired <- agg_subjects %>%
-  select(-ConditionC) %>% 
-  #pivot_wider(names_from = Condition, values_from = MeanLogLT) %>%
-  select(-MeanLogLT) %>%
-  pivot_wider(names_from = Condition, values_from = mean_lt) %>%
-  mutate(Diff = IDS - ADS, 
-         Prop = IDS / (IDS + ADS),
-         binary_pref = case_when(
-           is.na(Diff) ~ NA_character_,
-           Diff > 0 ~ "IDS_preference",
-           Diff < 0 ~ "ADS_preference",
-           Diff == 0 ~ "no_preference"
-         ))
-
-reversal <- all_agg_subjects_paired %>%
-  select(Subject_Unique, Session, binary_pref)
-
-reversal <- reversal[,c(2, 6:8)]
-
-reversal <- reversal %>%
-  group_by(Subject_Unique) %>%
-  pivot_wider(names_from = Session, values_from = binary_pref)
-
-names(reversal) <- c("Method", "Subject_Unique","Pref_Test" , "Pref_Retest")
-  
-reversal <- reversal %>%
-  group_by(Subject_Unique) %>%
-  mutate(reversal = case_when((Pref_Test == "IDS_preference" & Pref_Retest == "IDS_preference")  ~ 0,
+#read in cleaned and aggregated data
+data_clean <- read_csv(here(read_path,"clean_data_minimum_trials_per_type_1.csv"))
+agg_subjects <- read_csv(here(read_path,"all_agg_subjects_paired_minimum_trials_per_type_1.csv"))
+all_agg_subjects_paired <- read_csv(here(read_path,"all_agg_subjects_paired_minimum_trials_per_type_1.csv")) 
+all_agg_subjects_paired_retest <- read_csv(here(read_path,"all_agg_subjects_paired_retest_minimum_trials_per_type_1.csv")) %>%
+  mutate(Pref_Test=case_when(
+             Diff_1 > 0 ~ "IDS_preference",
+             Diff_1 < 0 ~ "ADS_preference",
+             Diff_1 == 0 ~ "no_preference"
+             ),
+         Pref_Retest=case_when(
+             Diff_2 > 0 ~ "IDS_preference",
+             Diff_2 < 0 ~ "ADS_preference",
+             Diff_2 == 0 ~ "no_preference"
+             )) %>%
+  mutate(reversal_binary = case_when((Pref_Test == "IDS_preference" & Pref_Retest == "IDS_preference")  ~ 0,
                               (Pref_Test == "ADS_preference" & Pref_Retest == "ADS_preference")  ~ 0,
                               (Pref_Test == "IDS_preference" & Pref_Retest == "ADS_preference")  ~ 1,
-                              (Pref_Test == "ADS_preference" & Pref_Retest == "IDS_preference")  ~ 1))
+                              (Pref_Test == "ADS_preference" & Pref_Retest == "IDS_preference")  ~ 1)) %>%
+  unite(reversal_type,Pref_Test,Pref_Retest,remove=FALSE) %>%
+  mutate(reversal_type=str_remove_all(reversal_type,pattern="_preference"))
 
-n_reversal <- length(reversal$reversal[reversal$reversal==1])
-n_total <- length(reversal$reversal)
-
-perc_reversal <- n_reversal/n_total*100
+#overall percent reversals
+reversal_tally <- all_agg_subjects_paired_retest %>%
+  ungroup() %>%
+  group_by(reversal_type) %>%
+  tally()
+total_consistent <- sum(filter(reversal_tally, reversal_type %in% c("IDS_IDS","ADS_ADS"))$n)
+total_n <- sum(reversal_tally$n)
+percent_consistent <- total_consistent/total_n 
 ```
 
-`r perc_reversal` percent of the infants had a preference reversal from test to retest session.
+We also conducted analyses to explore whether there were any patterns of preference reversal across test sessions.
+While there was no strong correlation in the magnitude of IDS preference between test session 1 and test session 2, here we asked whether infants consistently expressed the same preference across test sessions.
+Overall, `r round(percent_consistent,3)*100 `% of the infants had a consistent preference from test to retest session, indicating that infants were not more likely than chance to maintain their preference from test session 1 to test session 2 (exact binomial test; *p* = 
+`r round(binom.test(total_consistent,total_n)$p.value,2)`).
+Of the `r sum(reversal_tally$n)` total infants, `r round(filter(reversal_tally,reversal_type=="IDS_IDS")$n/sum(reversal_tally$n),3)*100`% of infants showed a consistent infant-directed speech preference and `r round(filter(reversal_tally,reversal_type=="ADS_ADS")$n/sum(reversal_tally$n),3)*100`% showed a consistent adult-directed speech preference.
+`r round(filter(reversal_tally,reversal_type=="IDS_ADS")$n/sum(reversal_tally$n),3)*100`% of infants switched from an infant-directed speech preference at test session 1 to an adult-directed speech preference at test session 2 and `r round(filter(reversal_tally,reversal_type=="ADS_IDS")$n/sum(reversal_tally$n),3)*100`% switched from an adult-directed speech preference to an infant-directed speech preference. 
+
+
+Next, we explored whether we could detect any systematic clustering of infants with distinct patterns of preference across the test and retest session.
+We took a bottom-up approach and conducted a *k*-means clustering of the test-retest difference data.
+We found little evidence of distinct clusters emerging from these groupings: the clusterings ranging from *k*=2 (2 clusters) to *k*=4 (4 clusters) appear to simply track  whether participants are approximately above or below the mean looking time difference for test session 1 and test session 2, and the diagnostic elbow plot shows little evidence of a qualitative improvement as the number of clusters is increased.
+
+```{r}
+d <- all_agg_subjects_paired_retest %>% 
+  column_to_rownames(var = "Subject_Unique") %>% 
+  filter(!is.na(Diff_1)) %>%
+  ungroup() %>% 
+  select(Diff_1,Diff_2)
+
+kclusts <- 
+  tibble(k = 1:9) %>%
+  mutate(
+    kclust = map(k, ~kmeans(d, .x)),
+    tidied = map(kclust, tidy),
+    glanced = map(kclust, glance),
+    augmented = map(kclust, augment, d)
+  )
+
+clusters <- 
+  kclusts %>%
+  unnest(cols = c(tidied))
+
+assignments <- 
+  kclusts %>% 
+  unnest(cols = c(augmented)) %>%
+  mutate(
+    mean_diff_1=mean(Diff_1),
+    mean_diff_2=mean(Diff_2),
+  )
+
+clusterings <- 
+  kclusts %>%
+  unnest(cols = c(glanced))
+```
+
+```{r fig2, fig.cap = " (A) Results from the k-means clustering analysis of IDS preference in session 1 and 2 for different numbers of k  and (B) the corresponding elbow plot of the total within-cluster sum of squares. In (A), points represent indvidual participants' magnitude of looking time difference at test sessions 1 (x-axis) and 2 (y-axis). The solid line indicates no preference for IDS vs. ADS, the dotted lines indicate mean IDS preference at test session 1 and 2, respectively. Colors indicate clusters from the k-means clustering for different values of k."}
+p1 <- 
+  ggplot(assignments, aes(x = Diff_1, y = Diff_2)) +
+  geom_point(aes(color = .cluster), alpha = 0.8) + 
+  facet_wrap(~ k)+
+  geom_hline(yintercept=0)+
+  geom_vline(xintercept=0)+
+  geom_hline(yintercept=assignments$mean_diff_2[1],linetype="dotted")+
+  geom_vline(xintercept=assignments$mean_diff_1[1],linetype="dotted")+
+  xlab("IDS preference in first session")+
+  ylab("IDS preference in second session")
+
+p2 <- ggplot(clusterings, aes(k, tot.withinss)) +
+  geom_line() +
+  geom_point()+
+  xlab("Number of clusters")+
+  scale_x_continuous(breaks=seq(1,10))+
+  ylab("Total within-cluster sum of squares")
+
+plot_grid(p1,p2,labels=c("A","B"),rel_widths=c(2,1))
+```
+
 
 ## S3: Deviations from the preregistration
 
