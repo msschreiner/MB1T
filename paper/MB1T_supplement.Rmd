@@ -36,6 +36,7 @@ library(lmerTest)
 library(ggplot2)
 library(cowplot)
 library(tidymodels)
+library(car)
 
 read_path <- here("data","processed")
 ```
@@ -46,7 +47,16 @@ set.seed(42)
 knitr::opts_chunk$set(cache.extra = knitr::rand_seed,echo = FALSE, warning = FALSE, message = FALSE)
 ```
 
-## S1: Relationship between the number of trials infants contribute in each session
+
+## S1: Deviations from the preregistration
+
+Below, we document all deviations from the preregistered methods and analyses [https://osf.io/v5f8t](https://osf.io/v5f8t).
+
+- All infants with usable data for both test and retest session were included in the analyses, regardless of the number of total of infants a lab was able to contribute after exclusion. This decision is consistent with past decisions in ManyBabies projects to be as inclusive about data inclusion as possible [@manybabies2020quantifying].
+- A small number of infants with a time between sessions above 31 days were also included in the analyses (n=2).
+- Consistent with analytic decisions in ManyBabies 1 [@manybabies2020quantifying], total looking times were truncated at 18 seconds (the maximum trial time) in the small number of cases where recorded looking times were slightly greater than 18s (presumably due to small measurement error in recording infant looking times).
+
+## S2: Relationship between the number of trials infants contribute in each session
 
 ```{r}
 # importing dataset (after excluding session and trial errors)
@@ -105,7 +115,7 @@ This result suggests that if infants contribute a higher number of trials in one
 This finding is consistent with the hypothesis that how attentive infants are throughout an experiment (and hence how many trials they contribute) is a stable individual difference, at least for some infant looking time tasks.
 Researchers should therefore be mindful of the fact that decisions about including or excluding infants based on trials contributed may selectively sample a specific sub-set of the infant population they are studying [@debolt2020robust;@byers2021six].
 
-## S2: Patterns of preference across sessions
+## S3: Patterns of preference across sessions
 ```{r,message=FALSE,warning=FALSE}
 
 #read in cleaned and aggregated data
@@ -210,15 +220,116 @@ p2 <- ggplot(clusterings, aes(k, tot.withinss)) +
 plot_grid(p1,p2,labels=c("A","B"),rel_widths=c(1.5,1))
 ```
 
+## S4: Correlations in average looking times between sessions
 
-## S3: Deviations from the preregistration
+### S4.1: Relations between overall looking time in session 1 and 2.
 
-Below, we document all deviations from the preregistered methods and analyses [https://osf.io/v5f8t](https://osf.io/v5f8t).
+There is a strong relationship between average overall looking in the first test session and the second test session, even after controlling for number of trials in the first and second session.
 
-- All infants with usable data for both test and retest session were included in the analyses, regardless of the number of total of infants a lab was able to contribute after exclusion. This decision is consistent with past decisions in ManyBabies projects to be as inclusive about data inclusion as possible [@manybabies2020quantifying].
-- A small number of infants with a time between sessions above 31 days were also included in the analyses (n=2).
-- Consistent with analytic decisions in ManyBabies 1 [@manybabies2020quantifying], total looking times were truncated at 18 seconds (the maximum trial time) in the small number of cases where recorded looking times were slightly greater than 18s (presumably due to small measurement error in recording infant looking times).
+```{r}
+agg_by_subj_paired <- data_clean %>%
+  select(Subject,Subject_Unique,Gender,Method, preterm,Session, Condition, trial_num,LT,Lab,days_between_sessions) %>% 
+  group_by(Method, Lab,Subject, Subject_Unique, Gender, preterm,days_between_sessions,Session) %>%
+  summarize(mean_lt=mean(LT),
+            N=n()) %>%
+  pivot_wider(names_from = Session, values_from = c(mean_lt,N))
 
+ggplot(agg_by_subj_paired,aes(mean_lt_1,mean_lt_2))+
+  geom_point()+
+  geom_smooth(method="lm",color="black")+
+  theme_cowplot()+
+  theme(legend.position="none")+
+  xlab("Average Looking Time (in ms) in first session")+
+  ylab("Average Looking Time (in ms) in second session")
+
+m <- lm(mean_lt_2~mean_lt_1+N_1+N_2,data=agg_by_subj_paired)
+apa_lm <- apa_print(m)
+apa_table(
+  apa_lm$table
+  , caption = "Average Looking during session 1 predicted from average looking at session 2, controlling for trial number for each session."
+)
+#vif(m) #no evidence of variance inflation
+```
+
+
+### S4.2: Relations in overall looking time to IDS and ADS stimuli.
+
+```{r}
+agg_by_subj_condition_paired <- data_clean %>%
+  select(Subject,Subject_Unique,Gender,Method, preterm,Session, Condition, LT,Lab,days_between_sessions) %>% 
+  group_by(Method, Lab,Subject, Subject_Unique, Gender, preterm,days_between_sessions,Condition,Session) %>%
+  summarize(mean_lt=mean(LT)) %>%
+  pivot_wider(names_from = Session, values_from = mean_lt) %>%
+  rename(LT_Test = `1`,LT_Retest=`2`)
+
+ggplot(agg_by_subj_condition_paired,aes(LT_Test,LT_Retest,color=Condition))+
+  geom_point()+
+  geom_smooth(method="lm",color="black")+
+  facet_wrap(~Condition)+
+  theme_cowplot()+
+  theme(legend.position="none")+
+  xlab("Average Looking Time (in ms) in first session")+
+  ylab("Average Looking Time (in ms) in second session")
+```
+
+```{r}
+agg_by_subj_condition_paired_session_1 <- agg_by_subj_condition_paired %>%
+  select(-LT_Retest)
+
+agg_by_subj_condition_paired_session_2_rev_condition <- agg_by_subj_condition_paired %>%
+  select(-LT_Test) %>%
+  rename(Condition_old=Condition) %>%
+  mutate(Condition = case_when(
+    Condition_old=="IDS" ~ "ADS",
+    Condition_old=="ADS" ~ "IDS"
+  ))
+agg_by_subj_condition_paired_cond_sess2_flipped <- agg_by_subj_condition_paired_session_1 %>%
+  left_join(agg_by_subj_condition_paired_session_2_rev_condition)
+
+ggplot(agg_by_subj_condition_paired_cond_sess2_flipped,aes(LT_Test,LT_Retest,color=Condition))+
+  geom_point()+
+  geom_smooth(method="lm",color="black")+
+  facet_wrap(~Condition)+
+  theme_cowplot()+
+  theme(legend.position="none")+
+  xlab("Average Looking Time (in ms) in first session")+
+  ylab("Average Looking Time (in ms) in second session")
+```
+
+
+### S4.3: Relations for specific ADS and IDS stimuli between the first and second session.
+
+```{r}
+agg_by_subj_item_paired <- data_clean %>%
+    select(Subject,Subject_Unique,Gender,Method, preterm,Session, Condition, stimulus, LT,Lab,days_between_sessions) %>% 
+  group_by(Method, Lab,Subject, Subject_Unique, Gender, preterm,days_between_sessions,Condition,stimulus) %>%
+  mutate(stimulus = str_remove(stimulus,"Retest")) %>%
+  mutate(stimulus = str_remove(stimulus,"retest")) %>%
+  filter(stimulus %in% c("ADS1","IDS1","ADS2","IDS2","ADS3","IDS3","ADS4", "IDS4","IDS5","ADS5","ADS6","IDS6","ADS7","IDS7","ADS8","IDS8")) %>%
+  pivot_wider(names_from = Session, values_from = LT) %>%
+  rename(LT_Test = `1`,LT_Retest=`2`)
+
+ggplot(agg_by_subj_item_paired,aes(LT_Test,LT_Retest,color=Condition))+
+  geom_point()+
+  geom_smooth(method="lm",color="black")+
+  facet_wrap(~stimulus)+
+  theme_cowplot()+
+  theme(legend.position="none")+
+  xlab("Looking Time (in ms) in first session")+
+  ylab("Looking Time (in ms) in second session")
+
+m <- lmer(LT_Retest~LT_Test+(1+LT_Test|Subject_Unique)+(1+LT_Test|stimulus),data=agg_by_subj_item_paired)
+apa_lm <- apa_print(m)
+apa_table(
+  apa_lm$table
+  , caption = "Mixed-effects model results predicting looking time during session 1 from looking time at session 2 at the stimulus level."
+)
+```
+
+
+
+
+## 
 
 \newpage
 
