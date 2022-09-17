@@ -270,30 +270,38 @@ ggplot(agg_by_subj_condition_paired,aes(LT_Test,LT_Retest,color=Condition))+
   theme(legend.position="none")+
   xlab("Average Looking Time (in ms) in first session")+
   ylab("Average Looking Time (in ms) in second session")
+
+agg_by_subj_condition_paired_wide <- agg_by_subj_condition_paired %>%
+  pivot_wider(names_from = Condition,values_from = c(LT_Test,LT_Retest))
+
+m <- lm(LT_Retest_IDS ~ LT_Test_IDS + LT_Test_ADS,data=agg_by_subj_condition_paired_wide)
+summary(m)
+m <- lm(LT_Retest_ADS ~ LT_Test_IDS + LT_Test_ADS,data=agg_by_subj_condition_paired_wide)
+summary(m)
 ```
 
 ```{r}
-agg_by_subj_condition_paired_session_1 <- agg_by_subj_condition_paired %>%
-  select(-LT_Retest)
-
-agg_by_subj_condition_paired_session_2_rev_condition <- agg_by_subj_condition_paired %>%
-  select(-LT_Test) %>%
-  rename(Condition_old=Condition) %>%
-  mutate(Condition = case_when(
-    Condition_old=="IDS" ~ "ADS",
-    Condition_old=="ADS" ~ "IDS"
-  ))
-agg_by_subj_condition_paired_cond_sess2_flipped <- agg_by_subj_condition_paired_session_1 %>%
-  left_join(agg_by_subj_condition_paired_session_2_rev_condition)
-
-ggplot(agg_by_subj_condition_paired_cond_sess2_flipped,aes(LT_Test,LT_Retest,color=Condition))+
-  geom_point()+
-  geom_smooth(method="lm",color="black")+
-  facet_wrap(~Condition)+
-  theme_cowplot()+
-  theme(legend.position="none")+
-  xlab("Average Looking Time (in ms) in first session")+
-  ylab("Average Looking Time (in ms) in second session")
+# agg_by_subj_condition_paired_session_1 <- agg_by_subj_condition_paired %>%
+#   select(-LT_Retest)
+# 
+# agg_by_subj_condition_paired_session_2_rev_condition <- agg_by_subj_condition_paired %>%
+#   select(-LT_Test) %>%
+#   rename(Condition_old=Condition) %>%
+#   mutate(Condition = case_when(
+#     Condition_old=="IDS" ~ "ADS",
+#     Condition_old=="ADS" ~ "IDS"
+#   ))
+# agg_by_subj_condition_paired_cond_sess2_flipped <- agg_by_subj_condition_paired_session_1 %>%
+#   left_join(agg_by_subj_condition_paired_session_2_rev_condition)
+# 
+# ggplot(agg_by_subj_condition_paired_cond_sess2_flipped,aes(LT_Test,LT_Retest,color=Condition))+
+#   geom_point()+
+#   geom_smooth(method="lm",color="black")+
+#   facet_wrap(~Condition)+
+#   theme_cowplot()+
+#   theme(legend.position="none")+
+#   xlab("Average Looking Time (in ms) in first session")+
+#   ylab("Average Looking Time (in ms) in second session")
 ```
 
 
@@ -318,7 +326,7 @@ ggplot(agg_by_subj_item_paired,aes(LT_Test,LT_Retest,color=Condition))+
   xlab("Looking Time (in ms) in first session")+
   ylab("Looking Time (in ms) in second session")
 
-m <- lmer(LT_Retest~LT_Test+(1+LT_Test|Subject_Unique)+(1+LT_Test|stimulus),data=agg_by_subj_item_paired)
+m <- lmer(LT_Retest~LT_Test+(1+LT_Test|Subject_Unique)+(1+LT_Test|stimulus)+(1|Lab),data=agg_by_subj_item_paired)
 apa_lm <- apa_print(m)
 apa_table(
   apa_lm$table
@@ -326,6 +334,47 @@ apa_table(
 )
 ```
 
+## S5: By-item-pair preference scores across sessions
+
+```{r}
+agg_by_subj_item_paired_pref <- data_clean  %>%
+  select(Subject,Subject_Unique,Gender,Method, preterm,Session, Condition, stimulus, LT,Lab) %>% 
+  mutate(stimulus = str_remove(stimulus,"Retest")) %>%
+  mutate(stimulus = str_remove(stimulus,"retest")) %>%
+  filter(stimulus %in% c("ADS1","IDS1","ADS2","IDS2","ADS3","IDS3","ADS4", "IDS4","IDS5","ADS5","ADS6","IDS6","ADS7","IDS7","ADS8","IDS8")) %>%
+  separate(stimulus,into = c("cond","stimulus_num"),sep="(?<=[A-Za-z])(?=[0-9])",remove=TRUE) %>%
+  select(-cond) %>%
+  group_by(Method, Lab,Subject, Subject_Unique, Gender, preterm,Session,stimulus_num) %>%
+  pivot_wider(names_from = Condition,values_from=LT) %>%
+  mutate(Diff = IDS - ADS, 
+           Prop = IDS / (IDS + ADS)) %>%
+  pivot_wider(names_from = Session, values_from =c(IDS,ADS,Diff,Prop))
+
+# ggplot(agg_by_subj_item_paired_pref ,aes(Prop_1,Prop_2))+
+#   geom_point()+
+#   geom_smooth(method="lm",color="black")+
+#   facet_wrap(~stimulus_num,ncol=4)+
+#   theme_cowplot()+
+#   theme(legend.position="none")+
+#   xlab("IDS preference in first session")+
+#   ylab("IDS preference in second session")
+
+ggplot(agg_by_subj_item_paired_pref ,aes(Diff_1,Diff_2))+
+  geom_point()+
+  geom_smooth(method="lm",color="black")+
+  facet_wrap(~stimulus_num,ncol=4)+
+  theme_cowplot()+
+  theme(legend.position="none")+
+  xlab("IDS difference score in first session")+
+  ylab("IDS difference score in second session")
+
+m <- lmer(Diff_2~Diff_1+(1+Diff_1|Subject_Unique)+(1+Diff_1|stimulus_num)+(1+Diff_1|Lab),data=agg_by_subj_item_paired_pref)
+apa_lm <- apa_print(m)
+apa_table(
+  apa_lm$table
+  , caption = "Mixed-effects model results predicting IDS preference during session 1 from IDS preference at session 2 at the stimulus level."
+)
+```
 
 
 
