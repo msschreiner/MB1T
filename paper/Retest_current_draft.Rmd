@@ -216,6 +216,7 @@ n_exclude <- length(excludeID)
 ```{r,message=FALSE,warning=FALSE}
 LT_MIN <- 2                # minumum LT for inclusion
 MIN_TRIALS_PER_TYPE <- 1  # min trials per type for inclusion
+LOOKING_MEASURE <- "log" #how to compute aggregated looking time preferences per subject. raw = using raw (average) looking times. log = using log-transformed (average) looking times
 
 # function for cleaning data 
 # by using minimum LT for inclusion and minimum number of trials per condition,
@@ -285,8 +286,22 @@ agg_subjects_lt <- agg_subjects %>%
   relocate(SD_LT_session_1, .before = MeanLT_session_2)
 
 # function for creating a wide format of the dataset and calculating difference in log_lt for IDS and ADS and the proportion of IDS looking
-aggregate_by_subject_paired <- function(aggregated_subjects, file_path) {
-  all_agg_subjects_paired <- aggregated_subjects %>%
+aggregate_by_subject_paired <- function(aggregated_subjects, file_path, looking_measure = LOOKING_MEASURE) {
+  if (looking_measure == "raw") {
+    all_agg_subjects_paired <- aggregated_subjects %>%
+    select(-ConditionC,-MeanLogLT) %>% 
+    pivot_wider(names_from = Condition, values_from = mean_lt) %>%
+    mutate(Diff = IDS - ADS, 
+           Prop = IDS / (IDS + ADS),
+           binary_pref = case_when(
+             is.na(Diff) ~ NA_character_,
+             Diff > 0 ~ "IDS_preference",
+             Diff < 0 ~ "ADS_preference",
+             Diff == 0 ~ "no_preference"
+             ))
+    
+  } else if (looking_measure == "log") {
+    all_agg_subjects_paired <- aggregated_subjects %>%
     select(-ConditionC,-mean_lt) %>% 
     pivot_wider(names_from = Condition, values_from = MeanLogLT) %>%
     mutate(Diff = IDS - ADS, 
@@ -297,6 +312,7 @@ aggregate_by_subject_paired <- function(aggregated_subjects, file_path) {
              Diff < 0 ~ "ADS_preference",
              Diff == 0 ~ "no_preference"
              ))
+  }
   
   tally_subject_sessions <- all_agg_subjects_paired %>%
     select(Subject_Unique,Diff) %>%
@@ -317,7 +333,8 @@ aggregate_by_subject_paired <- function(aggregated_subjects, file_path) {
 }
 
 #create wide format summarizing data per participant
-all_agg_subjects_paired <- aggregate_by_subject_paired(agg_subjects,file_path=here(write_path,"all_agg_subjects_paired_minimum_trials_per_type_1.csv"))
+all_agg_subjects_paired <- aggregate_by_subject_paired(agg_subjects,
+                                                       file_path=here(write_path,"all_agg_subjects_paired_minimum_trials_per_type_1.csv"))
 
 # function for creating a wide format of the dataset such that the difference scores for each Session become a separate variable, calculating the number of days between test and retest session, and mean Age for both testing sessions
 aggregate_by_subject_paired_retest <- function(aggregated_subjects_paired, file_path) {
