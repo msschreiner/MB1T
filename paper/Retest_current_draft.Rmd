@@ -1,5 +1,5 @@
 ---
-title             : "Assessing test-retest reliability of the infant preference measures"
+title             : "No evidence of test-retest reliability in infant-directed speech preference in a large pre-registered infant sample"
 shorttitle        : "test-retest reliability of the infant preference measures"
 
 author: 
@@ -8,13 +8,74 @@ author:
     corresponding : yes    # Define only one corresponding author
     address       : "Gosslerstr. 14, 37073 Göttingen"
     email         : "melanie.schreiner@psych.uni-goettingen.de"
-  - name          : "the ManyBabies Test-Retest Consortium"
+  - name          : "Christina Bergmann"
+    affiliation   : "3"
+  - name          : "Michael C. Frank"
+    affiliation   : "4"
+  - name          : "Tom	Fritzsche"
+    affiliation   : "5"
+  - name          : "Nayeli	Gonzalez-Gomez"
+    affiliation   : "6" 
+  - name          : "Kiley	Hamlin"
+    affiliation   : "7"
+  - name          : "Natalia	Kartushina"
+    affiliation   : "8"
+  - name          : "Danielle J.	Kellier"
+    affiliation   : "4"
+  - name          : "Nivedita	Mani"
+    affiliation   : "1"
+  - name          : "Julien	Mayor"
+    affiliation   : "8"
+  - name          : "Jenny	Saffran"
+    affiliation   : "9"
+  - name          : "Melanie	Soderstrom"
+    affiliation   : "10"
+  - name          : "Mohinish	Shukla"
+    affiliation   : "11"
+  - name          : "Priya	Silverstein"
+    affiliation   : "12,13"
+  - name          : "Martin	Zettersten"
+    affiliation   : "9,14"
+  - name          : "Matthias	Lippold"
+    affiliation   : "1"
 
 affiliation:
   - id            : "1"
     institution   : "University of Goettingen"
   - id            : "2"
     institution   : "Leibniz Science Campus PrimateCognition"
+  - id            : "3"
+    institution   : "Max Planck Insitute for Psycholinguistics"
+  - id            : "4"
+    institution   : "Stanford University"
+  - id            : "5"
+    institution   : "University of Potsdam"
+  - id            : "6"
+    institution   : "Oxford Brookes University"
+  - id            : "7"
+    institution   : "University of British Columbia"  
+  - id            : "8"
+    institution   : "University of Oslo"
+  - id            : "9"
+    institution   : "University of Wisconsin-Madison"
+  - id            : "10"
+    institution   : "University of Manitoba"
+  - id            : "11"
+    institution   : "Università di Padova"
+  - id            : "12"
+    institution   : "Lancaster University"
+  - id            : "13"
+    institution   : "Center for Open Science"
+  - id            : "14"
+    institution   : "Princeton University"
+    
+authornote: |
+  **Acknowledgements.** This work was supported in part by Leibniz ScienceCampus Primate Cognition seed funds awarded to MS and ML, and grants from XXXX awarded to XXXX and from the NSF awarded to MZ (NSF DGE-1747503). 
+  
+  **Open Practices Statement.** All code for reproducing the paper is available at https://github.com/msschreiner/MB1T. Data and materials are available on OSF (https://osf.io/zeqka/).
+  
+  **CRediT author statement.** Outside of the position of the first and the last author, authorship position was determined by sorting authors' last names alphabetical order. An overview of authorship contributions following the CRediT taxonomy can be viewed here: https://docs.google.com/spreadsheets/d/1jDvb0xL1U6YbXrpPZ1UyfyQ7yYK9aXo002UaArqy35U/edit?usp=sharing.
+
 
 abstract: |
   The ManyBabies1 collaborative research project (hereafter, MB1; Frank et al., 2017; ManyBabies Consortium, 2020) explores the reproducibility of the well-studied and robust phenomenon of infants' preference of infant-directed speech (hereafter, IDS) over adult-directed speech (hereafter, ADS; Cooper & Aslin, 1990). The current study is a follow-on project aiming at further investigating the test-retest reliability of infant speech preference measures. In particular, labs of the original study were asked to bring in tested babies for a second appointment retesting infants on their IDS preference. This allows us to estimate test-retest reliability for the three different methods used to investigate preferential listening in infancy: the head-turn preference procedure, central fixation, and eye-tracking. Our results suggest that the test-retest reliability of infants' speech preference measures is rather low. While increasing the number of trials that infants needed to contribute for inclusion in the analysis from 2 to 8 trial pairs revealed a descriptive growth in test-retest reliability, it also considerably reduced the study's effective sample size.  Therefore, future research on infant development should take into account that not all experimental measures might be appropriate to assess individual differences between infants, and hence, the interpretation of findings needs to be treated with caution.
