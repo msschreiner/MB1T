@@ -1,146 +1,146 @@
 Lab,Subject,Subject_Unique,Method,Language,Diff_1,Diff_2,days_between_sessions,Age
-babylab-potsdam,b7027,babylab-potsdam:b7027,HPP,German,-0.2606674993849991,0.5249716709665637,9,255.5
-babylab-potsdam,b7030,babylab-potsdam:b7030,HPP,German,-0.6030206306320529,0.41657011531886745,7,203.5
-babylab-potsdam,b7033,babylab-potsdam:b7033,HPP,German,0.4180851785646247,-0.008376648433080058,21,228.5
-babylab-potsdam,b7096,babylab-potsdam:b7096,HPP,German,0.32616409092627996,-0.2053867180461164,7,219.5
-babylab-potsdam,b7105,babylab-potsdam:b7105,HPP,German,-0.06211237385088708,-0.1869049567929535,7,200.5
-babylab-potsdam,b7135,babylab-potsdam:b7135,HPP,German,0.17059551229435233,-0.1982321227562711,9,261.5
-babylab-potsdam,b7139,babylab-potsdam:b7139,HPP,German,-0.238567125280861,0.6622067942131227,7,209.5
-babylab-potsdam,b7140,babylab-potsdam:b7140,HPP,German,0.09556482065820227,0.3475249417433264,5,193.5
-babylab-potsdam,b7145,babylab-potsdam:b7145,HPP,German,0.26139588478322673,0.21653982435906083,9,258.5
-babylab-potsdam,b7146,babylab-potsdam:b7146,HPP,German,0.17901757766691917,-0.09547067138979237,10,225
-babylab-potsdam,b7147,babylab-potsdam:b7147,HPP,German,0.026425038088145003,0.05454450289826629,7,213.5
-babylab-potsdam,b7149,babylab-potsdam:b7149,HPP,German,0.09157530348829024,0.25989621157571663,11,236.5
-babylab-potsdam,b7151,babylab-potsdam:b7151,HPP,German,0.5979399930690881,0.1984125883119947,9,236.5
-babylab-potsdam,b7155,babylab-potsdam:b7155,HPP,German,0.07557002298609561,-0.2222971277911161,10,212
-babylab-potsdam,b7161,babylab-potsdam:b7161,HPP,German,-0.024578205067363745,0.39488415550132383,13,215.5
-babylab-potsdam,b7171,babylab-potsdam:b7171,HPP,German,0.09818104999768318,0.3349884390992608,7,208.5
-babylab-potsdam,b7172,babylab-potsdam:b7172,HPP,German,0.10547885458266126,-0.45940227908463305,11,199.5
-babylab-potsdam,b7181,babylab-potsdam:b7181,HPP,German,-0.061954412469444,-0.10772082126173466,7,254.5
-babylab-potsdam,b7184,babylab-potsdam:b7184,HPP,German,0.2520820171332445,-0.21763238635184456,35,243.5
-babylab-potsdam,b7185,babylab-potsdam:b7185,HPP,German,0.05545498067742849,0.07084016961639783,7,216.5
-babyling-oslo,OS_009,babyling-oslo:OS_009,Eyetracking,Norwegian,-0.017882012906721867,0.09805384471169809,21,270.5
-babyling-oslo,OS_031,babyling-oslo:OS_031,Eyetracking,Norwegian,0.24771932015265197,-0.0627023961397788,4,251
-babyling-oslo,OS_032,babyling-oslo:OS_032,Eyetracking,Norwegian,-0.20806394251017712,0.17470205507048608,11,250.5
-babyling-oslo,OS_042,babyling-oslo:OS_042,Eyetracking,Norwegian,-0.18547096415436992,-0.22157524851900012,19,193.5
-brookes-babylab,MB_103,brookes-babylab:MB_103,central fixation,English,-0.13997209625233498,1.0422585105313327,7,371.5
-brookes-babylab,MB_135,brookes-babylab:MB_135,central fixation,English,0.7168822006690285,-0.005989700067093207,14,310
-brookes-babylab,MB_136,brookes-babylab:MB_136,central fixation,English,0.6089983685487927,0.6420573231904274,7,298.5
-brookes-babylab,MB_137,brookes-babylab:MB_137,central fixation,English,0.358688477136768,0.7237286141545287,10,257
-brookes-babylab,MB_138,brookes-babylab:MB_138,central fixation,English,0.7901500266266044,0.7292994157532595,7,243.5
-brookes-babylab,MB_139,brookes-babylab:MB_139,central fixation,English,0.303326300026048,0.47398063016534064,6,281
-brookes-babylab,MB_140,brookes-babylab:MB_140,central fixation,English,0.7314616006824286,0.3719989164113986,8,257
-brookes-babylab,MB_141,brookes-babylab:MB_141,central fixation,English,0.4559843069963536,0.0017135601440467774,10,265
-brookes-babylab,MB_142,brookes-babylab:MB_142,central fixation,English,0.157442519663491,0.32095680856431574,7,303.5
-brookes-babylab,MB_143,brookes-babylab:MB_143,central fixation,English,0.30509900821017144,0.25794241389547534,10,292
-brookes-babylab,MB_144,brookes-babylab:MB_144,central fixation,English,0.13585071377670888,0.1249280131856425,8,220
-brookes-babylab,MB_36,brookes-babylab:MB_36,central fixation,English,0.44490173038739056,0.7513655701379289,12,223
-brookes-babylab,MB_42,brookes-babylab:MB_42,central fixation,English,0.43950301238844114,0.7070459459643008,7,231.5
-brookes-babylab,MB_48,brookes-babylab:MB_48,central fixation,English,0.027902189799824395,0.3967798925766717,9,273.5
-brookes-babylab,MB_50,brookes-babylab:MB_50,central fixation,English,0.2342580460167456,1.019353303998209,7,258.5
-brookes-babylab,MB_63,brookes-babylab:MB_63,central fixation,English,0.6292171689971646,0.5719329056261995,8,178
-brookes-babylab,MB_80,brookes-babylab:MB_80,central fixation,English,0.134216563467771,0.44302314131777876,12,276
-brookes-babylab,MB_88,brookes-babylab:MB_88,central fixation,English,-0.09983468879818069,0.326022247231168,7,262.5
-InfantCog-UBC,AD42,InfantCog-UBC:AD42,central fixation,English,0.21819998961406428,0.059378351059700796,11,163.5
-InfantCog-UBC,HV25,InfantCog-UBC:HV25,central fixation,English,-0.01294262837690252,-0.02200751174697868,9,167.5
-InfantCog-UBC,ML23,InfantCog-UBC:ML23,central fixation,English,-0.020439219193162383,0.25448411234983737,49,159.5
-InfantCog-UBC,OS32,InfantCog-UBC:OS32,central fixation,English,-0.3015958251875488,-0.1360032008103731,8,108
-InfantCog-UBC,PH39,InfantCog-UBC:PH39,central fixation,English,0.14720125055854227,-0.19655332774456902,43,137.5
-InfantCog-UBC,VF48,InfantCog-UBC:VF48,central fixation,English,0.1833650199907113,-0.27926027421702293,29,184.5
-InfantCog-UBC,VM20,InfantCog-UBC:VM20,central fixation,English,0.48632687215568593,-0.2313554582058841,5,110.5
-infantll-madison,mb2_002,infantll-madison:mb2_002,HPP,English,0.26427121865928904,0.210775842531145,7,220.5
-infantll-madison,mb2_003,infantll-madison:mb2_003,HPP,English,0.5996562176014779,0.46556239789405374,7,256.5
-infantll-madison,mb2_005,infantll-madison:mb2_005,HPP,English,0.03454729636323162,0.11450741761323324,7,228.5
-infantll-madison,mb2_007,infantll-madison:mb2_007,HPP,English,-0.03146268352963011,0.5877461844468364,7,228.5
-infantll-madison,mb2_009,infantll-madison:mb2_009,HPP,English,0.4672714518096779,0.10149150788888983,7,221.5
-infantll-madison,mb2_010,infantll-madison:mb2_010,HPP,English,-0.19444337656669286,0.08985303865123306,7,222.5
-infantll-madison,mb2_011,infantll-madison:mb2_011,HPP,English,-0.5424322695837358,0.9709478522256337,7,225.5
-infantll-madison,mb2_012,infantll-madison:mb2_012,HPP,English,0.055272863628055724,0.35490076321054276,7,259.5
-infantll-madison,mb2_013,infantll-madison:mb2_013,HPP,English,-0.2104822187902351,0.3287702460142954,13,215.5
-infantll-madison,mb2_014,infantll-madison:mb2_014,HPP,English,-0.2313332063583693,-0.08156747861591862,7,195.5
-infantll-madison,mb2_015,infantll-madison:mb2_015,HPP,English,0.5951197280604188,-0.22761190169139178,15,216.5
-infantll-madison,mb2_016,infantll-madison:mb2_016,HPP,English,0.3202945763540612,0.4389655304587643,7,266.5
-infantll-madison,mb2_017,infantll-madison:mb2_017,HPP,English,0.1891180464534421,0.31893263582826614,5,255.5
-infantll-madison,mb2_018,infantll-madison:mb2_018,HPP,English,-0.023940367056935363,-0.03141163895295107,7,208.5
-infantll-madison,mb2_019,infantll-madison:mb2_019,HPP,English,0.00980125209392324,-0.11671816513326205,7,188.5
-infantll-madison,mb2_020,infantll-madison:mb2_020,HPP,English,-0.07720452296764901,-0.07790418406591648,6,269
-infantll-madison,mb2_021,infantll-madison:mb2_021,HPP,English,0.2761497338318417,0.6524185142322994,28,259
-infantll-madison,mb2_022,infantll-madison:mb2_022,HPP,English,0.2072370649075117,-0.22842677654845267,7,221.5
-infantll-madison,mb2_023,infantll-madison:mb2_023,HPP,English,1.2578714382268201,0.7031570833843959,7,254.5
-infantll-madison,mb2_025,infantll-madison:mb2_025,HPP,English,0.35255361466735335,0.050068496529566575,10,230
-infantll-madison,mb2_027,infantll-madison:mb2_027,HPP,English,0.4393699093179235,0.031903157240366076,7,221.5
-infantll-madison,mb2_028,infantll-madison:mb2_028,HPP,English,0.1594196271571402,-0.011340943347011745,7,194.5
-infantll-madison,mb2_029,infantll-madison:mb2_029,HPP,English,0.1251487231875661,-0.11281211061156471,7,241.5
-infantll-madison,mb2_031,infantll-madison:mb2_031,HPP,English,0.256807033101464,-0.17295776500970428,14,231
-infantll-madison,mb2_032,infantll-madison:mb2_032,HPP,English,-0.08177385662531944,0.3849670340799469,8,242
-infantll-madison,mb2_033,infantll-madison:mb2_033,HPP,English,0.47475664780710036,-0.17784238137069042,16,216
-infantll-madison,mb2_034,infantll-madison:mb2_034,HPP,English,-0.15082581808783857,-0.545153458844098,7,205.5
-lancslab,P01,lancslab:P01,Eyetracking,English,-0.23993127575017237,0.2228139680116401,7,211.5
-lancslab,P03,lancslab:P03,Eyetracking,English,-0.1890359017154244,0.031848309191045754,7,261.5
-lancslab,P04,lancslab:P04,Eyetracking,English,0.09654530574984,0.6812481954352303,7,253.5
-lancslab,P05,lancslab:P05,Eyetracking,English,0.04947096766968784,0.14296576189661003,7,189.5
-lancslab,P06,lancslab:P06,Eyetracking,English,0.3385915752338957,0.1141035751443118,7,260.5
-lancslab,P07,lancslab:P07,Eyetracking,English,0.10694741200768343,0.11419469517445746,7,213.5
-lancslab,P08,lancslab:P08,Eyetracking,English,0.06446085431405013,0.05998136763861073,7,236.5
-lancslab,P09,lancslab:P09,Eyetracking,English,0.14562673710102336,0.2894443081527991,7,252.5
-lancslab,P10,lancslab:P10,Eyetracking,English,-8.031448786085527e-4,0.16699817951081553,7,232.5
-lancslab,P11,lancslab:P11,Eyetracking,English,0.35719552119715514,0.08887008578183053,7,238.5
-lancslab,P13,lancslab:P13,Eyetracking,English,0.29116562369798427,-0.28531685659503747,7,233.5
-lancslab,P14,lancslab:P14,Eyetracking,English,0.13021854258770205,0.48447556973403993,10,266
-lancslab,P15,lancslab:P15,Eyetracking,English,-0.095555448970301,0.15961232789855107,7,212.5
-lancslab,P16,lancslab:P16,Eyetracking,English,-0.4351682867232105,0.40238199907863303,7,275.5
-lancslab,P17,lancslab:P17,Eyetracking,English,0.0792967997956664,0.07663741677170921,7,223.5
-wsi-goettingen,M213,wsi-goettingen:M213,central fixation,German,0.2524179159515114,-0.06983959765775438,7,232.5
-wsi-goettingen,M214,wsi-goettingen:M214,central fixation,German,-0.08261307915032567,-0.18733764016478816,8,227
-wsi-goettingen,M215,wsi-goettingen:M215,central fixation,German,0.2695518336201892,-0.3533438014717034,7,252.5
-wsi-goettingen,M217,wsi-goettingen:M217,central fixation,German,0.20201480378745962,0.20147956543618717,7,259.5
-wsi-goettingen,M218,wsi-goettingen:M218,central fixation,German,0.0265619765943228,0.07193162977064849,7,265.5
-wsi-goettingen,M219,wsi-goettingen:M219,central fixation,German,0.009093563265845539,-0.028854435388848243,7,225.5
-wsi-goettingen,M220,wsi-goettingen:M220,central fixation,German,0.12065038311754317,0.02377595612521244,16,213
-wsi-goettingen,M221,wsi-goettingen:M221,central fixation,German,-0.01362691019047979,0.06441153658563303,1,259.5
-wsi-goettingen,M223,wsi-goettingen:M223,central fixation,German,-0.19479109157328023,0.3344048349482427,7,198.5
-wsi-goettingen,M226,wsi-goettingen:M226,central fixation,German,0.1408729497381862,-0.17735566357084132,19,220.5
-wsi-goettingen,M227,wsi-goettingen:M227,central fixation,German,0.16126064698965625,0.10824611607442591,8,240
-wsi-goettingen,M228,wsi-goettingen:M228,central fixation,German,0.1709299397743982,0.40136824086773704,7,200.5
-wsi-goettingen,M229,wsi-goettingen:M229,central fixation,German,-0.03235802133067711,-0.15946768520160903,7,200.5
-wsi-goettingen,M230,wsi-goettingen:M230,central fixation,German,-0.4291109470913823,8.18370420483383e-4,7,203.5
-wsi-goettingen,M231,wsi-goettingen:M231,central fixation,German,-0.18624497332023582,0.11785380481321406,5,237.5
-wsi-goettingen,M312,wsi-goettingen:M312,central fixation,German,-0.08581155883884639,0.3717663614313347,8,307
-wsi-goettingen,M313,wsi-goettingen:M313,central fixation,German,-0.15769117890961493,-0.28142696028524794,24,290
-wsi-goettingen,M314,wsi-goettingen:M314,central fixation,German,0.0729404719784772,0.07128567804870212,7,355.5
-wsi-goettingen,M315,wsi-goettingen:M315,central fixation,German,0.1809184107890136,-0.49489033408411287,7,329.5
-wsi-goettingen,M316,wsi-goettingen:M316,central fixation,German,0.5824728948520557,-0.22922919653469465,7,285.5
-wsi-goettingen,M317,wsi-goettingen:M317,central fixation,German,0.07184581823397274,0.1607970146246971,7,356.5
-wsi-goettingen,M319,wsi-goettingen:M319,central fixation,German,0.3927938680302392,-0.38346471151308315,20,373
-wsi-goettingen,M320,wsi-goettingen:M320,central fixation,German,0.4658000283828092,0.02226931213383465,13,282.5
-wsi-goettingen,M321,wsi-goettingen:M321,central fixation,German,0.4306254278918229,0.3841200520486232,8,337
-wsi-goettingen,M322,wsi-goettingen:M322,central fixation,German,-0.10126617887818723,-0.012369275503691712,20,315
-wsi-goettingen,M324,wsi-goettingen:M324,central fixation,German,-0.22162756693568997,0.7210031262606322,26,311
-wsi-goettingen,M326,wsi-goettingen:M326,central fixation,German,-0.03646301438634669,0.3963464157673757,7,285.5
-wsi-goettingen,M327,wsi-goettingen:M327,central fixation,German,-0.3226756352260516,-0.21327566487236282,7,286.5
-wsi-goettingen,M328,wsi-goettingen:M328,central fixation,German,0.2533162360053538,-0.24714949575060952,7,278.5
-wsi-goettingen,M329,wsi-goettingen:M329,central fixation,German,0.4404452395893348,0.1526058721016086,6,342
-wsi-goettingen,M330,wsi-goettingen:M330,central fixation,German,-0.12046208917641632,-0.01063552926894884,8,320
-wsi-goettingen,M331,wsi-goettingen:M331,central fixation,German,0.12302064787978773,-0.42491547412262265,6,286
-wsi-goettingen,M332,wsi-goettingen:M332,central fixation,German,-0.015602658300631234,0.2031925240005914,12,325
-wsi-goettingen,M333,wsi-goettingen:M333,central fixation,German,0.023554012376858058,0.0975774523811841,8,295
-wsi-goettingen,M334,wsi-goettingen:M334,central fixation,German,0.6209226793103069,-0.055762123052130574,8,325
-wsi-goettingen,M336,wsi-goettingen:M336,central fixation,German,0.02157240065194932,-0.39027906290199055,10,290
-wsi-goettingen,M337,wsi-goettingen:M337,central fixation,German,-0.007454919363923729,0.3492212906272627,7,277.5
-wsi-goettingen,M338,wsi-goettingen:M338,central fixation,German,-0.1317268944495582,0.06493717333164528,3,326.5
-wsi-goettingen,M502,wsi-goettingen:M502,HPP,German,0.41516116783618306,-0.0019022567834272586,7,263.5
-wsi-goettingen,M503,wsi-goettingen:M503,HPP,German,-0.10746912276330889,-0.3830790376938389,25,235.5
-wsi-goettingen,M504,wsi-goettingen:M504,HPP,German,0.07602084443219592,0.1013940661886803,7,231.5
-wsi-goettingen,M505,wsi-goettingen:M505,HPP,German,0.22706373775035438,0.6868757238123233,20,276
-wsi-goettingen,M506,wsi-goettingen:M506,HPP,German,0.8314084689960008,0.34106865187389346,7,255.5
-wsi-goettingen,M507,wsi-goettingen:M507,HPP,German,0.5164540780113442,-0.44940532545163214,6,225
-wsi-goettingen,M508,wsi-goettingen:M508,HPP,German,0.05029762181748598,0.6326894140539145,5,234.5
-wsi-goettingen,M509,wsi-goettingen:M509,HPP,German,0.24294178832917046,-0.01802691708129922,5,246.5
-wsi-goettingen,M510,wsi-goettingen:M510,HPP,German,-0.18214729271168806,0.05881236639056775,9,253.5
-wsi-goettingen,M511,wsi-goettingen:M511,HPP,German,0.3056130294731587,0.7302267857095406,8,208
-wsi-goettingen,M514,wsi-goettingen:M514,HPP,German,0.32828098979653886,0.17943795247724714,19,245.5
-wsi-goettingen,M515,wsi-goettingen:M515,HPP,German,-0.12194378280415252,0.1820135349366172,15,211.5
-wsi-goettingen,M516,wsi-goettingen:M516,HPP,German,0.04146644321977355,-0.24567792413560463,7,231.5
-wsi-goettingen,M517,wsi-goettingen:M517,HPP,German,-0.09663033024315482,-0.23753551795493077,9,211.5
-wsi-goettingen,M518,wsi-goettingen:M518,HPP,German,0.1444192071685717,0.009035877727311403,6,269
-wsi-goettingen,M520,wsi-goettingen:M520,HPP,German,-0.04680997784390595,0.2324690257204658,5,273.5
+babylab-potsdam,b7027,babylab-potsdam:b7027,HPP,German,-1.1704285714285714,2.966285714285715,9,255.5
+babylab-potsdam,b7030,babylab-potsdam:b7030,HPP,German,-3.743166666666667,2.5378000000000007,7,203.5
+babylab-potsdam,b7033,babylab-potsdam:b7033,HPP,German,2.6214999999999993,-0.04125000000000023,21,228.5
+babylab-potsdam,b7096,babylab-potsdam:b7096,HPP,German,2.9047857142857145,-1.2054285714285715,7,219.5
+babylab-potsdam,b7105,babylab-potsdam:b7105,HPP,German,-0.23050000000000104,-2.0262857142857147,7,200.5
+babylab-potsdam,b7135,babylab-potsdam:b7135,HPP,German,1.9588750000000008,-1.2701071428571424,9,261.5
+babylab-potsdam,b7139,babylab-potsdam:b7139,HPP,German,-2.034625,4.526142857142857,7,209.5
+babylab-potsdam,b7140,babylab-potsdam:b7140,HPP,German,1.3458571428571418,2.4426666666666668,5,193.5
+babylab-potsdam,b7145,babylab-potsdam:b7145,HPP,German,1.7077500000000008,1.814375,9,258.5
+babylab-potsdam,b7146,babylab-potsdam:b7146,HPP,German,2.109375000000001,-1.985125,10,225
+babylab-potsdam,b7147,babylab-potsdam:b7147,HPP,German,0.3752500000000003,0.4977499999999999,7,213.5
+babylab-potsdam,b7149,babylab-potsdam:b7149,HPP,German,0.3817499999999985,1.3965357142857142,11,236.5
+babylab-potsdam,b7151,babylab-potsdam:b7151,HPP,German,3.902875,1.838708333333333,9,236.5
+babylab-potsdam,b7155,babylab-potsdam:b7155,HPP,German,-0.10174999999999912,-2.5604999999999993,10,212
+babylab-potsdam,b7161,babylab-potsdam:b7161,HPP,German,-0.25661904761904797,2.8622083333333324,13,215.5
+babylab-potsdam,b7171,babylab-potsdam:b7171,HPP,German,1.5367499999999996,3.2037142857142857,7,208.5
+babylab-potsdam,b7172,babylab-potsdam:b7172,HPP,German,2.153500000000001,-2.834761904761905,11,199.5
+babylab-potsdam,b7181,babylab-potsdam:b7181,HPP,German,-0.4131999999999998,-0.261571428571429,7,254.5
+babylab-potsdam,b7184,babylab-potsdam:b7184,HPP,German,1.0942499999999997,-1.2280892857142858,35,243.5
+babylab-potsdam,b7185,babylab-potsdam:b7185,HPP,German,-0.0384285714285717,0.4271666666666665,7,216.5
+babyling-oslo,OS_009,babyling-oslo:OS_009,Eyetracking,Norwegian,0.37558333333333316,0.26200000000000045,21,270.5
+babyling-oslo,OS_031,babyling-oslo:OS_031,Eyetracking,Norwegian,1.7717916666666662,0.010583333333332945,4,251
+babyling-oslo,OS_032,babyling-oslo:OS_032,Eyetracking,Norwegian,-0.9216785714285711,1.5902500000000002,11,250.5
+babyling-oslo,OS_042,babyling-oslo:OS_042,Eyetracking,Norwegian,-1.3914642857142852,-0.7843333333333335,19,193.5
+brookes-babylab,MB_103,brookes-babylab:MB_103,central fixation,English,-2.2562499999999996,5.654999999999999,7,371.5
+brookes-babylab,MB_135,brookes-babylab:MB_135,central fixation,English,3.878392857142857,-0.442333333333333,14,310
+brookes-babylab,MB_136,brookes-babylab:MB_136,central fixation,English,4.1225,3.396607142857143,7,298.5
+brookes-babylab,MB_137,brookes-babylab:MB_137,central fixation,English,2.5062499999999996,4.88375,10,257
+brookes-babylab,MB_138,brookes-babylab:MB_138,central fixation,English,5.761428571428571,6.3100000000000005,7,243.5
+brookes-babylab,MB_139,brookes-babylab:MB_139,central fixation,English,3.452857142857143,3.7425000000000006,6,281
+brookes-babylab,MB_140,brookes-babylab:MB_140,central fixation,English,6.066607142857144,2.575,8,257
+brookes-babylab,MB_141,brookes-babylab:MB_141,central fixation,English,3.7942857142857136,-1.4812500000000002,10,265
+brookes-babylab,MB_142,brookes-babylab:MB_142,central fixation,English,0.36571428571428566,3.1315,7,303.5
+brookes-babylab,MB_143,brookes-babylab:MB_143,central fixation,English,3.21875,1.4428571428571422,10,292
+brookes-babylab,MB_144,brookes-babylab:MB_144,central fixation,English,2.5687499999999996,1.0594642857142862,8,220
+brookes-babylab,MB_36,brookes-babylab:MB_36,central fixation,English,2.2800000000000002,4.8691666666666675,12,223
+brookes-babylab,MB_42,brookes-babylab:MB_42,central fixation,English,4.0424999999999995,5.878750000000001,7,231.5
+brookes-babylab,MB_48,brookes-babylab:MB_48,central fixation,English,0.9462499999999991,2.145714285714285,9,273.5
+brookes-babylab,MB_50,brookes-babylab:MB_50,central fixation,English,1.1875,7.406428571428571,7,258.5
+brookes-babylab,MB_63,brookes-babylab:MB_63,central fixation,English,3.9278571428571416,3.8862499999999995,8,178
+brookes-babylab,MB_80,brookes-babylab:MB_80,central fixation,English,0.6550000000000002,3.9537500000000003,12,276
+brookes-babylab,MB_88,brookes-babylab:MB_88,central fixation,English,-0.6105357142857146,1.9337499999999999,7,262.5
+InfantCog-UBC,AD42,InfantCog-UBC:AD42,central fixation,English,1.705,0.7287499999999998,11,163.5
+InfantCog-UBC,HV25,InfantCog-UBC:HV25,central fixation,English,-0.06500000000000039,-0.056000000000000494,9,167.5
+InfantCog-UBC,ML23,InfantCog-UBC:ML23,central fixation,English,0.03250000000000064,2.702678571428571,49,159.5
+InfantCog-UBC,OS32,InfantCog-UBC:OS32,central fixation,English,-2.154285714285713,-0.506904761904762,8,108
+InfantCog-UBC,PH39,InfantCog-UBC:PH39,central fixation,English,0.9175000000000004,-2.187142857142856,43,137.5
+InfantCog-UBC,VF48,InfantCog-UBC:VF48,central fixation,English,1.7876666666666656,-0.984,29,184.5
+InfantCog-UBC,VM20,InfantCog-UBC:VM20,central fixation,English,2.505000000000001,-1.6174999999999997,5,110.5
+infantll-madison,mb2_002,infantll-madison:mb2_002,HPP,English,1.6130500000000003,1.9687619047619052,7,220.5
+infantll-madison,mb2_003,infantll-madison:mb2_003,HPP,English,3.3462916666666667,3.293466666666667,7,256.5
+infantll-madison,mb2_005,infantll-madison:mb2_005,HPP,English,1.4315238095238092,0.5639000000000003,7,228.5
+infantll-madison,mb2_007,infantll-madison:mb2_007,HPP,English,0.12349999999999994,3.7220714285714287,7,228.5
+infantll-madison,mb2_009,infantll-madison:mb2_009,HPP,English,5.049821428571429,1.1178749999999997,7,221.5
+infantll-madison,mb2_010,infantll-madison:mb2_010,HPP,English,-2.0920000000000005,-0.40080000000000027,7,222.5
+infantll-madison,mb2_011,infantll-madison:mb2_011,HPP,English,-4.002057142857143,4.196371428571429,7,225.5
+infantll-madison,mb2_012,infantll-madison:mb2_012,HPP,English,0.23499999999999943,1.2573214285714291,7,259.5
+infantll-madison,mb2_013,infantll-madison:mb2_013,HPP,English,-1.6756666666666673,2.4401666666666664,13,215.5
+infantll-madison,mb2_014,infantll-madison:mb2_014,HPP,English,-0.7171500000000002,-0.5593333333333348,7,195.5
+infantll-madison,mb2_015,infantll-madison:mb2_015,HPP,English,3.824880952380953,-2.130066666666666,15,216.5
+infantll-madison,mb2_016,infantll-madison:mb2_016,HPP,English,2.715238095238095,1.4909999999999997,7,266.5
+infantll-madison,mb2_017,infantll-madison:mb2_017,HPP,English,0.679125,1.0785535714285714,5,255.5
+infantll-madison,mb2_018,infantll-madison:mb2_018,HPP,English,-0.43049999999999944,1.2180476190476188,7,208.5
+infantll-madison,mb2_019,infantll-madison:mb2_019,HPP,English,-0.3594761904761903,-0.3633333333333333,7,188.5
+infantll-madison,mb2_020,infantll-madison:mb2_020,HPP,English,-0.7333750000000006,-0.9642571428571411,6,269
+infantll-madison,mb2_021,infantll-madison:mb2_021,HPP,English,2.829142857142857,5.1686250000000005,28,259
+infantll-madison,mb2_022,infantll-madison:mb2_022,HPP,English,1.7589642857142858,-3.3796250000000008,7,221.5
+infantll-madison,mb2_023,infantll-madison:mb2_023,HPP,English,9.730642857142858,5.163333333333334,7,254.5
+infantll-madison,mb2_025,infantll-madison:mb2_025,HPP,English,2.452119047619047,0.4742571428571436,10,230
+infantll-madison,mb2_027,infantll-madison:mb2_027,HPP,English,2.68795238095238,0.9038333333333339,7,221.5
+infantll-madison,mb2_028,infantll-madison:mb2_028,HPP,English,0.5502000000000002,-0.6138750000000002,7,194.5
+infantll-madison,mb2_029,infantll-madison:mb2_029,HPP,English,0.9174999999999995,-1.398357142857142,7,241.5
+infantll-madison,mb2_031,infantll-madison:mb2_031,HPP,English,1.3412499999999996,-0.6325892857142854,14,231
+infantll-madison,mb2_032,infantll-madison:mb2_032,HPP,English,-1.7933571428571433,3.186,8,242
+infantll-madison,mb2_033,infantll-madison:mb2_033,HPP,English,3.3198035714285705,0.02197499999999941,16,216
+infantll-madison,mb2_034,infantll-madison:mb2_034,HPP,English,-0.4495238095238099,-2.8891785714285714,7,205.5
+lancslab,P01,lancslab:P01,Eyetracking,English,-2.4989999999999988,1.8062499999999986,7,211.5
+lancslab,P03,lancslab:P03,Eyetracking,English,-1.1741333333333337,-0.031449999999999534,7,261.5
+lancslab,P04,lancslab:P04,Eyetracking,English,0.8925000000000001,3.8356250000000003,7,253.5
+lancslab,P05,lancslab:P05,Eyetracking,English,0.7272857142857152,1.729750000000001,7,189.5
+lancslab,P06,lancslab:P06,Eyetracking,English,3.2387321428571436,1.9457500000000003,7,260.5
+lancslab,P07,lancslab:P07,Eyetracking,English,1.332374999999999,1.5916249999999987,7,213.5
+lancslab,P08,lancslab:P08,Eyetracking,English,0.6311250000000008,0.774342857142857,7,236.5
+lancslab,P09,lancslab:P09,Eyetracking,English,1.6409047619047623,1.8572499999999996,7,252.5
+lancslab,P10,lancslab:P10,Eyetracking,English,-0.42037499999999994,1.3599999999999994,7,232.5
+lancslab,P11,lancslab:P11,Eyetracking,English,3.0451250000000005,1.0416250000000016,7,238.5
+lancslab,P13,lancslab:P13,Eyetracking,English,1.3114285714285723,-1.408875,7,233.5
+lancslab,P14,lancslab:P14,Eyetracking,English,1.2971607142857149,3.065666666666666,10,266
+lancslab,P15,lancslab:P15,Eyetracking,English,-1.0661428571428564,2.1334999999999997,7,212.5
+lancslab,P16,lancslab:P16,Eyetracking,English,-3.0406666666666684,2.2032,7,275.5
+lancslab,P17,lancslab:P17,Eyetracking,English,-6.071428571434723e-4,0.1827500000000004,7,223.5
+wsi-goettingen,M213,wsi-goettingen:M213,central fixation,German,2.7825000000000006,-1.2489285714285723,7,232.5
+wsi-goettingen,M214,wsi-goettingen:M214,central fixation,German,0.2375000000000007,-2.318999999999999,8,227
+wsi-goettingen,M215,wsi-goettingen:M215,central fixation,German,1.307142857142857,-1.3569642857142856,7,252.5
+wsi-goettingen,M217,wsi-goettingen:M217,central fixation,German,2.007142857142857,1.76525,7,259.5
+wsi-goettingen,M218,wsi-goettingen:M218,central fixation,German,0.9662500000000005,1.3426666666666662,7,265.5
+wsi-goettingen,M219,wsi-goettingen:M219,central fixation,German,-0.14499999999999957,-0.35517857142857157,7,225.5
+wsi-goettingen,M220,wsi-goettingen:M220,central fixation,German,0.5687500000000005,0.4612499999999997,16,213
+wsi-goettingen,M221,wsi-goettingen:M221,central fixation,German,0.34750000000000014,1.8312500000000007,1,259.5
+wsi-goettingen,M223,wsi-goettingen:M223,central fixation,German,-1.2337499999999997,2.18,7,198.5
+wsi-goettingen,M226,wsi-goettingen:M226,central fixation,German,1.0474999999999994,-1.5053571428571422,19,220.5
+wsi-goettingen,M227,wsi-goettingen:M227,central fixation,German,1.6575000000000006,0.3324999999999996,8,240
+wsi-goettingen,M228,wsi-goettingen:M228,central fixation,German,0.725714285714286,1.4349999999999996,7,200.5
+wsi-goettingen,M229,wsi-goettingen:M229,central fixation,German,-0.12624999999999886,-1.335178571428572,7,200.5
+wsi-goettingen,M230,wsi-goettingen:M230,central fixation,German,-3.5975,0.7012499999999999,7,203.5
+wsi-goettingen,M231,wsi-goettingen:M231,central fixation,German,-1.1462499999999984,1.237678571428571,5,237.5
+wsi-goettingen,M312,wsi-goettingen:M312,central fixation,German,-1.1062499999999993,2.1308333333333334,8,307
+wsi-goettingen,M313,wsi-goettingen:M313,central fixation,German,-1.7051785714285712,-2.0890476190476193,24,290
+wsi-goettingen,M314,wsi-goettingen:M314,central fixation,German,1.363214285714287,1.03125,7,355.5
+wsi-goettingen,M315,wsi-goettingen:M315,central fixation,German,1.7861904761904768,-4.1814285714285715,7,329.5
+wsi-goettingen,M316,wsi-goettingen:M316,central fixation,German,2.9702380952380967,-0.6662499999999998,7,285.5
+wsi-goettingen,M317,wsi-goettingen:M317,central fixation,German,1.2689285714285718,1.5274999999999999,7,356.5
+wsi-goettingen,M319,wsi-goettingen:M319,central fixation,German,3.3935714285714296,-2.468571428571428,20,373
+wsi-goettingen,M320,wsi-goettingen:M320,central fixation,German,4.612619047619047,-0.5724999999999998,13,282.5
+wsi-goettingen,M321,wsi-goettingen:M321,central fixation,German,3.4987499999999994,1.2335714285714285,8,337
+wsi-goettingen,M322,wsi-goettingen:M322,central fixation,German,-0.40000000000000036,0.1200000000000001,20,315
+wsi-goettingen,M324,wsi-goettingen:M324,central fixation,German,-1.2299999999999995,4.248333333333333,26,311
+wsi-goettingen,M326,wsi-goettingen:M326,central fixation,German,-0.08375000000000021,1.482678571428571,7,285.5
+wsi-goettingen,M327,wsi-goettingen:M327,central fixation,German,-1.328500000000001,-1.5899999999999999,7,286.5
+wsi-goettingen,M328,wsi-goettingen:M328,central fixation,German,1.9674999999999994,-1.1099999999999994,7,278.5
+wsi-goettingen,M329,wsi-goettingen:M329,central fixation,German,3.9800000000000004,1.3475000000000006,6,342
+wsi-goettingen,M330,wsi-goettingen:M330,central fixation,German,-1.1883333333333335,0.5936666666666675,8,320
+wsi-goettingen,M331,wsi-goettingen:M331,central fixation,German,1.8012499999999996,-2.432499999999999,6,286
+wsi-goettingen,M332,wsi-goettingen:M332,central fixation,German,0.36685714285714255,1.1025,12,325
+wsi-goettingen,M333,wsi-goettingen:M333,central fixation,German,0.29999999999999893,-0.013928571428571068,8,295
+wsi-goettingen,M334,wsi-goettingen:M334,central fixation,German,4.7717857142857145,-0.021428571428571352,8,325
+wsi-goettingen,M336,wsi-goettingen:M336,central fixation,German,0.8037499999999991,-2.960749999999999,10,290
+wsi-goettingen,M337,wsi-goettingen:M337,central fixation,German,0.45374999999999943,2.7817857142857143,7,277.5
+wsi-goettingen,M338,wsi-goettingen:M338,central fixation,German,-1.3989285714285717,-0.19250000000000078,3,326.5
+wsi-goettingen,M502,wsi-goettingen:M502,HPP,German,2.010553571428572,0.15824999999999978,7,263.5
+wsi-goettingen,M503,wsi-goettingen:M503,HPP,German,0.6303333333333327,-2.3495178571428577,25,235.5
+wsi-goettingen,M504,wsi-goettingen:M504,HPP,German,0.43824999999999825,0.38700000000000045,7,231.5
+wsi-goettingen,M505,wsi-goettingen:M505,HPP,German,3.253,4.0489999999999995,20,276
+wsi-goettingen,M506,wsi-goettingen:M506,HPP,German,6.419375000000001,2.446999999999999,7,255.5
+wsi-goettingen,M507,wsi-goettingen:M507,HPP,German,3.266285714285714,-2.412171428571429,6,225
+wsi-goettingen,M508,wsi-goettingen:M508,HPP,German,0.6908214285714269,5.2207380952380955,5,234.5
+wsi-goettingen,M509,wsi-goettingen:M509,HPP,German,1.0138214285714282,-0.6079166666666671,5,246.5
+wsi-goettingen,M510,wsi-goettingen:M510,HPP,German,-1.2878749999999997,-0.29189285714285695,9,253.5
+wsi-goettingen,M511,wsi-goettingen:M511,HPP,German,3.7207500000000007,5.74925,8,208
+wsi-goettingen,M514,wsi-goettingen:M514,HPP,German,2.3485000000000005,1.223250000000001,19,245.5
+wsi-goettingen,M515,wsi-goettingen:M515,HPP,German,-1.0192499999999995,2.153125000000001,15,211.5
+wsi-goettingen,M516,wsi-goettingen:M516,HPP,German,0.12787499999999952,-2.647124999999999,7,231.5
+wsi-goettingen,M517,wsi-goettingen:M517,HPP,German,-0.44400000000000084,-2.213000000000001,9,211.5
+wsi-goettingen,M518,wsi-goettingen:M518,HPP,German,1.7973750000000006,0.8062500000000004,6,269
+wsi-goettingen,M520,wsi-goettingen:M520,HPP,German,-1.013,1.3740000000000006,5,273.5

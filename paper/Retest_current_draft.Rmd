@@ -1,5 +1,5 @@
 ---
-title             : "No evidence of test-retest reliability in infant-directed speech preference in a large pre-registered infant sample"
+title             : "Limited evidence of test-retest reliability in infant-directed speech preference in a large pre-registered infant sample"
 shorttitle        : "test-retest reliability of the infant preference measures"
 
 author: 
@@ -82,7 +82,7 @@ abstract: |
   
   
 keywords          : "language acquisition; speech perception; infant-directed speech; adult-directed speech, test-retest reliability"
-wordcount         : "4468"
+wordcount         : "4506"
 
 bibliography      : ["r-references.bib"]
 
@@ -216,7 +216,7 @@ n_exclude <- length(excludeID)
 ```{r,message=FALSE,warning=FALSE}
 LT_MIN <- 2                # minumum LT for inclusion
 MIN_TRIALS_PER_TYPE <- 1  # min trials per type for inclusion
-LOOKING_MEASURE <- "log" #how to compute aggregated looking time preferences per subject. raw = using raw (average) looking times. log = using log-transformed (average) looking times
+LOOKING_MEASURE <- "raw" #how to compute aggregated looking time preferences per subject. raw = using raw (average) looking times. log = using log-transformed (average) looking times
 
 # function for cleaning data 
 # by using minimum LT for inclusion and minimum number of trials per condition,
@@ -735,20 +735,31 @@ print_test_retest_correlation <- function(df,minimum_trials=1) {
   correlation <- compute_test_retest_correlation(df,minimum_trials=minimum_trials)
   apa_print(correlation)$statistic
 }
+
+#compute correlations for various includsion criteria
+correlation_1 <- compute_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=1)
+correlation_2 <- compute_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=2)
+correlation_4 <- compute_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=4)
+correlation_6 <- compute_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=6)
+correlation_8 <- compute_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=8)
+correlations <- c(correlation_1$estimate,correlation_2$estimate,correlation_4$estimate,correlation_6$estimate,correlation_8$estimate)
 ```
 
 ## Results with different inclusion criteria
-To this point, all analyses were performed on data with the inclusion criteria from MB1. For this, infants needed only 1 out of 8 valid trial pairs (i.e., any combination of an IDS and ADS trial) to be included in the analyses. Given that the use of more stringent inclusion criteria yielded larger effects sizes within the original MB1 study, we also assessed test-retest reliability by applying stricter inclusion criteria and thereby increasing test length to 2, 4, 6, and 8 included test trial pairs per condition. Applying a stricter criterion - and thereby increasing test length - increased reliability numerically from r = .02 to r = .38 (Figure 2). However, in part likely due to the decrease in sample size, none of these correlations was statistically significant: 2 valid trial pairs, `r print_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=2)`; 4 valid trial pairs, `r print_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=4)`; 6 valid trial pairs, `r print_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=6)`; 8 valid trial pairs - all trials on both testing days - `r print_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=8)`. Nevertheless, the analyses show that stricter inclusion criteria might lead to higher test-retest reliability but at the same time comes with tremendous decreases in sample size.
+To this point, all analyses were performed on data with the inclusion criteria from MB1. For this, infants needed only 1 out of 8 valid trial pairs (i.e., any combination of an IDS and ADS trial) to be included in the analyses. Given that the use of more stringent inclusion criteria yielded larger effects sizes within the original MB1 study, we also assessed test-retest reliability by applying stricter inclusion criteria and thereby increasing test length to 2, 4, 6, and 8 included test trial pairs per condition. Applying a stricter criterion - and thereby increasing test length - increased reliability numerically from r = `r round(min(correlations),2)` to r = `r round(max(correlations),2)` (Figure 2). However, in part likely due to the decrease in sample size, only one of these correlations (when requiring a minimum of 6 trial pairs) was statistically significant: 2 valid trial pairs, `r print_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=2)`; 4 valid trial pairs, `r print_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=4)`; 6 valid trial pairs, `r print_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=6)`; 8 valid trial pairs - all trials on both testing days - `r print_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=8)`. The analyses provide tentative evidence that stricter inclusion criteria might lead to higher test-retest reliability but at the same time comes with tremendous decreases in sample size.
 
 ```{r fig.cap="IDS preferences of both sessions plotted against each other for each inclusion criterion. n indicates the number of included infants, r is the Pearson correlation coefficient as the indicator for reliability.", fig.align="center",out.width = "5in",fig.height = 12, fig.width = 8}
 
 # Creating scatterplot for each inclusion criterion
-plot_exclusion_dataset <- function(df,minimum_trials=1,Limaxes=c(-0.5,1.5)) {
+plot_exclusion_dataset <- function(df,minimum_trials=1,
+                                   Limaxes=c(-4,10)
+                                   ) {
   #create the dataset based on the minimum trial inclusion criterion
   current_dataset <- create_exclusion_dataset(df,minimum_trials=minimum_trials)
   current_correlation <- compute_test_retest_correlation(df,minimum_trials=minimum_trials)
   main_message <- paste0("Inclusion criterion: ",minimum_trials," trial pairs")
   plot(current_dataset$Diff_1,current_dataset$Diff_2,xlab = "IDS preference in first session",ylab= "IDS preference in second session",main = main_message,xlim = Limaxes,ylim = Limaxes)
+  #plot(current_dataset$Diff_1,current_dataset$Diff_2,xlab = "IDS preference in first session",ylab= "IDS preference in second session",main = main_message)
 abline(lm(current_dataset$Diff_2~current_dataset$Diff_1),col="red")
 legend("topleft",legend = paste("r = ",round(current_correlation$estimate,2),"; n = ",current_correlation$parameter+2,sep=""))
 }
