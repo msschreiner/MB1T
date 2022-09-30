@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.15)  28 SEP 2022 20:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.30)  30 SEP 2022 16:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **Retest_current_draft.tex
 (./Retest_current_draft.tex
 LaTeX2e <2022-06-01> patch level 5
-L3 programming layer <2022-08-30> (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/apa6/apa6.cls
+L3 programming layer <2022-09-28> (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/apa6/apa6.cls
 Document Class: apa6 2020/01/13 v2.34 APA formatting (6th edition)
 (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
@@ -100,29 +100,31 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 107.
 (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def
-File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
+File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
+\stockwidth=\dimen147
+\stockheight=\dimen148
 ))
-\Gin@req@height=\dimen147
-\Gin@req@width=\dimen148
+\Gin@req@height=\dimen149
+\Gin@req@width=\dimen150
 ) (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen149
-\lightrulewidth=\dimen150
-\cmidrulewidth=\dimen151
-\belowrulesep=\dimen152
-\belowbottomsep=\dimen153
-\aboverulesep=\dimen154
-\abovetopsep=\dimen155
-\cmidrulesep=\dimen156
-\cmidrulekern=\dimen157
-\defaultaddspace=\dimen158
+\heavyrulewidth=\dimen151
+\lightrulewidth=\dimen152
+\cmidrulewidth=\dimen153
+\belowrulesep=\dimen154
+\belowbottomsep=\dimen155
+\aboverulesep=\dimen156
+\abovetopsep=\dimen157
+\cmidrulesep=\dimen158
+\cmidrulekern=\dimen159
+\defaultaddspace=\dimen160
 \@cmidla=\count197
 \@cmidlb=\count198
-\@aboverulesep=\dimen159
-\@belowrulesep=\dimen160
+\@aboverulesep=\dimen161
+\@belowrulesep=\dimen162
 \@thisruleclass=\count199
 \@lastruleclass=\count266
-\@thisrulewidth=\dimen161
+\@thisrulewidth=\dimen163
 ) (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/threeparttable/threeparttable.sty
 Package: threeparttable 2003/06/13  v 3.0
 \@tempboxb=\box51
@@ -141,14 +143,14 @@ Package: threeparttable 2003/06/13  v 3.0
 Package: caption 2022/03/01 v3.6b Customizing captions (AR)
 (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2022/03/17 v2.3b caption3 kernel (AR)
-\caption@tempdima=\dimen162
-\captionmargin=\dimen163
-\caption@leftmargin=\dimen164
-\caption@rightmargin=\dimen165
-\caption@width=\dimen166
-\caption@indent=\dimen167
-\caption@parindent=\dimen168
-\caption@hangindent=\dimen169
+\caption@tempdima=\dimen164
+\captionmargin=\dimen165
+\caption@leftmargin=\dimen166
+\caption@rightmargin=\dimen167
+\caption@width=\dimen168
+\caption@indent=\dimen169
+\caption@parindent=\dimen170
+\caption@hangindent=\dimen171
 Package caption Info: Standard document class detected.
 )
 \c@caption@flags=\count267
@@ -204,11 +206,11 @@ Package: amstext 2021/08/26 v2.01 AMS text
 (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks20
-\ex@=\dimen170
+\ex@=\dimen172
 )) (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 LaTeX Info: Redefining \boldsymbol on input line 28.
-\pmbraise@=\dimen171
+\pmbraise@=\dimen173
 ) (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
@@ -229,7 +231,7 @@ LaTeX Info: Redefining \big on input line 722.
 LaTeX Info: Redefining \Big on input line 723.
 LaTeX Info: Redefining \bigg on input line 724.
 LaTeX Info: Redefining \Bigg on input line 725.
-\big@size=\dimen172
+\big@size=\dimen174
 LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
 \macc@depth=\count281
@@ -247,12 +249,12 @@ LaTeX Info: Redefining \Relbar on input line 971.
 \column@=\count286
 \maxfields@=\count287
 \andhelp@=\toks22
-\eqnshift@=\dimen173
-\alignsep@=\dimen174
-\tagshift@=\dimen175
-\tagwidth@=\dimen176
-\totwidth@=\dimen177
-\lineht@=\dimen178
+\eqnshift@=\dimen175
+\alignsep@=\dimen176
+\tagshift@=\dimen177
+\tagwidth@=\dimen178
+\totwidth@=\dimen179
+\lineht@=\dimen180
 \@envbody=\toks23
 \multlinegap=\skip72
 \multlinetaggap=\skip73
@@ -300,8 +302,8 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1376.
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
 \calc@Acount=\count288
 \calc@Bcount=\count289
-\calc@Adimen=\dimen179
-\calc@Bdimen=\dimen180
+\calc@Adimen=\dimen181
+\calc@Bdimen=\dimen182
 \calc@Askip=\skip77
 \calc@Bskip=\skip78
 LaTeX Info: Redefining \setlength on input line 80.
@@ -309,17 +311,17 @@ LaTeX Info: Redefining \addtolength on input line 81.
 \calc@Ccount=\count290
 \calc@Cskip=\skip79
 ) (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/generic/babel/babel.sty
-Package: babel 2022/08/29 3.79 The Babel package
+Package: babel 2022/09/17 3.80 The Babel package
 \babel@savecnt=\count291
-\U@D=\dimen181
+\U@D=\dimen183
 \l@unhyphenated=\language3
 (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/generic/babel/txtbabel.def)
 \bbl@readstream=\read2
 \bbl@dirlevel=\count292
 Package babel Info: You haven't specified a language. I'll use 'nil'
-(babel)             as the main language. Reported on input line 4411.
+(babel)             as the main language. Reported on input line 4446.
 (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/generic/babel/nil.ldf
-Language: nil 2022/08/29 3.79 Nil language
+Language: nil 2022/09/17 3.80 Nil language
 \l@nil=\language4
 ))
 \everypar=\toks27
@@ -341,7 +343,7 @@ Package: longtable 2021-09-01 v4.17 Multi-page Table package (DPC)
 \LTpre=\skip82
 \LTpost=\skip83
 \LTchunksize=\count293
-\LTcapwidth=\dimen182
+\LTcapwidth=\dimen184
 \LT@head=\box57
 \LT@firsthead=\box58
 \LT@foot=\box59
@@ -359,24 +361,24 @@ Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
 \multirow@colwidth=\skip84
 \multirow@cntb=\count298
 \multirow@dima=\skip85
-\bigstrutjot=\dimen183
+\bigstrutjot=\dimen185
 ) (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/tools/tabularx.sty
 Package: tabularx 2020/01/15 v2.11c `tabularx' package (DPC)
 (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/tools/array.sty
 Package: array 2022/03/10 v2.5f Tabular extension package (FMi)
-\col@sep=\dimen184
+\col@sep=\dimen186
 \ar@mcellbox=\box62
-\extrarowheight=\dimen185
+\extrarowheight=\dimen187
 \NC@list=\toks29
 \extratabsurround=\skip86
 \backup@length=\skip87
 \ar@cellbox=\box63
 )
-\TX@col@width=\dimen186
-\TX@old@table=\dimen187
-\TX@old@col=\dimen188
-\TX@target=\dimen189
-\TX@delta=\dimen190
+\TX@col@width=\dimen188
+\TX@old@table=\dimen189
+\TX@old@col=\dimen190
+\TX@target=\dimen191
+\TX@delta=\dimen192
 \TX@cols=\count299
 \TX@ftn=\toks30
 ) (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/threeparttablex/threeparttablex.sty
@@ -392,9 +394,9 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 Failed to patch abstract.
 Failed to patch title.
 (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/xpatch/xpatch.sty (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2022-08-30 L3 programming layer (loader) 
+Package: expl3 2022-09-28 L3 programming layer (loader) 
 (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-File: l3backend-pdftex.def 2022-08-30 L3 backend support: PDF output (pdfTeX)
+File: l3backend-pdftex.def 2022-09-28 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count300
 \l__pdf_internal_box=\box64
 ))
@@ -406,16 +408,16 @@ Package: lineno 2005/11/02 line numbers on paragraphs v4.41
 \linenopenalty=\count301
 \output=\toks31
 \linenoprevgraf=\count302
-\linenumbersep=\dimen191
-\linenumberwidth=\dimen192
+\linenumbersep=\dimen193
+\linenumberwidth=\dimen194
 \c@linenumber=\count303
 \c@pagewiselinenumber=\count304
 \c@LN@truepage=\count305
 \c@internallinenumber=\count306
 \c@internallinenumbers=\count307
-\quotelinenumbersep=\dimen193
-\bframerule=\dimen194
-\bframesep=\dimen195
+\quotelinenumbersep=\dimen195
+\bframerule=\dimen196
+\bframesep=\dimen197
 \bframebox=\box65
 LaTeX Info: Redefining \\ on input line 3056.
 ) (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/csquotes/csquotes.sty
@@ -435,7 +437,7 @@ Package csquotes Info: ... configuration file loaded successfully.
 (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/csquotes/csquotes.cfg
 File: csquotes.cfg 
 )) (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2022-06-20 v7.00s Hypertext links for LaTeX
+Package: hyperref 2022-09-22 v7.00t Hypertext links for LaTeX
 (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
 Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
 ) (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
@@ -469,11 +471,11 @@ Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
 \c@section@level=\count314
 )
-\@linkdim=\dimen196
+\@linkdim=\dimen198
 \Hy@linkcounter=\count315
 \Hy@pagecounter=\count316
 (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2022-06-20 v7.00s Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2022-09-22 v7.00t Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 ) (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
@@ -483,7 +485,7 @@ Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
 \Hy@SavedSpaceFactor=\count317
 (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
-File: puenc.def 2022-06-20 v7.00s Hyperref: PDF Unicode definition (HO)
+File: puenc.def 2022-09-22 v7.00t Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
 )
@@ -494,29 +496,29 @@ Package hyperref Info: Hyper index ON on input line 4170.
 Package hyperref Info: Plain pages OFF on input line 4177.
 Package hyperref Info: Backreferencing OFF on input line 4182.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4408.
+Package hyperref Info: Bookmarks ON on input line 4410.
 \c@Hy@tempcnt=\count318
 (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-LaTeX Info: Redefining \url on input line 4746.
-\XeTeXLinkMargin=\dimen197
+LaTeX Info: Redefining \url on input line 4748.
+\XeTeXLinkMargin=\dimen199
 (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
 \Fld@menulength=\count319
-\Field@Width=\dimen198
-\Fld@charsize=\dimen199
-Package hyperref Info: Hyper figures OFF on input line 6024.
-Package hyperref Info: Link nesting OFF on input line 6029.
-Package hyperref Info: Hyper index ON on input line 6032.
-Package hyperref Info: backreferencing OFF on input line 6039.
-Package hyperref Info: Link coloring OFF on input line 6044.
-Package hyperref Info: Link coloring with OCG OFF on input line 6049.
-Package hyperref Info: PDF/A mode OFF on input line 6054.
+\Field@Width=\dimen256
+\Fld@charsize=\dimen257
+Package hyperref Info: Hyper figures OFF on input line 6027.
+Package hyperref Info: Link nesting OFF on input line 6032.
+Package hyperref Info: Hyper index ON on input line 6035.
+Package hyperref Info: backreferencing OFF on input line 6042.
+Package hyperref Info: Link coloring OFF on input line 6047.
+Package hyperref Info: Link coloring with OCG OFF on input line 6052.
+Package hyperref Info: PDF/A mode OFF on input line 6057.
 (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/base/atbegshi-ltx.sty
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
@@ -527,7 +529,7 @@ package with kernel methods
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def
-File: hpdftex.def 2022-06-20 v7.00s Hyperref driver for pdfTeX
+File: hpdftex.def 2022-09-22 v7.00t Hyperref driver for pdfTeX
 (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/base/atveryend-ltx.sty
 Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend package
 with kernel methods
@@ -668,31 +670,33 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 
 [1{/Users/martinzettersten/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
-] [2] [3] [4] [5]
-Underfull \vbox (badness 3977) has occurred while \output is active []
+] [2] [3]
+Underfull \vbox (badness 1838) has occurred while \output is active []
 
-[6]
-Underfull \vbox (badness 3977) has occurred while \output is active []
-
-[7]
-Underfull \vbox (badness 7649) has occurred while \output is active []
-
-[8] [9] [10] [11] [12] [13]
-<Retest_current_draft_files/figure-latex/fig1-1.pdf, id=163, 463.7325pt x 305.14pt>
-File: Retest_current_draft_files/figure-latex/fig1-1.pdf Graphic file (type pdf)
-<use Retest_current_draft_files/figure-latex/fig1-1.pdf>
-Package pdftex.def Info: Retest_current_draft_files/figure-latex/fig1-1.pdf  used on input line 385.
-(pdftex.def)             Requested size: 463.73842pt x 305.14389pt.
-
+[4] [5]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[14] [15 <./Retest_current_draft_files/figure-latex/fig1-1.pdf>]
-<Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf, id=183, 551.05875pt x 835.12pt>
+[6] [7] [8] [9] [10] [11] [12]
+Underfull \vbox (badness 1028) has occurred while \output is active []
+
+[13]
+<Retest_current_draft_files/figure-latex/fig1-1.pdf, id=173, 463.7325pt x 305.14pt>
+File: Retest_current_draft_files/figure-latex/fig1-1.pdf Graphic file (type pdf)
+<use Retest_current_draft_files/figure-latex/fig1-1.pdf>
+Package pdftex.def Info: Retest_current_draft_files/figure-latex/fig1-1.pdf  used on input line 445.
+(pdftex.def)             Requested size: 463.73842pt x 305.14389pt.
+<Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf, id=174, 551.05875pt x 835.12pt>
 File: Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf Graphic file (type pdf)
 <use Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf>
-Package pdftex.def Info: Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf  used on input line 396.
+Package pdftex.def Info: Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf  used on input line 456.
 (pdftex.def)             Requested size: 361.36234pt x 547.63838pt.
-[16] [17 <./Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf>] [18] [19] [20] [21]
+[14] [15 <./Retest_current_draft_files/figure-latex/fig1-1.pdf>] [16 <./Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf>] [17]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[18]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[19] [20] [21]
 Underfull \vbox (badness 1028) has occurred while \output is active []
 
 [22]
@@ -703,21 +707,21 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [24] AED endfloat: Processing end Figures and Tables [25] (./Retest_current_draft.aux)
 Package rerunfilecheck Info: File `Retest_current_draft.out' has not changed.
-(rerunfilecheck)             Checksum: 2FDC4515604AD4A6B603AD259EF75FB5;2860.
+(rerunfilecheck)             Checksum: B2140CF9824E7BC4ADA3EFD63FDAAEB4;3125.
  ) 
 Here is how much of TeX's memory you used:
- 16092 strings out of 477035
- 265703 string characters out of 5826644
- 633821 words of memory out of 5000000
- 36844 multiletter control sequences out of 15000+600000
+ 16108 strings out of 477031
+ 266067 string characters out of 5826551
+ 632217 words of memory out of 5000000
+ 36860 multiletter control sequences out of 15000+600000
  512478 words of font info for 63 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 72i,11n,77p,2049b,593s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,11n,77p,1792b,603s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb></Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-Output written on Retest_current_draft.pdf (25 pages, 237267 bytes).
+Output written on Retest_current_draft.pdf (25 pages, 237581 bytes).
 PDF statistics:
- 343 PDF objects out of 1000 (max. 8388607)
- 292 compressed objects within 3 object streams
- 105 named destinations out of 1000 (max. 500000)
- 155 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 356 PDF objects out of 1000 (max. 8388607)
+ 304 compressed objects within 4 object streams
+ 109 named destinations out of 1000 (max. 500000)
+ 171 words of extra memory for PDF output out of 10000 (max. 10000000)
 
