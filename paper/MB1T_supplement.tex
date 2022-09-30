@@ -202,6 +202,9 @@ Below, we document all deviations from the preregistered methods and analyses \u
   A small number of infants with a time between sessions above 31 days were also included in the analyses (n=2).
 \item
   Consistent with analytic decisions in ManyBabies 1 (ManyBabies Consortium, 2020), total looking times were truncated at 18 seconds (the maximum trial time) in the small number of cases where recorded looking times were slightly greater than 18s (presumably due to small measurement error in recording infant looking times).
+  -The preregistration included a series of secondary planned analyses that ultimately did run because we collected fewer participants than originally expected.
+\item
+  In assessing differences in IDS preference between test and retest sessions, we preregistered an additional linear mixed-effects model including a by-lab random slope for session. This model yielded qualitatively equivalent results (see R markdown analysis script for the main manuscript). However, the model resulted in a singular fit, suggesting that the model specification may be overly complex and that its estimates should be interpreted with caution. We therefore focused only on the first preregistered model (including only by-lab and by-participant random intercepts) in reporting the analyses in the main manuscript.
 \end{itemize}
 
 \hypertarget{s2-relationship-between-the-number-of-trials-infants-contribute-in-each-session}{%
@@ -229,10 +232,10 @@ Researchers should therefore be mindful of the fact that decisions about includi
 
 We also conducted analyses to explore whether there were any patterns of preference reversal across test sessions.
 While there was no strong correlation in the magnitude of IDS preference between test session 1 and test session 2, here we asked whether infants consistently expressed the same preference across test sessions.
-Overall, 53.80\% of the infants had a consistent preference from test to retest session, indicating that infants were not more likely than chance to maintain their preference from test session 1 to test session 2 (exact binomial test; \emph{p} =
-0.38).
-Of the 158 total infants, 42.40\% of infants showed a consistent infant-directed speech preference and 11.40\% showed a consistent adult-directed speech preference.
-24.70\% of infants switched from an infant-directed speech preference at test session 1 to an adult-directed speech preference at test session 2 and 21.50\% switched from an adult-directed speech preference to an infant-directed speech preference.
+Overall, 58.20\% of the infants had a consistent preference from test to retest session, indicating that infants were not more likely than chance to maintain their preference from test session 1 to test session 2 (exact binomial test; \emph{p} =
+0.05).
+Of the 158 total infants, 44.90\% of infants showed a consistent infant-directed speech preference and 13.30\% showed a consistent adult-directed speech preference.
+23.40\% of infants switched from an infant-directed speech preference at test session 1 to an adult-directed speech preference at test session 2 and 18.40\% switched from an adult-directed speech preference to an infant-directed speech preference.
 
 Next, we explored whether we could detect any systematic clustering of infants with distinct patterns of preference across the test and retest session.
 We took a bottom-up approach and conducted a \emph{k}-means clustering of the test-retest difference data.
@@ -344,8 +347,8 @@ N 2 & 0.18 & {}[0.04, 0.32] & 2.52 & 154 & .013\\
 \toprule
 Term & \multicolumn{1}{c}{$\hat{\beta}$} & \multicolumn{1}{c}{95\% CI} & \multicolumn{1}{c}{$t$} & \multicolumn{1}{c}{$\mathit{df}$} & \multicolumn{1}{c}{$p$}\\
 \midrule
-Intercept & 6.04 & {}[5.48, 6.60] & 21.05 & 71.84 & < .001\\
-LT Test & 0.13 & {}[0.06, 0.21] & 3.69 & 25.74 & .001\\
+Intercept & 6.04 & {}[4.99, 7.08] & 11.35 & 6.88 & < .001\\
+LT Test & 0.13 & {}[0.05, 0.20] & 3.46 & 25.38 & .002\\
 \bottomrule
 \end{tabular}
 
@@ -370,8 +373,8 @@ LT Test & 0.13 & {}[0.06, 0.21] & 3.69 & 25.74 & .001\\
 \toprule
 Term & \multicolumn{1}{c}{$\hat{\beta}$} & \multicolumn{1}{c}{95\% CI} & \multicolumn{1}{c}{$t$} & \multicolumn{1}{c}{$\mathit{df}$} & \multicolumn{1}{c}{$p$}\\
 \midrule
-Intercept & 0.89 & {}[0.47, 1.32] & 4.15 & 69.99 & < .001\\
-Diff 1 & 0.08 & {}[0.01, 0.16] & 2.15 & 288.70 & .033\\
+Intercept & 0.87 & {}[0.45, 1.30] & 4.04 & 122.79 & < .001\\
+Diff 1 & 0.10 & {}[-0.02, 0.22] & 1.63 & 6.31 & .151\\
 \bottomrule
 \end{tabular}
 

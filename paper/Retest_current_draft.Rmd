@@ -82,7 +82,7 @@ abstract: |
   
   
 keywords          : "language acquisition; speech perception; infant-directed speech; adult-directed speech, test-retest reliability"
-wordcount         : "4302"
+wordcount         : "4321"
 
 bibliography      : ["r-references.bib"]
 
@@ -496,21 +496,15 @@ papaja::apa_table(lab_stats,
 ```{r,message=FALSE,warning=FALSE}
 # Linear mixed model assessing if session predicts differences in LT 
 diff_session_1 <- lmer(Diff ~ Session + 
-                (1+Session | Lab), 
-              data=all_agg_subjects_paired, REML=FALSE)
-
-# why not these preregistered models?
-diff_session_2 <- lmer(Diff ~ Session + 
                 (1 | Lab) + (1 | Subject), 
               data=all_agg_subjects_paired, REML=FALSE)
 
-diff_session_3 <- lmer(Diff ~ Session + (1+Session|Lab) + (1|Subject),
+diff_session_2 <- lmer(Diff ~ Session + (1+Session|Lab) + (1|Subject),
                        data=all_agg_subjects_paired, REML=FALSE)
-
+#this model yields a singular boundary fit but also yields similar results to the first model 
 
 diff_session_coefs<-summary(diff_session_1)$coefficients
 diff_session_coefs2<-summary(diff_session_2)$coefficients
-diff_session_coefs3<-summary(diff_session_3)$coefficients
 
 
 # Subsetting to session 1 for t-test
@@ -526,9 +520,10 @@ ttestSession2 = t.test(all_agg_subjects_paired_s2$Diff)
 
 ```
 
-First, we examined infants' preferences for IDS in both sessions. Two two-samples t-tests revealed that the children in Session 1, `r apa_print(ttestSession1)$statistic`, and in Session 2, `r apa_print(ttestSession2)$statistic`, showed a preference of IDS over ADS (see Table 2 for the looking times in each session).
+First, we examined infants' preferences for IDS in both sessions. Two two-samples t-tests revealed that the children in Session 1, `r apa_print(ttestSession1)$statistic`, and in Session 2, `r apa_print(ttestSession2)$statistic`, showed a preference of IDS over ADS (see Table 2 for the average looking times in each session), replicating the main finding from MB1.
 In the first session, `r sum(all_agg_subjects_paired_s1$Diff>0)/length(all_agg_subjects_paired_s1$Diff)*100`% of infants showed a preference for IDS, and in the second session, `r sum(all_agg_subjects_paired_s2$Diff>0)/length(all_agg_subjects_paired_s2$Diff)*100`% of infants showed a numerical preference for IDS. 
-In other words, we replicated the previous finding from the main MB1 study. There was no difference in the strength of the preference effect, as a multilevel analysis with a random slope and random intercept for session on the lab level revealed no significant impact of session on infants’ preference, $\beta$=`r round(diff_session_coefs[2,1],3)`, *SE*=`r round(diff_session_coefs[2,2],2)`, *p*=`r printp(diff_session_coefs[2,5])`.
+In order to test whether there was a difference in the strength of the preference effect across sessions, we fit a linear mixed-effects model predicting infants' average difference in looking time between IDS and ADS from test session (1 vs. 2), including by-lab and by-participant random intercepts.
+There was no significant difference in the magnitude of infants’ preference between the two test sessions, $\beta$=`r round(diff_session_coefs[2,1],3)`, *SE*=`r round(diff_session_coefs[2,2],2)`, *p*=`r printp(diff_session_coefs[2,5])`.
 
 ```{r descriptives_table1, results="asis",warning=FALSE,message=FALSE}
 
