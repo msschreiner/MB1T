@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.30)  30 SEP 2022 17:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.30)  2 OCT 2022 18:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -676,56 +676,47 @@ Underfull \vbox (badness 1838) has occurred while \output is active []
 [4] [5]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[6] [7] [8] [9] [10] [11] [12]
-<Retest_current_draft_files/figure-latex/fig1-1.pdf, id=166, 463.7325pt x 305.14pt>
-File: Retest_current_draft_files/figure-latex/fig1-1.pdf Graphic file (type pdf)
-<use Retest_current_draft_files/figure-latex/fig1-1.pdf>
-Package pdftex.def Info: Retest_current_draft_files/figure-latex/fig1-1.pdf  used on input line 461.
-(pdftex.def)             Requested size: 463.73842pt x 305.14389pt.
-
-Underfull \vbox (badness 1028) has occurred while \output is active []
-
-[13] [14 <./Retest_current_draft_files/figure-latex/fig1-1.pdf>]
-<Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf, id=189, 551.05875pt x 835.12pt>
-File: Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf Graphic file (type pdf)
-<use Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf>
-Package pdftex.def Info: Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf  used on input line 472.
+[6] [7] [8] [9] [10] [11] [12] [13]
+<Retest_current_draft_files/figure-latex/unnamed-chunk-7-1.pdf, id=174, 551.05875pt x 835.12pt>
+File: Retest_current_draft_files/figure-latex/unnamed-chunk-7-1.pdf Graphic file (type pdf)
+<use Retest_current_draft_files/figure-latex/unnamed-chunk-7-1.pdf>
+Package pdftex.def Info: Retest_current_draft_files/figure-latex/unnamed-chunk-7-1.pdf  used on input line 464.
 (pdftex.def)             Requested size: 361.36234pt x 547.63838pt.
-[15] [16 <./Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf>]
+[14] [15 <./Retest_current_draft_files/figure-latex/unnamed-chunk-7-1.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[16]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [17]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[18]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[19] [20] [21]
+[18] [19] [20]
 Underfull \vbox (badness 1028) has occurred while \output is active []
+
+[21]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [22]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[23]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[24] AED endfloat: Processing end Figures and Tables [25] (./Retest_current_draft.aux)
+[23] AED endfloat: Processing end Figures and Tables [24] (./Retest_current_draft.aux)
 Package rerunfilecheck Info: File `Retest_current_draft.out' has not changed.
-(rerunfilecheck)             Checksum: B2140CF9824E7BC4ADA3EFD63FDAAEB4;3125.
+(rerunfilecheck)             Checksum: 61E5C90B5455FF9F251D894B1FF0E6E6;3125.
  ) 
 Here is how much of TeX's memory you used:
- 16108 strings out of 477031
- 266067 string characters out of 5826551
- 633217 words of memory out of 5000000
- 36860 multiletter control sequences out of 15000+600000
+ 16098 strings out of 477031
+ 265668 string characters out of 5826551
+ 631870 words of memory out of 5000000
+ 36853 multiletter control sequences out of 15000+600000
  512478 words of font info for 63 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 72i,11n,77p,1792b,597s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,11n,77p,1791b,581s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb></Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-Output written on Retest_current_draft.pdf (25 pages, 237372 bytes).
+Output written on Retest_current_draft.pdf (24 pages, 219422 bytes).
 PDF statistics:
- 356 PDF objects out of 1000 (max. 8388607)
- 304 compressed objects within 4 object streams
- 109 named destinations out of 1000 (max. 500000)
- 171 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 339 PDF objects out of 1000 (max. 8388607)
+ 292 compressed objects within 3 object streams
+ 107 named destinations out of 1000 (max. 500000)
+ 166 words of extra memory for PDF output out of 10000 (max. 10000000)
 

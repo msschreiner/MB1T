@@ -78,11 +78,11 @@ authornote: |
 
 
 abstract: |
- Test-retest reliability -- establishing that measurements remain consistent across multiple testing sessions -- is critical to measuring, understanding, and predicting individual differences in infant language development. However, previous attempts to establish measurement reliability in infant speech perception tasks are limited, and reliability of frequently-used infant measures is largely unknown. The current study investigated the test-retest reliability infant speech preference in a large sample (N=158) in the context of the ManyBabies1 collaborative research project (hereafter, MB1; Frank et al., 2017; ManyBabies Consortium, 2020) of infant-directed speech preference (hereafter, IDS) over adult-directed speech (hereafter, ADS; Cooper & Aslin, 1990). Labs of the original MB1 study were asked to bring in participating infants for a second appointment retesting infants on their IDS preference. This approach allows us to estimate test-retest reliability for the three different methods used to investigate preferential listening in infancy: the head-turn preference procedure, central fixation, and eye-tracking. Overall, we find no consistent evidence of test-retest reliability in measures of infants' speech preference (overall *r* = .09, 95% CI [-.06,.25]). While increasing the number of trials that infants needed to contribute for inclusion in the analysis revealed a numeric growth in test-retest reliability, it also considerably reduced the study's effective sample size.  Therefore, future research on infant development should take into account that not all experimental measures might be appropriate to assess individual differences between infants, and hence, the interpretation of findings needs to be treated with caution.
+ Test-retest reliability -- establishing that measurements remain consistent across multiple testing sessions -- is critical to measuring, understanding, and predicting individual differences in infant language development. However, previous attempts to establish measurement reliability in infant speech perception tasks are limited, and reliability of frequently-used infant measures is largely unknown. The current study investigated the test-retest reliability infant speech preference in a large sample (N=158) in the context of the ManyBabies1 collaborative research project (hereafter, MB1; Frank et al., 2017; ManyBabies Consortium, 2020) of infant-directed speech preference (hereafter, IDS) over adult-directed speech (hereafter, ADS; Cooper & Aslin, 1990). Labs of the original MB1 study were asked to bring in participating infants for a second appointment retesting infants on their IDS preference. This approach allows us to estimate test-retest reliability across three different methods used to investigate preferential listening in infancy: the head-turn preference procedure, central fixation, and eye-tracking. Overall, we find no consistent evidence of test-retest reliability in measures of infants' speech preference (overall *r* = .09, 95% CI [-.06,.25]). While increasing the number of trials that infants needed to contribute for inclusion in the analysis revealed a numeric growth in test-retest reliability, it also considerably reduced the study's effective sample size.  Therefore, future research on infant development should take into account that not all experimental measures might be appropriate to assess individual differences between infants, and hence, the interpretation of findings needs to be treated with caution.
   
   
 keywords          : "language acquisition; speech perception; infant-directed speech; adult-directed speech, test-retest reliability"
-wordcount         : "4321"
+wordcount         : "4131"
 
 bibliography      : ["r-references.bib"]
 
@@ -523,7 +523,7 @@ ttestSession2 = t.test(all_agg_subjects_paired_s2$Diff)
 First, we examined infants' preferences for IDS in both sessions. Two two-samples t-tests revealed that the children in Session 1, `r apa_print(ttestSession1)$statistic`, and in Session 2, `r apa_print(ttestSession2)$statistic`, showed a preference of IDS over ADS (see Table 2 for the average looking times in each session), replicating the main finding from MB1.
 In the first session, `r sum(all_agg_subjects_paired_s1$Diff>0)/length(all_agg_subjects_paired_s1$Diff)*100`% of infants showed a preference for IDS, and in the second session, `r sum(all_agg_subjects_paired_s2$Diff>0)/length(all_agg_subjects_paired_s2$Diff)*100`% of infants showed a numerical preference for IDS. 
 In order to test whether there was a difference in the strength of the preference effect across sessions, we fit a linear mixed-effects model predicting infants' average difference in looking time between IDS and ADS from test session (1 vs. 2), including by-lab and by-participant random intercepts.
-There was no significant difference in the magnitude of infants’ preference between the two test sessions, $\beta$=`r round(diff_session_coefs[2,1],3)`, *SE*=`r round(diff_session_coefs[2,2],2)`, *p*=`r printp(diff_session_coefs[2,5])`.
+There was no significant difference in the magnitude of infants’ preference between the two sessions, $\beta$=`r round(diff_session_coefs[2,1],3)`, *SE*=`r round(diff_session_coefs[2,2],2)`, *p*=`r printp(diff_session_coefs[2,5])`.
 
 ```{r descriptives_table1, results="asis",warning=FALSE,message=FALSE}
 
@@ -540,22 +540,11 @@ papaja::apa_table(agg_subjects_lt,
 mod_lmer <- lmer(Diff_2 ~ Diff_1 + (1|Lab),
               data=all_agg_subjects_paired_retest,REML=T)
 
-# Adding days between sessions to model
-mod_lmer2 <- lmer(Diff_2 ~ Diff_1*days_between_sessions+ (1|Lab), # Effect of days between sessions
+#secondary preregistered model
+# including an additional by-lab random slope for test session 1
+# this model yields qualitatively equivalent results
+mod_lmer_b <- lmer(Diff_2 ~ Diff_1 + (1+Diff_1|Lab),
               data=all_agg_subjects_paired_retest,REML=T)
-
-days_coefs<-summary(mod_lmer2)$coefficients
-
-# Differences in test-retest reliability between English and non-English learning infants
-# Assigning 1 to UBC and Madison as NAE labs. Remaining labs are non-NAE and are coded as 0.
-all_agg_subjects_paired_retest$NAE<-ifelse(all_agg_subjects_paired_retest$Lab=="InfantCog-UBC"| all_agg_subjects_paired_retest$Lab=="infantll-madison", 1, 0)
-
-# Adding NAE to model
-# center session
-mod_lmer3 <- lmer(Diff_2 ~ Diff_1*NAE+(1|Lab),
-              data=all_agg_subjects_paired_retest,REML=T) 
-
-nae_coefs<-summary(mod_lmer3)$coefficients
 
 # Coefficients for linear mixed model predicting difference score of session 2 from difference score of session 1
 coefs <- summary(mod_lmer)$coef %>%
@@ -599,7 +588,7 @@ perc_reversal <- n_reversal/n_total*100
 
 reversal$reversal <- as.factor(reversal$reversal)
 
-# Figure for reversal
+# Figure for reversal (not shown)
 
 reversal_plot <- left_join(all_agg_subjects_paired_retest, reversal)
 
@@ -620,69 +609,9 @@ simplyOverallCorr<-cor.test(all_agg_subjects_paired_retest$Diff_1,
          all_agg_subjects_paired_retest$Diff_2)
 ```
 
-We assessed test-retest reliability in two ways. First, we conducted a multilevel analysis, with Lab as random intercept, predicting the IDS preference in Session 2 based on the IDS preference in Session 1. The results revealed that we could not predict the preference score in Session 2 based on Session 1 (see Table 2). Second, we calculated the Pearson correlation coefficient. While a simple correlation coefficient might overestimate the test-retest reliability in our sample because it does not control for the differences between different labs and methods (HPP, CF, and eye-tracking), we felt it was important to also conduct a Pearson correlation as it is commonly used to assess reliability. Again, the size of the correlation coefficient was not statistically different from zero and the estimate was, in fact, approaching nil, `r apa_print(simplyOverallCorr)$full_result`. Furthermore, we calculated the percentage of preference reversal between test and retest counting the number of participants for whom the preference changed between test and retest, and dividing it by the number of all participants. The results revealed that `r perc_reversal` percent of the infants had a preference reversal from test to retest session. Taken together, our results lead us to conclude that there is no overall test-retest reliability for the three infant preference measures used within the current study.
+We assessed test-retest reliability in two ways. First, we fit a linear mixed-effects model predicting IDS preference in Session 2 from IDS preference in Session 1, including a by-lab random intercept. The results revealed no significant relationship between IDS preference in Session 2 and Session 1 (Table 2). Second, we calculated the Pearson correlation coefficient. While a simple correlation coefficient might overestimate the test-retest reliability in our sample because it does not control for the differences between different labs and methods (HPP, CF, and eye-tracking), we felt it was important to also conduct a Pearson correlation as it is commonly used to assess reliability. Again, the size of the correlation coefficient was not statistically different from zero and the estimate was, in fact, approaching nil, `r apa_print(simplyOverallCorr)$full_result`. Furthermore, we calculated the percentage of preference reversal between test and retest counting the number of participants for whom the preference changed between test and retest, and dividing it by the number of all participants. The results revealed that `r perc_reversal` percent of the infants had a preference reversal from test to retest session. 
 
-To test whether the results were different for a specific method, we calculated the Pearson correlation coefficients and the multilevel analyses for the three different methods, HPP, central fixation and eye-tracking, separately (see Table 4). Splitting the data per method also did not lead to different results. Neither the Pearson correlation coefficients nor the coefficients of the multilevel analysis were significant, all *p*-values > .286.
-We also tested for the possibility that the Time between sessions might have an impact on the reliability. The subsequent multilevel analysis, with Lab as random intercept, predicting the IDS preference in Session 2 based on the IDS preference in Session 1, the number of days between Session 1 and Session 2 and the interaction of these two variables, did not indicate that Time between sessions had an effect. Neither the main effect of Time between sessions, $\beta$=`r round(days_coefs[3,1],3)`, *SE*=`r round(days_coefs[3,2],2)`, *p*=`r printp(days_coefs[3,5])`, nor the interaction term, $\beta$=`r round(days_coefs[4,1],3)`, *SE*=`r round(days_coefs[4,2],2)`, *p*=`r printp(days_coefs[4,5])`, showed significant effects.
-As NAE-learning infants showed greater IDS preferences than their non-NAE counterparts in the original study, we also assessed if test-retest reliability interacted with children’s native language. A multilevel analysis with Lab as random intercept, predicting the IDS preference in Session 2 based on the IDS preference in Session 1, NAE and the interaction of these two variables, revealed no interaction, $\beta$=`r round(nae_coefs[4,1],3)`, *SE*=`r round(nae_coefs[4,2],2)`, *p*=`r printp(nae_coefs[4,5])` (see Figure 1).
-
-```{r, results='hide', warning=FALSE, message=FALSE}
-# Age model
-
-## age_days and age_group
-
-month <- 365.25 / 12
-
-d <- all_agg_subjects_paired
-d$age_mo <- d$Age / month
-#ggplot(d, aes(x = age_mo)) + 
- # geom_histogram(binwidth = 1)+
-  # theme_bw(base_size=20)
-d$age_group <- cut(d$age_mo, c(3,6,9,12,15), 
-                   labels = c("3-6 mo","6-9 mo","9-12 mo","12-15 mo"), 
-                   include.lowest = TRUE)
-max(d$age_mo, na.rm=TRUE)
-#see_if(all(d$age_mo > 3 & d$age_mo < 15))
-participants_by_lab_and_age_group = d %>%
-  group_by(Lab, age_group) %>%
-  summarize(participants = n_distinct(Subject))
-# print(participants_by_lab_and_age_group, n=1e4)
-
-
-ordered_ages <- c("3-6 mo", "6-9 mo", "9-12 mo", "12-15 mo")
-d$age_group <- fct_relevel(d$age_group, ordered_ages)
-
-#d$age_group <- fct_relevel(d$age_group, ordered_ages)
-
-ages <- d %>%
-  group_by(Lab, age_group, Method, Native, Subject) %>%
-  summarise(age_mo = mean(age_mo)) %>%
-  summarise(age_mo = mean(age_mo))
-
-d_var_calc <- function(n, d) {
-  return((2/n) + (d ^ 2 / (4 * n)))
-}
-ds_zt <- d %>%
-  group_by(Lab, age_group, Method, Native, Subject) %>%
-  summarise(d = mean(Diff, na.rm = TRUE)) %>%
-  group_by(Lab, age_group, Method, Native) %>%
-   summarise(d_z = mean(d, na.rm = TRUE) / sd(d, na.rm = TRUE), 
-            n = length(unique(Subject)), 
-            d_z_var = d_var_calc(n, d_z)) %>%
-  left_join(ages) %>%
-  filter(!is.na(d_z)) # CHECK THIS 
-
-ds_zt$age_mo_centered <- scale(ds_zt$age_mo, scale = FALSE)[,1]
-age_mod <- metafor::rma(d_z ~ age_mo_centered, 
-                        vi = d_z_var, slab = Lab, data = ds_zt, method = "REML") 
-
-age <- ggplot(d, aes(y=Diff, x=Age))+
-  geom_point()+
-   facet_wrap(~ Session)+
-  geom_hline(yintercept=0)
-
-
-```
+To test whether the results were different for a specific method, we calculated the Pearson correlation coefficients and the multilevel analyses for the three different methods, HPP, central fixation and eye-tracking, separately (see Table 4). There was no evidence that method moderated test-retest reliability. Neither the Pearson correlation coefficients nor the coefficients of the multilevel analysis were significant, all *p*-values > .286. In series of planned secondary analyses, we found that participant age, language background, and time between test sessions also did not moderate the relationship between IDS preference in session 1 and session 2 (see Suppmentary Materials, S2). Taken together, we find no significant evidence of test-retest reliability across our preregistered analyses.
 
 ```{r results="asis",warning=FALSE,message=FALSE}
 #function for computing coefficient table from lmer model and correlation reliability
@@ -726,32 +655,8 @@ papaja::apa_table(coef_table,
                   caption = "Coefficient estimates from a linear mixed effects model predicting IDS preference in Session 2 for each method separately.", 
                   format.args = list(digits = 3))
 ```
-```{r fig1, fig.cap = "Infants' preference in Session 1 and Session 2 with individual data points and regression lines color-coded by method (central fixation, eye-tracking, or HPP). Results are plotted separately for North American English-learning infants (right panel) and infants learning other languages and dialects (right panel)."}
 
-# Plotting IDS preference in Session 1 and Session 2 split by NAE
-NAE.labs <- c("non-NAE", "NAE")
-names(NAE.labs) <- c("0", "1")
-
-all_agg_subjects_paired_retest$NAE <- as.factor(all_agg_subjects_paired_retest$NAE)
-
-ggplot(all_agg_subjects_paired_retest, aes(x = Diff_1, y = Diff_2, col = Method)) + 
-  geom_point() +
-  geom_smooth(method = "lm", se=FALSE) + 
- # geom_hline(yintercept = 0, lty = 2) + 
-  facet_grid(~NAE, labeller=labeller(NAE=NAE.labs))+
-  ylab("IDS preference in second session") + 
-  scale_color_ptol(name = "Method") + 
-  #scale_linetype(name = "North American English") + 
-  xlab("IDS preference in first session") + 
- # ylim(-3, 5) + 
-  theme(legend.position = "bottom", legend.box = "vertical",panel.background = element_rect(fill = "white",
-                                colour = "black",
-                                size = 0.5, linetype = "solid"),
-  panel.grid.major = element_blank(), 
-  panel.grid.minor = element_blank(),
-  strip.background = element_blank())
-
-```
+## Results with different inclusion criteria
 
 ```{r,message=FALSE,warning=FALSE}
 
@@ -814,8 +719,7 @@ correlation_8 <- compute_test_retest_correlation(paired_retest_df_by_trial_exclu
 correlations <- c(correlation_1$estimate,correlation_2$estimate,correlation_4$estimate,correlation_6$estimate,correlation_8$estimate)
 ```
 
-## Results with different inclusion criteria
-To this point, all analyses were performed on data with the inclusion criteria from MB1. For this, infants needed only 1 out of 8 valid trial pairs (i.e., any combination of an IDS and ADS trial) to be included in the analyses. Given that the use of more stringent inclusion criteria yielded larger effects sizes within the original MB1 study, we also assessed test-retest reliability by applying stricter inclusion criteria and thereby increasing test length to 2, 4, 6, and 8 included test trial pairs per condition. Applying a stricter criterion - and thereby increasing test length - increased reliability numerically from r = `r round(min(correlations),2)` to r = `r round(max(correlations),2)` (Figure 2). However, in part likely due to the decrease in sample size, only one of these correlations (when requiring a minimum of 6 trial pairs) was statistically significant: 2 valid trial pairs, `r print_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=2)`; 4 valid trial pairs, `r print_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=4)`; 6 valid trial pairs, `r print_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=6)`; 8 valid trial pairs - all trials on both testing days - `r print_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=8)`. The analyses provide tentative evidence that stricter inclusion criteria might lead to higher test-retest reliability but at the same time comes with tremendous decreases in sample size.
+To this point, all analyses were performed on data with the inclusion criteria from MB1. For this, infants needed only 1 out of 8 valid trial pairs (i.e., any combination of an IDS and ADS trial) to be included in the analyses. Given that the use of more stringent inclusion criteria yielded larger effects sizes within the original MB1 study, we also assessed test-retest reliability by applying stricter inclusion criteria and thereby increasing test length to 2, 4, 6, and 8 included test trial pairs per condition. Applying a stricter criterion - and thereby increasing test length - increased reliability numerically from r = `r round(min(correlations),2)` to r = `r round(max(correlations),2)` (Figure 1). However, in part likely due to the decrease in sample size, only one of these correlations (when requiring a minimum of 6 trial pairs) was statistically significant: 2 valid trial pairs, `r print_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=2)`; 4 valid trial pairs, `r print_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=4)`; 6 valid trial pairs, `r print_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=6)`; 8 valid trial pairs - all trials on both testing days - `r print_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=8)`. The analyses provide tentative evidence that stricter inclusion criteria might lead to higher test-retest reliability but at the same time comes with tremendous decreases in sample size.
 
 ```{r fig.cap="IDS preferences of both sessions plotted against each other for each inclusion criterion. n indicates the number of included infants, r is the Pearson correlation coefficient as the indicator for reliability.", fig.align="center",out.width = "5in",fig.height = 12, fig.width = 8}
 
