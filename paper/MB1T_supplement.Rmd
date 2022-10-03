@@ -1,5 +1,5 @@
 ---
-title             : "Manybabies1 Test-Retest Supplementary Information"
+title             : "Manybabies1 Test-Retest Supplementary Materials"
 shorttitle        : "MB1T supplementary"
 
 figsintext        : yes
@@ -37,6 +37,7 @@ library(ggplot2)
 library(cowplot)
 library(tidymodels)
 library(car)
+library(metafor)
 
 read_path <- here("data","processed")
 ```
@@ -107,7 +108,7 @@ days_coefs<-summary(mod_lmer2)$coefficients
 
 ```
 
-The number of days between the first and second testing session varied widely across participants (mean: `r round(mean(all_agg_subjects_paired_retest$days_between_sessions),1)` days; range: `r min(all_agg_subjects_paired_retest$days_between_sessions)` - `r max(all_agg_subjects_paired_retest$days_between_sessions)` days). We therefore tested for the possibility that the time between sessions might have an impact on the reliability. We fit a linear mixed-effects model predicting IDS preference in session 2 from IDS preference in session 1 (mean-centered), number of days between testing sessions (mean-centered), and their interaction, including a by-lab random intercept and random slope for IDS preference in test session 1 (more complex random effects structure including additional random slopes for number of days between test sessions and its interaction with IDS preference in session 1 did not converge). We found no evidence that numebr of days between test sessions moderated the relationship between IDS preference at test session 1 and 2. Neither the main effect of time between sessions, $\beta$=`r round(days_coefs[3,1],3)`, *SE*=`r round(days_coefs[3,2],2)`, *p*=`r printp(days_coefs[3,5])`, nor the interaction term, $\beta$=`r round(days_coefs[4,1],3)`, *SE*=`r round(days_coefs[4,2],2)`, *p*=`r printp(days_coefs[4,5])`, showed significant effects.
+The number of days between the first and second testing session varied widely across participants (mean: `r round(mean(all_agg_subjects_paired_retest$days_between_sessions),1)` days; range: `r min(all_agg_subjects_paired_retest$days_between_sessions)` - `r max(all_agg_subjects_paired_retest$days_between_sessions)` days). We therefore tested for the possibility that the time between sessions might have an impact on the reliability. We fit a linear mixed-effects model predicting IDS preference in session 2 from IDS preference in session 1 (mean-centered), number of days between testing sessions (mean-centered), and their interaction, including a by-lab random intercept and random slope for IDS preference in test session 1 (more complex random effects structure including additional random slopes for number of days between test sessions and its interaction with IDS preference in session 1 did not converge). We found no evidence that number of days between test sessions moderated the relationship between IDS preference at test session 1 and 2. Neither the main effect of time between sessions, $\beta$=`r round(days_coefs[3,1],3)`, *SE*=`r round(days_coefs[3,2],2)`, *p*=`r printp(days_coefs[3,5])`, nor the interaction term, $\beta$=`r round(days_coefs[4,1],3)`, *SE*=`r round(days_coefs[4,2],2)`, *p*=`r printp(days_coefs[4,5])`, showed significant effects.
 
 ### S2.2. Participant Age
 
@@ -211,8 +212,45 @@ ggplot(all_agg_subjects_paired_retest, aes(x = Diff_1, y = Diff_2, col = Method)
 
 NAE-learning infants showed greater IDS preferences than their non-NAE counterparts in MB1. We therefore also assessed if test-retest reliability interacted with children’s language background. A multilevel analysis with Lab as random intercept, predicting the IDS preference in Session 2 based on the IDS preference in Session 1, NAE and the interaction of these two variables, revealed no interaction, $\beta$=`r round(nae_coefs[4,1],3)`, *SE*=`r round(nae_coefs[4,2],2)`, *p*=`r printp(nae_coefs[4,5])` (see Figure S1).
 
-## S3: Meta-analytic estimate
+## S3: Meta-analysis of test-retest reliability
 
+```{r}
+#compute correlation
+diff_correlation_estimate <- function(df) {
+  return(as.numeric(cor.test(df$Diff_1,df$Diff_2)$estimate))
+}
+
+#summarize correlations by lab
+lab_correlations <- all_agg_subjects_paired_retest %>%
+  select(Lab,Method, Diff_1,Diff_2) %>%
+  ungroup() %>%
+  group_by(Lab,Method) %>%
+  nest() %>%
+  mutate(
+    correlation=purrr::map(data,diff_correlation_estimate),
+  ) %>%
+  unnest(cols=c(data,correlation)) %>%
+  group_by(Lab,Method,correlation) %>%
+  summarize(
+    N=n()
+  ) %>%
+  mutate(
+    Method=case_when(
+      Method=="Eyetracking" ~ "ET",
+      Method=="central fixation" ~ "CF",
+      TRUE ~ Method
+    )
+  )
+
+z_transformed_es <- escalc(measure = "ZCOR",ri=correlation,ni=N,data=lab_correlations,slab=paste(Lab,Method,sep=", "))
+meta_model <- rma.mv(yi=yi, V=vi,random=list(~ 1 | Lab, ~ 1 | Method),data=z_transformed_es)
+```
+
+```{r fig2, fig.cap = "Forest plot of test-retest reliability effect sizes. Each row represents Fisher's z transformed correlation coefficient and 95% CI for a given lab and method (HPP = head-turn preference procedure; ET = eye-tracking; CF = central fixation). The black diamond represents the overall estimated effect size from the mixed-effects meta-analytic model." }
+forest(meta_model,header="Lab and Method")
+```
+
+We used the metafor package [@R-metafor] to fit a mixed-effects meta-analytic model on z-transformed correlations using sample size weighting. The model included random intercepts for lab and method. The overall effect size estimate was not significantly different from zero, *b* = `r round(meta_model$beta[1],2)`, 95% CI = [`r round(meta_model$ci.lb,2)`, `r round(meta_model$ci.ub,2)`], *p* = `r round(meta_model$pval,2)`. A forest plot of the effect sizes for each lab and method is shown in Figure 2.
 
 
 ## S4: Alternative Dependent Variables
@@ -280,7 +318,7 @@ clusterings <-
   unnest(cols = c(glanced))
 ```
 
-```{r fig2, fig.cap = " (A) Results from the k-means clustering analysis of IDS preference in session 1 and 2 for different numbers of k  and (B) the corresponding elbow plot of the total within-cluster sum of squares. In (A), points represent indvidual participants' magnitude of looking time difference at test sessions 1 (x-axis) and 2 (y-axis). The solid line indicates no preference for IDS vs. ADS, the dotted lines indicate mean IDS preference at test session 1 and 2, respectively. Colors indicate clusters from the k-means clustering for different values of k."}
+```{r fig3, fig.cap = " (A) Results from the k-means clustering analysis of IDS preference in session 1 and 2 for different numbers of k  and (B) the corresponding elbow plot of the total within-cluster sum of squares. In (A), points represent indvidual participants' magnitude of looking time difference at test sessions 1 (x-axis) and 2 (y-axis). The solid line indicates no preference for IDS vs. ADS, the dotted lines indicate mean IDS preference at test session 1 and 2, respectively. Colors indicate clusters from the k-means clustering for different values of k."}
 p1 <- 
   ggplot(assignments, aes(x = Diff_1, y = Diff_2)) +
   geom_point(aes(color = .cluster), alpha = 0.8) + 
