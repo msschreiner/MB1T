@@ -61,7 +61,7 @@ Below, we have compiled a list of notes on and deviations from the preregistered
 - In assessing the reliability of IDS using a linear-mixed-effects model predicting IDS preference in session 2 from IDS preference in session 1, we also assessed the robustness of the results by fitting a second preregistered model with more complex random effects structure, including a by-lab random slope for IDS preference in session 1. This model is included in the main R markdown script and yields qualitatively equivalent results to the model reported in the manuscript that includes a by-lab random intercept only.
 - We report a series of secondary planned analyses in the Supplementary Materials exploring potential moderating variables of time between test sessions (S2.1), participant age (S2.2.), and the language background of the participants (S2.3.).
 
-## S2: Secondary Analyses Investigating Possible Moderating Variables
+## S2: Secondary analyses investigating possible moderating variables
 
 ```{r}
 
@@ -88,7 +88,7 @@ all_agg_subjects_paired_retest <- read_csv(here(read_path,"all_agg_subjects_pair
   mutate(reversal_type=str_remove_all(reversal_type,pattern="_preference"))
 ```
 
-### S2.1. Time between test sessions.
+### S2.1. Time between test sessions
 
 ```{r}
 #mean-center Diff_1 and age_between_sessions to make main effects interpretable
@@ -111,7 +111,7 @@ days_coefs<-summary(mod_lmer2)$coefficients
 
 The number of days between the first and second testing session varied widely across participants (mean: `r round(mean(all_agg_subjects_paired_retest$days_between_sessions),1)` days; range: `r min(all_agg_subjects_paired_retest$days_between_sessions)` - `r max(all_agg_subjects_paired_retest$days_between_sessions)` days). We therefore tested for the possibility that the time between sessions might have an impact on the reliability. We fit a linear mixed-effects model predicting IDS preference in session 2 from IDS preference in session 1 (mean-centered), number of days between testing sessions (mean-centered), and their interaction, including a by-lab random intercept and random slope for IDS preference in test session 1 (more complex random effects structure including additional random slopes for number of days between test sessions and its interaction with IDS preference in session 1 did not converge). We found no evidence that number of days between test sessions moderated the relationship between IDS preference at test session 1 and 2. Neither the main effect of time between sessions, $\beta$=`r round(days_coefs[3,1],3)`, *SE*=`r round(days_coefs[3,2],2)`, *p*=`r printp(days_coefs[3,5])`, nor the interaction term, $\beta$=`r round(days_coefs[4,1],3)`, *SE*=`r round(days_coefs[4,2],2)`, *p*=`r printp(days_coefs[4,5])`, showed significant effects.
 
-### S2.2. Participant Age
+### S2.2. Participant age
 
 ```{r, results='hide', warning=FALSE, message=FALSE}
 # Age model
