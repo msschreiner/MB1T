@@ -218,6 +218,8 @@ Below, we have compiled a list of notes on and deviations from the preregistered
   We did not fit all models (in particular, the models investigating interactions between moderators) described in the secondary analyses of the preregistration, because our final sample size was smaller than we anticipated, which made it less feasible to investigate more complex relationships between moderators.
 \end{itemize}
 
+\newpage
+
 \hypertarget{s2.-secondary-analyses-investigating-possible-moderating-variables}{%
 \section{S2. Secondary analyses investigating possible moderating variables}\label{s2.-secondary-analyses-investigating-possible-moderating-variables}}
 
@@ -246,6 +248,8 @@ To investigate the possibility that age moderated test-retest reliability, we fi
 The model included a by-lab random intercept and a by-lab random slope for IDS preference in Session 1.
 We found no evidence that age influenced test-retest reliability as indicated by the interaction between IDS preference in Session 1 and age, \(\beta\)=0.00, \emph{SE}=0.00, \emph{t}(76.60)=-0.85, \emph{p}=.398.
 
+\newpage
+
 \hypertarget{s3.-meta-analysis-of-test-retest-reliability}{%
 \section{S3. Meta-analysis of test-retest reliability}\label{s3.-meta-analysis-of-test-retest-reliability}}
 
@@ -261,14 +265,92 @@ The model included random intercepts for lab and method.
 The overall effect size estimate was not significantly different from zero, \emph{b} = -0.04, 95\% CI = {[}-0.26, 0.19{]}, \emph{p} = 0.73.
 A forest plot of the effect sizes for each lab and method is shown in Figure 2.
 
+\newpage
+
 \hypertarget{s4.-alternative-dependent-variables}{%
 \section{S4. Alternative Dependent Variables}\label{s4.-alternative-dependent-variables}}
+
+To check the robustness of our results, we also investigated whether we obtained similar results with other possible dependent measures: average log-transformed looking times and a proportion-based preference measure. For each alternative dependent variable, we conducted the main analyses of test-retest reliability reported in the manuscript: the overall Pearson correlation, the test-retest linear mixed-effects model, and an inspection of applying stricter inclusion criteria for number of trials contributed.
 
 \hypertarget{s4.1.-log-transformed-looking-times}{%
 \subsection{S4.1. Log-transformed looking times}\label{s4.1.-log-transformed-looking-times}}
 
-\hypertarget{s4.2.-proportion-novelty-preference.}{%
-\subsection{S4.2. Proportion novelty preference.}\label{s4.2.-proportion-novelty-preference.}}
+In these analyses, we calculated IDS preference by first log-transforming looking times for each trial, computing the average log-transformed looking time for IDS and ADS for each participant, and calculating the difference between average IDS and ADS log-transforming looking times.
+We fit a linear mixed-effects model predicting IDS preference in Session 2 from IDS preference in Session 1, including a by-lab random intercept.
+As in the analyses using average raw looking times, the results revealed no significant relationship between IDS preference in Session 1 and 2 (Table 1).
+The Pearson correlation coefficient was also not statistically significant, \(r = .03\), 95\% CI \([-.12, .19]\), \(t(156) = 0.43\), \(p = .670\).
+Applying successively stricter inclusion criteria --- by requiring a higher number of valid trials per condition in each session --- showed a similar pattern to the main manuscript, such that correlations increased somewhat with stricter inclusion criteria, but substantially reduced the sample size at the same time (Figure 3).
+
+\begin{table}[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:unnamed-chunk-7}Coefficient estimates from a linear mixed effects model predicting Log LT IDS preference in Session 2.}
+
+\begin{tabular}{lllll}
+\toprule
+ & \multicolumn{1}{c}{Estimate} & \multicolumn{1}{c}{SE} & \multicolumn{1}{c}{t} & \multicolumn{1}{c}{p}\\
+\midrule
+Intercept & 0.14 & 0.07 & 2.05 & 0.09\\
+Log LT IDS Preference Session 1 & -0.06 & 0.09 & -0.68 & 0.50\\
+\bottomrule
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+
+\begin{figure}
+
+{\centering \includegraphics[width=5in]{MB1T_supplement_files/figure-latex/unnamed-chunk-8-1} 
+
+}
+
+\caption{IDS preferences (based on average log-looking times) of both sessions plotted against each other for each inclusion criterion. n indicates the number of included infants, r is the Pearson correlation coefficient as the indicator for reliability.}\label{fig:unnamed-chunk-8}
+\end{figure}
+
+\hypertarget{s4.2.-proportion-looking-to-ids}{%
+\subsection{S4.2. Proportion looking to IDS}\label{s4.2.-proportion-looking-to-ids}}
+
+\begin{table}[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:unnamed-chunk-9}Coefficient estimates from a linear mixed effects model predicting IDS preference (based on proportion IDS looking) in Session 2.}
+
+\begin{tabular}{lllll}
+\toprule
+ & \multicolumn{1}{c}{Estimate} & \multicolumn{1}{c}{SE} & \multicolumn{1}{c}{t} & \multicolumn{1}{c}{p}\\
+\midrule
+Intercept & 0.59 & 0.05 & 10.70 & 0.00\\
+IDS Preference (proportion measure) Session 1 & -0.10 & 0.10 & -1.01 & 0.31\\
+\bottomrule
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+
+Next, we calculated a proportion-based IDS preference measure by computing the average proportion (raw) looking time to IDS relative to total (raw) looking time to IDS and ADS for each subject (i.e., IDS looking time / (ADS looking time + IDS looking time)).
+We fit a linear mixed-effects model predicting proportion-based IDS preference in Session 2 from propotion-based IDS preference in Session 1, including a by-lab random intercept.
+As in the analyses using other measure of IDS preference, the results revealed no significant relationship between IDS preference in Session 1 and 2 (Table 2).
+The Pearson correlation coefficient based on proportional IDS looking was also not statistically significant, \(r = .01\), 95\% CI \([-.15, .16]\), \(t(156) = 0.09\), \(p = .927\).
+Stricter inclusion criteria increased the correlation somewhat, as in previous analyses (Figure 4).
+
+\begin{figure}
+
+{\centering \includegraphics[width=5in]{MB1T_supplement_files/figure-latex/unnamed-chunk-11-1} 
+
+}
+
+\caption{IDS preferences (based on average log-looking times) of both sessions plotted against each other for each inclusion criterion. n indicates the number of included infants, r is the Pearson correlation coefficient as the indicator for reliability.}\label{fig:unnamed-chunk-11}
+\end{figure}
+
+\newpage
 
 \hypertarget{s5.-patterns-of-preference-across-sessions}{%
 \section{S5. Patterns of preference across sessions}\label{s5.-patterns-of-preference-across-sessions}}
@@ -318,14 +400,14 @@ Researchers should therefore be mindful of the fact that decisions about includi
 
 There is a strong relationship between average overall looking in the first test session and the second test session, even after controlling for number of trials in the first and second session.
 
-\includegraphics{MB1T_supplement_files/figure-latex/unnamed-chunk-9-1.pdf}
+\includegraphics{MB1T_supplement_files/figure-latex/unnamed-chunk-15-1.pdf}
 
 \begin{table}[tbp]
 
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:unnamed-chunk-9}Average Looking during session 1 predicted from average looking at session 2, controlling for trial number for each session.}
+\caption{\label{tab:unnamed-chunk-15}Average Looking during session 1 predicted from average looking at session 2, controlling for trial number for each session.}
 
 \begin{tabular}{llllll}
 \toprule
@@ -346,7 +428,7 @@ N 2 & 0.18 & {}[0.04, 0.32] & 2.52 & 154 & .013\\
 \hypertarget{s7.2.-relations-in-overall-looking-time-to-ids-and-ads-stimuli.}{%
 \subsection{S7.2. Relations in overall looking time to IDS and ADS stimuli.}\label{s7.2.-relations-in-overall-looking-time-to-ids-and-ads-stimuli.}}
 
-\includegraphics{MB1T_supplement_files/figure-latex/unnamed-chunk-10-1.pdf}
+\includegraphics{MB1T_supplement_files/figure-latex/unnamed-chunk-16-1.pdf}
 
 \begin{verbatim}
 ## 
@@ -397,14 +479,14 @@ N 2 & 0.18 & {}[0.04, 0.32] & 2.52 & 154 & .013\\
 \hypertarget{s7.3.-relations-for-specific-ads-and-ids-stimuli-between-the-first-and-second-session.}{%
 \subsection{S7.3. Relations for specific ADS and IDS stimuli between the first and second session.}\label{s7.3.-relations-for-specific-ads-and-ids-stimuli-between-the-first-and-second-session.}}
 
-\includegraphics{MB1T_supplement_files/figure-latex/unnamed-chunk-12-1.pdf}
+\includegraphics{MB1T_supplement_files/figure-latex/unnamed-chunk-18-1.pdf}
 
 \begin{table}[tbp]
 
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:unnamed-chunk-12}Mixed-effects model results predicting looking time during session 1 from looking time at session 2 at the stimulus level.}
+\caption{\label{tab:unnamed-chunk-18}Mixed-effects model results predicting looking time during session 1 from looking time at session 2 at the stimulus level.}
 
 \begin{tabular}{llllll}
 \toprule
@@ -423,14 +505,14 @@ LT Test & 0.13 & {}[0.05, 0.20] & 3.46 & 25.38 & .002\\
 \hypertarget{s8.-by-item-pair-preference-scores-across-sessions}{%
 \section{S8. By-item-pair preference scores across sessions}\label{s8.-by-item-pair-preference-scores-across-sessions}}
 
-\includegraphics{MB1T_supplement_files/figure-latex/unnamed-chunk-13-1.pdf}
+\includegraphics{MB1T_supplement_files/figure-latex/unnamed-chunk-19-1.pdf}
 
 \begin{table}[tbp]
 
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:unnamed-chunk-13}Mixed-effects model results predicting IDS preference during session 1 from IDS preference at session 2 at the stimulus level.}
+\caption{\label{tab:unnamed-chunk-19}Mixed-effects model results predicting IDS preference during session 1 from IDS preference at session 2 at the stimulus level.}
 
 \begin{tabular}{llllll}
 \toprule

@@ -738,26 +738,23 @@ create_exclusion_dataset <- function(df, minimum_trials=1) {
   return(filtered_data)
 }
 
-compute_test_retest_correlation <- function(df,minimum_trials=1) {
-  #create the dataset based on the minimum trial inclusion criterion
-  filtered_data <- create_exclusion_dataset(df,minimum_trials=minimum_trials)
+compute_test_retest_correlation <- function(dataset,session_1_column="Diff_1",session_2_column="Diff_2") {
   #compute the test-retest correlation
-  correlation <- cor.test(filtered_data$Diff_1,filtered_data$Diff_2)
+  correlation <- cor.test(dataset[[session_1_column]],dataset[[session_2_column]])
   correlation
 }
 
-print_test_retest_correlation <- function(df,minimum_trials=1) {
-  #compute and print the correlation
-  correlation <- compute_test_retest_correlation(df,minimum_trials=minimum_trials)
-  apa_print(correlation)$statistic
-}
-
-#compute correlations for various includsion criteria
-correlation_1 <- compute_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=1)
-correlation_2 <- compute_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=2)
-correlation_4 <- compute_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=4)
-correlation_6 <- compute_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=6)
-correlation_8 <- compute_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=8)
+#compute correlations for various inclusion criteria
+correlation_1 <- create_exclusion_dataset(paired_retest_df_by_trial_exclusions,minimum_trials=1) %>%
+  compute_test_retest_correlation()
+correlation_2 <- create_exclusion_dataset(paired_retest_df_by_trial_exclusions,minimum_trials=2) %>%
+  compute_test_retest_correlation()
+correlation_4 <- create_exclusion_dataset(paired_retest_df_by_trial_exclusions,minimum_trials=4) %>%
+  compute_test_retest_correlation()
+correlation_6 <- create_exclusion_dataset(paired_retest_df_by_trial_exclusions,minimum_trials=6) %>%
+  compute_test_retest_correlation()
+correlation_8 <- create_exclusion_dataset(paired_retest_df_by_trial_exclusions,minimum_trials=8) %>%
+  compute_test_retest_correlation()
 correlations <- c(correlation_1$estimate,correlation_2$estimate,correlation_4$estimate,correlation_6$estimate,correlation_8$estimate)
 ```
 
@@ -765,30 +762,31 @@ To this point, all analyses were performed using the inclusion criteria from MB1
 However, more stringent inclusion criteria yielded larger effect sizes in MB1. 
 We therefore conducted exploratory analyses assessing test-retest reliability after applying progressively stricter inclusion criteria, requiring 2, 4, 6, and 8 valid trials per condition. 
 Applying stricter criteria --- and thereby increasing the number of test trials --- increased reliability numerically from r = `r round(min(correlations),2)` to r = `r round(max(correlations),2)` (Figure 2). 
-In part due to a decrease in sample size, only one of these correlations was statistically significant (when requiring 6 trial pairs): 2 valid trial pairs, `r print_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=2)`; 4 valid trial pairs, `r print_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=4)`; 6 valid trial pairs, `r print_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=6)`; 8 valid trial pairs --- all trials in both sessions --- `r print_test_retest_correlation(paired_retest_df_by_trial_exclusions,minimum_trials=8)`. 
+In part due to a decrease in sample size, only one of these correlations was statistically significant (when requiring 6 trial pairs): 2 valid trial pairs, `r apa_print(correlation_2)$statistic`; 4 valid trial pairs, `r apa_print(correlation_4)$statistic`; 6 valid trial pairs, `r apa_print(correlation_6)$statistic`; 8 valid trial pairs --- all trials in both sessions --- `r apa_print(correlation_8)$statistic`. 
 The analyses provide tentative evidence that stricter inclusion criteria may lead to higher test-retest reliability, but at the cost of substantial decreases in sample size.
 
 ```{r fig.cap="IDS preferences of both sessions plotted against each other for each inclusion criterion. n indicates the number of included infants, r is the Pearson correlation coefficient as the indicator for reliability.", fig.align="center",out.width = "5in",fig.height = 10, fig.width = 8}
 
 # Creating scatterplot for each inclusion criterion
-plot_exclusion_dataset <- function(df,minimum_trials=1,
-                                   Limaxes=c(-4,10)
+plot_exclusion_dataset <- function(current_dataset,minimum_trials=1,
+                                   Limaxes=c(-4,10),
+                                   session_1_column="Diff_1",
+                                   session_2_column="Diff_2",
+                                   xlab = "IDS preference in first session",
+                                   ylab = "IDS preference in second session"
                                    ) {
-  #create the dataset based on the minimum trial inclusion criterion
-  current_dataset <- create_exclusion_dataset(df,minimum_trials=minimum_trials)
-  current_correlation <- compute_test_retest_correlation(df,minimum_trials=minimum_trials)
+  current_correlation <- cor.test(current_dataset[[session_1_column]],current_dataset[[session_2_column]])
   main_message <- paste0("Inclusion criterion: ",minimum_trials," trial pairs")
-  plot(current_dataset$Diff_1,current_dataset$Diff_2,xlab = "IDS preference in first session",ylab= "IDS preference in second session",main = main_message,xlim = Limaxes,ylim = Limaxes)
-  #plot(current_dataset$Diff_1,current_dataset$Diff_2,xlab = "IDS preference in first session",ylab= "IDS preference in second session",main = main_message)
-abline(lm(current_dataset$Diff_2~current_dataset$Diff_1),col="red")
+  plot(current_dataset[[session_1_column]],current_dataset[[session_2_column]],xlab = xlab,ylab=ylab,main = main_message,xlim = Limaxes,ylim = Limaxes)
+abline(lm(current_dataset[[session_2_column]]~current_dataset[[session_1_column]]),col="red")
 legend("topleft",legend = paste("r = ",round(current_correlation$estimate,2),"; n = ",current_correlation$parameter+2,sep=""))
 }
 
 par(mfrow = c(2, 2))
-plot_exclusion_dataset(paired_retest_df_by_trial_exclusions,minimum_trials=2)
-plot_exclusion_dataset(paired_retest_df_by_trial_exclusions,minimum_trials=4)
-plot_exclusion_dataset(paired_retest_df_by_trial_exclusions,minimum_trials=6)
-plot_exclusion_dataset(paired_retest_df_by_trial_exclusions,minimum_trials=8)
+plot_exclusion_dataset(create_exclusion_dataset(paired_retest_df_by_trial_exclusions,minimum_trials=2),minimum_trials=2)
+plot_exclusion_dataset(create_exclusion_dataset(paired_retest_df_by_trial_exclusions,minimum_trials=4),minimum_trials=4)
+plot_exclusion_dataset(create_exclusion_dataset(paired_retest_df_by_trial_exclusions,minimum_trials=6),minimum_trials=6)
+plot_exclusion_dataset(create_exclusion_dataset(paired_retest_df_by_trial_exclusions,minimum_trials=8),minimum_trials=8)
 ```
 
 # General Discussion
