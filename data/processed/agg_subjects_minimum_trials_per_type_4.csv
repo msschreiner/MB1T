@@ -1,4 +1,4 @@
-Lab,Method,Subject,Subject_Unique,Language,Condition,Age,Session,total_trial_n,MeanLogLT,mean_lt,ConditionC,language_recoded,Native
+Lab,Method,Subject,Subject_Unique,Language,Condition,Age,Session,total_trial_n,mean_log_lt,mean_lt,ConditionC,language_recoded,Native
 babylab-potsdam,HPP,b7027,babylab-potsdam:b7027,German,ADS,251,1,14,2.0301167299780323,8.882714285714286,-0.5,German,FALSE
 babylab-potsdam,HPP,b7027,babylab-potsdam:b7027,German,ADS,260,2,13,1.6029670062444594,6.345,-0.5,German,FALSE
 babylab-potsdam,HPP,b7027,babylab-potsdam:b7027,German,IDS,251,1,14,1.7694492305930332,7.712285714285715,0.5,German,FALSE

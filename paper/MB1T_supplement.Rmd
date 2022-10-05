@@ -236,6 +236,8 @@ A forest plot of the effect sizes for each lab and method is shown in Figure 2.
 
 # S4. Alternative Dependent Variables
 
+To check the robustness of our results to our preregistered analysis plan, we also investigated whether we obtained similar results with other possible dependent measures: average log-transformed looking times and a proportion novelty preference measure. For each alternative dependent variable, we conducted the main analyses of test-retest reliability reported in the manuscript: the overall Pearson correlation, the test-retest linear mixed-effects model, and an inspection of applying stricter inclusion criteria for number of trials contributed.
+
 ## S4.1. Log-transformed looking times
 
 ## S4.2. Proportion novelty preference.
