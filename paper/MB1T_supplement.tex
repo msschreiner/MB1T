@@ -213,7 +213,9 @@ Below, we have compiled a list of notes on and deviations from the preregistered
 \item
   In assessing the reliability of IDS using a linear-mixed-effects model predicting IDS preference in session 2 from IDS preference in session 1, we also assessed the robustness of the results by fitting a second preregistered model with more complex random effects structure, including a by-lab random slope for IDS preference in session 1. This model is included in the main R markdown script and yields qualitatively equivalent results to the model reported in the manuscript that includes a by-lab random intercept only.
 \item
-  We report a series of secondary planned analyses in the Supplementary Materials exploring potential moderating variables of time between test sessions (S2.1), participant age (S2.2.), and the language background of the participants (S2.3.).
+  We report a series of secondary planned analyses in the Supplementary Materials exploring potential moderating variables of time between test sessions (S2.1), the language background of the participants (S2.2.), and participant age (S2.3.).
+\item
+  We did not fit all models (in particular, the models investigating interactions between moderators) described in the secondary analyses of the preregistration, because our final sample size was smaller than we anticipated, which made it less feasible to investigate more complex relationships between moderators.
 \end{itemize}
 
 \hypertarget{s2.-secondary-analyses-investigating-possible-moderating-variables}{%
@@ -222,13 +224,10 @@ Below, we have compiled a list of notes on and deviations from the preregistered
 \hypertarget{s2.1.-time-between-test-sessions}{%
 \subsection{S2.1. Time between test sessions}\label{s2.1.-time-between-test-sessions}}
 
-The number of days between the first and second testing session varied widely across participants (mean: 10 days; range: 1 - 49 days). We therefore tested for the possibility that the time between sessions might have an impact on the reliability. We fit a linear mixed-effects model predicting IDS preference in session 2 from IDS preference in session 1 (mean-centered), number of days between testing sessions (mean-centered), and their interaction, including a by-lab random intercept and random slope for IDS preference in test session 1 (more complex random effects structure including additional random slopes for number of days between test sessions and its interaction with IDS preference in session 1 did not converge). We found no evidence that number of days between test sessions moderated the relationship between IDS preference at test session 1 and 2. Neither the main effect of time between sessions, \(\beta\)=-0.01, \emph{SE}=0.03, \emph{p}=.684, nor the interaction term, \(\beta\)=-0.01, \emph{SE}=0.02, \emph{p}=.465, showed significant effects.
+The number of days between the first and second testing session varied widely across participants (mean: 10 days; range: 1 - 49 days). We therefore tested for the possibility that the time between sessions might have an impact on the reliability. We fit a linear mixed-effects model predicting IDS preference in session 2 from IDS preference in session 1 (mean-centered), number of days between testing sessions (mean-centered), and their interaction, including a by-lab random intercept and random slope for IDS preference in test session 1 (more complex random effects structure including additional random slopes for number of days between test sessions and its interaction with IDS preference in session 1 did not converge). We found no evidence that number of days between test sessions moderated the relationship between IDS preference at test session 1 and 2. Neither the main effect of time between sessions, \(\beta\)=-0.01, \emph{SE}=0.03, \emph{t}(148.70)=-0.41, \emph{p}=.684, nor the interaction term, \(\beta\)=-0.01, \emph{SE}=0.02, \emph{t}(149.10)=-0.73, \emph{p}=.465, showed significant effects.
 
-\hypertarget{s2.2.-participant-age}{%
-\subsection{S2.2. Participant age}\label{s2.2.-participant-age}}
-
-\hypertarget{s2.3.-language-background}{%
-\subsection{S2.3. Language Background}\label{s2.3.-language-background}}
+\hypertarget{s2.2.-language-background}{%
+\subsection{S2.2. Language Background}\label{s2.2.-language-background}}
 
 \begin{figure}
 \centering
@@ -236,7 +235,16 @@ The number of days between the first and second testing session varied widely ac
 \caption{\label{fig:fig1}Infants' preference in Session 1 and Session 2 with individual data points and regression lines color-coded by method (central fixation, eye-tracking, or HPP). Results are plotted separately for North American English-learning infants (right panel) and infants learning other languages and dialects (right panel).}
 \end{figure}
 
-NAE-learning infants showed greater IDS preferences than their non-NAE counterparts in MB1. We therefore also assessed if test-retest reliability interacted with children's language background. A linear mixed-effects model predicting IDS preference in Session 2 based on IDS preference in Session 1, NAE and their interaction, including Lab as a random intercept, revealed no interaction, \(\beta\)=0.29, \emph{SE}=0.18, \emph{p}=.115 (see Figure S1).
+NAE-learning infants showed greater IDS preferences than their non-NAE counterparts in MB1.
+We therefore also assessed if test-retest reliability interacted with children's language background.
+A linear mixed-effects model predicting IDS preference in Session 2 based on IDS preference in Session 1 (mean-centered), NAE (centered) and their interaction, including Lab as a random intercept, revealed no interaction, \(\beta\)=0.29, \emph{SE}=0.18, \emph{t}(151.30)=1.59, \emph{p}=.115 (Figure 1).
+
+\hypertarget{s2.3.-participant-age}{%
+\subsection{S2.3. Participant age}\label{s2.3.-participant-age}}
+
+To investigate the possibility that age moderated test-retest reliability, we fit a linear mixed-effects model predicting predicting IDS preference in Session 2 from on IDS preference in Session 1 (mean-centered), participant age (mean-centered) and their interaction.
+The model included a by-lab random intercept and a by-lab random slope for IDS preference in Session 1.
+We found no evidence that age influenced test-retest reliability as indicated by the interaction between IDS preference in Session 1 and age, \(\beta\)=0.00, \emph{SE}=0.00, \emph{t}(76.60)=-0.85, \emph{p}=.398.
 
 \hypertarget{s3.-meta-analysis-of-test-retest-reliability}{%
 \section{S3. Meta-analysis of test-retest reliability}\label{s3.-meta-analysis-of-test-retest-reliability}}
@@ -247,7 +255,11 @@ NAE-learning infants showed greater IDS preferences than their non-NAE counterpa
 \caption{\label{fig:fig2}Forest plot of test-retest reliability effect sizes. Each row represents Fisher's z transformed correlation coefficient and 95\% CI for a given lab and method (HPP = head-turn preference procedure; ET = eye-tracking; CF = central fixation). The black diamond represents the overall estimated effect size from the mixed-effects meta-analytic model.}
 \end{figure}
 
-We used the metafor package (Viechtbauer, 2010) to fit a mixed-effects meta-analytic model on z-transformed correlations using sample size weighting. The model included random intercepts for lab and method. The overall effect size estimate was not significantly different from zero, \emph{b} = -0.04, 95\% CI = {[}-0.26, 0.19{]}, \emph{p} = 0.73. A forest plot of the effect sizes for each lab and method is shown in Figure 2.
+In addition to the methods for assessing test-retest reliability reported in the main manuscript, we also investigated test-retest reliability across labs using a meta-analytic approach.
+We used the metafor package (Viechtbauer, 2010) to fit a mixed-effects meta-analytic model on z-transformed correlations for each combination of lab and method using sample size weighting.
+The model included random intercepts for lab and method.
+The overall effect size estimate was not significantly different from zero, \emph{b} = -0.04, 95\% CI = {[}-0.26, 0.19{]}, \emph{p} = 0.73.
+A forest plot of the effect sizes for each lab and method is shown in Figure 2.
 
 \hypertarget{s4.-alternative-dependent-variables}{%
 \section{S4. Alternative Dependent Variables}\label{s4.-alternative-dependent-variables}}
