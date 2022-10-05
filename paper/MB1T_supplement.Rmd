@@ -50,18 +50,18 @@ knitr::opts_chunk$set(cache.extra = knitr::rand_seed,echo = FALSE, warning = FAL
 ```
 
 \newpage
-## S1: Notes on and deviations from the preregistration
+# S1. Notes on and deviations from the preregistration
 
 Below, we have compiled a list of notes on and deviations from the preregistered methods and analyses [https://osf.io/v5f8t](https://osf.io/v5f8t).
 
 - All infants with usable data for both test and retest session were included in the analyses, regardless of the number of total of infants a lab was able to contribute after exclusion. This decision is consistent with past decisions in ManyBabies projects to be as inclusive about data inclusion as possible [@manybabies2020quantifying].
-- A small number of infants with a time between sessions above 31 days were also included in the analyses (n=2).
+- A small number of infants with a time between sessions above 31 days were also included in the analyses (*n* = 3).
 - Consistent with analytic decisions in ManyBabies 1 [@manybabies2020quantifying], total looking times were truncated at 18 seconds (the maximum trial time) in the small number of cases where recorded looking times were slightly greater than 18s (presumably due to small measurement error in recording infant looking times).
 - In assessing differences in IDS preference between test and retest sessions, we preregistered an additional linear mixed-effects model including a by-lab random slope for session. This model yielded qualitatively equivalent results (see R markdown analysis script for the main manuscript). However, the model resulted in a singular fit, suggesting that the model specification may be overly complex and that its estimates should be interpreted with caution. We therefore focused only on the first preregistered model (including only by-lab and by-participant random intercepts) in reporting the analyses in the main manuscript.
 - In assessing the reliability of IDS using a linear-mixed-effects model predicting IDS preference in session 2 from IDS preference in session 1, we also assessed the robustness of the results by fitting a second preregistered model with more complex random effects structure, including a by-lab random slope for IDS preference in session 1. This model is included in the main R markdown script and yields qualitatively equivalent results to the model reported in the manuscript that includes a by-lab random intercept only.
 - We report a series of secondary planned analyses in the Supplementary Materials exploring potential moderating variables of time between test sessions (S2.1), participant age (S2.2.), and the language background of the participants (S2.3.).
 
-## S2: Secondary analyses investigating possible moderating variables
+# S2. Secondary analyses investigating possible moderating variables
 
 ```{r}
 
@@ -88,7 +88,7 @@ all_agg_subjects_paired_retest <- read_csv(here(read_path,"all_agg_subjects_pair
   mutate(reversal_type=str_remove_all(reversal_type,pattern="_preference"))
 ```
 
-### S2.1. Time between test sessions
+## S2.1. Time between test sessions
 
 ```{r}
 #mean-center Diff_1 and age_between_sessions to make main effects interpretable
@@ -111,7 +111,7 @@ days_coefs<-summary(mod_lmer2)$coefficients
 
 The number of days between the first and second testing session varied widely across participants (mean: `r round(mean(all_agg_subjects_paired_retest$days_between_sessions),1)` days; range: `r min(all_agg_subjects_paired_retest$days_between_sessions)` - `r max(all_agg_subjects_paired_retest$days_between_sessions)` days). We therefore tested for the possibility that the time between sessions might have an impact on the reliability. We fit a linear mixed-effects model predicting IDS preference in session 2 from IDS preference in session 1 (mean-centered), number of days between testing sessions (mean-centered), and their interaction, including a by-lab random intercept and random slope for IDS preference in test session 1 (more complex random effects structure including additional random slopes for number of days between test sessions and its interaction with IDS preference in session 1 did not converge). We found no evidence that number of days between test sessions moderated the relationship between IDS preference at test session 1 and 2. Neither the main effect of time between sessions, $\beta$=`r round(days_coefs[3,1],3)`, *SE*=`r round(days_coefs[3,2],2)`, *p*=`r printp(days_coefs[3,5])`, nor the interaction term, $\beta$=`r round(days_coefs[4,1],3)`, *SE*=`r round(days_coefs[4,2],2)`, *p*=`r printp(days_coefs[4,5])`, showed significant effects.
 
-### S2.2. Participant age
+## S2.2. Participant age
 
 ```{r, results='hide', warning=FALSE, message=FALSE}
 # Age model
@@ -169,7 +169,7 @@ age <- ggplot(d, aes(y=Diff, x=Age))+
   geom_hline(yintercept=0)
 ```
 
-### S2.3. Language Background
+## S2.3. Language Background
 
 ```{r}
 # Differences in test-retest reliability between English and non-English learning infants
@@ -211,9 +211,9 @@ ggplot(all_agg_subjects_paired_retest, aes(x = Diff_1, y = Diff_2, col = Method)
 
 ```
 
-NAE-learning infants showed greater IDS preferences than their non-NAE counterparts in MB1. We therefore also assessed if test-retest reliability interacted with children’s language background. A multilevel analysis with Lab as random intercept, predicting the IDS preference in Session 2 based on the IDS preference in Session 1, NAE and the interaction of these two variables, revealed no interaction, $\beta$=`r round(nae_coefs[4,1],3)`, *SE*=`r round(nae_coefs[4,2],2)`, *p*=`r printp(nae_coefs[4,5])` (see Figure S1).
+NAE-learning infants showed greater IDS preferences than their non-NAE counterparts in MB1. We therefore also assessed if test-retest reliability interacted with children’s language background. A linear mixed-effects model predicting IDS preference in Session 2 based on IDS preference in Session 1, NAE and their interaction, including Lab as a random intercept, revealed no interaction, $\beta$=`r round(nae_coefs[4,1],2)`, *SE*=`r round(nae_coefs[4,2],2)`, *p*=`r printp(nae_coefs[4,5])` (see Figure S1).
 
-## S3: Meta-analysis of test-retest reliability
+# S3. Meta-analysis of test-retest reliability
 
 ```{r}
 #compute correlation
@@ -253,15 +253,14 @@ forest(meta_model,header="Lab and Method")
 
 We used the metafor package [@R-metafor] to fit a mixed-effects meta-analytic model on z-transformed correlations using sample size weighting. The model included random intercepts for lab and method. The overall effect size estimate was not significantly different from zero, *b* = `r round(meta_model$beta[1],2)`, 95% CI = [`r round(meta_model$ci.lb,2)`, `r round(meta_model$ci.ub,2)`], *p* = `r round(meta_model$pval,2)`. A forest plot of the effect sizes for each lab and method is shown in Figure 2.
 
+# S4. Alternative Dependent Variables
 
-## S4: Alternative Dependent Variables
+## S4.1. Log-transformed looking times
 
-### S4.1. Log-transformed looking times
-
-### S4.2. Proportion novelty preference.
+## S4.2. Proportion novelty preference.
 
 
-## S5: Patterns of preference across sessions
+# S5. Patterns of preference across sessions
 ```{r,message=FALSE,warning=FALSE}
 
 #overall percent reversals
@@ -345,7 +344,7 @@ plot_grid(p1,p2,labels=c("A","B"),rel_widths=c(1.5,1))
 ```
 
 
-## S6: Relationship between the number of trials infants contribute in each session
+# S6. Relationship between number of contributed trials in each session
 
 ```{r}
 # importing dataset (after excluding session and trial errors)
@@ -404,9 +403,9 @@ This result suggests that if infants contribute a higher number of trials in one
 This finding is consistent with the hypothesis that how attentive infants are throughout an experiment (and hence how many trials they contribute) is a stable individual difference, at least for some infant looking time tasks.
 Researchers should therefore be mindful of the fact that decisions about including or excluding infants based on trials contributed may selectively sample a specific sub-set of the infant population they are studying [@debolt2020robust;@byers2021six].
 
-## S7: Correlations in average looking times between sessions
+# S7. Correlations in average looking times between sessions
 
-### S7.1: Relations between overall looking time in session 1 and 2.
+## S7.1. Relations between overall looking time in session 1 and 2.
 
 There is a strong relationship between average overall looking in the first test session and the second test session, even after controlling for number of trials in the first and second session.
 
@@ -436,7 +435,7 @@ apa_table(
 ```
 
 
-### S7.2: Relations in overall looking time to IDS and ADS stimuli.
+## S7.2. Relations in overall looking time to IDS and ADS stimuli.
 
 ```{r}
 agg_by_subj_condition_paired <- data_clean %>%
@@ -489,7 +488,7 @@ summary(m)
 ```
 
 
-### S7.3: Relations for specific ADS and IDS stimuli between the first and second session.
+## S7.3. Relations for specific ADS and IDS stimuli between the first and second session.
 
 ```{r}
 agg_by_subj_item_paired <- data_clean %>%
@@ -518,7 +517,7 @@ apa_table(
 )
 ```
 
-## S8: By-item-pair preference scores across sessions
+# S8. By-item-pair preference scores across sessions
 
 ```{r}
 agg_by_subj_item_paired_pref <- data_clean  %>%
@@ -563,7 +562,7 @@ apa_table(
 
 \newpage
 
-## References
+# References
 ```{r create_r-references}
 r_refs(file = "r-references.bib")
 ```
