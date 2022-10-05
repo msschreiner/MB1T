@@ -82,7 +82,7 @@ abstract: |
   
   
 keywords          : "language acquisition; speech perception; infant-directed speech; adult-directed speech; test-retest reliability"
-wordcount         : "3979"
+wordcount         : "3977"
 
 bibliography      : ["r-references.bib"]
 
@@ -708,7 +708,7 @@ papaja::apa_table(coef_table,
 To investigate the test-retest reliability of each specific method, we computed Pearson correlation coefficients and the same mixed-effects model described above for HPP, central fixation and eye-tracking separately (Table 4). 
 None of the three methods showed evidence of test-retest reliability. 
 Neither the Pearson correlation coefficients nor the coefficients of the multilevel analysis were significant, all *p*s > `r floor(min(coef_table$pvalue)*100)*0.01`.
-In planned secondary analyses, we found that method, participant age, language background, and time between test sessions did not moderate the relationship between IDS preference in session 1 and session 2 (see Suppmentary Materials, S2).
+In planned secondary analyses, we found that time between test sessions, participant age, and language background did not moderate the relationship between IDS preference in session 1 and session 2 (Supplementary Materials, S2).
 Taken together, we find no significant evidence of test-retest reliability across our preregistered analyses.
 
 ## Results with different inclusion criteria
