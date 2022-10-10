@@ -483,7 +483,8 @@ p1 <-
   xlab("IDS preference (log-based) in first session")+
   ylab("IDS preference (log-based) in second session")+
   scale_color_brewer(name ="cluster", palette="Set1")+
-  theme_cowplot()
+  theme_cowplot()+
+  theme(axis.text=element_text(size=11),axis.title=element_text(size=11))
 
 p2 <- ggplot(clusterings, aes(k, tot.withinss)) +
   geom_line() +
@@ -551,16 +552,12 @@ Do infants who contribute a higher number of trials during their first testing s
 A positive correlation between trial numbers during the first and second session would indicate that their is some stability in a given infants' likelihood of remaining attentive throughout the experiment.
 On the other hand, the absence of a correlation would indicate that the number of trials a given infant contributes is not predictive of how many trials they might contribute during their next session.
 
-We found a strong positive correlation between number of trials contributed during the first and the second session `r cor_trials_out$full_result` (see Figure 1). 
+We found a strong positive correlation between number of trials contributed during the first and the second session `r cor_trials_out$full_result` (Figure 7). 
 This result suggests that if infants contribute a higher number of trials in one session, compared to other infants, they are likely to contribute a higher number of trials in their next session.
 This finding is consistent with the hypothesis that how attentive infants are throughout an experiment (and hence how many trials they contribute) is a stable individual difference, at least for some infant looking time tasks.
 Researchers should therefore be mindful of the fact that decisions about including or excluding infants based on trials contributed may selectively sample a specific sub-set of the infant population they are studying [@debolt2020robust;@byers2021six].
 
 # S8. Correlations in average looking times between sessions
-
-## S8.1. Relations between overall looking time in session 1 and 2.
-
-There is a strong relationship between average overall looking in the first test session and the second test session, even after controlling for number of trials in the first and second session.
 
 ```{r}
 agg_by_subj_paired <- data_clean %>%
@@ -570,7 +567,7 @@ agg_by_subj_paired <- data_clean %>%
             N=n()) %>%
   pivot_wider(names_from = Session, values_from = c(mean_lt,N))
 
-ggplot(agg_by_subj_paired,aes(mean_lt_1,mean_lt_2))+
+corr_lt_p1 <- ggplot(agg_by_subj_paired,aes(mean_lt_1,mean_lt_2))+
   geom_point()+
   geom_smooth(method="lm",color="black")+
   theme_cowplot()+
@@ -578,17 +575,18 @@ ggplot(agg_by_subj_paired,aes(mean_lt_1,mean_lt_2))+
   xlab("Average Looking Time (ms) in first session")+
   ylab("Average Looking Time (ms) in second session")
 
+correlation_avg_looking <- cor.test(agg_by_subj_paired$mean_lt_1,agg_by_subj_paired$mean_lt_2)
+
+#similar results when controlling for trial number
 m <- lm(mean_lt_2~mean_lt_1+N_1+N_2,data=agg_by_subj_paired)
-apa_lm <- apa_print(m)
-apa_table(
-  apa_lm$table
-  , caption = "Average Looking during session 1 predicted from average looking at session 2, controlling for trial number for each session."
-)
-#vif(m) #no evidence of variance inflation
+results_control_model <- summary(m)
+#car::vif(m) #no really worrying variance inflation here
 ```
 
-
-## S8.2. Relations in overall looking time to IDS and ADS stimuli.
+To what extent are participants looking times between the two sessions related?
+To test this question, we first investigated whether participants' overall looking times --- irrespective of condition --- were correlated between the first and second session.
+There was a robust correlation between average looking time in Session 1 and Session 2: infants with longer looking times during their first session also tended to look longer during their second session, `r apa_print(correlation_avg_looking)$full_result`.
+This relationship held even after controlling for number of trials in the first and second session, suggesting that the relationship in between average looking could not be entirely explained by correlation between number of trials contributed between the two sessions (S7), `r apa_print(m)$full_result[["mean_lt_1"]]` (Figure 8A).
 
 ```{r}
 agg_by_subj_condition_paired <- data_clean %>%
@@ -598,7 +596,7 @@ agg_by_subj_condition_paired <- data_clean %>%
   pivot_wider(names_from = Session, values_from = mean_lt) %>%
   rename(LT_Test = `1`,LT_Retest=`2`)
 
-ggplot(agg_by_subj_condition_paired,aes(LT_Test,LT_Retest,color=Condition))+
+corr_lt_p2 <- ggplot(agg_by_subj_condition_paired,aes(LT_Test,LT_Retest,color=Condition))+
   geom_point()+
   geom_smooth(method="lm",color="black")+
   facet_wrap(~Condition)+
@@ -610,38 +608,21 @@ ggplot(agg_by_subj_condition_paired,aes(LT_Test,LT_Retest,color=Condition))+
 agg_by_subj_condition_paired_wide <- agg_by_subj_condition_paired %>%
   pivot_wider(names_from = Condition,values_from = c(LT_Test,LT_Retest))
 
-m <- lm(LT_Retest_IDS ~ LT_Test_IDS + LT_Test_ADS,data=agg_by_subj_condition_paired_wide)
-summary(m)
-m <- lm(LT_Retest_ADS ~ LT_Test_IDS + LT_Test_ADS,data=agg_by_subj_condition_paired_wide)
-summary(m)
+#condition-specific correlations
+correlation_IDS_LT <- cor.test(agg_by_subj_condition_paired_wide$LT_Retest_IDS,agg_by_subj_condition_paired_wide$LT_Test_IDS)
+correlation_ADS_LT <- cor.test(agg_by_subj_condition_paired_wide$LT_Retest_ADS,agg_by_subj_condition_paired_wide$LT_Test_ADS)
+
+#predicting condition-specific session 2 looking from session 1 looking to IDS and ADS
+predicting_Retest_IDS <- lm(LT_Retest_IDS ~ LT_Test_IDS + LT_Test_ADS,data=agg_by_subj_condition_paired_wide)
+predicting_Retest_ADS <- lm(LT_Retest_ADS ~ LT_Test_IDS + LT_Test_ADS,data=agg_by_subj_condition_paired_wide)
 ```
 
-```{r}
-# agg_by_subj_condition_paired_session_1 <- agg_by_subj_condition_paired %>%
-#   select(-LT_Retest)
-# 
-# agg_by_subj_condition_paired_session_2_rev_condition <- agg_by_subj_condition_paired %>%
-#   select(-LT_Test) %>%
-#   rename(Condition_old=Condition) %>%
-#   mutate(Condition = case_when(
-#     Condition_old=="IDS" ~ "ADS",
-#     Condition_old=="ADS" ~ "IDS"
-#   ))
-# agg_by_subj_condition_paired_cond_sess2_flipped <- agg_by_subj_condition_paired_session_1 %>%
-#   left_join(agg_by_subj_condition_paired_session_2_rev_condition)
-# 
-# ggplot(agg_by_subj_condition_paired_cond_sess2_flipped,aes(LT_Test,LT_Retest,color=Condition))+
-#   geom_point()+
-#   geom_smooth(method="lm",color="black")+
-#   facet_wrap(~Condition)+
-#   theme_cowplot()+
-#   theme(legend.position="none")+
-#   xlab("Average Looking Time (in ms) in first session")+
-#   ylab("Average Looking Time (in ms) in second session")
-```
-
-
-## S8.3. Relations for specific ADS and IDS stimuli between the first and second session.
+Next, we explored the extent to which average looking times for IDS and ADS stimuli specifically were related.
+First, we found similar correlations in average looking time to IDS stimuli in Session 1 and 2 (`r apa_print(correlation_IDS_LT)$full_result`; Figure 8B) and ADS stimuli in Session 1 and 2 (`r apa_print(correlation_ADS_LT)$full_result`).
+To test whether these correlations were specific to looking times for IDS or ADS stimuli alone, we fit linear regression models predicting average looking to IDS (or ADS) stimuli in Session 2 from average looking to IDS and ADS stimuli in Session 1.
+We found that average looking to IDS stimuli in Session 2 could be predicted from average looking to IDS stimuli in Session 1, even after controlling for average looking to ADS stimuli in Session 1, `r apa_print(predicting_Retest_IDS)$full_result[["LT_Test_IDS"]]`.
+Conversely, average looking to ADS stimuli in Session 2 could be predicted from average looking to ADS stimuli in Session 1, even after controlling for average looking to IDS stimuli in Session 1, `r apa_print(predicting_Retest_ADS)$full_result[["LT_Test_ADS"]]`.
+These results suggest that the condition-specific correlations in average looking time cannot be fully explained by the fact that infants' overall looking times between sessions are correlated.
 
 ```{r}
 agg_by_subj_item_paired <- data_clean %>%
@@ -653,7 +634,7 @@ agg_by_subj_item_paired <- data_clean %>%
   pivot_wider(names_from = Session, values_from = LT) %>%
   rename(LT_Test = `1`,LT_Retest=`2`)
 
-ggplot(agg_by_subj_item_paired,aes(LT_Test,LT_Retest,color=Condition))+
+corr_lt_p3 <- ggplot(agg_by_subj_item_paired,aes(LT_Test,LT_Retest,color=Condition))+
   geom_point()+
   geom_smooth(method="lm",color="black")+
   facet_wrap(~stimulus)+
@@ -662,12 +643,19 @@ ggplot(agg_by_subj_item_paired,aes(LT_Test,LT_Retest,color=Condition))+
   xlab("Looking Time (in ms) in first session")+
   ylab("Looking Time (in ms) in second session")
 
-m <- lmer(LT_Retest~LT_Test+(1+LT_Test|Subject_Unique)+(1+LT_Test|stimulus)+(1|Lab),data=agg_by_subj_item_paired)
-apa_lm <- apa_print(m)
-apa_table(
-  apa_lm$table
-  , caption = "Mixed-effects model results predicting looking time during session 1 from looking time at session 2 at the stimulus level."
-)
+item_lt_relationship <- lmer(LT_Retest~LT_Test+(1+LT_Test|Subject_Unique)+(1|stimulus)+(1+LT_Test|Lab),data=agg_by_subj_item_paired, control=lmerControl(optimizer="bobyqa"))
+#model including a by-stimulus slope for LT_Test has a singular fit but yields similar results
+```
+
+Finally, we inspected item-level correlations between the two test sessions.
+Specifically, we investigated the relation between items composed of the same recording clips in Session 1 and Session 2 (but with a reversed order of clips between the two sessions).
+We fit a linear mixed-effects model predicting item-level looking time in Session 2 from item-level looking time in Session 1, including random intercepts for participant, item, and lab, as well as an  random slope for item-level looking time in Session 1 for participant and lab.
+Item-level looking in Session 2 was related to item-level looking in Session 1, `r apa_print(item_lt_relationship)$full_result[["LT_Test"]]` (Figure 8C).
+Similar results hold if looking times are log-transformed
+
+```{r fig.cap="Correlations in average looking time (in ms) between Session 1 and 2 (A) overall, (B) by condition, and (C) by item.", fig.align="center",fig.height = 16, fig.width = 12}
+top_row <- plot_grid(corr_lt_p1,corr_lt_p2, labels=c("A","B"),ncol=2)
+plot_grid(top_row,corr_lt_p3,labels=c("","C"),nrow=2,rel_heights=c(1,2))
 ```
 
 # S9. By-item-pair preference scores across sessions
