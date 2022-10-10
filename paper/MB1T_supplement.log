@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.10.9)  9 OCT 2022 20:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.10.9)  10 OCT 2022 03:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -676,31 +676,31 @@ File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 <MB1T_supplement_files/figure-latex/fig1-1.pdf, id=104, 463.7325pt x 305.14pt>
 File: MB1T_supplement_files/figure-latex/fig1-1.pdf Graphic file (type pdf)
 <use MB1T_supplement_files/figure-latex/fig1-1.pdf>
-Package pdftex.def Info: MB1T_supplement_files/figure-latex/fig1-1.pdf  used on input line 236.
+Package pdftex.def Info: MB1T_supplement_files/figure-latex/fig1-1.pdf  used on input line 238.
 (pdftex.def)             Requested size: 463.73842pt x 305.14389pt.
 [5] [6 <./MB1T_supplement_files/figure-latex/fig1-1.pdf>]
 <MB1T_supplement_files/figure-latex/fig2-1.pdf, id=126, 439.6425pt x 242.9075pt>
 File: MB1T_supplement_files/figure-latex/fig2-1.pdf Graphic file (type pdf)
 <use MB1T_supplement_files/figure-latex/fig2-1.pdf>
-Package pdftex.def Info: MB1T_supplement_files/figure-latex/fig2-1.pdf  used on input line 258.
+Package pdftex.def Info: MB1T_supplement_files/figure-latex/fig2-1.pdf  used on input line 260.
 (pdftex.def)             Requested size: 439.64142pt x 242.90689pt.
 [7 <./MB1T_supplement_files/figure-latex/fig2-1.pdf>]
 <MB1T_supplement_files/figure-latex/unnamed-chunk-8-1.pdf, id=142, 551.05875pt x 546.04pt>
 File: MB1T_supplement_files/figure-latex/unnamed-chunk-8-1.pdf Graphic file (type pdf)
 <use MB1T_supplement_files/figure-latex/unnamed-chunk-8-1.pdf>
-Package pdftex.def Info: MB1T_supplement_files/figure-latex/unnamed-chunk-8-1.pdf  used on input line 301.
+Package pdftex.def Info: MB1T_supplement_files/figure-latex/unnamed-chunk-8-1.pdf  used on input line 303.
 (pdftex.def)             Requested size: 361.36234pt x 358.07124pt.
 [8] [9 <./MB1T_supplement_files/figure-latex/unnamed-chunk-8-1.pdf>]
 <MB1T_supplement_files/figure-latex/unnamed-chunk-10-1.pdf, id=168, 551.05875pt x 546.04pt>
 File: MB1T_supplement_files/figure-latex/unnamed-chunk-10-1.pdf Graphic file (type pdf)
 <use MB1T_supplement_files/figure-latex/unnamed-chunk-10-1.pdf>
-Package pdftex.def Info: MB1T_supplement_files/figure-latex/unnamed-chunk-10-1.pdf  used on input line 325.
+Package pdftex.def Info: MB1T_supplement_files/figure-latex/unnamed-chunk-10-1.pdf  used on input line 327.
 (pdftex.def)             Requested size: 361.36234pt x 358.07124pt.
 [10 <./MB1T_supplement_files/figure-latex/unnamed-chunk-10-1.pdf>]
 <MB1T_supplement_files/figure-latex/sfig5-1.pdf, id=182, 457.71pt x 312.16624pt>
 File: MB1T_supplement_files/figure-latex/sfig5-1.pdf Graphic file (type pdf)
 <use MB1T_supplement_files/figure-latex/sfig5-1.pdf>
-Package pdftex.def Info: MB1T_supplement_files/figure-latex/sfig5-1.pdf  used on input line 365.
+Package pdftex.def Info: MB1T_supplement_files/figure-latex/sfig5-1.pdf  used on input line 367.
 (pdftex.def)             Requested size: 457.71587pt x 312.17024pt.
 [11]
 Underfull \vbox (badness 1776) has occurred while \output is active []
@@ -709,13 +709,13 @@ Underfull \vbox (badness 1776) has occurred while \output is active []
 <MB1T_supplement_files/figure-latex/fig6-1.pdf, id=203, 460.72125pt x 315.1775pt>
 File: MB1T_supplement_files/figure-latex/fig6-1.pdf Graphic file (type pdf)
 <use MB1T_supplement_files/figure-latex/fig6-1.pdf>
-Package pdftex.def Info: MB1T_supplement_files/figure-latex/fig6-1.pdf  used on input line 388.
+Package pdftex.def Info: MB1T_supplement_files/figure-latex/fig6-1.pdf  used on input line 389.
 (pdftex.def)             Requested size: 460.72012pt x 315.17673pt.
 [13] [14 <./MB1T_supplement_files/figure-latex/fig6-1.pdf>]
 <MB1T_supplement_files/figure-latex/sfig7-1.pdf, id=226, 457.71pt x 312.16624pt>
 File: MB1T_supplement_files/figure-latex/sfig7-1.pdf Graphic file (type pdf)
 <use MB1T_supplement_files/figure-latex/sfig7-1.pdf>
-Package pdftex.def Info: MB1T_supplement_files/figure-latex/sfig7-1.pdf  used on input line 399.
+Package pdftex.def Info: MB1T_supplement_files/figure-latex/sfig7-1.pdf  used on input line 400.
 (pdftex.def)             Requested size: 457.71587pt x 312.17024pt.
 [15 <./MB1T_supplement_files/figure-latex/sfig7-1.pdf>] [16]
 Underfull \vbox (badness 1838) has occurred while \output is active []
@@ -724,25 +724,25 @@ Underfull \vbox (badness 1838) has occurred while \output is active []
 <MB1T_supplement_files/figure-latex/sfig8-1.pdf, id=254, 856.19875pt x 1145.27875pt>
 File: MB1T_supplement_files/figure-latex/sfig8-1.pdf Graphic file (type pdf)
 <use MB1T_supplement_files/figure-latex/sfig8-1.pdf>
-Package pdftex.def Info: MB1T_supplement_files/figure-latex/sfig8-1.pdf  used on input line 439.
+Package pdftex.def Info: MB1T_supplement_files/figure-latex/sfig8-1.pdf  used on input line 440.
 (pdftex.def)             Requested size: 469.74802pt x 628.34995pt.
 
-LaTeX Warning: Float too large for page by 35.91489pt on input line 444.
+LaTeX Warning: Float too large for page by 35.91489pt on input line 445.
 
 [18] [19 <./MB1T_supplement_files/figure-latex/sfig8-1.pdf>] [20] AED endfloat: Processing end Figures and Tables [21] (./MB1T_supplement.aux)
 Package rerunfilecheck Info: File `MB1T_supplement.out' has not changed.
-(rerunfilecheck)             Checksum: B02104C9C7572602D11BA2A543DA37DD;4172.
+(rerunfilecheck)             Checksum: 410B92CC63CB97590580DFB5B6110C76;4152.
  ) 
 Here is how much of TeX's memory you used:
  16158 strings out of 477031
- 269381 string characters out of 5826551
- 626010 words of memory out of 5000000
+ 269373 string characters out of 5826551
+ 626006 words of memory out of 5000000
  36931 multiletter control sequences out of 15000+600000
  522521 words of font info for 66 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 72i,13n,77p,1155b,593s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,13n,77p,753b,593s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}</Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb></Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-Output written on MB1T_supplement.pdf (21 pages, 470682 bytes).
+Output written on MB1T_supplement.pdf (21 pages, 470319 bytes).
 PDF statistics:
  351 PDF objects out of 1000 (max. 8388607)
  286 compressed objects within 3 object streams
