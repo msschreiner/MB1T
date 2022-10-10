@@ -653,7 +653,7 @@ We fit a linear mixed-effects model predicting item-level looking time in Sessio
 Item-level looking in Session 2 was related to item-level looking in Session 1, `r apa_print(item_lt_relationship)$full_result[["LT_Test"]]` (Figure 8C).
 Similar results hold if looking times are log-transformed
 
-```{r fig.cap="Correlations in average looking time (in ms) between Session 1 and 2 (A) overall, (B) by condition, and (C) by item.", fig.align="center",fig.height = 16, fig.width = 12}
+```{r  sfig8, fig.cap="Correlations in average looking time (in ms) between Session 1 and 2 (A) overall, (B) by condition, and (C) by item.", fig.align="center",fig.height = 16, fig.width = 12}
 top_row <- plot_grid(corr_lt_p1,corr_lt_p2, labels=c("A","B"),ncol=2)
 plot_grid(top_row,corr_lt_p3,labels=c("","C"),nrow=2,rel_heights=c(1,2))
 ```
@@ -661,6 +661,9 @@ plot_grid(top_row,corr_lt_p3,labels=c("","C"),nrow=2,rel_heights=c(1,2))
 # S9. By-item-pair preference scores across sessions
 
 ```{r}
+#organizing by stimulus number
+#computes stimulus-level preference scores by pairing IDS1-ADS1, IDS2-ADS2, etc.
+#these two trials always occurred consecutively across all lists and sessions
 agg_by_subj_item_paired_pref <- data_clean  %>%
   select(Subject,Subject_Unique,Gender,Method, preterm,Session, Condition, stimulus, LT,Lab) %>% 
   mutate(stimulus = str_remove(stimulus,"Retest")) %>%
@@ -674,16 +677,8 @@ agg_by_subj_item_paired_pref <- data_clean  %>%
            Prop = IDS / (IDS + ADS)) %>%
   pivot_wider(names_from = Session, values_from =c(IDS,ADS,Diff,Prop))
 
-# ggplot(agg_by_subj_item_paired_pref ,aes(Prop_1,Prop_2))+
-#   geom_point()+
-#   geom_smooth(method="lm",color="black")+
-#   facet_wrap(~stimulus_num,ncol=4)+
-#   theme_cowplot()+
-#   theme(legend.position="none")+
-#   xlab("IDS preference in first session")+
-#   ylab("IDS preference in second session")
-
-ggplot(agg_by_subj_item_paired_pref ,aes(Diff_1,Diff_2))+
+#not plotted
+fig8 <- ggplot(agg_by_subj_item_paired_pref ,aes(Diff_1,Diff_2))+
   geom_point()+
   geom_smooth(method="lm",color="black")+
   facet_wrap(~stimulus_num,ncol=4)+
@@ -692,14 +687,21 @@ ggplot(agg_by_subj_item_paired_pref ,aes(Diff_1,Diff_2))+
   xlab("IDS difference score in first session")+
   ylab("IDS difference score in second session")
 
-m <- lmer(Diff_2~Diff_1+(1+Diff_1|Subject_Unique)+(1+Diff_1|stimulus_num)+(1+Diff_1|Lab),data=agg_by_subj_item_paired_pref)
-apa_lm <- apa_print(m)
+#fit mixed-effects model predicting IDS preference in Session 2 from IDS preference in Session 1
+#models including more complex random effects structure (slopes for IDS preference in Session 1 and by-item random effects) led to non-convergence
+item_pref <- lmer(Diff_2~Diff_1+(1|Subject_Unique)+(1|Lab),data=agg_by_subj_item_paired_pref, control=lmerControl(optimizer="bobyqa"))
+apa_lm_item_pref <- apa_print(item_pref)
 apa_table(
-  apa_lm$table
+  apa_lm_item_pref$table
   , caption = "Mixed-effects model results predicting IDS preference during session 1 from IDS preference at session 2 at the stimulus level."
 )
 ```
 
+Finally, we inspected on a more fine-grained item-level whether IDS preference in Session 1 was related to IDS preference in Session 2.
+To do so, we exploited the fact the specific IDS and ADS stimuli were paired together in test orders in both sessions, such that one IDS stimulus (e.g., IDS1) always occurred adjacently to a specific ADS stimulus (e.g., ADS1).
+We therefore computed stimulus-specific IDS preference scores by calculating the difference in raw looking time for each of the eight IDS-ADS stimulus pairs for each participant (when both trials in a given pair were available).
+We then fit a linear mixed-effects model predicting stimulus-specific IDS preference in Session 2 from stimulus-specific IDS preference in Session 1, including by-participant and by-lab random intercepts (models with more complex random effects structure, including by-item random effects, failed to converge).
+There was a marginal, but non-significant relation in stimulus-specific IDS preference between the two test sessions (Table 3).
 
 \newpage
 

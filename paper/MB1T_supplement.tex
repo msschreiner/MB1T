@@ -430,31 +430,29 @@ Similar results hold if looking times are log-transformed
 
 \begin{figure}
 
-{\centering \includegraphics{MB1T_supplement_files/figure-latex/unnamed-chunk-19-1} 
+{\centering \includegraphics{MB1T_supplement_files/figure-latex/sfig8-1} 
 
 }
 
-\caption{Correlations in average looking time (in ms) between Session 1 and 2 (A) overall, (B) by condition, and (C) by item.}\label{fig:unnamed-chunk-19}
+\caption{Correlations in average looking time (in ms) between Session 1 and 2 (A) overall, (B) by condition, and (C) by item.}\label{fig:sfig8}
 \end{figure}
 
 \hypertarget{s9.-by-item-pair-preference-scores-across-sessions}{%
 \section{S9. By-item-pair preference scores across sessions}\label{s9.-by-item-pair-preference-scores-across-sessions}}
-
-\includegraphics{MB1T_supplement_files/figure-latex/unnamed-chunk-20-1.pdf}
 
 \begin{table}[tbp]
 
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:unnamed-chunk-20}Mixed-effects model results predicting IDS preference during session 1 from IDS preference at session 2 at the stimulus level.}
+\caption{\label{tab:unnamed-chunk-19}Mixed-effects model results predicting IDS preference during session 1 from IDS preference at session 2 at the stimulus level.}
 
 \begin{tabular}{llllll}
 \toprule
 Term & \multicolumn{1}{c}{$\hat{\beta}$} & \multicolumn{1}{c}{95\% CI} & \multicolumn{1}{c}{$t$} & \multicolumn{1}{c}{$\mathit{df}$} & \multicolumn{1}{c}{$p$}\\
 \midrule
-Intercept & 0.87 & {}[0.45, 1.30] & 4.04 & 122.79 & < .001\\
-Diff 1 & 0.10 & {}[-0.02, 0.22] & 1.63 & 6.31 & .151\\
+Intercept & 1.02 & {}[0.14, 1.90] & 2.27 & 6.55 & .060\\
+Diff 1 & 0.07 & {}[-0.01, 0.14] & 1.79 & 718.46 & .074\\
 \bottomrule
 \end{tabular}
 
@@ -462,6 +460,12 @@ Diff 1 & 0.10 & {}[-0.02, 0.22] & 1.63 & 6.31 & .151\\
 \end{center}
 
 \end{table}
+
+Finally, we inspected on a more fine-grained item-level whether IDS preference in Session 1 was related to IDS preference in Session 2.
+To do so, we exploited the fact the specific IDS and ADS stimuli were paired together in test orders in both sessions, such that one IDS stimulus (e.g., IDS1) always occurred adjacently to a specific ADS stimulus (e.g., ADS1).
+We therefore computed stimulus-specific IDS preference scores by calculating the difference in raw looking time for each of the eight IDS-ADS stimulus pairs for each participant (when both trials in a given pair were available).
+We then fit a linear mixed-effects model predicting stimulus-specific IDS preference in Session 2 from stimulus-specific IDS preference in Session 1, including by-participant and by-lab random intercepts (models with more complex random effects structure, including by-item random effects, failed to converge).
+There was a marginal, but non-significant relation in stimulus-specific IDS preference between the two test sessions (Table 3).
 
 \newpage
 
