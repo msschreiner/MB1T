@@ -1,5 +1,7 @@
 # MB1T
 
+A cross-lab, cognitive development collaboration investigating the test-retest reliability of infant-directed speech preference
+
 ## ManyBabies1 test-retest analysis code
 
 Analyzing MB1T data involves two steps:
