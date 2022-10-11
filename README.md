@@ -1,8 +1,8 @@
 # MB1T
 
-A cross-lab, cognitive development collaboration investigating the test-retest reliability of infant-directed speech preference
+A cross-lab, developmental collaboration investigating the test-retest reliability of infant-directed speech preference
 
-More information here:
+More information can be found at the project website:
 https://manybabies.github.io/MB1T/
 
 ## ManyBabies1 test-retest analysis code
