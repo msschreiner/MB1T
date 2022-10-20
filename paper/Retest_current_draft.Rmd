@@ -37,7 +37,7 @@ author:
   - name          : "Martin	Zettersten"
     affiliation   : "9,14"
   - name          : "Matthias	Lippold"
-    affiliation   : "1"
+    affiliation   : "1,2"
 
 affiliation:
   - id            : "1"
@@ -78,7 +78,7 @@ authornote: |
 
 
 abstract: |
- Test-retest reliability --- establishing that measurements remain consistent across multiple testing sessions --- is critical to measuring, understanding, and predicting individual differences in infant language development. However, previous attempts to establish measurement reliability in infant speech perception tasks are limited, and reliability of frequently-used infant measures is largely unknown. The current study investigated the test-retest reliability of infants' preference for infant-directed speech (hereafter, IDS) over adult-directed speech (hereafter, ADS) in a large sample (N=158) in the context of the ManyBabies1 collaborative research project (hereafter, MB1; Frank et al., 2017; ManyBabies Consortium, 2020). Labs of the original MB1 study were asked to bring in participating infants for a second appointment retesting infants on their IDS preference. This approach allows us to estimate test-retest reliability across three different methods used to investigate preferential listening in infancy: the head-turn preference procedure, central fixation, and eye-tracking. Overall, we find no consistent evidence of test-retest reliability in measures of infants' speech preference (overall *r* = .09, 95% CI [-.06,.25]). While increasing the number of trials that infants needed to contribute for inclusion in the analysis revealed a numeric growth in test-retest reliability, it also considerably reduced the study's effective sample size.  Therefore, future research on infant development should take into account that not all experimental measures may be appropriate for assessing individual differences between infants.
+ Test-retest reliability --- establishing that measurements remain consistent across multiple testing sessions --- is critical to measuring, understanding, and predicting individual differences in infant language development. However, previous attempts to establish measurement reliability in infant speech perception tasks are limited, and reliability of frequently-used infant measures is largely unknown. The current study investigated the test-retest reliability of infants' preference for infant-directed speech (hereafter, IDS) over adult-directed speech (hereafter, ADS) in a large sample (*N*=158) in the context of the ManyBabies1 collaborative research project (hereafter, MB1; Frank et al., 2017; ManyBabies Consortium, 2020). Labs of the original MB1 study were asked to bring in participating infants for a second appointment retesting infants on their IDS preference. This approach allows us to estimate test-retest reliability across three different methods used to investigate preferential listening in infancy: the head-turn preference procedure, central fixation, and eye-tracking. Overall, we find no consistent evidence of test-retest reliability in measures of infants' speech preference (overall *r* = .09, 95% CI [-.06,.25]). While increasing the number of trials that infants needed to contribute for inclusion in the analysis revealed a numeric growth in test-retest reliability, it also considerably reduced the study's effective sample size.  Therefore, future research on infant development should take into account that not all experimental measures may be appropriate for assessing individual differences between infants.
   
   
 keywords          : "language acquisition; speech perception; infant-directed speech; adult-directed speech; test-retest reliability"
@@ -129,7 +129,7 @@ knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
 
 Obtaining a quantitative measure of infants' cognitive abilities is an extraordinarily difficult endeavor. 
 The most frequent way to assess what infants know or prefer is to track overt behavior.
-However, measuring overt behavior at early ages presents many challenges: participants' attention span is short, they do not follow instructions, their mood can change instantly and their behavior is often inconsistent. 
+However, measuring overt behavior at early ages presents many challenges: participants' attention span is short, they do not follow instructions, their mood can change instantly, and their behavior is often inconsistent. 
 Therefore, most measurements are noisy and the typical sample size of an infant study is small (around 20 infants per group), resulting in low power [@oakes2017sample]. 
 In addition, there is individual and environmental variation that may add even more noise to the data [e.g., @johnson2010using]. 
 Despite these demanding conditions, reliable and robust methods for assessing infants’ behavior are critical to understanding development.
@@ -179,19 +179,15 @@ One option would be simply to bring back infants and have them hear exactly the 
 A weakness of this design would be the potential for stimulus familiarity effects, however, since infants would have heard the materials before. 
 Further complicating matters, infants might show a preference for or against a familiar stimulus depending on their age [@hunter1988multifactor]. 
 The ideal solution then would be to create a brand new stimulus set with the same characteristics.
-Unfortunately, because of the process of how MB1 stimuli were created, we did not have enough normed raw recordings available to make brand new stimulus items that conformed to the same standards as the MB1 stimuli.
-
-We therefore chose an intermediate path: we reversed the ordering of MB1 stimuli.
-Average looking times in MB1 were always lower than 9s per trial, even for the youngest children on the earliest trials (the group who looked the longest on average), so most children in MB1 did not hear the second half of most trials. 
+Unfortunately, because of the process of how MB1 stimuli were created, we did not have enough normed raw recordings available to make brand new stimulus items that conformed to the same standards as the MB1 stimuli. We therefore chose an intermediate path: we reversed the ordering of MB1 stimuli. Average looking times in MB1 were always lower than 9s per trial, even for the youngest children on the earliest trials (the group who looked the longest on average), so most children in MB1 did not hear the second half of most trials. 
 Thus, by reversing the order, we had a perfectly matched stimulus set that was relatively unfamiliar to most infants.
 The disadvantage of this design was that infants who looked longer might be more likely to hear a familiar clip heard in the previous study. 
-If infants then showed a familiarity preference --- an assumption which might not be true --- the end result could be to inflate our estimates of test-retest reliability slightly, since longer lookers would on average look longer at retest due to their familiarity preference.
-We view this risk as relatively low, but do note that it is a limitation of our design. 
+If infants then showed a familiarity preference --- an assumption which might not be true --- the end result could be to inflate our estimates of test-retest reliability slightly, since longer lookers would on average look longer at retest due to their familiarity preference. We view this risk as relatively low, but do note that it is a limitation of our design. 
 
 The current study also explores whether there are any differences in test-retest reliability between three widely used methods: central fixation (CF), eye-tracking (ET), and the head-turn preference procedure (HPP).
-Exploring differences in CF, eye-tracking, and HPP, @junge2020contrasting provide experimental and meta-analytic evidence in favor of using the HPP in speech segmentation tasks.
-Similarly, the MB1 project reported an increase in the effect size for HPP compared to CF and eye-tracking [@manybabies2020quantifying].
-HPP requires gross motor movements relative to other methods, such as CF and eye-tracking paradigms, for which subtle eye movements towards a monitor located in front of the child are sufficient.
+Exploring differences in CF, ET, and HPP, @junge2020contrasting provide experimental and meta-analytic evidence in favor of using the HPP in speech segmentation tasks.
+Similarly, the MB1 project reported an increase in the effect size for HPP compared to CF and ET [@manybabies2020quantifying].
+HPP requires gross motor movements relative to other methods, such as CF and ET paradigms, for which subtle eye movements towards a monitor located in front of the child are sufficient.
 One possible explanation for the stronger effects with HPP may be a higher sensitivity to the contingency of the presentation of auditory stimuli and infants’ head turns away from the typical forward-facing position.
 While these findings suggest that HPP may be a more sensitive index of infant preference, they do not necessarily imply higher reliability for individual infants’ performance using HPP.
 For example, @marimon2022 found no evidence for test-retest reliability when testing infants' prosodic preferences using the HPP method.
@@ -429,7 +425,7 @@ The mean age of infants included in the study was `r round(age_stats$mean, 0)` d
 
 ### Visual stimuli.
 The visual stimuli and instructions were identical to MB1.
-For the central fixation paradigm and eye-tracking, labs used a multicolored static checkerboard as the fixation stimulus as well as a multicolored moving circle with a ringing sound as an attention-getter between trials.
+For the CF paradigm and ET, labs used a multicolored static checkerboard as the fixation stimulus as well as a multicolored moving circle with a ringing sound as an attention-getter between trials.
 For the HPP method, labs used their standard procedure, as in MB1.
 
 ### Speech stimuli.
@@ -438,7 +434,7 @@ A second set of naturalistic IDS and ADS recordings of mothers either talking to
 This resulted in eight new sequences of natural IDS and eight new sequences of natural ADS with a length of 18 seconds each.
  
 ### Procedure.
-Infants were retested using the identical procedure as during the first testing day: central fixation, HPP, or eye-tracking. 
+Infants were retested using the identical procedure as during the first testing day: CF, HPP, or ET. 
 Participating labs were asked to schedule test and retest sessions 7 days apart with a minimum number of 1 day and a maximum number of 31 days. 
 However, infants whose time between test and retest exceeded 31 days were still included in the analyses (*n* = 3). 
 The mean number of days between test and retest was `r round(stats_daysbetween$mean, 1)` (range: `r stats_daysbetween$min` - `r stats_daysbetween$max`).
@@ -514,7 +510,7 @@ ttestSession2 <- t.test(all_agg_subjects_paired_s2$Diff)
 
 ```
 
-First, we examined infants' preference for IDS in both sessions. Two-samples t-tests comparing the difference in average looking time between IDS and ADS to zero revealed that infants showed a preference of IDS over ADS in Session 1 (`r apa_print(ttestSession1)$statistic`) and Session 2 (`r apa_print(ttestSession2)$statistic`), replicating the main finding from MB1 (Table 2).
+First, we examined infants' preference for IDS in both sessions. Two-samples t-tests comparing the difference in average looking time between IDS and ADS to zero revealed that infants showed a preference of IDS over ADS in Session 1, `r apa_print(ttestSession1)$statistic`, and Session 2, `r apa_print(ttestSession2)$statistic`, replicating the main finding from MB1 (Table 2).
 `r sum(all_agg_subjects_paired_s1$Diff>0)/length(all_agg_subjects_paired_s1$Diff)*100`% of infants in Session 1 and `r sum(all_agg_subjects_paired_s2$Diff>0)/length(all_agg_subjects_paired_s2$Diff)*100`% of infants in Session 2 showed a preference for IDS.
 In order to test whether there was a difference in the strength of the preference effect across sessions, we fit a linear mixed-effects model predicting infants' average difference in looking time between IDS and ADS from test session (1 vs. 2), including by-lab and by-participant random intercepts.
 There was no significant difference in the magnitude of infants’ preference between the two sessions, $\beta$=`r round(diff_session_coefs[2,1],2)`, *SE*=`r round(diff_session_coefs[2,2],2)`, *p*=`r printp(diff_session_coefs[2,5])`.
@@ -635,10 +631,10 @@ We assessed test-retest reliability in two ways.
 First, we fit a linear mixed-effects model predicting IDS preference in Session 2 from IDS preference in Session 1, including a by-lab random intercept. 
 The results revealed no significant relationship between IDS preference in Session 1 and 2 (Table 3). 
 Second, we calculated the Pearson correlation coefficient. 
-While a simple correlation coefficient might overestimate the test-retest reliability in our sample because it does not control for the differences between different labs and methods (HPP, CF, and eye-tracking), we felt it was important to also conduct a Pearson correlation as it is commonly used to assess reliability. 
+While a simple correlation coefficient might overestimate the test-retest reliability in our sample because it does not control for the differences between different labs and methods (HPP, CF, and ET), we felt it was important to also conduct a Pearson correlation as it is commonly used to assess reliability. 
 The size of the correlation coefficient was not statistically different from zero and the estimate was small, `r apa_print(simplyOverallCorr)$full_result`. 
 Moreover, no significant correlations emerged in each sample considered separately (Figure 1; see Supplementary Materials S3 for a meta-analytic approach).
- `r perc_reversal` percent of the infants reversed their direction of preference for IDS versus ADS from the test to the retest session. 
+ `r perc_reversal`% of the infants reversed their direction of preference for IDS versus ADS from the test to the retest session. 
 
 ```{r results="asis",warning=FALSE,message=FALSE}
 #function for computing coefficient table from lmer model and correlation reliability
@@ -692,10 +688,10 @@ papaja::apa_table(coef_table,
                   format.args = list(digits = 2))
 ```
 
-To investigate the test-retest reliability of each specific method, we computed Pearson correlation coefficients and the same mixed-effects model described above for HPP, central fixation and eye-tracking separately (Table 4). 
+To investigate the test-retest reliability of each specific method, we computed Pearson correlation coefficients and the same mixed-effects model described above for HPP, CF, and ET separately (Table 4). 
 None of the three methods showed evidence of test-retest reliability. 
-Neither the Pearson correlation coefficients nor the coefficients of the multilevel analysis were significant, all *p*s > `r floor(min(coef_table$pvalue)*100)*0.01`.
-In planned secondary analyses, we found that time between test sessions, participant age, and language background did not moderate the relationship between IDS preference in session 1 and session 2 (Supplementary Materials, S2).
+Neither the Pearson correlation coefficients nor the coefficients of the multilevel analysis were significant, all *p*-values > `r floor(min(coef_table$pvalue)*100)*0.01`.
+In planned secondary analyses, we found that time between test sessions, participant age, and language background did not moderate the relationship between IDS preference in session 1 and session 2 (see Supplementary Materials S2).
 Taken together, we find no significant evidence of test-retest reliability across our preregistered analyses.
 
 ## Results with different inclusion criteria
@@ -758,14 +754,15 @@ correlation_8 <- create_exclusion_dataset(paired_retest_df_by_trial_exclusions,m
 correlations <- c(correlation_1$estimate,correlation_2$estimate,correlation_4$estimate,correlation_6$estimate,correlation_8$estimate)
 ```
 
-To this point, all analyses were performed using the inclusion criteria from MB1, which required only that infants contribute at least 1 trial per condition for inclusion (i.e., one IDS and one ADS trial). 
+To this point, all analyses were performed using the inclusion criteria from MB1, which required only that infants contribute at least one trial per condition for inclusion (i.e., one IDS and one ADS trial). 
 However, more stringent inclusion criteria yielded larger effect sizes in MB1. 
-We therefore conducted exploratory analyses assessing test-retest reliability after applying progressively stricter inclusion criteria, requiring 2, 4, 6, and 8 valid trials per condition. 
-Applying stricter criteria --- and thereby increasing the number of test trials --- increased reliability numerically from r = `r round(min(correlations),2)` to r = `r round(max(correlations),2)` (Figure 2). 
-In part due to a decrease in sample size, only one of these correlations was statistically significant (when requiring 6 trial pairs): 2 valid trial pairs, `r apa_print(correlation_2)$statistic`; 4 valid trial pairs, `r apa_print(correlation_4)$statistic`; 6 valid trial pairs, `r apa_print(correlation_6)$statistic`; 8 valid trial pairs --- all trials in both sessions --- `r apa_print(correlation_8)$statistic`. 
-The analyses provide tentative evidence that stricter inclusion criteria may lead to higher test-retest reliability, but at the cost of substantial decreases in sample size (see Supplementary Materials, S5, for additional analyses).
+We therefore conducted exploratory analyses assessing test-retest reliability after applying progressively stricter inclusion criteria, requiring two, four, six, and eight valid trials per condition. 
+Applying stricter criteria --- and thereby increasing the number of test trials --- increased reliability numerically from *r* = `r round(min(correlations),2)` to *r* = `r round(max(correlations),2)` (Figure 2). 
+In part due to a decrease in sample size, only one of these correlations was statistically significant (when requiring six trial pairs): two valid trial pairs, `r apa_print(correlation_2)$statistic`; four valid trial pairs, `r apa_print(correlation_4)$statistic`; six valid trial pairs, `r apa_print(correlation_6)$statistic`; eight valid trial pairs --- all trials in both sessions --- `r apa_print(correlation_8)$statistic`. 
+The analyses provide tentative evidence that stricter inclusion criteria may lead to higher test-retest reliability, but at the cost of substantial decreases in sample size (see Supplementary Materials S5 for additional analyses).
 
-```{r fig.cap="IDS preferences of both sessions plotted against each other for each inclusion criterion. n indicates the number of included infants, r is the Pearson correlation coefficient as the indicator for reliability.", fig.align="center",out.width = "5in",fig.height = 10, fig.width = 8}
+```{r fig.cap="IDS preferences of both sessions plotted against each other for each inclusion criterion. \\textit{n} indicates the number of included infants, \\textit{r} is the Pearson correlation coefficient as the indicator for reliability.", fig.align="center",out.width = "5in",fig.height = 10, fig.width = 8}
+
 
 # Creating scatterplot for each inclusion criterion
 plot_exclusion_dataset <- function(current_dataset,minimum_trials=1,
@@ -800,15 +797,15 @@ Given that most experimental procedures conducted in infant research are interes
 Therefore, infant preference measures may be a good approach for capturing group-level phenomena, but may be less appropriate for examining individual differences in development.
 
 Consistent with general psychometric theory [e.g.,@debolt2020robust], stricter inclusion criteria --- and consequently a larger number of included test trials per participant --- tended to increase the magnitude of the correlation between test sessions. 
-However, this association was based on exploratory analyses and was only observed descriptively, and hence should be interpreted with caution. 
+However, this association was based on exploratory analyses and was in part only observed descriptively, and hence should be interpreted with caution. 
 A similar effect on the group-level was found in the MB1 project, where a stricter inclusion criterion led to bigger effect sizes [@manybabies2020quantifying]. 
 As in MB1, higher reliability through strict exclusions came at a high cost. 
 In particular, with the strictest criterion, only a small portion of the original sample size (24 out of 158 infants) could be included in the final sample.
-In other words, applying stricter criteria leads to a higher drop-out rate and can dramatically reduce sample size. 
+In other words, applying stricter criteria leads to a higher drop-out rate and can dramatically reduce the sample size. 
 In the case of studies in the field of developmental science, where there are many practical restrictions in collecting large samples of infants (e.g., birth rate in the area, restricted lab capacities, budget restrictions), a strict drop-out criterion may often be difficult to implement. 
 Note that studies in developmental science already have above-average drop-out rates [@miller2017developmental]. 
 In addition, drop out may not be random, and so having high drop-out rates can further limit the generalizability of a study. 
-In fact, the number of trials individual infants contributed was highly correlated between test sessions in the current study (see S6 in the Supplementary Materials).
+In fact, the number of trials individual infants contributed was highly correlated between test sessions in the current study (see Supplementary Materials S6).
 Particularly in the context of turning individual differences measures into diagnostic tools, high drop-out rates have an additional limitation of not being broadly usable.
 
 An alternative approach to increasing the number of valid trials is to increase the number of experimental trials. 
@@ -817,7 +814,7 @@ While this approach is promising, it may not always be feasible, because the att
 Therefore, prolonging the experimental procedure to maximize the absolute number of trials is often challenging in practice. 
 Other avenues for obtaining higher numbers of valid trials may include changes in the procedure [e.g., @egger2020improving] or implementing multi-day test sessions [@fernald2012individual].
 
-As our results are only based on the phenomenon of IDS preference (albeit, with three widely used methods: HPP, central fixation; eye-tracking) it is essential to further assess the underlying reliability of preferential looking measures within other areas of speech perception [@marimon2022]. 
+As our results are only based on the phenomenon of IDS preference (albeit, with three widely used methods: HPP, CF, ET) it is essential to further assess the underlying reliability of preferential looking measures within other areas of speech perception [@marimon2022]. 
 While most infants prefer IDS over ADS [@dunst2012preference], patterns of preferential looking in other tasks (e.g., speech segmentation) are often inconsistent and difficult to predict [@bergmann2016development].
 These inconsistencies in looking behavior are especially important to consider in the context of relating a direction of preference to later language development, and can sometimes lead to seemingly contradictory findings. 
 That is, both familiarity and novelty responses have been suggested to be predictive of infants’ later linguistic abilities [@depaolis2014infants; @newman2006infants; @newman2016input].
