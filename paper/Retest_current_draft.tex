@@ -3,12 +3,7 @@
 \PassOptionsToPackage{hyphens}{url}
 %
 \documentclass[
-  english,
   man,floatsintext]{apa6}
-\title{Limited evidence of test-retest reliability in infant-directed speech preference in a large pre-registered infant sample}
-\author{Melanie S. Schreiner\textsuperscript{1,2}, Christina Bergmann\textsuperscript{3}, Michael C. Frank\textsuperscript{4}, Tom Fritzsche\textsuperscript{5}, Nayeli Gonzalez-Gomez\textsuperscript{6}, Kiley Hamlin\textsuperscript{7}, Natalia Kartushina\textsuperscript{8}, Danielle J. Kellier\textsuperscript{4}, Nivedita Mani\textsuperscript{1}, Julien Mayor\textsuperscript{8}, Jenny Saffran\textsuperscript{9}, Melanie Soderstrom\textsuperscript{10}, Mohinish Shukla\textsuperscript{11}, Priya Silverstein\textsuperscript{12,13}, Martin Zettersten\textsuperscript{9,14}, \& Matthias Lippold\textsuperscript{1,2}}
-\date{}
-
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
 \usepackage{iftex}
@@ -38,16 +33,6 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  pdftitle={Limited evidence of test-retest reliability in infant-directed speech preference in a large pre-registered infant sample},
-  pdfauthor={Melanie S. Schreiner1,2, Christina Bergmann3, Michael C. Frank4, Tom Fritzsche5, Nayeli Gonzalez-Gomez6, Kiley Hamlin7, Natalia Kartushina8, Danielle J. Kellier4, Nivedita Mani1, Julien Mayor8, Jenny Saffran9, Melanie Soderstrom10, Mohinish Shukla11, Priya Silverstein12,13, Martin Zettersten9,14, \& Matthias Lippold1,2},
-  pdflang={en-EN},
-  pdfkeywords={language acquisition; speech perception; infant-directed speech; adult-directed speech; test-retest reliability},
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
 \usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -97,6 +82,15 @@
 \newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{english}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
 % Manuscript styling
 \usepackage{upgreek}
 \captionsetup{font=singlespacing,justification=justified}
@@ -127,6 +121,20 @@
 % \setlength{\parindent}{0.5in}
 % \setlength{\parskip}{0pt plus 0pt minus 0pt}
 
+% Overwrite redefinition of paragraph and subparagraph by the default LaTeX template
+% See https://github.com/crsh/papaja/issues/292
+\makeatletter
+\renewcommand{\paragraph}{\@startsection{paragraph}{4}{\parindent}%
+  {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries\itshape\typesectitle}}
+
+\renewcommand{\subparagraph}[1]{\@startsection{subparagraph}{5}{1em}%
+  {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
+  {-\z@\relax}%
+  {\normalfont\normalsize\itshape\hspace{\parindent}{#1}\textit{\addperi}}{\relax}}
+\makeatother
+
 % \usepackage{etoolbox}
 \makeatletter
 \patchcmd{\HyOrg@maketitle}
@@ -138,7 +146,15 @@
   {\section*{\protect\normalfont{\@title}}}
   {}{\typeout{Failed to patch title.}}
 \makeatother
-\shorttitle{test-retest reliability of infant-directed speech preference}
+
+\usepackage{xpatch}
+\makeatletter
+\xapptocmd\appendix
+  {\xapptocmd\section
+    {\addcontentsline{toc}{section}{\appendixname\ifoneappendix\else~\theappendix\fi\\: #1}}
+    {}{\InnerPatchFailed}%
+  }
+{}{\PatchFailed}
 \keywords{language acquisition; speech perception; infant-directed speech; adult-directed speech; test-retest reliability\newline\indent Word count: 3998}
 \DeclareDelayedFloatFlavor{ThreePartTable}{table}
 \DeclareDelayedFloatFlavor{lltable}{table}
@@ -150,20 +166,26 @@
 
 \linenumbers
 \usepackage{csquotes}
-\ifXeTeX
-  % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
-  \usepackage{polyglossia}
-  \setmainlanguage[]{english}
-\else
-  \usepackage[main=english]{babel}
-% get rid of language-specific shorthands (see #6817):
-\let\LanguageShortHands\languageshorthands
-\def\languageshorthands#1{}
-\fi
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Limited evidence of test-retest reliability in infant-directed speech preference in a large pre-registered infant sample},
+  pdfauthor={Melanie S. Schreiner1,2, Christina Bergmann3, Michael C. Frank4, Tom Fritzsche5, Nayeli Gonzalez-Gomez6, Kiley Hamlin7, Natalia Kartushina8, Danielle J. Kellier4, Nivedita Mani1, Julien Mayor8, Jenny Saffran9, Melanie Soderstrom10, Mohinish Shukla11, Priya Silverstein12,13, Martin Zettersten9,14, \& Matthias Lippold1,2},
+  pdflang={en-EN},
+  pdfkeywords={language acquisition; speech perception; infant-directed speech; adult-directed speech; test-retest reliability},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
 
+\title{Limited evidence of test-retest reliability in infant-directed speech preference in a large pre-registered infant sample}
+\author{Melanie S. Schreiner\textsuperscript{1,2}, Christina Bergmann\textsuperscript{3}, Michael C. Frank\textsuperscript{4}, Tom Fritzsche\textsuperscript{5}, Nayeli Gonzalez-Gomez\textsuperscript{6}, Kiley Hamlin\textsuperscript{7}, Natalia Kartushina\textsuperscript{8}, Danielle J. Kellier\textsuperscript{4}, Nivedita Mani\textsuperscript{1}, Julien Mayor\textsuperscript{8}, Jenny Saffran\textsuperscript{9}, Melanie Soderstrom\textsuperscript{10}, Mohinish Shukla\textsuperscript{11}, Priya Silverstein\textsuperscript{12,13}, Martin Zettersten\textsuperscript{9,14}, \& Matthias Lippold\textsuperscript{1,2}}
+\date{}
+
+
+\shorttitle{test-retest reliability of infant-directed speech preference}
 
 \authornote{
 
@@ -179,7 +201,7 @@ Correspondence concerning this article should be addressed to Melanie S. Schrein
 
 \affiliation{\vspace{0.5cm}\textsuperscript{1} University of Goettingen\\\textsuperscript{2} Leibniz Science Campus PrimateCognition\\\textsuperscript{3} Max Planck Insitute for Psycholinguistics\\\textsuperscript{4} Stanford University\\\textsuperscript{5} University of Potsdam\\\textsuperscript{6} Oxford Brookes University\\\textsuperscript{7} University of British Columbia\\\textsuperscript{8} University of Oslo\\\textsuperscript{9} University of Wisconsin-Madison\\\textsuperscript{10} University of Manitoba\\\textsuperscript{11} Università di Padova\\\textsuperscript{12} Lancaster University\\\textsuperscript{13} Center for Open Science\\\textsuperscript{14} Princeton University}
 
-\abstract{
+\abstract{%
 Test-retest reliability --- establishing that measurements remain consistent across multiple testing sessions --- is critical to measuring, understanding, and predicting individual differences in infant language development. However, previous attempts to establish measurement reliability in infant speech perception tasks are limited, and reliability of frequently-used infant measures is largely unknown. The current study investigated the test-retest reliability of infants' preference for infant-directed speech (hereafter, IDS) over adult-directed speech (hereafter, ADS) in a large sample (\emph{N}=158) in the context of the ManyBabies1 collaborative research project (hereafter, MB1; Frank et al., 2017; ManyBabies Consortium, 2020). Labs of the original MB1 study were asked to bring in participating infants for a second appointment retesting infants on their IDS preference. This approach allows us to estimate test-retest reliability across three different methods used to investigate preferential listening in infancy: the head-turn preference procedure, central fixation, and eye-tracking. Overall, we find no consistent evidence of test-retest reliability in measures of infants' speech preference (overall \emph{r} = .09, 95\% CI {[}-.06,.25{]}). While increasing the number of trials that infants needed to contribute for inclusion in the analysis revealed a numeric growth in test-retest reliability, it also considerably reduced the study's effective sample size. Therefore, future research on infant development should take into account that not all experimental measures may be appropriate for assessing individual differences between infants.
 }
 
@@ -252,7 +274,7 @@ HPP requires gross motor movements relative to other methods, such as CF and ET 
 One possible explanation for the stronger effects with HPP may be a higher sensitivity to the contingency of the presentation of auditory stimuli and infants' head turns away from the typical forward-facing position.
 While these findings suggest that HPP may be a more sensitive index of infant preference, they do not necessarily imply higher reliability for individual infants' performance using HPP.
 For example, Marimon and Höhle (2022) found no evidence for test-retest reliability when testing infants' prosodic preferences using the HPP method.
-It remains an open question whether the same measures that produce larger effect sizes at the group-level also have higher test-retest reliability for individual infants (Byers-Heinlein et al., 2021).
+It remains an open question whether the same measures that produce larger effect sizes at the group-level also have higher test-retest reliability for individual infants (Byers-Heinlein, Bergmann, et al., 2021).
 Therefore, assessing the test-retest reliability of the different preference measures is crucial, so that researchers can make informed decisions about the appropriate methods for their particular research question.
 Critically, only measures with high test-retest reliability should be used for studies of individual differences.
 
@@ -417,7 +439,7 @@ First, we fit a linear mixed-effects model predicting IDS preference in Session 
 The results revealed no significant relationship between IDS preference in Session 1 and 2 (Table 3).
 Second, we calculated the Pearson correlation coefficient.
 While a simple correlation coefficient might overestimate the test-retest reliability in our sample because it does not control for the differences between different labs and methods (HPP, CF, and ET), we felt it was important to also conduct a Pearson correlation as it is commonly used to assess reliability.
-The size of the correlation coefficient was not statistically different from zero and the estimate was small, \(r = .09\), 95\% CI \([-.06\), \(.25]\), \(t(156) = 1.19\), \(p = .237\).
+The size of the correlation coefficient was not statistically different from zero and the estimate was small, \(r = .09\), 95\% CI \([-.06, .25]\), \(t(156) = 1.19\), \(p = .237\).
 Moreover, no significant correlations emerged in each sample considered separately (Figure 1; see Supplementary Materials S3 for a meta-analytic approach).
 41.77\% of the infants reversed their direction of preference for IDS versus ADS from the test to the retest session.
 
@@ -543,10 +565,10 @@ Bergmann, C., \& Cristia, A. (2016). Development of infants' segmentation of wor
 Byers-Heinlein, K., Bergmann, C., \& Savalei, V. (2021). Six solutions for more reliable infant research. \emph{Infant and Child Development}, e2296.
 
 \leavevmode\vadjust pre{\hypertarget{ref-byers2021multilab}{}}%
-Byers-Heinlein, K., Tsui, A. S. M., Bergmann, C., Black, A. K., Brown, A., Carbajal, M. J., \ldots{} others. (2021). A multilab study of bilingual infants: Exploring the preference for infant-directed speech. \emph{Advances in Methods and Practices in Psychological Science}, \emph{4}(1), 2515245920974622.
+Byers-Heinlein, K., Tsui, A. S. M., Bergmann, C., Black, A. K., Brown, A., Carbajal, M. J., et al.others. (2021). A multilab study of bilingual infants: Exploring the preference for infant-directed speech. \emph{Advances in Methods and Practices in Psychological Science}, \emph{4}(1), 2515245920974622.
 
 \leavevmode\vadjust pre{\hypertarget{ref-byers2021development}{}}%
-Byers-Heinlein, K., Tsui, R. K.-Y., Van Renswoude, D., Black, A. K., Barr, R., Brown, A., \ldots{} others. (2021). The development of gaze following in monolingual and bilingual infants: A multi-laboratory study. \emph{Infancy}, \emph{26}(1), 4--38.
+Byers-Heinlein, K., Tsui, R. K.-Y., Van Renswoude, D., Black, A. K., Barr, R., Brown, A., et al.others. (2021). The development of gaze following in monolingual and bilingual infants: A multi-laboratory study. \emph{Infancy}, \emph{26}(1), 4--38.
 
 \leavevmode\vadjust pre{\hypertarget{ref-colombo1988infant}{}}%
 Colombo, J., Mitchell, D. W., \& Horowitz, F. D. (1988). Infant visual attention in the paired-comparison paradigm: Test-retest and attention-performance relations. \emph{Child Development}, 1198--1210.
@@ -597,7 +619,7 @@ Houston, D. M., Horn, D. L., Qi, R., Ting, J. Y., \& Gao, S. (2007). Assessing s
 Hunter, M. A., \& Ames, E. W. (1988). A multifactor model of infant preferences for novel and familiar stimuli. \emph{Advances in Infancy Research}, \emph{5}, 69--95.
 
 \leavevmode\vadjust pre{\hypertarget{ref-johnson2010using}{}}%
-Johnson, E., \& Zamuner, T. (2010). Using infant and toddler testing methods in language acquisition research.
+Johnson, E., \& Zamuner, T. (2010). \emph{Using infant and toddler testing methods in language acquisition research.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-junge2020contrasting}{}}%
 Junge, C., Everaert, E., Porto, L., Fikkert, P., Klerk, M. de, Keij, B., \& Benders, T. (2020). Contrasting behavioral looking procedures: A case study on infant speech segmentation. \emph{Infant Behavior and Development}, \emph{60}, 101448.
