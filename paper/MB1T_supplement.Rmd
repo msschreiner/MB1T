@@ -568,11 +568,15 @@ Researchers should therefore be mindful of the fact that decisions about includi
 
 ```{r}
 agg_by_subj_paired <- data_clean %>%
-  select(Subject,Subject_Unique,Gender,Method, preterm,Session, Condition, trial_num,LT,Lab,days_between_sessions) %>% 
-  group_by(Method, Lab,Subject, Subject_Unique, Gender, preterm,days_between_sessions,Session) %>%
+  select(Subject,Subject_Unique,Age,Gender,Method, preterm,Session, Condition, trial_num,LT,Lab,days_between_sessions) %>% 
+  group_by(Method, Lab,Subject, Subject_Unique, Age,Gender, preterm,days_between_sessions,Session) %>%
   summarize(mean_lt=mean(LT),
             N=n()) %>%
-  pivot_wider(names_from = Session, values_from = c(mean_lt,N))
+  pivot_wider(names_from = Session, values_from = c(mean_lt,N,Age)) %>%
+  rowwise() %>%
+  mutate(
+    mean_age = mean(c(Age_1,Age_2),na.rm=TRUE)
+  )
 
 corr_lt_p1 <- ggplot(agg_by_subj_paired,aes(mean_lt_1,mean_lt_2))+
   geom_point()+
@@ -586,22 +590,30 @@ correlation_avg_looking <- cor.test(agg_by_subj_paired$mean_lt_1,agg_by_subj_pai
 
 #similar results when controlling for trial number
 m <- lm(mean_lt_2~mean_lt_1+N_1+N_2,data=agg_by_subj_paired)
-results_control_model <- summary(m)
 #car::vif(m) #no really worrying variance inflation here
+
+#model controlling for age
+m_overall_correlation_age <- lm(mean_lt_2~mean_lt_1+mean_age,data=agg_by_subj_paired)
+results_overall_correlation_age  <- summary(m_overall_correlation_age)
 ```
 
 To what extent are participants looking times between the two sessions related?
 To test this question, we first investigated whether participants' overall looking times --- irrespective of condition --- were correlated between the first and second session.
 There was a robust correlation between average looking time in Session 1 and Session 2: infants with longer looking times during their first session also tended to look longer during their second session, `r apa_print(correlation_avg_looking)$full_result`.
 This relationship held even after controlling for number of trials in the first and second session, suggesting that the relation between average looking in Session 1 and 2 could not be entirely explained by the correlation in the number of trials contributed between the two sessions (S7), `r apa_print(m)$full_result[["mean_lt_1"]]` (Figure 8A).
+The result is also similar when controlling for participants' average age across the two test sessions, `r apa_print(results_overall_correlation_age)$full_result[["mean_lt_1"]]`.
 
 ```{r}
 agg_by_subj_condition_paired <- data_clean %>%
-  select(Subject,Subject_Unique,Gender,Method, preterm,Session, Condition, LT,Lab,days_between_sessions) %>% 
-  group_by(Method, Lab,Subject, Subject_Unique, Gender, preterm,days_between_sessions,Condition,Session) %>%
+  select(Subject,Subject_Unique,Age,Gender,Method, preterm,Session, Condition, LT,Lab,days_between_sessions) %>% 
+  group_by(Method, Lab,Subject, Subject_Unique, Age,Gender, preterm,days_between_sessions,Condition,Session) %>%
   summarize(mean_lt=mean(LT)) %>%
-  pivot_wider(names_from = Session, values_from = mean_lt) %>%
-  rename(LT_Test = `1`,LT_Retest=`2`)
+  pivot_wider(names_from = Session, values_from =  c(mean_lt, Age)) %>%
+  rename(LT_Test = mean_lt_1,LT_Retest=mean_lt_2) %>%
+  rowwise() %>%
+  mutate(
+    mean_age = mean(c(Age_1,Age_2),na.rm=TRUE)
+  )
 
 corr_lt_p2 <- ggplot(agg_by_subj_condition_paired,aes(LT_Test,LT_Retest,color=Condition))+
   geom_point()+
@@ -622,6 +634,15 @@ correlation_ADS_LT <- cor.test(agg_by_subj_condition_paired_wide$LT_Retest_ADS,a
 #predicting condition-specific session 2 looking from session 1 looking to IDS and ADS
 predicting_Retest_IDS <- lm(LT_Retest_IDS ~ LT_Test_IDS + LT_Test_ADS,data=agg_by_subj_condition_paired_wide)
 predicting_Retest_ADS <- lm(LT_Retest_ADS ~ LT_Test_IDS + LT_Test_ADS,data=agg_by_subj_condition_paired_wide)
+
+#controlling for age
+predicting_Retest_IDS_age <- lm(LT_Retest_IDS ~ LT_Test_IDS + mean_age,data=agg_by_subj_condition_paired_wide)
+predicting_Retest_ADS_age <- lm(LT_Retest_ADS ~ LT_Test_ADS + mean_age,data=agg_by_subj_condition_paired_wide)
+
+#both controlling for age and IDS and ADS looking
+#predicting condition-specific session 2 looking from session 1 looking to IDS and ADS
+predicting_Retest_IDS_full <- lm(LT_Retest_IDS ~ LT_Test_IDS + LT_Test_ADS+mean_age,data=agg_by_subj_condition_paired_wide)
+predicting_Retest_ADS_full <- lm(LT_Retest_ADS ~ LT_Test_IDS + LT_Test_ADS+mean_age,data=agg_by_subj_condition_paired_wide)
 ```
 
 Next, we explored the extent to which average looking times for IDS and ADS stimuli were related.
