@@ -70,7 +70,7 @@ affiliation:
     institution   : "Princeton University"
     
 authornote: |
-  **Acknowledgements.** This work was supported in part by Leibniz ScienceCampus Primate Cognition seed funds awarded to MS and ML, and grants from XXXX awarded to XXXX and from the NSF awarded to MZ (NSF DGE-1747503). 
+  **Acknowledgements.** This work was supported in part by Leibniz ScienceCampus Primate Cognition seed funds awarded to MS and ML, a grant from the Research Council of Norway (project number 301625) and its Centres of Excellence funding scheme (project number 223265) awarded to N.K. and a grant from the NSF awarded to MZ (NSF DGE-1747503). 
   
   **Open Practices Statement.** All code for reproducing the paper is available at https://github.com/msschreiner/MB1T. Data and materials are available on OSF (https://osf.io/zeqka/).
   
