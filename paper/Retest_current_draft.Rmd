@@ -30,12 +30,12 @@ author:
     affiliation   : "10"
   - name          : "Jenny	Saffran"
     affiliation   : "3"
-  - name          : "Melanie	Soderstrom"
-    affiliation   : "12"
   - name          : "Mohinish	Shukla"
-    affiliation   : "13"
+    affiliation   : "12"
   - name          : "Priya	Silverstein"
-    affiliation   : "14,15"
+    affiliation   : "13, 14"
+  - name          : "Melanie	Soderstrom"
+    affiliation   : "15"
   - name          : "Matthias	Lippold"
     affiliation   : "1,2"
 
@@ -63,13 +63,14 @@ affiliation:
   - id            : "11"
     institution   : "University of Pennsylvania"
   - id            : "12"
-    institution   : "University of Manitoba"
-  - id            : "13"
     institution   : "Università di Padova"
-  - id            : "14"
+  - id            : "13"
     institution   : "Institute for Globally Distributed Open Research"
-  - id            : "15"
+  - id            : "14"
     institution   : "Ashland University"
+  - id            : "15"
+    institution   : "University of Manitoba"
+
     
 authornote: |
   **Acknowledgements.** This work was supported in part by a Leibniz ScienceCampus Primate Cognition seed fund awarded to MSc and ML, a grant from the Research Council of Norway (project number 301625) and its Centres of Excellence funding scheme (project number 223265) awarded to NK, an ERC Grant (agreement number 773202 – ERC 2017, "BabyRhythm") awarded to MSh, a ManyBabies SSHRC Partnership Development Grant awarded to MSo, and a grant from the NSF awarded to MZ (NSF DGE-1747503). 
