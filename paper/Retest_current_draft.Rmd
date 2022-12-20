@@ -23,7 +23,7 @@ author:
   - name          : "Danielle J.	Kellier"
     affiliation   : "4"
   - name          : "Nivedita	Mani"
-    affiliation   : "1"
+    affiliation   : "1,2"
   - name          : "Julien	Mayor"
     affiliation   : "8"
   - name          : "Jenny	Saffran"
@@ -70,12 +70,11 @@ affiliation:
     institution   : "Princeton University"
     
 authornote: |
-  **Acknowledgements.** This work was supported in part by Leibniz ScienceCampus Primate Cognition seed funds awarded to MS and ML, a grant from the Research Council of Norway (project number 301625) and its Centres of Excellence funding scheme (project number 223265) awarded to N.K. and a grant from the NSF awarded to MZ (NSF DGE-1747503). 
+  **Acknowledgements.** This work was supported in part by a Leibniz ScienceCampus Primate Cognition seed fund awarded to MSc and ML, a grant from the Research Council of Norway (project number 301625) and its Centres of Excellence funding scheme (project number 223265) awarded to NK, an ERC Grant Agreement number 773202 – ERC 2017, "BabyRhythm" awarded to MSh, a ManyBabies SSHRC Partnership Development Grant awarded to MSo, and a grant from the NSF awarded to MZ (NSF DGE-1747503). 
   
   **Open Practices Statement.** All code for reproducing the paper is available at https://github.com/msschreiner/MB1T. Data and materials are available on OSF (https://osf.io/zeqka/).
   
   **CRediT author statement.** Outside of the position of the first and the last author, authorship position was determined by sorting authors' last names in alphabetical order. An overview of authorship contributions following the CRediT taxonomy can be viewed here: https://docs.google.com/spreadsheets/d/1jDvb0xL1U6YbXrpPZ1UyfyQ7yYK9aXo002UaArqy35U/edit?usp=sharing.
-
 
 abstract: |
  Test-retest reliability --- establishing that measurements remain consistent across multiple testing sessions --- is critical to measuring, understanding, and predicting individual differences in infant language development. However, previous attempts to establish measurement reliability in infant speech perception tasks are limited, and reliability of frequently-used infant measures is largely unknown. The current study investigated the test-retest reliability of infants' preference for infant-directed speech (hereafter, IDS) over adult-directed speech (hereafter, ADS) in a large sample (*N*=158) in the context of the ManyBabies1 collaborative research project (hereafter, MB1; Frank et al., 2017; ManyBabies Consortium, 2020). Labs of the original MB1 study were asked to bring in participating infants for a second appointment retesting infants on their IDS preference. This approach allows us to estimate test-retest reliability across three different methods used to investigate preferential listening in infancy: the head-turn preference procedure, central fixation, and eye-tracking. Overall, we find no consistent evidence of test-retest reliability in measures of infants' speech preference (overall *r* = .09, 95% CI [-.06,.25]). While increasing the number of trials that infants needed to contribute for inclusion in the analysis revealed a numeric growth in test-retest reliability, it also considerably reduced the study's effective sample size.  Therefore, future research on infant development should take into account that not all experimental measures may be appropriate for assessing individual differences between infants.
