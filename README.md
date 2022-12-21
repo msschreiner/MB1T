@@ -9,9 +9,9 @@ https://manybabies.github.io/MB1T/
 
 Analyzing MB1T data involves two steps:
 
-1. Merging of all data sets creating the df_all file
+1. Merging of all data sets creating the df_all file (data/processing_scripts/merge_data.R)
 
-2. Preprocessing and analyses
+2. Preprocessing and analyses (paper/Retest_current_draft.Rmd)
 
 ## Metadata
 
