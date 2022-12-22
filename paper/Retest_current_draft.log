@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.12.19)  21 DEC 2022 13:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.12.19)  21 DEC 2022 15:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -551,24 +551,24 @@ Package csquotes Info: Redefining alias 'default' -> 'english'.
 (./Retest_current_draft.aux)
 \openout1 = `Retest_current_draft.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 210.
-LaTeX Font Info:    ... okay on input line 210.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 210.
-LaTeX Font Info:    ... okay on input line 210.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 210.
-LaTeX Font Info:    ... okay on input line 210.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 210.
-LaTeX Font Info:    ... okay on input line 210.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 210.
-LaTeX Font Info:    ... okay on input line 210.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 210.
-LaTeX Font Info:    ... okay on input line 210.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 210.
-LaTeX Font Info:    ... okay on input line 210.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 210.
-LaTeX Font Info:    ... okay on input line 210.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 210.
-LaTeX Font Info:    ... okay on input line 210.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 212.
+LaTeX Font Info:    ... okay on input line 212.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 212.
+LaTeX Font Info:    ... okay on input line 212.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 212.
+LaTeX Font Info:    ... okay on input line 212.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 212.
+LaTeX Font Info:    ... okay on input line 212.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 212.
+LaTeX Font Info:    ... okay on input line 212.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 212.
+LaTeX Font Info:    ... okay on input line 212.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 212.
+LaTeX Font Info:    ... okay on input line 212.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 212.
+LaTeX Font Info:    ... okay on input line 212.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 212.
+LaTeX Font Info:    ... okay on input line 212.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -619,42 +619,42 @@ Package caption Info: longtable package is loaded.
 Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
 )
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring OFF on input line 210.
+Package hyperref Info: Link coloring OFF on input line 212.
 (./Retest_current_draft.out) (./Retest_current_draft.out)
 \@outlinefile=\write5
 \openout5 = `Retest_current_draft.out'.
 
-LaTeX Font Info:    Trying to load font information for T1+lmss on input line 212.
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 214.
 (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 212.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 214.
 (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 212.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 214.
 (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 212.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 214.
 (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 212.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 214.
 (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 212.
+(Font)              <12> on input line 214.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 212.
+(Font)              <8> on input line 214.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 212.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 212.
+(Font)              <6> on input line 214.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 214.
 (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 212.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 214.
 (/Users/martinzettersten/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
@@ -682,13 +682,13 @@ Underfull \vbox (badness 2689) has occurred while \output is active []
 <Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf, id=154, 465.74pt x 311.1625pt>
 File: Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type pdf)
 <use Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf>
-Package pdftex.def Info: Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf  used on input line 430.
+Package pdftex.def Info: Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf  used on input line 432.
 (pdftex.def)             Requested size: 465.74596pt x 311.16649pt.
 [12] [13 <./Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf>] [14]
 <Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf, id=188, 551.05875pt x 690.58pt>
 File: Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf Graphic file (type pdf)
 <use Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf>
-Package pdftex.def Info: Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf  used on input line 486.
+Package pdftex.def Info: Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf  used on input line 488.
 (pdftex.def)             Requested size: 361.36234pt x 452.85481pt.
 [15] [16 <./Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf>]
 Underfull \vbox (badness 7649) has occurred while \output is active []
@@ -709,13 +709,13 @@ Package rerunfilecheck Info: File `Retest_current_draft.out' has not changed.
 Here is how much of TeX's memory you used:
  16115 strings out of 478053
  266245 string characters out of 5839225
- 1861793 words of memory out of 5000000
+ 1862793 words of memory out of 5000000
  35848 multiletter control sequences out of 15000+600000
  555506 words of font info for 67 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  72i,11n,77p,1691b,587s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb></Users/martinzettersten/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-Output written on Retest_current_draft.pdf (23 pages, 243813 bytes).
+Output written on Retest_current_draft.pdf (23 pages, 244258 bytes).
 PDF statistics:
  342 PDF objects out of 1000 (max. 8388607)
  293 compressed objects within 3 object streams
