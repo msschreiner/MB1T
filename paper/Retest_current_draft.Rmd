@@ -607,28 +607,43 @@ simplyOverallCorr<-cor.test(all_agg_subjects_paired_retest$Diff_1,
 
 all_agg_subjects_paired_retest <- all_agg_subjects_paired_retest  %>%
   mutate(
-    Method=case_when(
+    Method_short=case_when(
       Method=="Eyetracking" ~ "ET",
       Method=="central fixation" ~ "CF",
       TRUE ~ Method
     )
   ) %>%
-  unite(lab_method,Lab,Method,sep=", ", remove=FALSE)
+  mutate(
+    Method=case_when(
+      Method=="Eyetracking" ~ "eye-tracking",
+      TRUE ~ Method
+    )
+  ) %>%
+  unite(lab_method,Lab,Method_short,sep=", ", remove=FALSE) %>%
+  left_join(lab_stats) %>%
+  ungroup() %>%
+  mutate(
+    lab_method = fct_reorder(lab_method,`Mean age (days)`,.fun=max)
+  )
 
-ggplot(all_agg_subjects_paired_retest,aes(Diff_1,Diff_2))+
+ggplot(all_agg_subjects_paired_retest,aes(Diff_1,Diff_2,color=Method))+
   geom_vline(xintercept=0,linetype="dashed")+
   geom_hline(yintercept=0,linetype="dashed")+
   geom_point()+
   geom_smooth(method="lm")+
   xlab("IDS preference in first session")+
   ylab("IDS preference in second session")+
-  facet_wrap(~lab_method,ncol=4)+
+  facet_wrap(~lab_method,nrow=2)+
   theme(panel.background = element_rect(fill = "white",
                                 colour = "black",
                                 size = 0.5, linetype = "solid"),
   panel.grid.major = element_blank(),
   panel.grid.minor = element_blank(),
-  strip.background = element_blank())
+  strip.background = element_blank())+
+  scale_color_brewer(palette="Set1")+
+  theme(legend.position=c(0.17,0.92),legend.title=element_text(size=8),legend.text=element_text(size=5), legend.key.height = unit(0.2, 'cm'), 
+        legend.key.width = unit(0.2, 'cm'))+
+  geom_label(aes(label=paste0("Mean Age: ",round(`Mean age (days)`,0)," days")),x=2.5,y=-7,size=2)
 ```
 
 We assessed test-retest reliability in two planned, confirmatory analyses. 
