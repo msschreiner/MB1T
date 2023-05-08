@@ -1,5 +1,5 @@
 ---
-title             : "Limited evidence of test-retest reliability in infant-directed speech preference in a large pre-registered infant sample"
+title             : "Limited evidence of test-retest reliability in infant-directed speech preference in a large pre-registered infant experiment"
 shorttitle        : "test-retest reliability of infant-directed speech preference"
 
 author: 
@@ -128,7 +128,7 @@ write_path <- here("data","processed")
 ```{r analysis-preferences}
 # Seed for random number generation
 set.seed(42)
-knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed, warning=F, message = F)
 ```
 
 Obtaining a quantitative measure of infants' cognitive abilities is an extraordinarily difficult endeavor. 
