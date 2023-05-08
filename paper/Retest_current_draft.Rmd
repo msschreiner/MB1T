@@ -204,7 +204,7 @@ Critically, only measures with high test-retest reliability should be used for s
 
 ## Preregistration
 
-Prior to the start of data collection, we preregistered the current study on the Open Science Framework (https://osf.io/v5f8t; see S1 in the Supplementary Materials for details). 
+We preregistered the current study on the Open Science Framework (https://osf.io/v5f8t). Section S1 in the Supplementary Materials contains additional notes on the preregistration decisions and any deviations from the preregistered analytic plan.
 
 ## Data Collection
 
@@ -514,7 +514,7 @@ ttestSession2 <- t.test(all_agg_subjects_paired_s2$Diff)
 
 ```
 
-First, we examined infants' preference for IDS in both sessions. Two-samples t-tests comparing the difference in average looking time between IDS and ADS to zero revealed that infants showed a preference of IDS over ADS in Session 1, `r apa_print(ttestSession1)$statistic`, and Session 2, `r apa_print(ttestSession2)$statistic`, replicating the main finding from MB1 (Table 2).
+First, we conducted confirmatory analyses examining infants' preference for IDS in both sessions. Two-samples t-tests comparing the difference in average looking time between IDS and ADS to zero revealed that infants showed a preference of IDS over ADS in Session 1, `r apa_print(ttestSession1)$statistic`, and Session 2, `r apa_print(ttestSession2)$statistic`, replicating the main finding from MB1 (Table 2).
 `r sum(all_agg_subjects_paired_s1$Diff>0)/length(all_agg_subjects_paired_s1$Diff)*100`% of infants in Session 1 and `r sum(all_agg_subjects_paired_s2$Diff>0)/length(all_agg_subjects_paired_s2$Diff)*100`% of infants in Session 2 showed a preference for IDS.
 In order to test whether there was a difference in the strength of the preference effect across sessions, we fit a linear mixed-effects model predicting infants' average difference in looking time between IDS and ADS from test session (1 vs. 2), including by-lab and by-participant random intercepts.
 There was no significant difference in the magnitude of infants’ preference between the two sessions, $\beta$=`r round(diff_session_coefs[2,1],2)`, *SE*=`r round(diff_session_coefs[2,2],2)`, *p*=`r printp(diff_session_coefs[2,5])`.
@@ -631,7 +631,7 @@ ggplot(all_agg_subjects_paired_retest,aes(Diff_1,Diff_2))+
   strip.background = element_blank())
 ```
 
-We assessed test-retest reliability in two ways. 
+We assessed test-retest reliability in two planned, confirmatory analyses. 
 First, we fit a linear mixed-effects model predicting IDS preference in Session 2 from IDS preference in Session 1, including a by-lab random intercept. 
 The results revealed no significant relationship between IDS preference in Session 1 and 2 (Table 3). 
 Second, we calculated the Pearson correlation coefficient. 
@@ -692,7 +692,7 @@ papaja::apa_table(coef_table,
                   format.args = list(digits = 2))
 ```
 
-To investigate the test-retest reliability of each specific method, we computed Pearson correlation coefficients and the same mixed-effects model described above for HPP, CF, and ET separately (Table 4). 
+To investigate the test-retest reliability of each specific method, we computed Pearson correlation coefficients and the same mixed-effects model described above for HPP, CF, and ET separately (Table 4) in additional exploratory analyses. 
 None of the three methods showed evidence of test-retest reliability. 
 Neither the Pearson correlation coefficients nor the coefficients of the multilevel analysis were significant, all *p*-values > `r floor(min(coef_table$pvalue)*100)*0.01`.
 In planned secondary analyses, we found that time between test sessions, participant age, and language background did not moderate the relationship between IDS preference in session 1 and session 2 (see Supplementary Materials S2).
