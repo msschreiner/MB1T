@@ -39,7 +39,7 @@ library(cowplot)
 library(tidymodels)
 library(car)
 library(metafor)
-
+library(ggExtra)
 read_path <- here("data","processed")
 ```
 
@@ -548,7 +548,8 @@ trials <- ggplot(df_all_trials, aes(x=Test, y=Retest))+
   theme_cowplot()+
   theme(legend.position=c(0.02,0.8))
 #plot
-trials
+#trials
+ggMarginal(trials, groupColour = TRUE, groupFill = TRUE,alpha=0.3)
 ```
 
 Are there stable individual differences in how likely an infant is to contribute a high number of trials?
