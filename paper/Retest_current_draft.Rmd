@@ -273,6 +273,15 @@ df_all <- df_all %>%
 #excludePreterm<-unique(df_all$Subject_Unique[df_all$preterm=="preterm"])
 #df_all<-df_all %>% filter(preterm!="preterm")
 
+#compute number of trial errors
+df_all_exclude_trial_count <- df_all %>%
+  filter(Condition!="training") %>%
+  summarize(
+    N=n(),
+    trial_error = sum(trial_error=="error"),
+    trial_error_percent = trial_error/N
+  )
+
 # exclude trials with trial error
 df_all <- df_all %>% 
   filter(trial_error == "noerror")
@@ -326,6 +335,16 @@ data_clean <- clean_data(df_all,
                          minimum_looking_time=LT_MIN,
                          minimum_trials_per_type=MIN_TRIALS_PER_TYPE,
                          file_path=here(write_path,"clean_data_minimum_trials_per_type_1.csv"))
+
+#tally the count of trials removed for being below the looking time threshold
+data_clean_exclude_trial_minlooking <- data_clean %>%
+  distinct(Lab,Subject_Unique, Session,N_below_threshold_lt,total_trial_n) %>%
+  ungroup() %>%
+  summarize(
+    sum_trials_below_threshold = sum(N_below_threshold_lt,na.rm=TRUE),
+    sum_trial_n = sum(total_trial_n),
+    percent_trials_below_threshold=sum_trials_below_threshold/sum_trial_n
+  )
 
 # function for aggregating LT and log_lt for each Subject, Session and Condition
 aggregate_by_subject <- function(cleaned_data, file_path) {
@@ -471,8 +490,8 @@ If the experimenter was in an adjacent room separate from the testing location, 
 In total, `r n_exclude+n_exclude_session` participants were excluded from the analysis.
 `r sum(df_all_exclude_counts$session_error_type=="preterm exclusion")` participants were excluded for being preterm (defined as a gestation time of less than 37 weeks).
 `r sum(df_all_exclude_counts$session_error_type %in% c("experimenter error","experiment error"))` participants were excluded due to session errors involving an experimenter error (e.g., inaccurate coding or presentation of retest stimuli on the first test session). 
-Individual trials were excluded if they were marked as trial errors, i.e., if the infant was reported as fussy, an experimental or equipment error occurred, or there was parental interference during the task (e.g., if the parent spoke with the infant during the trial).
-Trials were also excluded if the minimum looking time of 2 s was not met (`r round(sum(all_agg_subjects_paired$N_below_threshold_lt,na.rm=TRUE)/sum(all_agg_subjects_paired$total_trial_n,na.rm=TRUE),3) * 100`% of the remaining trials). 
+Individual trials were excluded if they were marked as trial errors (`r round(df_all_exclude_trial_count$trial_error_percent,4) * 100`% of remaining trials), i.e., if the infant was reported as fussy, an experimental or equipment error occurred, or there was parental interference during the task (e.g., if the parent spoke with the infant during the trial).
+Trials were also excluded if the minimum looking time of 2 s was not met (`r round(data_clean_exclude_trial_minlooking$percent_trials_below_threshold,4) * 100`% of the remaining trials). 
 If a participant was unable to contribute at least one IDS and one ADS trial for either test or retest after trial-level exclusions, all data of that participant was excluded from the test-retest analyses (`r n_exclude_session` additional participants).
 
 # Results
