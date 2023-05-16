@@ -444,7 +444,10 @@ n_exclude_session <- length(unique(df_all$Subject_Unique))-n # Calculating Parti
 age_stats <- all_agg_subjects_paired_retest %>% 
   ungroup() %>%
   select(Age) %>% 
-  summarise_at(vars(Age),funs(mean,min,max))
+  summarise_at(vars(Age),funs(mean,min,max)) %>%
+  mutate(
+    age_in_months = round(mean/30.44,2)
+  )
 
 # Stats on number of days between test and retest
 stats_daysbetween <- all_agg_subjects_paired_retest %>% 
@@ -461,7 +464,7 @@ The study was approved by each lab's respective ethics committee and parental co
 Our final sample consisted of `r n` monolingual infants from `r n_labs` different labs (Table 1). 
 In order to be included in the study, infants needed a minimum of 90% first language exposure, to be born full term with no known developmental disorders, and normal hearing and vision.
 We excluded `r n_exclude+n_exclude_session` additional participants (see Data Exclusion section for details). 
-The mean age of infants included in the study was `r round(age_stats$mean, 0)` days (range: `r age_stats$min` -- `r age_stats$max` days).
+The mean age of infants included in the study was `r round(age_stats$mean, 0)` days (range: `r age_stats$min` -- `r age_stats$max` days; approximately `r age_stats$age_in_months` months).
 
 ## Materials
 
