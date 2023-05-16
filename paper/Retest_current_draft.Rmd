@@ -231,18 +231,37 @@ df_all <- df_all %>%
 #### Processing exclusions ####
 # Excluding all children with session errors
 # Based on the preregistration, participants must meet the inclusion criteria for both test and retest sessions, so we exclude participants who have a session error during either test session
+
+##fix a few session error issues
+#unify session error type and reclassify one instance as not a session error
+df_all <- df_all %>%
+  mutate(session_error_type = case_when(
+    str_detect(session_error_type, "Coding") ~ "experimenter error",
+    session_error_type %in% c("Retest-Stimuli used for first session","retest-timuli used for first session") ~ "experiment error",
+    TRUE ~ session_error_type
+  )
+  ) %>%
+  mutate(
+    session_error = case_when(
+      session_error_type == "Baby cried after second music trial, went in and asked mom if it's okay to continue, she tried to soothe him but baby cried again so we stopped" ~ "noerror",
+      TRUE ~ session_error
+    )
+  )
+
 excludeID <- unique(df_all$Subject_Unique[df_all$session_error=="error"])
 
 #tabulate session errors
 df_all_exclude <- df_all %>% 
   filter(Subject_Unique %in% excludeID)
+  
 
 df_all_exclude_type <- df_all_exclude %>% filter(session_error=="error") %>%
   select(session_error_type) %>%
   distinct()
 
 df_all_exclude_counts <- df_all_exclude %>%
-  group_by(Subject_Unique,Session) %>%
+  filter(session_error == "error") %>%
+  group_by(Subject_Unique,preterm) %>%
   select(session_error,session_error_type) %>%
   distinct()
 
@@ -251,7 +270,7 @@ df_all <- df_all %>%
 
 #not needed as there are no premies? Checking preterm babies from Priya
 #exclude preterms
-#excludePreterm<-unique(df_all$Subject[df_all$preterm=="preterm"])
+#excludePreterm<-unique(df_all$Subject_Unique[df_all$preterm=="preterm"])
 #df_all<-df_all %>% filter(preterm!="preterm")
 
 # exclude trials with trial error
@@ -311,7 +330,7 @@ data_clean <- clean_data(df_all,
 # function for aggregating LT and log_lt for each Subject, Session and Condition
 aggregate_by_subject <- function(cleaned_data, file_path) {
   agg_subjects <- cleaned_data %>%
-    group_by(Lab, Method, Subject, Subject_Unique,Language, Condition, Age,Session,total_trial_n) %>%
+    group_by(Lab, Method, Subject, Subject_Unique,Language, Condition, Age,Session,total_trial_n,N_below_threshold_lt) %>%
     summarise(mean_log_lt = mean(log_lt),
               mean_lt = mean(LT)) %>%
     mutate(ConditionC = ifelse(Condition == "IDS", .5, -.5)) %>%
@@ -384,7 +403,7 @@ aggregate_by_subject_paired_retest <- function(aggregated_subjects_paired, file_
   
   all_agg_subjects_paired_retest <- aggregated_subjects_paired %>%
     group_by(Lab,Subject,Subject_Unique,Method,Language, language_recoded, Native) %>%
-  pivot_wider(names_from=Session,values_from=c(Age,total_trial_n,IDS,ADS,Diff,Prop,binary_pref,mean_log_lt_IDS,mean_log_lt_ADS,Diff_log_lt,Prop_log_lt),names_prefix="session_") %>% 
+  pivot_wider(names_from=Session,values_from=c(Age,total_trial_n,N_below_threshold_lt,IDS,ADS,Diff,Prop,binary_pref,mean_log_lt_IDS,mean_log_lt_ADS,Diff_log_lt,Prop_log_lt),names_prefix="session_") %>% 
   mutate(days_between_sessions=Age_session_2-Age_session_1,
          Age = rowMeans(cbind(Age_session_2,Age_session_1),na.rm=TRUE)) %>%
   rename(Diff_1 = Diff_session_1, Diff_2 = Diff_session_2)
@@ -421,8 +440,8 @@ Labs were asked to contribute half (*n*=16) or full samples (*n*=32); however, a
 The study was approved by each lab's respective ethics committee and parental consent was obtained for each infant prior to participation in the study.
 
 Our final sample consisted of `r n` monolingual infants from `r n_labs` different labs (Table 1). 
-In order to be included in the study, infants needed a minimum of 90% first language exposure, to be born full term with no known developmental disorders, and normal hearing and vision. 
-We excluded `r n_exclude` participants due to session errors and `r n_exclude_session` participants who did not have at least one valid trial per condition (IDS and ADS) at their first or second session. 
+In order to be included in the study, infants needed a minimum of 90% first language exposure, to be born full term with no known developmental disorders, and normal hearing and vision.
+We excluded `r n_exclude+n_exclude_session` additional participants (see Data Exclusion section for details). 
 The mean age of infants included in the study was `r round(age_stats$mean, 0)` days (range: `r age_stats$min` -- `r age_stats$max` days).
 
 ## Materials
@@ -449,10 +468,12 @@ The online coding experimenter and the parent listened to music masked with the 
 If the experimenter was in an adjacent room separate from the testing location, listening to masking music was optional for the experimenter.
  
 ### Data exclusion.
-A child was excluded if they had a session error, i.e., an experimenter error (e.g., inaccurate coding, or presentation of retest stimuli on the first test session) or equipment failure (visual stimuli continued to play after the end of a trial). 
-Trials were excluded if they were marked as trial errors, i.e., if the infant was reported as fussy, an experimental or equipment error occurred, or there was parental interference during the task (e.g., if the parent spoke with the infant during the trial).
-Trials were also excluded if the minimum looking time of 2 s was not met. 
-If a participant was unable to contribute at least one IDS and one ADS trial for either test or retest, all data of that participant was excluded from the test-retest analyses.
+In total, `r n_exclude+n_exclude_session` participants were excluded from the analysis.
+`r sum(df_all_exclude_counts$session_error_type=="preterm exclusion")` participants were excluded for being preterm (defined as a gestation time of less than 37 weeks).
+`r sum(df_all_exclude_counts$session_error_type %in% c("experimenter error","experiment error"))` participants were excluded due to session errors involving an experimenter error (e.g., inaccurate coding or presentation of retest stimuli on the first test session). 
+Individual trials were excluded if they were marked as trial errors, i.e., if the infant was reported as fussy, an experimental or equipment error occurred, or there was parental interference during the task (e.g., if the parent spoke with the infant during the trial).
+Trials were also excluded if the minimum looking time of 2 s was not met (`r round(sum(all_agg_subjects_paired$N_below_threshold_lt,na.rm=TRUE)/sum(all_agg_subjects_paired$total_trial_n,na.rm=TRUE),3) * 100`% of the remaining trials). 
+If a participant was unable to contribute at least one IDS and one ADS trial for either test or retest after trial-level exclusions, all data of that participant was excluded from the test-retest analyses (`r n_exclude_session` additional participants).
 
 # Results
 
@@ -558,9 +579,8 @@ papaja::apa_table(coefs,
 
 # Preference Reversal
 reversal <- all_agg_subjects_paired %>%
-  select(Subject_Unique, Session, binary_pref)
-
-reversal <- reversal[,c(2, 6:8)]
+  ungroup() %>%
+  select(Method,Subject_Unique, Session, binary_pref)
 
 reversal <- reversal %>%
   group_by(Subject_Unique) %>%

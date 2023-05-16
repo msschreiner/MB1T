@@ -1530,6 +1530,17 @@ AD42,InfantCog-UBC:AD42,169,F,central fixation,term,2,IDS,IDS6retest,13,2.63,noe
 AD42,InfantCog-UBC:AD42,169,F,central fixation,term,2,ADS,ADS6retest,14,4.87,noerror,noerror,NA,English,InfantCog-UBC,11,1.5830939370944985,0,8,8,16
 AD42,InfantCog-UBC:AD42,169,F,central fixation,term,2,IDS,IDS8retest,15,4.57,noerror,noerror,NA,English,InfantCog-UBC,11,1.5195132049061133,0,8,8,16
 AD42,InfantCog-UBC:AD42,169,F,central fixation,term,2,ADS,ADS8retest,16,2.51,noerror,noerror,NA,English,InfantCog-UBC,11,0.9202827531436925,0,8,8,16
+TF44,InfantCog-UBC:TF44,181,M,central fixation,term,1,IDS,IDS1,1,18,noerror,noerror,NA,English,InfantCog-UBC,13,2.8903717578961645,5,6,5,11
+TF44,InfantCog-UBC:TF44,181,M,central fixation,term,1,ADS,ADS1,2,5.61,noerror,noerror,NA,English,InfantCog-UBC,13,1.724550719534605,5,6,5,11
+TF44,InfantCog-UBC:TF44,181,M,central fixation,term,1,IDS,IDS2,3,9.65,noerror,noerror,NA,English,InfantCog-UBC,13,2.2669579153508947,5,6,5,11
+TF44,InfantCog-UBC:TF44,181,M,central fixation,term,1,ADS,ADS2,4,5.51,noerror,noerror,NA,English,InfantCog-UBC,13,1.706564623164823,5,6,5,11
+TF44,InfantCog-UBC:TF44,181,M,central fixation,term,1,ADS,ADS3,5,12.86,noerror,noerror,NA,English,InfantCog-UBC,13,2.554121718809473,5,6,5,11
+TF44,InfantCog-UBC:TF44,181,M,central fixation,term,1,IDS,IDS3,6,10.22,noerror,noerror,NA,English,InfantCog-UBC,13,2.3243465847755584,5,6,5,11
+TF44,InfantCog-UBC:TF44,181,M,central fixation,term,1,IDS,IDS4,7,3.85,noerror,noerror,NA,English,InfantCog-UBC,13,1.3480731482996928,5,6,5,11
+TF44,InfantCog-UBC:TF44,181,M,central fixation,term,1,IDS,IDS7,13,8.76,noerror,noerror,NA,English,InfantCog-UBC,13,2.1701959049483,5,6,5,11
+TF44,InfantCog-UBC:TF44,181,M,central fixation,term,1,ADS,ADS7,14,4.27,noerror,noerror,NA,English,InfantCog-UBC,13,1.451613827240533,5,6,5,11
+TF44,InfantCog-UBC:TF44,181,M,central fixation,term,1,ADS,ADS8,15,3.73,noerror,noerror,NA,English,InfantCog-UBC,13,1.3164082336557241,5,6,5,11
+TF44,InfantCog-UBC:TF44,181,M,central fixation,term,1,IDS,IDS8,16,5.37,noerror,noerror,NA,English,InfantCog-UBC,13,1.6808279085207734,5,6,5,11
 VF48,InfantCog-UBC:VF48,170,F,central fixation,term,1,IDS,IDS1,1,14.84,noerror,noerror,NA,English,InfantCog-UBC,29,2.6973262377392344,5,6,5,11
 VF48,InfantCog-UBC:VF48,170,F,central fixation,term,1,ADS,ADS1,2,8.81,noerror,noerror,NA,English,InfantCog-UBC,29,2.175887439948088,5,6,5,11
 VF48,InfantCog-UBC:VF48,170,F,central fixation,term,1,IDS,IDS3,6,12.5,noerror,noerror,NA,English,InfantCog-UBC,29,2.5257286443082556,5,6,5,11
