@@ -21,7 +21,8 @@ cols_to_keep <- c("subid","subid_unique","age_days","participant_gender","method
 "trial_num","looking_time","trial_error","session_error","session_error_type","lang1","lab") #columns to retain for main analysis
 
 ##read in metadata files
-lab_metadata <- read_csv(here("data","raw","metadata","lab_metadata.csv"))
+#(no longer used)
+#lab_metadata <- read_csv(here("data","raw","metadata","lab_metadata.csv"))
 
 #read and combine all participant files
 participant_files <-dir(path_to_participant_data,pattern = "*")
@@ -54,14 +55,20 @@ df_trial <- map_df(trial_files, function(fname) {
 #join participant and trial files
 df_all <- df_trial %>%
   left_join(df_participants,by=c("subid_unique","subid","test","lab")) %>%
-  left_join(lab_metadata) %>%
+  #centralized preterm exclusion
   mutate(
     preterm = case_when(
-      correct_preterm == "y" & preterm %in% c("Y","N") ~ "term",
-      correct_preterm == "y" ~ "term",
-      is.na(correct_preterm) ~ preterm
+      days_preterm>21 ~ "preterm",
+      TRUE ~ "term"
     )
   ) %>%
+  #remove session error for preterm exclusions
+  mutate(
+    session_error = case_when(
+      session_error_type == "preterm exclusion" ~ "noerror",
+      TRUE ~ "error"
+    )
+  )
   organize_columns(columns_to_use = cols_to_keep)  #rename and select key columns
 
 # write data for analysis
