@@ -255,23 +255,27 @@ df_all_exclude <- df_all %>%
   filter(Subject_Unique %in% excludeID)
   
 
-df_all_exclude_type <- df_all_exclude %>% filter(session_error=="error") %>%
+df_all_exclude_type <- df_all_exclude %>% 
+  filter(session_error=="error") %>%
   select(session_error_type) %>%
   distinct()
 
 df_all_exclude_counts <- df_all_exclude %>%
   filter(session_error == "error") %>%
-  group_by(Subject_Unique,preterm) %>%
+  group_by(Subject_Unique) %>%
   select(session_error,session_error_type) %>%
   distinct()
 
 df_all <- df_all %>% 
   filter(!Subject_Unique %in% excludeID)
 
-#not needed as there are no premies? Checking preterm babies from Priya
 #exclude preterms
-#excludePreterm<-unique(df_all$Subject_Unique[df_all$preterm=="preterm"])
-#df_all<-df_all %>% filter(preterm!="preterm")
+df_all_exclude_preterm <- df_all %>% 
+  filter(preterm=="preterm") %>%
+  select(Subject_Unique,preterm) %>%
+  distinct()
+df_all <- df_all %>%
+  filter(preterm!="preterm")
 
 #compute number of trial errors
 df_all_exclude_trial_count <- df_all %>%
@@ -491,8 +495,8 @@ If the experimenter was in an adjacent room separate from the testing location, 
  
 ### Data exclusion.
 In total, `r n_exclude+n_exclude_session` participants were excluded from the analysis.
-`r sum(df_all_exclude_counts$session_error_type=="preterm exclusion")` participants were excluded for being preterm (defined as a gestation time of less than 37 weeks).
-`r sum(df_all_exclude_counts$session_error_type %in% c("experimenter error","experiment error"))` participants were excluded due to session errors involving an experimenter error (e.g., inaccurate coding or presentation of retest stimuli on the first test session). 
+`r length(df_all_exclude_preterm$Subject_Unique)` participants were excluded for being preterm (defined as a gestation time of less than 37 weeks).
+`r length(df_all_exclude_counts$Subject_Unique)` participants were excluded due to session errors involving an experimenter error (e.g., inaccurate coding or presentation of retest stimuli on the first test session). 
 Individual trials were excluded if they were marked as trial errors (`r round(df_all_exclude_trial_count$trial_error_percent,4) * 100`% of remaining trials), i.e., if the infant was reported as fussy, an experimental or equipment error occurred, or there was parental interference during the task (e.g., if the parent spoke with the infant during the trial).
 Trials were also excluded if the minimum looking time of 2 s was not met (`r round(data_clean_exclude_trial_minlooking$percent_trials_below_threshold,4) * 100`% of the remaining trials). 
 If a participant was unable to contribute at least one IDS and one ADS trial for either test or retest after trial-level exclusions, all data of that participant was excluded from the test-retest analyses (`r n_exclude_session` additional participants).
