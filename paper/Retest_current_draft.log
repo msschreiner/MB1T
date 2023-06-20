@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.5.8)  24 MAY 2023 16:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.5.8)  20 JUN 2023 18:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -699,7 +699,7 @@ Underfull \vbox (badness 7649) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [18]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 1838) has occurred while \output is active []
 
 [19] [20]
 Underfull \vbox (badness 1028) has occurred while \output is active []
@@ -715,18 +715,18 @@ Package rerunfilecheck Info: File `Retest_current_draft.out' has not changed.
 (rerunfilecheck)             Checksum: 83296FF307B96BA1F7F325C9377CA177;2882.
  ) 
 Here is how much of TeX's memory you used:
- 16139 strings out of 478007
- 264704 string characters out of 5838709
+ 16140 strings out of 478007
+ 264732 string characters out of 5838709
  1864248 words of memory out of 5000000
  35917 multiletter control sequences out of 15000+600000
  555506 words of font info for 67 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  75i,11n,77p,1691b,587s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-Output written on Retest_current_draft.pdf (24 pages, 248913 bytes).
+Output written on Retest_current_draft.pdf (24 pages, 249615 bytes).
 PDF statistics:
- 342 PDF objects out of 1000 (max. 8388607)
- 294 compressed objects within 3 object streams
- 107 named destinations out of 1000 (max. 500000)
+ 344 PDF objects out of 1000 (max. 8388607)
+ 296 compressed objects within 3 object streams
+ 108 named destinations out of 1000 (max. 500000)
  163 words of extra memory for PDF output out of 10000 (max. 10000000)
 
