@@ -1,5 +1,5 @@
 ---
-title             : "Limited evidence of test-retest reliability in infant-directed speech preference in a large pre-registered infant experiment"
+title             : "Limited evidence of test-retest reliability in infant-directed speech preference in a large preregistered infant experiment"
 shorttitle        : "test-retest reliability of infant-directed speech preference"
 
 author: 
@@ -724,6 +724,7 @@ compute_coefs_reliability <- function(dataset) {
   correlation<-cor.test(dataset$Diff_1,dataset$Diff_2) 
   summarized_data <- coef %>%
     mutate(cor=as.numeric(correlation$estimate),
+           df=as.numeric(correlation$parameter),
            pvalue2=as.numeric(correlation$p.value))
   
   #return
@@ -738,7 +739,7 @@ coef_table <- all_agg_subjects_paired_retest %>%
   select(-data) %>%
   #unpack
   unnest(cols=c(coef_table)) %>%
-  select(-pvalue2) %>%
+  select(-pvalue2,-df) %>%
   mutate(
     Method=case_when(
       Method=="Eyetracking" ~ "eye-tracking",

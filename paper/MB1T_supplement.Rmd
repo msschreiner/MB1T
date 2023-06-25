@@ -59,8 +59,8 @@ Below, we have compiled a list of notes on and deviations from the preregistered
 - Consistent with analytic decisions in ManyBabies 1 [@manybabies2020quantifying], total looking times were truncated at 18 seconds (the maximum trial time) in the small number of cases where recorded looking times were slightly greater than 18s (presumably due to small measurement error in recording infant looking times).
 - In assessing differences in IDS preference between test and retest sessions, we preregistered an additional linear mixed-effects model including a by-lab random slope for session. This model yielded qualitatively equivalent results (see R markdown of the main manuscript). However, the model resulted in a singular fit, suggesting that the model specification may be overly complex and that its estimates should be interpreted with caution. We therefore focused only on the first preregistered model (including only by-lab and by-participant random intercepts) in reporting the analyses in the main manuscript.
 - In assessing the reliability of IDS using a linear mixed-effects model predicting IDS preference in session 2 from IDS preference in session 1, we also assessed the robustness of the results by fitting a second preregistered model with more complex random effects structure, including a by-lab random slope for IDS preference in session 1. This model is included in the main R markdown script and yields qualitatively equivalent results to the model reported in the manuscript that includes a by-lab random intercept only.
-- We report a series of secondary planned analyses in the Supplementary Materials exploring potential moderating variables of time between test sessions (S2.1), the language background of the participants (S2.2.), and participant age (S2.3.). 
-- We did not fit all models (in particular, the models investigating interactions between moderators) described in the secondary analyses of the preregistration, because our final sample size was smaller than we anticipated, which made it less feasible to investigate more complex relationships between moderators.
+- We report a series of secondary planned analyses in the Supplementary Materials exploring potential moderating variables of time between test sessions (S2.1), participant age (S2.2.), method (S2.3.), and the language background of the participants (S2.4.).
+- While we fit all models described in the secondary analyses of the preregistration, including models investigating interactions between moderators, we interpret the more complex, three-way interaction models with caution. Our final sample size was smaller than we anticipated, which made our sample less well-powered to investigate more complex relationships between moderators. Moreover, the baseline model for these secondary interaction models was incorrectly specified in the preregistration (lower-order terms for the moderator were incorrectly removed in the planned baseline model), and we opt instead to report estimates using the more conventional method of comparing parameters of interest to models including all predictors except the main predictor of interest (e.g., estimating significance of three-way interaction terms by comparing the model fit to a model including only all lower-order predictors).
 
 \newpage
 # S2. Secondary analyses investigating possible moderating variables
@@ -92,6 +92,8 @@ all_agg_subjects_paired_retest <- read_csv(here(read_path,"all_agg_subjects_pair
 
 ## S2.1. Time between test sessions
 
+### S2.1.1. Reliability moderated by time between test sessions
+
 ```{r}
 #mean-center Diff_1 and age_between_sessions to make main effects interpretable
 all_agg_subjects_paired_retest <- all_agg_subjects_paired_retest %>%
@@ -100,14 +102,14 @@ all_agg_subjects_paired_retest <- all_agg_subjects_paired_retest %>%
          days_between_sessions_c = days_between_sessions-mean(days_between_sessions))
 
 # Adding days between sessions to model
-mod_lmer_2.1 <- lmer(Diff_2 ~ Diff_1_c*days_between_sessions_c+ (1+ Diff_1_c|Lab), # Effect of days between sessions
+mod_lmer_2.1.1 <- lmer(Diff_2 ~ Diff_1_c*days_between_sessions_c+ (1+ Diff_1_c|Lab), # Effect of days between sessions
               data=all_agg_subjects_paired_retest,REML=T)
 
 # Note models with more complex random effects structure did not converge (singular boundary fit), though they yielded qualitatively equivalent results.
 ## random effects structure: (1+ Diff_1_c*days_between_sessions_c|Lab) --> singular boundary fit
 ## random effects structure: (1+ Diff_1_c+days_between_sessions_c|Lab) --> singular boundary fit
 
-days_coefs<-summary(mod_lmer_2.1)$coefficients
+days_coefs<-summary(mod_lmer_2.1.1)$coefficients
 
 ```
 
@@ -115,7 +117,410 @@ The number of days between the first and second testing session varied widely ac
 A more complex random effects structure including additional random slopes for number of days between test sessions and its interaction with IDS preference in Session 1 did not converge.
 We found no evidence that the number of days between test sessions moderated the relationship between IDS preference in Session 1 and 2. Neither the main effect of time between sessions, $\beta$=`r round(days_coefs[3,1],3)`, *SE*=`r round(days_coefs[3,2],2)`, *t*(`r round(days_coefs[3,3],1)`)=`r round(days_coefs[3,4],2)`, *p*=`r printp(days_coefs[3,5])`, nor the interaction term, $\beta$=`r round(days_coefs[4,1],3)`, *SE*=`r round(days_coefs[4,2],2)`, *t*(`r round(days_coefs[4,3],1)`)=`r round(days_coefs[4,4],2)`, *p*=`r printp(days_coefs[4,5])`, showed significant effects.
 
-## S2.2. Language background
+### S2.1.2. Change in preferential looking moderated by time between test sessions
+
+```{r}
+#APLT ~ time * time_between + (1+ time+time_between| lab) + (1+subject)
+agg_subjects <- agg_subjects %>%
+  mutate(
+    session_c=Session-1.5
+  ) %>%
+  group_by(Subject_Unique) %>%
+  mutate(
+    days_between_sessions = Age[Session==2]-Age[Session==1]
+  ) %>%
+  ungroup() %>%
+  mutate(
+    days_between_sessions_c = days_between_sessions-mean(days_between_sessions)
+  )
+
+mod_lmer_2.1.2 <- lmer(Diff ~ session_c*days_between_sessions_c + (1|Lab)+(1|Subject_Unique),
+                       data=agg_subjects)
+# Note models with more complex random effects structure did not converge (singular boundary fit)
+## random effects structure: (1+session_c*days_between_sessions_c|Lab) --> singular boundary fit
+## random effects structure: (1+ session_c+days_between_sessions_c|Lab) --> singular boundary fit
+## random effects structure: (1+ days_between_sessions_c|Lab) --> singular boundary fit
+## random effects structure: (1+ session_c|Lab) --> singular boundary fit
+
+change_days_coefs<-summary(mod_lmer_2.1.2)$coefficients
+```
+
+In addition to assessing the influence of moderators on test-retest reliability, we also tested whether the difference in magnitude of the IDS preference between Session 1 and Session 2 depended on moderators of interest.
+To investigate the influence of time between test sessions, we fit a linear mixed-effects model predicting average IDS preference from Session (centered; Session 1 vs. Session 2), days between test sessions (mean-centered), and their interaction.
+We included by-lab and by-participant random intercepts (more complex random effects structures did not converge due to singular fits).
+There were two key results.
+We found no evidence that the change in preferential looking to IDS between Session 1 and Session 2 was moderated by days between test sessions, $\beta$=`r round(change_days_coefs[4,1],3)`, *SE*=`r round(change_days_coefs[4,2],3)`, *t*(`r round(change_days_coefs[4,3],1)`)=`r round(change_days_coefs[4,4],2)`, *p*=`r printp(change_days_coefs[4,5])`.
+
+## S2.2. Participant age
+
+### S2.2.1. Reliability moderated by participant age
+
+```{r}
+# Age model
+#mean-center age to make main effects interpretable
+all_agg_subjects_paired_retest <- all_agg_subjects_paired_retest %>%
+  ungroup() %>%
+  mutate(Age_c = Age-mean(Age))
+
+# Adding age to model
+mod_lmer_2.2.1 <- lmer(Diff_2 ~ Diff_1_c*Age_c+ (1+ Diff_1_c|Lab), # effect of age
+              data=all_agg_subjects_paired_retest,REML=T)
+
+# Note models with more complex random effects structure did not converge (singular boundary fit), though they yielded qualitatively equivalent results.
+## random effects structure: (1+ Diff_1_c*Age_c|Lab) --> singular boundary fit
+## random effects structure: (1+ Diff_1_c+Age_c|Lab) --> singular boundary fit
+
+age_coefs<-summary(mod_lmer_2.2.1)$coefficients
+
+```
+
+To investigate the possibility that age moderated test-retest reliability, we fit a linear mixed-effects model predicting IDS preference in Session 2 from IDS preference in Session 1 (mean-centered), participant age (mean-centered) and their interaction.
+The model included a by-lab random intercept and a by-lab random slope for IDS preference in Session 1.
+We found no evidence that age influenced test-retest reliability as indicated by the interaction between IDS preference in Session 1 and age, $\beta$=`r round(age_coefs[4,1],3)`, *SE*=`r round(age_coefs[4,2],3)`, *t*(`r round(age_coefs[4,3],1)`)=`r round(age_coefs[4,4],2)`, *p*=`r printp(age_coefs[4,5])`.
+
+### S2.2.2. Change in preferential looking moderated by participant age
+
+```{r}
+#APLT ~ time * ageC + (1+ time+ageC| lab) + (1+subject)
+agg_subjects <- agg_subjects %>%
+  mutate(
+    Age_c=Age-mean(Age)
+  )
+
+
+mod_lmer_2.2.2 <- lmer(Diff ~ session_c*Age_c + (1|Lab)+(1|Subject_Unique),
+                       data=agg_subjects)
+# Note models with more complex random effects structure did not converge (singular boundary fit)
+## random effects structure: (1+session_c*Age_c|Lab) --> singular boundary fit
+## random effects structure: (1+ session_c+Age_c|Lab) --> singular boundary fit
+## random effects structure: (1+ session_c|Lab) --> singular boundary fit
+## random effects structure: (1+ Age_c|Lab) --> singular boundary fit
+
+change_age_coefs<-summary(mod_lmer_2.1.2)$coefficients
+```
+
+To investigate the potential of moderators to influence the overall magnitude of the IDS effect between Session 1 and 2, we fit a linear mixed-effects model predicting average IDS preference from Session (centered; Session 1 vs. Session 2), participant age (mean-centered), and their interaction.
+We included by-lab and by-participant random intercepts (more complex random effects structures did not converge due to singular fits).
+We found no evidence that the change in preferential looking to IDS between Session 1 and Session 2 was moderated by participant age, $\beta$=`r round(change_age_coefs[4,1],3)`, *SE*=`r round(change_age_coefs[4,2],3)`, *t*(`r round(change_age_coefs[4,3],1)`)=`r round(change_age_coefs[4,4],2)`, *p*=`r printp(change_age_coefs[4,5])`.
+
+## S2.3. Method
+
+### S2.3.1. Reliability moderated by Method
+
+```{r}
+all_agg_subjects_paired_retest <- all_agg_subjects_paired_retest %>%
+  mutate(
+    Method=case_when(
+      Method=="Eyetracking" ~ "eye-tracking",
+      TRUE ~ Method
+    )
+  )
+
+# Adding method to the model
+mod_lmer_2.3.1 <- lmer(Diff_2 ~ Diff_1_c*Method + (1+ Diff_1_c|Lab), # effect of method
+              data=all_agg_subjects_paired_retest,REML=T)
+
+# Note models with more complex random effects structure did not converge (singular boundary fit), though they yielded qualitatively equivalent results.
+## random effects structure: (1+ Diff_1_c*Method|Lab) --> singular boundary fit
+## random effects structure: (1+ Diff_1_c+*Method|Lab) --> singular boundary fit
+
+#overall chi-squared test to assess the omnibus interaction effect between test at time 1 and method
+overall_chisq_test_method <- Anova(mod_lmer_2.3.1,type="III")
+method_coefs<-summary(mod_lmer_2.3.1)$coefficients
+```
+
+We tested whether method (eye-tracking vs. central fixation vs. headturn preference procedure) moderated test-retest reliability by fitting a linear mixed-effects model predicting IDS preference in Session 2 from IDS preference in Session 1 (mean-centered), Method (dummy-coded, with central fixation as the reference level) and their interaction.
+The model included a by-lab random intercept and a by-lab random slope for IDS preference in Session 1 (models with more complex random effects structure including by-lab random effects for Method did not converge).
+We found no evidence that Method influenced test-retest reliability as indicated by the interaction between IDS preference in Session 1 and age, ${\chi}^2$=`r round(overall_chisq_test_method$Chisq[4],2)`, *p*=`r printp(overall_chisq_test_method[4,3])`.
+
+### S2.3.2. Reliability and its interaction with both method and age
+
+```{r}
+#interaction including both age and method
+mod_lmer_2.3.2 <- lmer(Diff_2 ~ Diff_1_c*Method*Age_c + (1+ Diff_1_c|Lab),
+              data=all_agg_subjects_paired_retest,REML=T)
+
+#more complex random effects structures fail to converge
+method_age_coefs<-summary(mod_lmer_2.3.2)$coefficients
+overall_chisq_test_method_age <- Anova(mod_lmer_2.3.2,type="III")
+```
+
+```{r}
+#compute reliability for older and younger infants by Method
+#function for computing coefficient table from lmer model and correlation reliability
+compute_coefs_reliability <- function(dataset) {
+  #fit lmer reliability model
+  mod_lmer <- lmer(Diff_2 ~ Diff_1 + (1|Lab),data=dataset,REML=T)
+  #extract coefficients
+  coef <- summary(mod_lmer)$coef %>%
+    as_data_frame %>%
+    mutate_at(c("Estimate","Std. Error","df", "t value", "Pr(>|t|)"), 
+              function (x) signif(x, digits = 3)) %>%
+    rename(SE = `Std. Error`, 
+           t = `t value`,
+           pvalue = `Pr(>|t|)`,
+           estimate = Estimate) %>%
+    #keep just main coefficient estimate
+    slice(2) %>%
+    #keep most important columns
+    select(estimate, SE, pvalue)
+  
+  #compute correlation and add to summarized data
+  correlation<-cor.test(dataset$Diff_1,dataset$Diff_2) 
+  summarized_data <- coef %>%
+    mutate(cor=as.numeric(correlation$estimate),
+           df=as.numeric(correlation$parameter),
+           pvalue2=as.numeric(correlation$p.value))
+  
+  #return
+  summarized_data
+}
+
+#split by older and younger kids
+all_agg_subjects_paired_retest <- all_agg_subjects_paired_retest %>%
+  mutate(age_bin = cut(Age, breaks = 2, labels = c("younger","older")))
+
+coef_table_method_age <- all_agg_subjects_paired_retest %>%
+  group_by(Method,age_bin) %>%
+  nest() %>%
+  #compute coefficients
+  mutate(coef_table = purrr::map(data, compute_coefs_reliability)) %>%
+  #remove data
+  select(-data) %>%
+  #unpack
+  unnest(cols=c(coef_table)) 
+```
+
+In a more complex linear mixed-effects model (preregistered as part of our planned secondary analyses) including the interaction between IDS preference in Session 1 (mean-centered), Method (dummy-coded, with central fixation as the reference level), participant age (mean-centered), and all lower order interactions, we find evidence for an interaction between method and age in predicting reliability, ${\chi}^2$=`r round(overall_chisq_test_method_age$Chisq[8],2)`, *p*=`r printp(overall_chisq_test_method_age[8,3])`.
+This effect appears to be mainly driven by older infants showing some evidence of test-retest reliability for the headturn preference procedure, *r* = `r round(filter(coef_table_method_age, Method=="HPP"&age_bin=="older")$cor,2)`, *p* = `r round(filter(coef_table_method_age, Method=="HPP"&age_bin=="older")$pvalue2,2)` (see Figure 2B).
+However, we believe these tentative findings should be treated with caution, due to the small size of our infant sample once binned by multiple moderating factors.
+
+### S2.3.3. Change in preferential looking moderated by age and method
+
+```{r}
+#APLT ~ time * ageC*method + (1+ test+ageC+method| lab) + (1+subject)
+```
+
+
+## S2.4. Language background
+
+### S2.4.1. Reliability moderated by language background
+
+```{r}
+# Differences in test-retest reliability between English and non-English learning infants
+# Assigning 1 to UBC and Madison as NAE labs. Remaining labs are non-NAE and are coded as 0.
+all_agg_subjects_paired_retest$NAE<-ifelse(all_agg_subjects_paired_retest$Lab=="InfantCog-UBC"| all_agg_subjects_paired_retest$Lab=="infantll-madison", 1, 0)
+
+#center NAE to make main effects interpretable
+all_agg_subjects_paired_retest <- all_agg_subjects_paired_retest %>%
+  ungroup() %>%
+  mutate(NAE_c = ifelse(NAE==1,0.5,-0.5))
+
+# Adding NAE to model
+mod_lmer_2.4.1 <- lmer(Diff_2 ~ Diff_1_c*NAE_c+(1|Lab),
+              data=all_agg_subjects_paired_retest,REML=T) 
+
+# Note models with more complex random effects structure did not converge (singular boundary fit), though they yielded qualitatively equivalent results.
+## random effects structure: (1+ Diff_1_c|Lab) --> singular boundary fit
+
+nae_coefs<-summary(mod_lmer_2.4.1)$coefficients
+```
+
+```{r fig.cap = "Infants' preference in Session 1 and Session 2 with individual data points and regression lines color-coded by method (CF, ET, or HPP). Results are plotted separately for North American English-learning infants (right panel) and infants learning other languages and dialects (left panel)."}
+
+# Plotting IDS preference in Session 1 and Session 2 split by NAE
+NAE.labs <- c("non-NAE", "NAE")
+names(NAE.labs) <- c("0", "1")
+
+all_agg_subjects_paired_retest$NAE <- as.factor(all_agg_subjects_paired_retest$NAE)
+
+ggplot(all_agg_subjects_paired_retest, aes(x = Diff_1, y = Diff_2, col = Method)) + 
+  geom_point() +
+  geom_smooth(method = "lm", se=FALSE) + 
+ # geom_hline(yintercept = 0, lty = 2) + 
+  facet_grid(~NAE, labeller=labeller(NAE=NAE.labs))+
+  ylab("IDS preference in second session") + 
+  scale_color_ptol(name = "Method") + 
+  #scale_linetype(name = "North American English") + 
+  xlab("IDS preference in first session") + 
+ # ylim(-3, 5) + 
+  theme(legend.position = "bottom", legend.box = "vertical",panel.background = element_rect(fill = "white",
+                                colour = "black",
+                                size = 0.5, linetype = "solid"),
+  panel.grid.major = element_blank(), 
+  panel.grid.minor = element_blank(),
+  strip.background = element_blank())
+
+```
+
+NAE-learning infants showed greater IDS preferences than their non-NAE counterparts in MB1.
+We therefore also assessed whether test-retest reliability interacted with children’s language background.
+A linear mixed-effects model predicting IDS preference in Session 2 based on IDS preference in Session 1 (mean-centered), NAE (centered), and their interaction, including Lab as a random intercept, revealed no interaction, $\beta$=`r round(nae_coefs[4,1],2)`, *SE*=`r round(nae_coefs[4,2],2)`, *t*(`r round(nae_coefs[4,3],1)`)=`r round(nae_coefs[4,4],2)`, *p*=`r printp(nae_coefs[4,5])` (Figure 1).
+
+### S2.4.2. Reliability and its interaction between language background and age
+
+```{r}
+# Adding NAE to model
+mod_lmer_2.4.2 <- lmer(Diff_2 ~ Diff_1_c*NAE_c*Age_c+(1+Diff_1_c|Lab),
+              data=all_agg_subjects_paired_retest,REML=T) 
+
+# Note models with more complex random effects structure did not converge
+nae_age_coefs<-summary(mod_lmer_2.4.2)$coefficients
+```
+
+
+```{r fig.cap = "Infants' preference in Session 1 and Session 2 with individual data points and regression lines color-coded by method for (A) younger and (B) older infants (median-split). Results are plotted separately for North American English-learning infants and infants learning other languages and dialects"}
+p1 <- ggplot(filter(all_agg_subjects_paired_retest,age_bin=="younger"), aes(x = Diff_1, y = Diff_2, col = Method)) +
+  geom_point() +
+  geom_smooth(method = "lm", se=FALSE) + 
+ # geom_hline(yintercept = 0, lty = 2) + 
+  facet_grid(~NAE, labeller=labeller(NAE=NAE.labs))+
+  ylab("IDS preference in second session") + 
+  scale_color_ptol(name = "Method") + 
+  xlab("IDS preference in first session") + 
+ # ylim(-3, 5) + 
+  theme(legend.position = "bottom", legend.box = "vertical",panel.background = element_rect(fill = "white",
+                                colour = "black",
+                                size = 0.5, linetype = "solid"),
+  panel.grid.major = element_blank(), 
+  panel.grid.minor = element_blank(),
+  strip.background = element_blank())+
+  ggtitle("YOUNGER INFANTS") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+p2 <- ggplot(filter(all_agg_subjects_paired_retest,age_bin=="older"), aes(x = Diff_1, y = Diff_2, col = Method)) +
+  geom_point() +
+  geom_smooth(method = "lm", se=FALSE) + 
+ # geom_hline(yintercept = 0, lty = 2) + 
+  facet_grid(~NAE, labeller=labeller(NAE=NAE.labs))+
+  ylab("IDS preference in second session") + 
+  scale_color_ptol(name = "Method") + 
+  xlab("IDS preference in first session") + 
+ # ylim(-3, 5) + 
+  theme(legend.position = "bottom", legend.box = "vertical",panel.background = element_rect(fill = "white",
+                                colour = "black",
+                                size = 0.5, linetype = "solid"),
+  panel.grid.major = element_blank(), 
+  panel.grid.minor = element_blank(),
+  strip.background = element_blank())+
+  ggtitle("OLDER INFANTS") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+plot_grid(p1,p2,labels=c("A","B"))
+```
+
+We also fit a preregistered linear mixed-effects model predicting IDS preference in Session 2 from the three-way interaction between IDS preference in Session 1 (mean-centered), NAE (centered), participant age (mean-centered), and all lower order interactions.
+We find evidence for an interaction between language background and age in predicting reliability, $\beta$=`r round(nae_age_coefs[8,1],2)`, *SE*=`r round(nae_age_coefs[8,2],3)`, *t*(`r round(nae_age_coefs[8,3],1)`)=`r round(nae_age_coefs[8,4],2)`, *p*=`r printp(nae_age_coefs[8,5])`.
+Figure 2 illustrates that this interaction was driven by a small set of older infants (all from a single lab and participating in the HPP method) showing a somewhat more reliable relationship between Session 1 and Session 2 looking.
+Note that the mixed-effects analyses use Age as a continuous predictor --- age is median-split in Figure 2 to ease visualization.
+Given the small number of infants driving the three-way interaction and the confounded nature of this sample (with method and lab), we do not draw strong conclusions from the existence of this three-way interaction, but report it here to spur future investigations into how age and experience interacts with test-retest reliability.
+
+### S2.4.3. Change in preferential looking moderated by age and language background
+
+```{r}
+#APLT ~ time * ageC*native + (1+ test+ageC+native| lab) + (1+subject)
+```
+
+
+\newpage
+# S3. Meta-analysis of test-retest reliability
+
+```{r}
+#compute correlation
+diff_correlation_estimate <- function(df) {
+  return(as.numeric(cor.test(df$Diff_1,df$Diff_2)$estimate))
+}
+
+#summarize correlations by lab
+lab_correlations <- all_agg_subjects_paired_retest %>%
+  select(Lab,Method, Diff_1,Diff_2) %>%
+  ungroup() %>%
+  group_by(Lab,Method) %>%
+  nest() %>%
+  mutate(
+    correlation=purrr::map(data,diff_correlation_estimate),
+  ) %>%
+  unnest(cols=c(data,correlation)) %>%
+  group_by(Lab,Method,correlation) %>%
+  summarize(
+    N=n()
+  ) %>%
+  mutate(
+    Method=case_when(
+      Method=="Eyetracking" ~ "ET",
+      Method=="central fixation" ~ "CF",
+      TRUE ~ Method
+    )
+  )
+
+z_transformed_es <- escalc(measure = "ZCOR",ri=correlation,ni=N,data=lab_correlations,slab=paste(Lab,Method,sep=", "))
+meta_model <- rma.mv(yi=yi, V=vi,random=list(~ 1 | Lab, ~ 1 | Method),data=z_transformed_es)
+```
+
+```{r fig.cap = "Forest plot of test-retest reliability effect sizes. Each row represents Fisher's z transformed correlation coefficient and 95% CI for a given lab and method (HPP = head-turn preference procedure; ET = eye-tracking; CF = central fixation). The black diamond represents the overall estimated effect size from the mixed-effects meta-analytic model." }
+forest(meta_model,header="Lab and Method")
+```
+
+In addition to the methods for assessing test-retest reliability reported in the main manuscript, we also investigated test-retest reliability across labs using a meta-analytic approach.
+We used the metafor package [@R-metafor] to fit a mixed-effects meta-analytic model on z-transformed correlations for each combination of lab and method using sample size weighting. 
+The model included random intercepts for lab and method.
+The overall effect size estimate was not significantly different from zero, *b* = `r round(meta_model$beta[1],2)`, 95% CI = [`r round(meta_model$ci.lb,2)`, `r round(meta_model$ci.ub,2)`], *p* = `r round(meta_model$pval,2)`. 
+A forest plot of the effect sizes for each lab and method is shown in Figure 2.
+
+#S4. Analyses including a more restricted sample
+
+Given that we found that restricting the sample to participants contributing at least 6 ADS and IDS trials in both sessions, we conducted the central analyses with this more restricted infant sample.
+
+```{r}
+agg_subjects_6 <- read_csv(here(read_path,"agg_subjects_minimum_trials_per_type_6.csv"))
+all_agg_subjects_paired_6 <- read_csv(here(read_path,"all_agg_subjects_paired_retest_minimum_trials_per_type_6.csv")) 
+all_agg_subjects_paired_retest_6 <- read_csv(here(read_path,"all_agg_subjects_paired_retest_minimum_trials_per_type_6.csv")) %>%
+  mutate(Pref_Test=case_when(
+             Diff_1 > 0 ~ "IDS_preference",
+             Diff_1 < 0 ~ "ADS_preference",
+             Diff_1 == 0 ~ "no_preference"
+             ),
+         Pref_Retest=case_when(
+             Diff_2 > 0 ~ "IDS_preference",
+             Diff_2 < 0 ~ "ADS_preference",
+             Diff_2 == 0 ~ "no_preference"
+             )) %>%
+  mutate(reversal_binary = case_when((Pref_Test == "IDS_preference" & Pref_Retest == "IDS_preference")  ~ 0,
+                              (Pref_Test == "ADS_preference" & Pref_Retest == "ADS_preference")  ~ 0,
+                              (Pref_Test == "IDS_preference" & Pref_Retest == "ADS_preference")  ~ 1,
+                              (Pref_Test == "ADS_preference" & Pref_Retest == "IDS_preference")  ~ 1)) %>%
+  unite(reversal_type,Pref_Test,Pref_Retest,remove=FALSE) %>%
+  mutate(reversal_type=str_remove_all(reversal_type,pattern="_preference"))
+```
+
+
+## S4.X. Moderator analyses including a more restricted sample
+
+### S4.X.1. Time between test sessions
+
+```{r}
+#mean-center Diff_1 and age_between_sessions to make main effects interpretable
+all_agg_subjects_paired_retest_6 <- all_agg_subjects_paired_retest_6 %>%
+  ungroup() %>%
+  mutate(Diff_1_c = Diff_1-mean(Diff_1),
+         days_between_sessions_c = days_between_sessions-mean(days_between_sessions))
+
+# Adding days between sessions to model
+mod_lmer_2.1_6trials <- lmer(Diff_2 ~ Diff_1_c*days_between_sessions_c+ (1|Lab), # Effect of days between sessions
+              data=all_agg_subjects_paired_retest_6,REML=T)
+
+# Note models with more complex random effects structure did not converge (singular boundary fit), though they yielded qualitatively equivalent results.
+## random effects structure: (1+ Diff_1_c*days_between_sessions_c|Lab) --> singular boundary fit
+## random effects structure: (1+ Diff_1_c+days_between_sessions_c|Lab) --> singular boundary fit
+## random effects structure: (1+ Diff_1_c|Lab) --> singular boundary fit
+
+days_coefs_6trials<-summary(mod_lmer_2.1_6trials)$coefficients
+
+```
+
+As in the analyses with the full dataset, we found no evidence that the number of days between test sessions moderated the relationship between IDS preference in Session 1 and 2. Neither the main effect of time between sessions, $\beta$=`r round(days_coefs_6trials[3,1],3)`, *SE*=`r round(days_coefs_6trials[3,2],2)`, *t*(`r round(days_coefs_6trials[3,3],1)`)=`r round(days_coefs_6trials[3,4],2)`, *p*=`r printp(days_coefs_6trials[3,5])`, nor the interaction term, $\beta$=`r round(days_coefs_6trials[4,1],3)`, *SE*=`r round(days_coefs_6trials[4,2],2)`, *t*(`r round(days_coefs_6trials[4,3],1)`)=`r round(days_coefs_6trials[4,4],2)`, *p*=`r printp(days_coefs_6trials[4,5])`, showed significant effects.
+
+## S4.2.2. Language background
 
 ```{r}
 # Differences in test-retest reliability between English and non-English learning infants
@@ -137,7 +542,7 @@ mod_lmer_2.2 <- lmer(Diff_2 ~ Diff_1_c*NAE_c+(1|Lab),
 nae_coefs<-summary(mod_lmer_2.2)$coefficients
 ```
 
-```{r fig1, fig.cap = "Infants' preference in Session 1 and Session 2 with individual data points and regression lines color-coded by method (CF, ET, or HPP). Results are plotted separately for North American English-learning infants (right panel) and infants learning other languages and dialects (right panel)."}
+```{r fig.cap = "Infants' preference in Session 1 and Session 2 with individual data points and regression lines color-coded by method (CF, ET, or HPP). Results are plotted separately for North American English-learning infants (right panel) and infants learning other languages and dialects (right panel)."}
 
 # Plotting IDS preference in Session 1 and Session 2 split by NAE
 NAE.labs <- c("non-NAE", "NAE")
@@ -194,56 +599,11 @@ The model included a by-lab random intercept and a by-lab random slope for IDS p
 We found no evidence that age influenced test-retest reliability as indicated by the interaction between IDS preference in Session 1 and age, $\beta$=`r round(age_coefs[4,1],3)`, *SE*=`r round(age_coefs[4,2],3)`, *t*(`r round(age_coefs[4,3],1)`)=`r round(age_coefs[4,4],2)`, *p*=`r printp(age_coefs[4,5])`.
 
 \newpage
-# S3. Meta-analysis of test-retest reliability
-
-```{r}
-#compute correlation
-diff_correlation_estimate <- function(df) {
-  return(as.numeric(cor.test(df$Diff_1,df$Diff_2)$estimate))
-}
-
-#summarize correlations by lab
-lab_correlations <- all_agg_subjects_paired_retest %>%
-  select(Lab,Method, Diff_1,Diff_2) %>%
-  ungroup() %>%
-  group_by(Lab,Method) %>%
-  nest() %>%
-  mutate(
-    correlation=purrr::map(data,diff_correlation_estimate),
-  ) %>%
-  unnest(cols=c(data,correlation)) %>%
-  group_by(Lab,Method,correlation) %>%
-  summarize(
-    N=n()
-  ) %>%
-  mutate(
-    Method=case_when(
-      Method=="Eyetracking" ~ "ET",
-      Method=="central fixation" ~ "CF",
-      TRUE ~ Method
-    )
-  )
-
-z_transformed_es <- escalc(measure = "ZCOR",ri=correlation,ni=N,data=lab_correlations,slab=paste(Lab,Method,sep=", "))
-meta_model <- rma.mv(yi=yi, V=vi,random=list(~ 1 | Lab, ~ 1 | Method),data=z_transformed_es)
-```
-
-```{r fig2, fig.cap = "Forest plot of test-retest reliability effect sizes. Each row represents Fisher's z transformed correlation coefficient and 95% CI for a given lab and method (HPP = head-turn preference procedure; ET = eye-tracking; CF = central fixation). The black diamond represents the overall estimated effect size from the mixed-effects meta-analytic model." }
-forest(meta_model,header="Lab and Method")
-```
-
-In addition to the methods for assessing test-retest reliability reported in the main manuscript, we also investigated test-retest reliability across labs using a meta-analytic approach.
-We used the metafor package [@R-metafor] to fit a mixed-effects meta-analytic model on z-transformed correlations for each combination of lab and method using sample size weighting. 
-The model included random intercepts for lab and method.
-The overall effect size estimate was not significantly different from zero, *b* = `r round(meta_model$beta[1],2)`, 95% CI = [`r round(meta_model$ci.lb,2)`, `r round(meta_model$ci.ub,2)`], *p* = `r round(meta_model$pval,2)`. 
-A forest plot of the effect sizes for each lab and method is shown in Figure 2.
-
-\newpage
-# S4. Alternative dependent variables
+# S5. Alternative dependent variables
 
 To check the robustness of our results, we also investigated whether we obtained similar results with other possible dependent measures: average log-transformed looking times and a proportion-based preference measure. For each alternative dependent variable, we conducted the main analyses of test-retest reliability reported in the manuscript: the overall Pearson correlation, the test-retest linear mixed-effects model, and an inspection of applying stricter inclusion criteria for number of trials contributed.
 
-## S4.1. Log-transformed looking times
+## S5.1. Log-transformed looking times
 
 ```{r}
 # calculate simple correlation of log-looking-time-based difference score of session 1 and difference score of session 2
@@ -310,7 +670,7 @@ As in the analyses using average raw looking times, the results revealed no sign
 The Pearson correlation coefficient was also not statistically significant, `r apa_print(simplyOverallCorr_log_lt)$full_result`.
 Applying successively stricter inclusion criteria --- by requiring a higher number of valid trials per condition in each session --- showed a similar pattern to the main manuscript, such that correlations increased somewhat with stricter inclusion criteria, but substantially reduced the sample size at the same time (Figure 3).
 
-## S4.2. Proportion looking to IDS
+## S5.2. Proportion looking to IDS
 
 ```{r}
 # calculate simple correlation of difference score of session 1 and difference score of session 2
@@ -356,7 +716,7 @@ papaja::apa_table(coefs,
 
 \newpage
 
-# S5. Sensitivity of test-retest reliability to trial number inclusion criteria
+# S6. Sensitivity of test-retest reliability to trial number inclusion criteria
 
 To conduct a more fine-grained analysis of how stricter trial inclusion criteria affect test-retest reliability, we computed correlations while gradually increasing the number of total valid trials required for inclusion.
 For this analysis, we required a minimum of one IDS and one ADS trial and gradually increased the number of total valid trials required in both sessions (irrespective of IDS and ADS condition) from 2 to 16 (the maximum number of total trials).
@@ -413,7 +773,7 @@ ggplot(correlation_trial_exclusion_seq,aes(x=min_trials,y=r))+
 
 \newpage
 
-# S6. Patterns of preference across sessions
+# S7. Patterns of preference across sessions
 
 ```{r,message=FALSE,warning=FALSE}
 
@@ -500,7 +860,7 @@ plot_grid(p1,p2,labels=c("A","B"),rel_widths=c(1.5,1))
 
 \newpage
 
-# S7. Relation between number of contributed trials in each session
+# S8. Relation between number of contributed trials in each session
 
 ```{r}
 # importing dataset (after excluding session and trial errors)
@@ -565,7 +925,7 @@ Researchers should therefore be mindful of the fact that decisions about includi
 
 \newpage
 
-# S8. Correlations in average looking times between sessions
+# S9. Correlations in average looking times between sessions
 
 ```{r}
 agg_by_subj_paired <- data_clean %>%
@@ -689,7 +1049,7 @@ plot_grid(top_row,corr_lt_p3,labels=c("","C"),nrow=2,rel_heights=c(1,2))
 
 \newpage
 
-# S9. By-item-pair preference scores across sessions
+# S10. By-item-pair preference scores across sessions
 
 ```{r}
 #organizing by stimulus number
