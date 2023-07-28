@@ -196,7 +196,7 @@ mod_lmer_2.2.2 <- lmer(Diff ~ session_c*Age_c + (1|Lab)+(1|Subject_Unique),
 ## random effects structure: (1+ session_c|Lab) --> singular boundary fit
 ## random effects structure: (1+ Age_c|Lab) --> singular boundary fit
 
-change_age_coefs<-summary(mod_lmer_2.1.2)$coefficients
+change_age_coefs<-summary(mod_lmer_2.2.2)$coefficients
 ```
 
 To investigate the potential of moderators to influence the overall magnitude of the IDS effect between Session 1 and 2, we fit a linear mixed-effects model predicting average IDS preference from Session (centered; Session 1 vs. Session 2), participant age (mean-centered), and their interaction.
@@ -299,8 +299,31 @@ However, we believe these tentative findings should be treated with caution, due
 
 ```{r}
 #APLT ~ time * ageC*method + (1+ test+ageC+method| lab) + (1+subject)
+mod_lmer_2.3.3 <- lmer(Diff ~ session_c*Age_c*Method + (1|Subject_Unique),
+                       data=agg_subjects)
+# Note models with more complex random effects structure did not converge (singular boundary fit)
+## random effects structure: (1+session_c*Age_c*Method|Lab) --> singular boundary fit
+## random effects structure: (1+ session_c*Age_c+Method|Lab) --> singular boundary fit
+## random effects structure: (1+ session_c+Age_c*Method|Lab) --> singular boundary fit
+## random effects structure: (1+ session_c+Age_c+Method|Lab) --> singular boundary fit
+## random effects structure: (1+ session_c*Age_c|Lab) --> singular boundary fit
+## random effects structure: (1+ session_c*Method|Lab) --> singular boundary fit
+## random effects structure: (1+ Age_c*Method|Lab) --> singular boundary fit
+## random effects structure: (1+ session_c+Age_c|Lab) --> singular boundary fit
+## random effects structure: (1+ session_c+Method|Lab) --> singular boundary fit
+## random effects structure: (1+ Age_c+Method|Lab) --> singular boundary fit
+## random effects structure: (1+ session_c|Lab) --> singular boundary fit
+## random effects structure: (1+ Age_c|Lab) --> singular boundary fit
+## random effects structure: (1+ Method|Lab) --> singular boundary fit
+## random effects structure: (1|Lab) --> singular boundary fit
+
+overall_chisq_test_change_age_method <- Anova(mod_lmer_2.3.3,type="III")
+change_age_method_coefs<-summary(mod_lmer_2.3.3)$coefficients
 ```
 
+We fit a linear mixed-effects model predicting average IDS preference from Session (centered; Session 1 vs. Session 2), participant age (mean-centered), Method (dummy-coded, with central fixation as the reference level) and their interaction.
+We included a by-participant random intercept (more complex random effects structures did not converge due to singular fits).
+We found no evidence that the change in preferential looking to IDS between Session 1 and Session 2 was moderated by participant age and Method, $\beta$=`r round(change_age_method_coefs[12,1],3)`, *SE*=`r round(change_age_method_coefs[12,2],3)`, *t*(`r round(change_age_method_coefs[12,3],1)`)=`r round(change_age_method_coefs[12,4],2)`, *p*=`r printp(change_age_method_coefs[12,5])`.
 
 ## S2.4. Language background
 
