@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.5.8)  28 JUL 2023 16:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.5.8)  28 JUL 2023 16:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -668,13 +668,13 @@ LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 20
 (/Users/martincz/Library/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) [4{/Users/martincz/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}] [5] [6{/Users/martincz/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}] [7]
-<MB1T_supplement_files/figure-latex/unnamed-chunk-11-1.pdf, id=205, 469.755pt x 325.215pt>
+<MB1T_supplement_files/figure-latex/unnamed-chunk-11-1.pdf, id=215, 469.755pt x 325.215pt>
 File: MB1T_supplement_files/figure-latex/unnamed-chunk-11-1.pdf Graphic file (type pdf)
 <use MB1T_supplement_files/figure-latex/unnamed-chunk-11-1.pdf>
 Package pdftex.def Info: MB1T_supplement_files/figure-latex/unnamed-chunk-11-1.pdf  used on input line 294.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [8{/Users/martincz/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}]
-<MB1T_supplement_files/figure-latex/unnamed-chunk-13-1.pdf, id=216, 469.755pt x 325.215pt>
+<MB1T_supplement_files/figure-latex/unnamed-chunk-13-1.pdf, id=226, 469.755pt x 325.215pt>
 File: MB1T_supplement_files/figure-latex/unnamed-chunk-13-1.pdf Graphic file (type pdf)
 <use MB1T_supplement_files/figure-latex/unnamed-chunk-13-1.pdf>
 Package pdftex.def Info: MB1T_supplement_files/figure-latex/unnamed-chunk-13-1.pdf  used on input line 307.
@@ -685,77 +685,86 @@ Underfull \vbox (badness 1817) has occurred while \output is active []
 [9 <./MB1T_supplement_files/figure-latex/unnamed-chunk-11-1.pdf>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[10 <./MB1T_supplement_files/figure-latex/unnamed-chunk-13-1.pdf>] [11]
-<MB1T_supplement_files/figure-latex/unnamed-chunk-16-1.pdf, id=243, 469.755pt x 325.215pt>
+[10 <./MB1T_supplement_files/figure-latex/unnamed-chunk-13-1.pdf>]
+<MB1T_supplement_files/figure-latex/unnamed-chunk-16-1.pdf, id=249, 469.755pt x 325.215pt>
 File: MB1T_supplement_files/figure-latex/unnamed-chunk-16-1.pdf Graphic file (type pdf)
 <use MB1T_supplement_files/figure-latex/unnamed-chunk-16-1.pdf>
-Package pdftex.def Info: MB1T_supplement_files/figure-latex/unnamed-chunk-16-1.pdf  used on input line 327.
+Package pdftex.def Info: MB1T_supplement_files/figure-latex/unnamed-chunk-16-1.pdf  used on input line 329.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 5460) has occurred while \output is active []
+
+[11]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 [12 <./MB1T_supplement_files/figure-latex/unnamed-chunk-16-1.pdf>]
-<MB1T_supplement_files/figure-latex/unnamed-chunk-20-1.pdf, id=256, 469.755pt x 325.215pt>
-File: MB1T_supplement_files/figure-latex/unnamed-chunk-20-1.pdf Graphic file (type pdf)
-<use MB1T_supplement_files/figure-latex/unnamed-chunk-20-1.pdf>
-Package pdftex.def Info: MB1T_supplement_files/figure-latex/unnamed-chunk-20-1.pdf  used on input line 354.
+<MB1T_supplement_files/figure-latex/unnamed-chunk-21-1.pdf, id=270, 469.755pt x 325.215pt>
+File: MB1T_supplement_files/figure-latex/unnamed-chunk-21-1.pdf Graphic file (type pdf)
+<use MB1T_supplement_files/figure-latex/unnamed-chunk-21-1.pdf>
+Package pdftex.def Info: MB1T_supplement_files/figure-latex/unnamed-chunk-21-1.pdf  used on input line 367.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[13] [14 <./MB1T_supplement_files/figure-latex/unnamed-chunk-20-1.pdf>]
-<MB1T_supplement_files/figure-latex/unnamed-chunk-24-1.pdf, id=277, 578.16pt x 578.16pt>
+[13]
+Underfull \vbox (badness 7151) has occurred while \output is active []
+
+[14 <./MB1T_supplement_files/figure-latex/unnamed-chunk-21-1.pdf>]
+<MB1T_supplement_files/figure-latex/unnamed-chunk-24-1.pdf, id=291, 578.16pt x 578.16pt>
 File: MB1T_supplement_files/figure-latex/unnamed-chunk-24-1.pdf Graphic file (type pdf)
 <use MB1T_supplement_files/figure-latex/unnamed-chunk-24-1.pdf>
-Package pdftex.def Info: MB1T_supplement_files/figure-latex/unnamed-chunk-24-1.pdf  used on input line 402.
+Package pdftex.def Info: MB1T_supplement_files/figure-latex/unnamed-chunk-24-1.pdf  used on input line 408.
 (pdftex.def)             Requested size: 361.3491pt x 361.3491pt.
-[15{/Users/martincz/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}] [16 <./MB1T_supplement_files/figure-latex/unnamed-chunk-24-1.pdf>]
-<MB1T_supplement_files/figure-latex/unnamed-chunk-26-1.pdf, id=300, 578.16pt x 578.16pt>
+[15{/Users/martincz/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
+<MB1T_supplement_files/figure-latex/unnamed-chunk-26-1.pdf, id=301, 578.16pt x 578.16pt>
 File: MB1T_supplement_files/figure-latex/unnamed-chunk-26-1.pdf Graphic file (type pdf)
 <use MB1T_supplement_files/figure-latex/unnamed-chunk-26-1.pdf>
-Package pdftex.def Info: MB1T_supplement_files/figure-latex/unnamed-chunk-26-1.pdf  used on input line 426.
+Package pdftex.def Info: MB1T_supplement_files/figure-latex/unnamed-chunk-26-1.pdf  used on input line 432.
 (pdftex.def)             Requested size: 361.3491pt x 361.3491pt.
-[17 <./MB1T_supplement_files/figure-latex/unnamed-chunk-26-1.pdf>]
-<MB1T_supplement_files/figure-latex/sfig5-1.pdf, id=312, 469.755pt x 325.215pt>
+[16 <./MB1T_supplement_files/figure-latex/unnamed-chunk-24-1.pdf>] [17 <./MB1T_supplement_files/figure-latex/unnamed-chunk-26-1.pdf>]
+<MB1T_supplement_files/figure-latex/sfig5-1.pdf, id=326, 469.755pt x 325.215pt>
 File: MB1T_supplement_files/figure-latex/sfig5-1.pdf Graphic file (type pdf)
 <use MB1T_supplement_files/figure-latex/sfig5-1.pdf>
-Package pdftex.def Info: MB1T_supplement_files/figure-latex/sfig5-1.pdf  used on input line 466.
+Package pdftex.def Info: MB1T_supplement_files/figure-latex/sfig5-1.pdf  used on input line 472.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [18] [19 <./MB1T_supplement_files/figure-latex/sfig5-1.pdf>]
-<MB1T_supplement_files/figure-latex/fig6-1.pdf, id=332, 469.755pt x 325.215pt>
+<MB1T_supplement_files/figure-latex/fig6-1.pdf, id=344, 469.755pt x 325.215pt>
 File: MB1T_supplement_files/figure-latex/fig6-1.pdf Graphic file (type pdf)
 <use MB1T_supplement_files/figure-latex/fig6-1.pdf>
-Package pdftex.def Info: MB1T_supplement_files/figure-latex/fig6-1.pdf  used on input line 488.
+Package pdftex.def Info: MB1T_supplement_files/figure-latex/fig6-1.pdf  used on input line 494.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [20] [21 <./MB1T_supplement_files/figure-latex/fig6-1.pdf>]
-<MB1T_supplement_files/figure-latex/sfig7-1.pdf, id=352, 469.755pt x 325.215pt>
+<MB1T_supplement_files/figure-latex/sfig7-1.pdf, id=364, 469.755pt x 325.215pt>
 File: MB1T_supplement_files/figure-latex/sfig7-1.pdf Graphic file (type pdf)
 <use MB1T_supplement_files/figure-latex/sfig7-1.pdf>
-Package pdftex.def Info: MB1T_supplement_files/figure-latex/sfig7-1.pdf  used on input line 499.
+Package pdftex.def Info: MB1T_supplement_files/figure-latex/sfig7-1.pdf  used on input line 505.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [22 <./MB1T_supplement_files/figure-latex/sfig7-1.pdf>] [23]
 Underfull \vbox (badness 1838) has occurred while \output is active []
 
 [24]
-<MB1T_supplement_files/figure-latex/sfig8-1.pdf, id=379, 867.24pt x 1156.32pt>
+<MB1T_supplement_files/figure-latex/sfig8-1.pdf, id=391, 867.24pt x 1156.32pt>
 File: MB1T_supplement_files/figure-latex/sfig8-1.pdf Graphic file (type pdf)
 <use MB1T_supplement_files/figure-latex/sfig8-1.pdf>
-Package pdftex.def Info: MB1T_supplement_files/figure-latex/sfig8-1.pdf  used on input line 540.
+Package pdftex.def Info: MB1T_supplement_files/figure-latex/sfig8-1.pdf  used on input line 546.
 (pdftex.def)             Requested size: 469.75827pt x 626.34435pt.
 
-LaTeX Warning: Float too large for page by 33.90929pt on input line 545.
+LaTeX Warning: Float too large for page by 33.90929pt on input line 551.
 
 [25] [26 <./MB1T_supplement_files/figure-latex/sfig8-1.pdf>] [27] AED endfloat: Processing end Figures and Tables [28] (./MB1T_supplement.aux)
 Package rerunfilecheck Info: File `MB1T_supplement.out' has not changed.
-(rerunfilecheck)             Checksum: D0D3F4821E1749582C25D9B90FB060D2;9193.
+(rerunfilecheck)             Checksum: 5EC07DFAD258102C3ECB33EC9C2DEEA1;9632.
  ) 
 Here is how much of TeX's memory you used:
- 16278 strings out of 478007
- 271032 string characters out of 5838709
+ 16286 strings out of 478007
+ 271210 string characters out of 5838709
  1862248 words of memory out of 5000000
- 36033 multiletter control sequences out of 15000+600000
+ 36037 multiletter control sequences out of 15000+600000
  565549 words of font info for 70 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  75i,13n,77p,968b,687s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-Output written on MB1T_supplement.pdf (28 pages, 569525 bytes).
+Output written on MB1T_supplement.pdf (28 pages, 569928 bytes).
 PDF statistics:
- 488 PDF objects out of 1000 (max. 8388607)
- 416 compressed objects within 5 object streams
- 111 named destinations out of 1000 (max. 500000)
- 291 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 501 PDF objects out of 1000 (max. 8388607)
+ 429 compressed objects within 5 object streams
+ 115 named destinations out of 1000 (max. 500000)
+ 307 words of extra memory for PDF output out of 10000 (max. 10000000)
 
