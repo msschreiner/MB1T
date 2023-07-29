@@ -113,6 +113,7 @@ library(lme4)
 library(readr)
 library(langcog)
 library(ggthemes)
+library(cowplot)
 library(tidyverse)
 library(here)
 library(knitr)
@@ -121,7 +122,9 @@ library("langcog")
 library(lmerTest)
 library(metafor)
 library(magick)
+library(ggExtra)
 
+read_path <- here("data","processed")
 write_path <- here("data","processed")
 ```
 
@@ -850,6 +853,146 @@ plot_exclusion_dataset(create_exclusion_dataset(paired_retest_df_by_trial_exclus
 plot_exclusion_dataset(create_exclusion_dataset(paired_retest_df_by_trial_exclusions,minimum_trials=4),minimum_trials=4)
 plot_exclusion_dataset(create_exclusion_dataset(paired_retest_df_by_trial_exclusions,minimum_trials=6),minimum_trials=6)
 plot_exclusion_dataset(create_exclusion_dataset(paired_retest_df_by_trial_exclusions,minimum_trials=8),minimum_trials=8)
+```
+
+## Correlations between sessions for number of trials contributed and overall looking time 
+
+In exploratory analyses, we also investigated whether there were stable individual differences in (a) the number of trials an infant contributed across the two test sessions and (b) infants' overall looking times.
+
+### Number of trials contributed
+
+```{r}
+# importing dataset (after excluding session and trial errors)
+df_all <- read_csv(here(read_path,"df_all_after_exclusions.csv"))
+
+#some minor data cleaning
+#not cleaning based on minimum number of trials in order to see even infants contributing at least one trial
+df_all <- df_all %>%
+  filter(Condition != "training") %>%
+  filter(LT >= 2) # minimum LT for inclusion
+
+# calculate number of trials that each participant contributes per session
+df_all_trials <- df_all %>%
+  group_by(Subject_Unique,Session, Method) %>%
+  summarise(N_trials = length(trial_num)) %>%
+  mutate(
+    N_trials = as.numeric(N_trials), #probably not needed, just to be safe
+    Method = as.factor(Method)) %>%
+  mutate(
+    Session = case_when(
+      Session==1 ~ "Test",
+      Session==2 ~ "Retest"
+    )
+  )
+
+df_all_trials <- df_all_trials %>% 
+  pivot_wider(names_from = Session,values_from = N_trials)
+
+#compute correlation
+cor_trials <- cor.test(df_all_trials$Test,df_all_trials$Retest)
+cor_trials_out <- apa_print(cor_trials)
+```
+
+```{r sfig7, fig.cap = "Correlation between the number of trials contributed in Session 1 and Session 2. Each data point represents one infant. Colored lines represent linear fits for each method."}
+# ordering levels of method as in language background plot (Figure 1 of Supplementary)
+df_all_trials$Method <- factor(df_all_trials$Method, levels = c("central fixation", "Eyetracking", "HPP"))
+# jittering individual data points in order to make overlapping data points visible
+trials <- ggplot(df_all_trials, aes(x=Test, y=Retest))+
+  geom_jitter(width=0.5,height=0.5,aes(colour = Method),alpha=0.5)+
+  geom_smooth(aes(colour = Method,group=Method),method=lm, se=FALSE,alpha=0.3)+
+  geom_smooth(method=lm, colour= "black")+
+  scale_color_ptol(name = "Method") + 
+  scale_x_continuous(seq(0,16,2),name="Number of Trials During Session 1")+
+  scale_y_continuous(seq(0,16,2),name="Number of Trials During Session 2")+
+  theme_cowplot()+
+  theme(legend.position=c(0.02,0.8))
+#plot
+#trials
+p1 <- ggMarginal(trials, groupColour = TRUE, groupFill = TRUE,alpha=0.3)
+```
+
+We found a strong positive correlation between number of trials contributed during the first and the second session `r cor_trials_out$full_result` (Figure 3A). 
+In other words, if infants contributed a higher number of trials in one session, compared to other infants, they were likely to contribute a higher number of trials in their next session.
+This finding is consistent with the hypothesis that how attentive infants are throughout an experiment (and hence how many trials they contribute) is a stable individual difference, at least for some infant looking time tasks.
+
+### Overall looking times
+
+```{r}
+#Overall Correlations
+agg_by_subj_paired <- data_clean %>%
+  select(Subject,Subject_Unique,Age,Gender,Method, preterm,Session, Condition, trial_num,LT,Lab,days_between_sessions) %>% 
+  group_by(Method, Lab,Subject, Subject_Unique, Age,Gender, preterm,days_between_sessions,Session) %>%
+  summarize(mean_lt=mean(LT),
+            N=n()) %>%
+  pivot_wider(names_from = Session, values_from = c(mean_lt,N,Age)) %>%
+  rowwise() %>%
+  mutate(
+    mean_age = mean(c(Age_1,Age_2),na.rm=TRUE)
+  )
+
+corr_lt_p1 <- ggplot(agg_by_subj_paired,aes(mean_lt_1,mean_lt_2))+
+  geom_point()+
+  geom_smooth(method="lm",color="black")+
+  theme_cowplot()+
+  theme(legend.position="none")+
+  xlab("Average Looking Time (s) in first session")+
+  ylab("Average Looking Time (s) in second session")
+
+correlation_avg_looking <- cor.test(agg_by_subj_paired$mean_lt_1,agg_by_subj_paired$mean_lt_2)
+
+#similar results when controlling for trial number
+m <- lm(mean_lt_2~mean_lt_1+N_1+N_2,data=agg_by_subj_paired)
+#car::vif(m) #no really worrying variance inflation here
+
+#model controlling for age
+m_overall_correlation_age <- lm(mean_lt_2~mean_lt_1+mean_age,data=agg_by_subj_paired)
+results_overall_correlation_age  <- summary(m_overall_correlation_age)
+```
+
+```{r}
+#Correlations by IDS/ADS
+agg_by_subj_condition_paired <- data_clean %>%
+  select(Subject,Subject_Unique,Age,Gender,Method, preterm,Session, Condition, LT,Lab,days_between_sessions) %>% 
+  group_by(Method, Lab,Subject, Subject_Unique, Age,Gender, preterm,days_between_sessions,Condition,Session) %>%
+  summarize(mean_lt=mean(LT)) %>%
+  pivot_wider(names_from = Session, values_from =  c(mean_lt, Age)) %>%
+  rename(LT_Test = mean_lt_1,LT_Retest=mean_lt_2) %>%
+  rowwise() %>%
+  mutate(
+    mean_age = mean(c(Age_1,Age_2),na.rm=TRUE)
+  )
+
+corr_lt_p2 <- ggplot(agg_by_subj_condition_paired,aes(LT_Test,LT_Retest,color=Condition))+
+  geom_point()+
+  geom_smooth(method="lm",color="black")+
+  facet_wrap(~Condition)+
+  theme_cowplot()+
+  theme(legend.position="none")+
+  xlab("Average Looking Time (in s) in first session")+
+  ylab("Average Looking Time (in s) in second session")
+
+agg_by_subj_condition_paired_wide <- agg_by_subj_condition_paired %>%
+  pivot_wider(names_from = Condition,values_from = c(LT_Test,LT_Retest))
+
+#condition-specific correlations
+correlation_IDS_LT <- cor.test(agg_by_subj_condition_paired_wide$LT_Retest_IDS,agg_by_subj_condition_paired_wide$LT_Test_IDS)
+correlation_ADS_LT <- cor.test(agg_by_subj_condition_paired_wide$LT_Retest_ADS,agg_by_subj_condition_paired_wide$LT_Test_ADS)
+
+#controlling for age
+predicting_Retest_IDS_age <- lm(LT_Retest_IDS ~ LT_Test_IDS + mean_age,data=agg_by_subj_condition_paired_wide)
+predicting_Retest_ADS_age <- lm(LT_Retest_ADS ~ LT_Test_ADS + mean_age,data=agg_by_subj_condition_paired_wide)
+
+```
+
+To what extent are participants looking times between the two sessions related?
+To test this question, we investigated whether participants' overall looking times --- irrespective of condition --- were correlated between the first and second session.
+There was a robust correlation between average looking time in Session 1 and Session 2: infants with longer looking times during their first session also tended to look longer during their second session, `r apa_print(correlation_avg_looking)$full_result` (Figure 3B).
+This relationship held even after controlling for number of trials (`r apa_print(m)$full_result[["mean_lt_1"]]`) and participants' average age (`r apa_print(results_overall_correlation_age)$full_result[["mean_lt_1"]]`) across the two test sessions in linear regression models.
+Finally, we found similar correlations in average looking time to IDS stimuli in Session 1 and 2, `r apa_print(correlation_IDS_LT)$full_result`, and ADS stimuli in Session 1 and 2, `r apa_print(correlation_ADS_LT)$full_result` (Figure 3C; see Supplementary Materials S9 and S10 for further details, including an investigation of item-level correlations).
+
+```{r fig3, fig.cap="(A) Correlation between the number of trials contributed in Session 1 and Session 2. Each data point represents one infant. Colored lines represent linear fits for each method. (B) Overall correlations in average looking time (in s) between Session 1 and 2. (C) Correlations in average looking time (in s) between sessions, split by IDS/ADS condition.", fig.align="center",fig.height = 14, fig.width = 12}
+bottom_row <- plot_grid(corr_lt_p1,corr_lt_p2, labels=c("B","C"),ncol=2)
+plot_grid(p1,bottom_row,labels=c("A",""),nrow=2,rel_heights=c(1,1))
 ```
 
 # General Discussion

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.5.8)  25 JUN 2023 18:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.5.8)  29 JUL 2023 17:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -678,7 +678,7 @@ Underfull \vbox (badness 7595) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [11]
-<Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf, id=151, 469.755pt x 325.215pt>
+<Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf, id=163, 469.755pt x 325.215pt>
 File: Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type pdf)
 <use Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf>
 Package pdftex.def Info: Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf  used on input line 434.
@@ -687,46 +687,55 @@ Package pdftex.def Info: Retest_current_draft_files/figure-latex/unnamed-chunk-5
 Underfull \vbox (badness 1028) has occurred while \output is active []
 
 [14{/Users/martincz/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
-<Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf, id=185, 578.16pt x 722.7pt>
+<Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf, id=197, 578.16pt x 722.7pt>
 File: Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf Graphic file (type pdf)
 <use Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf>
 Package pdftex.def Info: Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf  used on input line 490.
 (pdftex.def)             Requested size: 361.3491pt x 451.68639pt.
 [15] [16 <./Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf>]
+<Retest_current_draft_files/figure-latex/fig3-1.pdf, id=216, 867.24pt x 1011.78pt>
+File: Retest_current_draft_files/figure-latex/fig3-1.pdf Graphic file (type pdf)
+<use Retest_current_draft_files/figure-latex/fig3-1.pdf>
+Package pdftex.def Info: Retest_current_draft_files/figure-latex/fig3-1.pdf  used on input line 520.
+(pdftex.def)             Requested size: 469.75827pt x 548.0513pt.
+
+LaTeX Warning: Float too large for page by 3.6112pt on input line 525.
+
+[17] [18 <./Retest_current_draft_files/figure-latex/fig3-1.pdf>]
 Underfull \vbox (badness 7649) has occurred while \output is active []
 
-[17]
+[19]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[18]
+[20]
 Underfull \vbox (badness 1838) has occurred while \output is active []
 
-[19] [20]
+[21] [22]
 Underfull \vbox (badness 1028) has occurred while \output is active []
 
-[21]
+[23]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[22]
+[24]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[23] AED endfloat: Processing end Figures and Tables [24] (./Retest_current_draft.aux)
+[25] AED endfloat: Processing end Figures and Tables [26] (./Retest_current_draft.aux)
 Package rerunfilecheck Info: File `Retest_current_draft.out' has not changed.
-(rerunfilecheck)             Checksum: D403DAF03AF45407C8000056BE3A93C1;2877.
+(rerunfilecheck)             Checksum: 47AED991D4037C0E69EA8B963F7EAA44;3776.
  ) 
 Here is how much of TeX's memory you used:
- 16140 strings out of 478007
- 264732 string characters out of 5838709
+ 16165 strings out of 478007
+ 265592 string characters out of 5838709
  1864248 words of memory out of 5000000
- 35917 multiletter control sequences out of 15000+600000
+ 35932 multiletter control sequences out of 15000+600000
  555506 words of font info for 67 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  75i,11n,77p,1691b,587s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-Output written on Retest_current_draft.pdf (24 pages, 249610 bytes).
+Output written on Retest_current_draft.pdf (26 pages, 340460 bytes).
 PDF statistics:
- 344 PDF objects out of 1000 (max. 8388607)
- 296 compressed objects within 3 object streams
- 108 named destinations out of 1000 (max. 500000)
- 163 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 386 PDF objects out of 1000 (max. 8388607)
+ 333 compressed objects within 4 object streams
+ 117 named destinations out of 1000 (max. 500000)
+ 192 words of extra memory for PDF output out of 10000 (max. 10000000)
 
