@@ -523,7 +523,7 @@ Given that we found that restricting the sample to participants contributing at 
 
 ```{r}
 agg_subjects_6 <- read_csv(here(read_path,"agg_subjects_minimum_trials_per_type_6.csv"))
-all_agg_subjects_paired_6 <- read_csv(here(read_path,"all_agg_subjects_paired_retest_minimum_trials_per_type_6.csv")) 
+all_agg_subjects_paired_6 <- read_csv(here(read_path,"all_agg_subjects_paired_minimum_trials_per_type_6.csv")) 
 all_agg_subjects_paired_retest_6 <- read_csv(here(read_path,"all_agg_subjects_paired_retest_minimum_trials_per_type_6.csv")) %>%
   mutate(Pref_Test=case_when(
              Diff_1 > 0 ~ "IDS_preference",
@@ -541,6 +541,49 @@ all_agg_subjects_paired_retest_6 <- read_csv(here(read_path,"all_agg_subjects_pa
                               (Pref_Test == "ADS_preference" & Pref_Retest == "IDS_preference")  ~ 1)) %>%
   unite(reversal_type,Pref_Test,Pref_Retest,remove=FALSE) %>%
   mutate(reversal_type=str_remove_all(reversal_type,pattern="_preference"))
+```
+
+## S4.1. Descriptives for the restricted sample
+
+```{r}
+# Summarize mean Age and number of Subjects for each lab, method, and language
+lab_stats_6<-all_agg_subjects_paired_retest_6 %>%
+  select(Lab,Subject,Method,Age,Language) %>% 
+  group_by(Lab,Method,Language) %>% 
+  summarise(Age=mean(Age),N=length(unique(Subject)))
+
+# Assign column label to column 4
+names(lab_stats_6)[4]<-"Mean age (days)"
+
+#slight edit to method naming
+lab_stats_6 <- lab_stats_6 %>%
+  mutate(Method = case_when(
+    Method=="Eyetracking" ~ "eye-tracking",
+    TRUE ~ Method
+  ))
+
+papaja::apa_table(lab_stats_6, 
+                  caption = "Statistics of the included labs for the restricted sample (min 6 trials contributed per session). n refers to the number of infants included in the analysis.", 
+                  format.args = list(digits = 0))
+
+# Are the ages for the full sample and the restricted sample similar?
+t_test_age_restricted_sample <- t.test(all_agg_subjects_paired_retest_6$Age,all_agg_subjects_paired_retest$Age)
+```
+
+```{r,message=FALSE,warning=FALSE}
+# Linear mixed model assessing if session predicts differences in LT 
+diff_session_1_6 <- lmer(Diff ~ Session + 
+                (1 | Lab) + (1 | Subject), 
+              data=all_agg_subjects_paired_6, REML=FALSE)
+diff_session_6_coefs<-summary(diff_session_1_6)$coefficients
+
+# Subsetting to session 1 for t-test
+all_agg_subjects_paired_s1_6 <- subset(all_agg_subjects_paired_6, all_agg_subjects_paired_6$Session=="1")
+ttestSession1_6<-t.test(all_agg_subjects_paired_s1_6$Diff)
+
+# Subsetting to session 2 for t-test
+all_agg_subjects_paired_s2_6 <- subset(all_agg_subjects_paired_6, all_agg_subjects_paired_6$Session=="2")
+ttestSession2_6 <- t.test(all_agg_subjects_paired_s2_6$Diff)
 ```
 
 
