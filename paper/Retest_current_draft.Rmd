@@ -123,6 +123,7 @@ library(lmerTest)
 library(metafor)
 library(magick)
 library(ggExtra)
+library(psych)
 
 read_path <- here("data","processed")
 write_path <- here("data","processed")
@@ -650,6 +651,10 @@ rev_plot <- ggplot(reversal_plot, aes(y=reversal_plot$Diff, x=reversal, fill=rev
 # calculate simple correlation of difference score of session 1 and difference score of session 2
 simplyOverallCorr<-cor.test(all_agg_subjects_paired_retest$Diff_1,
          all_agg_subjects_paired_retest$Diff_2)
+
+#ICC
+icc_data <- all_agg_subjects_paired_retest %>% ungroup() %>% select(Diff_1,Diff_2)
+icc_results <- psych::ICC(icc_data,missing=FALSE, lmer=TRUE)
 ```
 
 ```{r fig.cap="Correlation between IDS Preference in Session 1 and Session 2 in each lab and method. Dots indicate individual participants. Error bands represent 95 percent confidence intervals. The dashed line indicates no preference (i.e., a value of zero) for the first and second session, respectively.", fig.align="center"}
@@ -821,6 +826,13 @@ correlation_6 <- create_exclusion_dataset(paired_retest_df_by_trial_exclusions,m
 correlation_8 <- create_exclusion_dataset(paired_retest_df_by_trial_exclusions,minimum_trials=8) %>%
   compute_test_retest_correlation()
 correlations <- c(correlation_1$estimate,correlation_2$estimate,correlation_4$estimate,correlation_6$estimate,correlation_8$estimate)
+
+#ICC for restricted samples
+icc_results_2 <- create_exclusion_dataset(paired_retest_df_by_trial_exclusions,minimum_trials=2) %>% ungroup() %>% select(Diff_1,Diff_2) %>% psych::ICC(missing=FALSE, lmer=TRUE)
+icc_results_4 <- create_exclusion_dataset(paired_retest_df_by_trial_exclusions,minimum_trials=4) %>% ungroup() %>% select(Diff_1,Diff_2) %>% psych::ICC(missing=FALSE, lmer=TRUE)
+icc_results_6 <- create_exclusion_dataset(paired_retest_df_by_trial_exclusions,minimum_trials=6) %>% ungroup() %>% select(Diff_1,Diff_2) %>% psych::ICC(missing=FALSE, lmer=TRUE)
+icc_results_8 <- create_exclusion_dataset(paired_retest_df_by_trial_exclusions,minimum_trials=8) %>% ungroup() %>% select(Diff_1,Diff_2) %>% psych::ICC(missing=FALSE, lmer=TRUE)
+
 ```
 
 To this point, all analyses were performed using the inclusion criteria from MB1, which required only that infants contribute at least one trial per condition for inclusion (i.e., one IDS and one ADS trial). 

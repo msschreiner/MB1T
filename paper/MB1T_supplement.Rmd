@@ -40,6 +40,8 @@ library(tidymodels)
 library(car)
 library(metafor)
 library(ggExtra)
+library(corrr)
+library(corx)
 read_path <- here("data","processed")
 ```
 
@@ -743,7 +745,27 @@ As in the main sample, a linear mixed-effects model predicting IDS preference in
 
 To check the robustness of our results, we also investigated whether we obtained similar results with other possible dependent measures: average log-transformed looking times and a proportion-based preference measure. For each alternative dependent variable, we conducted the main analyses of test-retest reliability reported in the manuscript: the overall Pearson correlation, the test-retest linear mixed-effects model, and an inspection of applying stricter inclusion criteria for number of trials contributed.
 
-## S5.1. Log-transformed looking times
+## S5.1. Correlations between alternative dependent variables
+
+```{r, results="asis"}
+dv_corr_dataframe <- all_agg_subjects_paired_6 %>%
+  select(Diff, Prop, Diff_log_lt) %>%
+  as.data.frame()
+
+dv_corr_table <- corx(dv_corr_dataframe,
+          triangle = "lower",
+          stars = c(0.05, 0.01, 0.001),
+          describe = c(`M` = mean, `SD` = sd))
+
+papaja::apa_table(dv_corr_table$apa, # apa contains the data.frame needed for apa_table
+                  caption = "Correlations between alternative dependent measures",
+                  note = "* p < 0.05; ** p < 0.01; *** p < 0.001",
+                  escape = T)
+```
+
+First, we consider the correlations between the three dependent measures we considered for IDS preference: (a) a simple difference score between average IDS and ADS looking times (main manuscript), (b) a difference score between average log-transformed looking times, and (c) the proportion-based preference measure. As expected, the correlations between the alternative dependent measures was very high (all *r*s > `r round(min(dv_corr_table$r),2)`; Table 2).
+
+## S5.2. Log-transformed looking times
 
 ```{r}
 # calculate simple correlation of log-looking-time-based difference score of session 1 and difference score of session 2
@@ -806,11 +828,11 @@ plot_exclusion_dataset(all_agg_subjects_paired_retest_8,minimum_trials=8,Limaxes
 
 In these analyses, we calculated IDS preference by first log-transforming looking times for each trial, computing the average log-transformed looking time for IDS and ADS for each participant, and calculating the difference between average IDS and ADS log-transformed looking times.
 We fit a linear mixed-effects model predicting IDS preference in Session 2 from IDS preference in Session 1, including a by-lab random intercept. 
-As in the analyses using average raw looking times, the results revealed no significant relationship between IDS preference in Session 1 and 2 (Table 2). 
+As in the analyses using average raw looking times, the results revealed no significant relationship between IDS preference in Session 1 and 2 (Table 3). 
 The Pearson correlation coefficient was also not statistically significant, `r apa_print(simplyOverallCorr_log_lt)$full_result`.
 Applying successively stricter inclusion criteria --- by requiring a higher number of valid trials per condition in each session --- showed a similar pattern to the main manuscript, such that correlations increased somewhat with stricter inclusion criteria, but substantially reduced the sample size at the same time (Figure 3).
 
-## S5.2. Proportion looking to IDS
+## S5.3. Proportion looking to IDS
 
 ```{r}
 # calculate simple correlation of difference score of session 1 and difference score of session 2
@@ -820,7 +842,7 @@ simplyOverallCorr_prop<-cor.test(all_agg_subjects_paired_retest$Prop_session_1,
 
 Next, we calculated a proportion-based IDS preference measure by computing the average proportion (raw) looking time to IDS relative to total (raw) looking time to IDS and ADS for each subject (i.e., IDS looking time / (ADS looking time + IDS looking time)).
 We fit a linear mixed-effects model predicting proportion-based IDS preference in Session 2 from proportion-based IDS preference in Session 1, including a by-lab random intercept. 
-As in the analyses using other measures of IDS preference, the results revealed no significant relationship between IDS preference in Session 1 and 2 (Table 3). 
+As in the analyses using other measures of IDS preference, the results revealed no significant relationship between IDS preference in Session 1 and 2 (Table 4). 
 The Pearson correlation coefficient based on proportional IDS looking was also not statistically significant, `r apa_print(simplyOverallCorr_prop)$full_result`.
 Stricter inclusion criteria increased the correlation somewhat, as in previous analyses (Figure 4).
 
@@ -1228,7 +1250,7 @@ Finally, we inspected on a more fine-grained item level whether IDS preference i
 To do so, we exploited the fact the specific IDS and ADS stimuli were paired together in test orders in both sessions, such that one IDS stimulus (e.g., IDS1) always occurred adjacently to a specific ADS stimulus (e.g., ADS1).
 We therefore computed stimulus-specific IDS preference scores by calculating the difference in raw looking time for each of the eight IDS-ADS stimulus pairs for each participant (whenever both trials in a given pair were available).
 We then fit a linear mixed-effects model predicting stimulus-specific IDS preference in Session 2 from stimulus-specific IDS preference in Session 1, including by-participant and by-lab random intercepts (models with more complex random effects structure, including by-item random effects, failed to converge).
-There was a marginal, but non-significant relation in stimulus-specific IDS preference between the two test sessions (Table 4).
+There was a marginal, but non-significant relation in stimulus-specific IDS preference between the two test sessions (Table 5).
 
 ```{r}
 apa_table(
