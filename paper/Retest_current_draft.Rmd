@@ -1011,7 +1011,7 @@ plot_grid(p1,bottom_row,labels=c("A",""),nrow=2,rel_heights=c(1,1))
 # General Discussion
 
 The current study investigated the test-retest reliability of infants' preference for IDS over ADS. 
-We retested the IDS preference of infants participating in the original MB1 project to assess the extent to which their pattern of preference would remain consistent across multiple testing sessions. 
+As part of the original MB1 project, we tested the IDS preference of infants in two separate test sessions to assess the extent to which their pattern of preference would remain consistent. 
 While we replicated the original effect of infants’ speech preference for IDS over ADS for both the test and retest session on the group-level, we found that infants' speech preference measures showed no evidence of test-retest reliability. 
 In other words, we were unable to detect stable individual differences in infants' preference for IDS. 
 This finding is consistent with past research suggesting low test-retest reliability in other infant paradigms [@cristia2016test]. 
