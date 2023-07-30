@@ -207,7 +207,18 @@ We found no evidence that the change in preferential looking to IDS between Sess
 
 ## S2.3. Method
 
-### S2.3.1. Reliability moderated by Method
+### S2.3.1. IDS preference moderated by Method
+
+```{r}
+diff_session_method <- lmer(Diff ~ Session + Method+
+                (1 | Lab) + (1 | Subject), 
+              data=all_agg_subjects_paired, REML=FALSE)
+chi_sq_test_session_method <- Anova(diff_session_method,type="III")
+```
+
+In ManyBabies1, infants who participated in the headturn preference procedure showed a significantly larger magnitude of IDS preference, compared to central fixation and eye-tracking methods. Therefore, in the current study, we also explored whether the magnitude of IDS preference differed as a function of method. We fit a linear mixed-effects model predicting IDS preference from Session and Method (dummy-coded, with central fixation as the reference level), including by-lab and by-participant random intercepts. We found no significant difference in IDS preference across methods, ${\chi}^2$=`r round(chi_sq_test_session_method$Chisq[3],2)`, *p*=`r printp(chi_sq_test_session_method[3,3])`.
+
+### S2.3.2. Reliability moderated by Method
 
 ```{r}
 all_agg_subjects_paired_retest <- all_agg_subjects_paired_retest %>%
@@ -235,7 +246,7 @@ We tested whether method (eye-tracking vs. central fixation vs. headturn prefere
 The model included a by-lab random intercept and a by-lab random slope for IDS preference in Session 1 (models with more complex random effects structure including by-lab random effects for Method did not converge).
 We found no evidence that Method influenced test-retest reliability as indicated by the interaction between IDS preference in Session 1 and age, ${\chi}^2$=`r round(overall_chisq_test_method$Chisq[4],2)`, *p*=`r printp(overall_chisq_test_method[4,3])`.
 
-### S2.3.2. Reliability and its interaction with both method and age
+### S2.3.3. Reliability and its interaction with both method and age
 
 ```{r}
 #interaction including both age and method
@@ -297,7 +308,7 @@ In a more complex linear mixed-effects model (preregistered as part of our plann
 This effect appears to be mainly driven by older infants showing some evidence of test-retest reliability for the headturn preference procedure, *r* = `r round(filter(coef_table_method_age, Method=="HPP"&age_bin=="older")$cor,2)`, *p* = `r round(filter(coef_table_method_age, Method=="HPP"&age_bin=="older")$pvalue2,2)` (see Figure 2B).
 However, we believe these tentative findings should be treated with caution, due to the small size of our infant sample once binned by multiple moderating factors.
 
-### S2.3.3. Change in preferential looking moderated by age and method
+### S2.3.4. Change in preferential looking moderated by age and method
 
 ```{r}
 #APLT ~ time * ageC*method + (1+ test+ageC+method| lab) + (1+subject)

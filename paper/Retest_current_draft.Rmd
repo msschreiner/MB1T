@@ -766,10 +766,10 @@ papaja::apa_table(coef_table,
 To investigate the test-retest reliability of each specific method, we computed Pearson correlation coefficients and the same mixed-effects model described above for HPP, CF, and ET separately (Table 4) in additional exploratory analyses. 
 None of the three methods showed evidence of test-retest reliability. 
 Neither the Pearson correlation coefficients nor the coefficients of the multilevel analysis were significant, all *p*-values > `r floor(min(coef_table$pvalue)*100)*0.01`.
-In planned secondary analyses, we found that time between test sessions, participant age, and language background did not moderate the relationship between IDS preference in session 1 and session 2 (see Supplementary Materials S2).
+In planned secondary analyses, we found that time between test sessions, participant age, method, and language background did not moderate the relationship between IDS preference in session 1 and session 2 (see Supplementary Materials S2).
 Taken together, we find no significant evidence of test-retest reliability across our preregistered analyses.
 
-## Results with different inclusion criteria
+## Exploratory analyses with different inclusion criteria
 
 ```{r,message=FALSE,warning=FALSE}
 
@@ -841,7 +841,7 @@ However, more stringent inclusion criteria yielded larger effect sizes in MB1.
 We therefore conducted exploratory analyses assessing test-retest reliability after applying progressively stricter inclusion criteria, requiring two, four, six, and eight valid trials per condition. 
 Applying stricter criteria --- and thereby increasing the number of test trials --- increased reliability numerically from *r* = `r round(min(correlations),2)` to *r* = `r round(max(correlations),2)` (Figure 2). 
 In part due to a decrease in sample size, only one of these correlations was statistically significant (when requiring six trial pairs): two valid trial pairs, `r apa_print(correlation_2)$statistic`; four valid trial pairs, `r apa_print(correlation_4)$statistic`; six valid trial pairs, `r apa_print(correlation_6)$statistic`; eight valid trial pairs --- all trials in both sessions --- `r apa_print(correlation_8)$statistic`. 
-The analyses provide tentative evidence that stricter inclusion criteria may lead to higher test-retest reliability, but at the cost of substantial decreases in sample size (see Supplementary Materials S5 for additional analyses).
+The analyses provide tentative evidence that stricter inclusion criteria may lead to higher test-retest reliability, but at the cost of substantial decreases in sample size (see Supplementary Materials S4 for additional analyses, including moderator analyses using a more restricted sample).
 
 ```{r fig.cap="IDS preferences of both sessions plotted against each other for each inclusion criterion. \\textit{n} indicates the number of included infants, \\textit{r} is the Pearson correlation coefficient as the indicator for reliability.", fig.align="center",out.width = "5in",fig.height = 10, fig.width = 8}
 
