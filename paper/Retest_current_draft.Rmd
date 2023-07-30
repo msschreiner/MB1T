@@ -124,6 +124,7 @@ library(metafor)
 library(magick)
 library(ggExtra)
 library(psych)
+library(pwr)
 
 read_path <- here("data","processed")
 write_path <- here("data","processed")
@@ -1028,6 +1029,30 @@ Note that studies in developmental science already have above-average drop-out r
 In addition, drop out may not be random, and so having high drop-out rates can further limit the generalizability of a study. 
 In fact, the number of trials individual infants contributed was highly correlated between test sessions in the current study (see Supplementary Materials S6).
 Particularly in the context of turning individual differences measures into diagnostic tools, high drop-out rates have an additional limitation of not being broadly usable.
+
+```{r}
+spearman_brown <- function(r_true, rxx, ryy) {
+  r_obs <-  r_true*sqrt(rxx*ryy)
+  return(r_obs)
+}
+
+cur_alpha <- icc_results_6$results[5,2]
+
+# Create dataframe for observable r's
+rxx <- c(cur_alpha,cur_alpha)
+true_r <- c(.7, .3)
+
+reliability <- data.frame(rxx, true_r) %>%
+  mutate(r_obs = spearman_brown(true_r, rxx, rxx))
+
+# r = .25, n = 122
+rel_pwr_results_r.7 <- pwr.r.test(r = .25, power = .8)
+
+# r = .107, n = 682
+rel_pwr_results_r.3 <- pwr.r.test(r = .107, power = .8)
+```
+
+Even under best-case scenarios, reliability remained quite low. For example, when restricting the sample to infants contributing at least 6 trials in each condition in both sessions, we obtained a correlation of *r* = `r round(correlation_6$estimate,2)` and an intra-class correlation coefficient of $\alpha$ = `r round(icc_results_6$results[5,2],2)`. As @byers2021six outline, low measurement reliability severely restricts power for detecting relationships between measures. Using the same approach as @byers2021six, we estimate that over `r floor(rel_pwr_results_r.3$n)` infants would be needed to have at least 80% power to observe a true correlation of *r* = .3 between two measurements, assuming an intra-class correlation coefficient as large as that observed in our restricted sample ($\alpha$ = `r round(icc_results_6$results[5,2],2)`). Even a very large true correlation of *r* = .7 would require a sample size of over 120 infants. In other words, even under optimistic estimates of reliability based on strict inclusion criteria, the low reliability of IDS preference measures would severely limit the feasibility of individual difference and longitudinal research using current methods.
 
 An alternative approach to increasing the number of valid trials is to increase the number of experimental trials. 
 This approach seeks to increase the likelihood that participants will contribute sufficient trials (after trial-level exclusions) to allow for precise individual-level estimates [@debolt2020robust; see also @silverstein2021infants]. 
