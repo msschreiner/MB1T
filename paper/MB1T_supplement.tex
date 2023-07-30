@@ -334,22 +334,22 @@ In addition to the methods for assessing test-retest reliability reported in the
 We used the metafor package (Viechtbauer, 2010) to fit a mixed-effects meta-analytic model on z-transformed correlations for each combination of lab and method using sample size weighting.
 The model included random intercepts for lab and method.
 The overall effect size estimate was not significantly different from zero, \emph{b} = -0.04, 95\% CI = {[}-0.26, 0.19{]}, \emph{p} = 0.73.
-A forest plot of the effect sizes for each lab and method is shown in Figure 2.
+A forest plot of the effect sizes for each lab and method is shown in Figure 3.
 
 \hypertarget{s4.-analyses-including-a-more-restricted-sample}{%
 \section{S4. Analyses including a more restricted sample}\label{s4.-analyses-including-a-more-restricted-sample}}
 
 Given that we found that restricting the sample to participants contributing at least 6 ADS and IDS trials in both sessions, we conducted the central analyses with this more restricted infant sample.
 
-\hypertarget{s4.1.-descriptives-for-the-restricted-sample}{%
-\subsection{S4.1. Descriptives for the restricted sample}\label{s4.1.-descriptives-for-the-restricted-sample}}
+\hypertarget{s4.1.-descriptives-and-ids-preference-for-the-restricted-sample}{%
+\subsection{S4.1. Descriptives and IDS preference for the restricted sample}\label{s4.1.-descriptives-and-ids-preference-for-the-restricted-sample}}
 
 \begin{table}[tbp]
 
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:unnamed-chunk-18}Statistics of the included labs for the restricted sample (min 6 trials contributed per session). n refers to the number of infants included in the analysis.}
+\caption{\label{tab:labs6}Statistics of the included labs for the restricted sample (min 6 trials contributed per session). n refers to the number of infants included in the analysis.}
 
 \begin{tabular}{lllll}
 \toprule
@@ -371,6 +371,10 @@ wsi-goettingen & central fixation & German & 281 & 26\\
 
 \end{table}
 
+The participants in the restricted sample --- contributing at least 6 IDS and ADS trials for both sessions --- were distributed across the contributing labs, methods, and language backgrounds (Table 1). There was no difference in average age between the main sample and the restricted sample (\(t(204.57) = -0.33\), \(p = .744\)). There was a robust preference for infant-directed speech in both session 1 (\(t(99) = 6.67\), \(p < .001\)) and session 2 (\(t(99) = 4.42\), \(p < .001\)). We observed no difference in IDS preference between the two sessions, \(\beta\)=-0.34, \emph{SE}=0.28, \emph{p}=.225.
+
+Interestingly, while there was a significant simple correlation between IDS preference in session 1 and session 2 (\(r = .22\), 95\% CI \([.02, .40]\), \(t(98) = 2.23\), \(p = .028\)), we found that IDS preference in session 1 did not significantly predict IDS preference in session 2 in a linear mixed-effects model including a by-lab random intercept, \(\beta\)=0.12, \emph{SE}=0.11, \emph{p}=.255.
+
 \hypertarget{s4.2.-moderator-analyses-including-a-more-restricted-sample}{%
 \subsection{S4.2. Moderator analyses including a more restricted sample}\label{s4.2.-moderator-analyses-including-a-more-restricted-sample}}
 
@@ -382,25 +386,21 @@ As in the analyses with the full dataset, we found no evidence that the number o
 \hypertarget{s4.2.2.-participant-age}{%
 \subsection{S4.2.2. Participant age}\label{s4.2.2.-participant-age}}
 
-To investigate the possibility that age moderated test-retest reliability, we fit a linear mixed-effects model predicting IDS preference in Session 2 from IDS preference in Session 1 (mean-centered), participant age (mean-centered) and their interaction.
+To investigate the possibility that age moderated test-retest reliability in the restricted sample, we fit a linear mixed-effects model predicting IDS preference in Session 2 from IDS preference in Session 1 (mean-centered), participant age (mean-centered) and their interaction.
 The model included a by-lab random intercept and a by-lab random slope for IDS preference in Session 1.
-We found no evidence that age influenced test-retest reliability as indicated by the interaction between IDS preference in Session 1 and age, \(\beta\)=0.00, \emph{SE}=0.00, \emph{t}(76.60)=-0.85, \emph{p}=.398.
+We found no evidence that age influenced test-retest reliability as indicated by the interaction between IDS preference in Session 1 and age, \(\beta\)=0.00, \emph{SE}=0.00, \emph{t}(43.20)=-0.69, \emph{p}=.494.
 
 \hypertarget{s4.2.3.-method}{%
 \subsection{S4.2.3. Method}\label{s4.2.3.-method}}
 
+We tested whether method (eye-tracking vs.~central fixation vs.~headturn preference procedure) moderated test-retest reliability by fitting a linear mixed-effects model predicting IDS preference in Session 2 from IDS preference in Session 1 (mean-centered), Method (dummy-coded, with central fixation as the reference level) and their interaction.
+The model included a by-lab random intercept and a by-lab random slope for IDS preference in Session 1.
+We found no evidence that Method influenced test-retest reliability as indicated by the interaction between IDS preference in Session 1 and age, \({\chi}^2\)=3.85, \emph{p}=.146. There was no significant relationship between IDS preference for session 1 and session 2 for each method considered separately (central fixation:\(\beta\)=-0.06, \emph{SE}=0.16, \emph{p}=.704; HPP: \(\beta\)=0.26, \emph{SE}=0.17, \emph{p}=.139; eye-tracking: \(\beta\)=-0.04, \emph{SE}=0.26, \emph{p}=.866)
+
 \hypertarget{s4.2.4.-language-background}{%
 \subsection{S4.2.4. Language background}\label{s4.2.4.-language-background}}
 
-\begin{figure}
-\centering
-\includegraphics{MB1T_supplement_files/figure-latex/unnamed-chunk-23-1.pdf}
-\caption{\label{fig:unnamed-chunk-23}Infants' preference in Session 1 and Session 2 with individual data points and regression lines color-coded by method (CF, ET, or HPP). Results are plotted separately for North American English-learning infants (right panel) and infants learning other languages and dialects (right panel).}
-\end{figure}
-
-NAE-learning infants showed greater IDS preferences than their non-NAE counterparts in MB1.
-We therefore also assessed whether test-retest reliability interacted with children's language background.
-A linear mixed-effects model predicting IDS preference in Session 2 based on IDS preference in Session 1 (mean-centered), NAE (centered), and their interaction, including Lab as a random intercept, revealed no interaction, \(\beta\)=0.29, \emph{SE}=0.18, \emph{t}(151.30)=1.59, \emph{p}=.115 (Figure 1).
+As in the main sample, a linear mixed-effects model predicting IDS preference in Session 2 based on IDS preference in Session 1 (mean-centered), NAE (centered), and their interaction, including Lab as a random intercept, revealed no interaction, \(\beta\)=0.31, \emph{SE}=0.24, \emph{t}(95.10)=1.29, \emph{p}=.199.
 
 \newpage
 
@@ -417,7 +417,7 @@ To check the robustness of our results, we also investigated whether we obtained
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:unnamed-chunk-25}Coefficient estimates from a linear mixed-effects model predicting Log LT IDS preference in Session 2.}
+\caption{\label{tab:unnamed-chunk-26}Coefficient estimates from a linear mixed-effects model predicting Log LT IDS preference in Session 2.}
 
 \begin{tabular}{lllll}
 \toprule
@@ -435,16 +435,16 @@ Log LT IDS Preference Session 1 & -0.06 & 0.09 & -0.68 & 0.50\\
 
 \begin{figure}
 
-{\centering \includegraphics[width=5in]{MB1T_supplement_files/figure-latex/unnamed-chunk-26-1} 
+{\centering \includegraphics[width=5in]{MB1T_supplement_files/figure-latex/unnamed-chunk-27-1} 
 
 }
 
-\caption{IDS preferences (based on average log-looking times) of both sessions plotted against each other for each inclusion criterion. n indicates the number of included infants, r is the Pearson correlation coefficient as the indicator for reliability.}\label{fig:unnamed-chunk-26}
+\caption{IDS preferences (based on average log-looking times) of both sessions plotted against each other for each inclusion criterion. n indicates the number of included infants, r is the Pearson correlation coefficient as the indicator for reliability.}\label{fig:unnamed-chunk-27}
 \end{figure}
 
 In these analyses, we calculated IDS preference by first log-transforming looking times for each trial, computing the average log-transformed looking time for IDS and ADS for each participant, and calculating the difference between average IDS and ADS log-transformed looking times.
 We fit a linear mixed-effects model predicting IDS preference in Session 2 from IDS preference in Session 1, including a by-lab random intercept.
-As in the analyses using average raw looking times, the results revealed no significant relationship between IDS preference in Session 1 and 2 (Table 1).
+As in the analyses using average raw looking times, the results revealed no significant relationship between IDS preference in Session 1 and 2 (Table 2).
 The Pearson correlation coefficient was also not statistically significant, \(r = .03\), 95\% CI \([-.12, .19]\), \(t(156) = 0.43\), \(p = .670\).
 Applying successively stricter inclusion criteria --- by requiring a higher number of valid trials per condition in each session --- showed a similar pattern to the main manuscript, such that correlations increased somewhat with stricter inclusion criteria, but substantially reduced the sample size at the same time (Figure 3).
 
@@ -453,17 +453,17 @@ Applying successively stricter inclusion criteria --- by requiring a higher numb
 
 Next, we calculated a proportion-based IDS preference measure by computing the average proportion (raw) looking time to IDS relative to total (raw) looking time to IDS and ADS for each subject (i.e., IDS looking time / (ADS looking time + IDS looking time)).
 We fit a linear mixed-effects model predicting proportion-based IDS preference in Session 2 from proportion-based IDS preference in Session 1, including a by-lab random intercept.
-As in the analyses using other measures of IDS preference, the results revealed no significant relationship between IDS preference in Session 1 and 2 (Table 2).
+As in the analyses using other measures of IDS preference, the results revealed no significant relationship between IDS preference in Session 1 and 2 (Table 3).
 The Pearson correlation coefficient based on proportional IDS looking was also not statistically significant, \(r = .01\), 95\% CI \([-.15, .16]\), \(t(156) = 0.09\), \(p = .927\).
 Stricter inclusion criteria increased the correlation somewhat, as in previous analyses (Figure 4).
 
 \begin{figure}
 
-{\centering \includegraphics[width=5in]{MB1T_supplement_files/figure-latex/unnamed-chunk-28-1} 
+{\centering \includegraphics[width=5in]{MB1T_supplement_files/figure-latex/unnamed-chunk-29-1} 
 
 }
 
-\caption{IDS preferences (based on proportion IDS looking) of both sessions plotted against each other for each inclusion criterion. n indicates the number of included infants, r is the Pearson correlation coefficient as the indicator for reliability.}\label{fig:unnamed-chunk-28}
+\caption{IDS preferences (based on proportion IDS looking) of both sessions plotted against each other for each inclusion criterion. n indicates the number of included infants, r is the Pearson correlation coefficient as the indicator for reliability.}\label{fig:unnamed-chunk-29}
 \end{figure}
 
 \begin{table}[tbp]
@@ -471,7 +471,7 @@ Stricter inclusion criteria increased the correlation somewhat, as in previous a
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:unnamed-chunk-29}Coefficient estimates from a linear mixed-effects model predicting IDS preference (based on proportion IDS looking) in Session 2.}
+\caption{\label{tab:unnamed-chunk-30}Coefficient estimates from a linear mixed-effects model predicting IDS preference (based on proportion IDS looking) in Session 2.}
 
 \begin{tabular}{lllll}
 \toprule
@@ -589,14 +589,14 @@ Finally, we inspected on a more fine-grained item level whether IDS preference i
 To do so, we exploited the fact the specific IDS and ADS stimuli were paired together in test orders in both sessions, such that one IDS stimulus (e.g., IDS1) always occurred adjacently to a specific ADS stimulus (e.g., ADS1).
 We therefore computed stimulus-specific IDS preference scores by calculating the difference in raw looking time for each of the eight IDS-ADS stimulus pairs for each participant (whenever both trials in a given pair were available).
 We then fit a linear mixed-effects model predicting stimulus-specific IDS preference in Session 2 from stimulus-specific IDS preference in Session 1, including by-participant and by-lab random intercepts (models with more complex random effects structure, including by-item random effects, failed to converge).
-There was a marginal, but non-significant relation in stimulus-specific IDS preference between the two test sessions (Table 3).
+There was a marginal, but non-significant relation in stimulus-specific IDS preference between the two test sessions (Table 4).
 
 \begin{table}[tbp]
 
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:unnamed-chunk-38}Linear mixed-effects model results predicting IDS preference in Session 2 from IDS preference in Session 1 at the stimulus level.}
+\caption{\label{tab:unnamed-chunk-39}Linear mixed-effects model results predicting IDS preference in Session 2 from IDS preference in Session 1 at the stimulus level.}
 
 \begin{tabular}{llllll}
 \toprule
