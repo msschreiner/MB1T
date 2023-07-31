@@ -223,18 +223,33 @@ Below, we have compiled a list of notes on and deviations from the preregistered
 \hypertarget{s2.-secondary-analyses-investigating-possible-moderating-variables}{%
 \section{S2. Secondary analyses investigating possible moderating variables}\label{s2.-secondary-analyses-investigating-possible-moderating-variables}}
 
-\hypertarget{s2.1.-time-between-test-sessions}{%
-\subsection{S2.1. Time between test sessions}\label{s2.1.-time-between-test-sessions}}
+\hypertarget{s2.1.-descriptives-and-power}{%
+\subsection{S2.1. Descriptives and power}\label{s2.1.-descriptives-and-power}}
 
-\hypertarget{s2.1.1.-reliability-moderated-by-time-between-test-sessions}{%
-\subsubsection{S2.1.1. Reliability moderated by time between test sessions}\label{s2.1.1.-reliability-moderated-by-time-between-test-sessions}}
+\hypertarget{s2.1.1.-additional-descriptive-information}{%
+\subsubsection{S2.1.1. Additional descriptive information}\label{s2.1.1.-additional-descriptive-information}}
+
+\includegraphics{MB1T_supplement_files/figure-latex/descriptives-1.pdf}
+
+To highlight the distributions of the key moderators of interest, we include an additional plot representing the distribution of infant age among the 7 participating labs, split by method and language background (Figure 1).
+
+\hypertarget{s2.1.2.-a-note-on-post-hoc-power}{%
+\subsubsection{S2.1.2. A note on (post-hoc) power}\label{s2.1.2.-a-note-on-post-hoc-power}}
+
+Our final sample size (\emph{N} = 158) --- although quite large for typical infant looking time studies --- had limited power to detect moderation effects. As a heuristic for approximate post-hoc power, we can consider the power to detect differences between correlations for our final sample. For the moderator of language background, we had \emph{n} = 37 participants with a North American English language background and \emph{n} =121 participants with non-North American English backgrounds. Given this sample size, differences between the two samples would have to be substantial in order to have reasonable power to detect a difference: assuming \emph{r} = 0 for one sample, we would only reach 80\% power to detect a difference if \emph{r} \textasciitilde{} 0.5 for the other sample. We had slightly more power to detect differences for method, where we had \emph{n} = 68 HPP observations and \emph{n} = 90 non-HPP observations. For example, again assuming \emph{r} = 0 for one sample, we would reach 80\% power to detect differences once \emph{r} \textasciitilde{} 0.43 for the second sample. Given the limited power to detect all but large effect sizes in our moderation analyses, we planned to treat any significant results from the moderator analyses with caution.
+
+\hypertarget{s2.2.-time-between-test-sessions}{%
+\subsection{S2.2. Time between test sessions}\label{s2.2.-time-between-test-sessions}}
+
+\hypertarget{s2.2.1.-reliability-moderated-by-time-between-test-sessions}{%
+\subsubsection{S2.2.1. Reliability moderated by time between test sessions}\label{s2.2.1.-reliability-moderated-by-time-between-test-sessions}}
 
 The number of days between the first and second testing session varied widely across participants (mean: 10 days; range: 1 - 49 days). We therefore tested for the possibility that the time between sessions might have an impact on test-retest reliability. We fit a linear mixed-effects model predicting IDS preference in Session 2 from IDS preference in Session 1 (mean-centered), number of days between testing sessions (mean-centered), and their interaction, including a by-lab random intercept and random slope for IDS preference in Session 1.
 A more complex random effects structure including additional random slopes for number of days between test sessions and its interaction with IDS preference in Session 1 did not converge.
 We found no evidence that the number of days between test sessions moderated the relationship between IDS preference in Session 1 and 2. Neither the main effect of time between sessions, \(\beta\)=-0.01, \emph{SE}=0.03, \emph{t}(148.70)=-0.41, \emph{p}=.684, nor the interaction term, \(\beta\)=-0.01, \emph{SE}=0.02, \emph{t}(149.10)=-0.73, \emph{p}=.465, showed significant effects.
 
-\hypertarget{s2.1.2.-change-in-preferential-looking-moderated-by-time-between-test-sessions}{%
-\subsubsection{S2.1.2. Change in preferential looking moderated by time between test sessions}\label{s2.1.2.-change-in-preferential-looking-moderated-by-time-between-test-sessions}}
+\hypertarget{s2.2.2.-change-in-preferential-looking-moderated-by-time-between-test-sessions}{%
+\subsubsection{S2.2.2. Change in preferential looking moderated by time between test sessions}\label{s2.2.2.-change-in-preferential-looking-moderated-by-time-between-test-sessions}}
 
 In addition to assessing the influence of moderators on test-retest reliability, we also tested whether the difference in magnitude of the IDS preference between Session 1 and Session 2 depended on moderators of interest.
 To investigate the influence of time between test sessions, we fit a linear mixed-effects model predicting average IDS preference from Session (centered; Session 1 vs.~Session 2), days between test sessions (mean-centered), and their interaction.
@@ -242,70 +257,75 @@ We included by-lab and by-participant random intercepts (more complex random eff
 There were two key results.
 We found no evidence that the change in preferential looking to IDS between Session 1 and Session 2 was moderated by days between test sessions, \(\beta\)=-0.02, \emph{SE}=0.04, \emph{t}(156)=-0.48, \emph{p}=.634.
 
-\hypertarget{s2.2.-participant-age}{%
-\subsection{S2.2. Participant age}\label{s2.2.-participant-age}}
+\hypertarget{s2.3.-participant-age}{%
+\subsection{S2.3. Participant age}\label{s2.3.-participant-age}}
 
-\hypertarget{s2.2.1.-reliability-moderated-by-participant-age}{%
-\subsubsection{S2.2.1. Reliability moderated by participant age}\label{s2.2.1.-reliability-moderated-by-participant-age}}
+\hypertarget{s2.3.1.-reliability-moderated-by-participant-age}{%
+\subsubsection{S2.3.1. Reliability moderated by participant age}\label{s2.3.1.-reliability-moderated-by-participant-age}}
 
 To investigate the possibility that age moderated test-retest reliability, we fit a linear mixed-effects model predicting IDS preference in Session 2 from IDS preference in Session 1 (mean-centered), participant age (mean-centered) and their interaction.
 The model included a by-lab random intercept and a by-lab random slope for IDS preference in Session 1.
 We found no evidence that age influenced test-retest reliability as indicated by the interaction between IDS preference in Session 1 and age, \(\beta\)=0.00, \emph{SE}=0.00, \emph{t}(76.60)=-0.85, \emph{p}=.398.
 
-\hypertarget{s2.2.2.-change-in-preferential-looking-moderated-by-participant-age}{%
-\subsubsection{S2.2.2. Change in preferential looking moderated by participant age}\label{s2.2.2.-change-in-preferential-looking-moderated-by-participant-age}}
+\hypertarget{s2.3.2.-change-in-preferential-looking-moderated-by-participant-age}{%
+\subsubsection{S2.3.2. Change in preferential looking moderated by participant age}\label{s2.3.2.-change-in-preferential-looking-moderated-by-participant-age}}
 
 To investigate the potential of moderators to influence the overall magnitude of the IDS effect between Session 1 and 2, we fit a linear mixed-effects model predicting average IDS preference from Session (centered; Session 1 vs.~Session 2), participant age (mean-centered), and their interaction.
 We included by-lab and by-participant random intercepts (more complex random effects structures did not converge due to singular fits).
 We found no evidence that the change in preferential looking to IDS between Session 1 and Session 2 was moderated by participant age, \(\beta\)=0.00, \emph{SE}=0.00, \emph{t}(157.50)=-0.56, \emph{p}=.577.
 
-\hypertarget{s2.3.-method}{%
-\subsection{S2.3. Method}\label{s2.3.-method}}
+\hypertarget{s2.4.-method}{%
+\subsection{S2.4. Method}\label{s2.4.-method}}
 
-\hypertarget{s2.3.1.-reliability-moderated-by-method}{%
-\subsubsection{S2.3.1. Reliability moderated by Method}\label{s2.3.1.-reliability-moderated-by-method}}
+\hypertarget{s2.4.1.-ids-preference-moderated-by-method}{%
+\subsubsection{S2.4.1. IDS preference moderated by Method}\label{s2.4.1.-ids-preference-moderated-by-method}}
+
+In ManyBabies1, infants who participated in the headturn preference procedure showed a significantly larger magnitude of IDS preference, compared to central fixation and eye-tracking methods. Therefore, in the current study, we also explored whether the magnitude of IDS preference differed as a function of method. We fit a linear mixed-effects model predicting IDS preference from Session and Method (dummy-coded, with central fixation as the reference level), including by-lab and by-participant random intercepts. We found no significant difference in IDS preference across methods, \({\chi}^2\)=1.11, \emph{p}=.575.
+
+\hypertarget{s2.4.2.-reliability-moderated-by-method}{%
+\subsubsection{S2.4.2. Reliability moderated by Method}\label{s2.4.2.-reliability-moderated-by-method}}
 
 We tested whether method (eye-tracking vs.~central fixation vs.~headturn preference procedure) moderated test-retest reliability by fitting a linear mixed-effects model predicting IDS preference in Session 2 from IDS preference in Session 1 (mean-centered), Method (dummy-coded, with central fixation as the reference level) and their interaction.
 The model included a by-lab random intercept and a by-lab random slope for IDS preference in Session 1 (models with more complex random effects structure including by-lab random effects for Method did not converge).
 We found no evidence that Method influenced test-retest reliability as indicated by the interaction between IDS preference in Session 1 and age, \({\chi}^2\)=3.85, \emph{p}=.146.
 
-\hypertarget{s2.3.2.-reliability-and-its-interaction-with-both-method-and-age}{%
-\subsubsection{S2.3.2. Reliability and its interaction with both method and age}\label{s2.3.2.-reliability-and-its-interaction-with-both-method-and-age}}
+\hypertarget{s2.4.3.-reliability-and-its-interaction-with-both-method-and-age}{%
+\subsubsection{S2.4.3. Reliability and its interaction with both method and age}\label{s2.4.3.-reliability-and-its-interaction-with-both-method-and-age}}
 
 In a more complex linear mixed-effects model (preregistered as part of our planned secondary analyses) including the interaction between IDS preference in Session 1 (mean-centered), Method (dummy-coded, with central fixation as the reference level), participant age (mean-centered), and all lower order interactions, we find evidence for an interaction between method and age in predicting reliability, \({\chi}^2\)=6.44, \emph{p}=.040.
 This effect appears to be mainly driven by older infants showing some evidence of test-retest reliability for the headturn preference procedure, \emph{r} = 0.45, \emph{p} = 0.02 (see Figure 2B).
 However, we believe these tentative findings should be treated with caution, due to the small size of our infant sample once binned by multiple moderating factors.
 
-\hypertarget{s2.3.3.-change-in-preferential-looking-moderated-by-age-and-method}{%
-\subsubsection{S2.3.3. Change in preferential looking moderated by age and method}\label{s2.3.3.-change-in-preferential-looking-moderated-by-age-and-method}}
+\hypertarget{s2.4.4.-change-in-preferential-looking-moderated-by-age-and-method}{%
+\subsubsection{S2.4.4. Change in preferential looking moderated by age and method}\label{s2.4.4.-change-in-preferential-looking-moderated-by-age-and-method}}
 
 We fit a linear mixed-effects model predicting average IDS preference from the three-way interaction of Session (centered; Session 1 vs.~Session 2), participant age (mean-centered), Method (dummy-coded, with central fixation as the reference level) and all lower order predictors.
 We included a by-participant random intercept (more complex random effects structures did not converge due to singular fits).
 We found no evidence that the change in preferential looking to IDS between Session 1 and Session 2 was moderated by participant age and Method, \(\beta\)=-0.01, \emph{SE}=0.02, \emph{t}(155.40)=-0.58, \emph{p}=.562.
 
-\hypertarget{s2.4.-language-background}{%
-\subsection{S2.4. Language background}\label{s2.4.-language-background}}
+\hypertarget{s2.5.-language-background}{%
+\subsection{S2.5. Language background}\label{s2.5.-language-background}}
 
-\hypertarget{s2.4.1.-reliability-moderated-by-language-background}{%
-\subsubsection{S2.4.1. Reliability moderated by language background}\label{s2.4.1.-reliability-moderated-by-language-background}}
+\hypertarget{s2.5.1.-reliability-moderated-by-language-background}{%
+\subsubsection{S2.5.1. Reliability moderated by language background}\label{s2.5.1.-reliability-moderated-by-language-background}}
 
 \begin{figure}
 \centering
-\includegraphics{MB1T_supplement_files/figure-latex/unnamed-chunk-11-1.pdf}
-\caption{\label{fig:unnamed-chunk-11}Infants' preference in Session 1 and Session 2 with individual data points and regression lines color-coded by method (CF, ET, or HPP). Results are plotted separately for North American English-learning infants (right panel) and infants learning other languages and dialects (left panel).}
+\includegraphics{MB1T_supplement_files/figure-latex/unnamed-chunk-13-1.pdf}
+\caption{\label{fig:unnamed-chunk-13}Infants' preference in Session 1 and Session 2 with individual data points and regression lines color-coded by method (CF, ET, or HPP). Results are plotted separately for North American English-learning infants (right panel) and infants learning other languages and dialects (left panel).}
 \end{figure}
 
 NAE-learning infants showed greater IDS preferences than their non-NAE counterparts in MB1.
 We therefore also assessed whether test-retest reliability interacted with children's language background.
 A linear mixed-effects model predicting IDS preference in Session 2 based on IDS preference in Session 1 (mean-centered), NAE (centered), and their interaction, including Lab as a random intercept, revealed no interaction, \(\beta\)=0.29, \emph{SE}=0.18, \emph{t}(151.30)=1.59, \emph{p}=.115 (Figure 1).
 
-\hypertarget{s2.4.2.-reliability-and-its-interaction-between-language-background-and-age}{%
-\subsubsection{S2.4.2. Reliability and its interaction between language background and age}\label{s2.4.2.-reliability-and-its-interaction-between-language-background-and-age}}
+\hypertarget{s2.5.2.-reliability-and-its-interaction-between-language-background-and-age}{%
+\subsubsection{S2.5.2. Reliability and its interaction between language background and age}\label{s2.5.2.-reliability-and-its-interaction-between-language-background-and-age}}
 
 \begin{figure}
 \centering
-\includegraphics{MB1T_supplement_files/figure-latex/unnamed-chunk-13-1.pdf}
-\caption{\label{fig:unnamed-chunk-13}Infants' preference in Session 1 and Session 2 with individual data points and regression lines color-coded by method for (A) younger and (B) older infants (median-split). Results are plotted separately for North American English-learning infants and infants learning other languages and dialects}
+\includegraphics{MB1T_supplement_files/figure-latex/unnamed-chunk-15-1.pdf}
+\caption{\label{fig:unnamed-chunk-15}Infants' preference in Session 1 and Session 2 with individual data points and regression lines color-coded by method for (A) younger and (B) older infants (median-split). Results are plotted separately for North American English-learning infants and infants learning other languages and dialects}
 \end{figure}
 
 We also fit a preregistered linear mixed-effects model predicting IDS preference in Session 2 from the three-way interaction between IDS preference in Session 1 (mean-centered), NAE (centered), participant age (mean-centered), and all lower order interactions.
@@ -314,8 +334,8 @@ Figure 2 illustrates that this interaction was driven by a small set of older in
 Note that the mixed-effects analyses use Age as a continuous predictor --- age is median-split in Figure 2 to ease visualization.
 Given the small number of infants driving the three-way interaction and the confounded nature of this sample (with method and lab), we do not draw strong conclusions from the existence of this three-way interaction, but report it here to spur future investigations into how age and experience interacts with test-retest reliability.
 
-\hypertarget{s2.4.3.-change-in-preferential-looking-moderated-by-age-and-language-background}{%
-\subsubsection{S2.4.3. Change in preferential looking moderated by age and language background}\label{s2.4.3.-change-in-preferential-looking-moderated-by-age-and-language-background}}
+\hypertarget{s2.5.3.-change-in-preferential-looking-moderated-by-age-and-language-background}{%
+\subsubsection{S2.5.3. Change in preferential looking moderated by age and language background}\label{s2.5.3.-change-in-preferential-looking-moderated-by-age-and-language-background}}
 
 We fit a linear mixed-effects model predicting average IDS preference from the three-way interaction of Session (centered; Session 1 vs.~Session 2), participant age (mean-centered), NAE (centered), and all lower order predictors.
 We included by-lab and by-participant random intercepts and by-lab random slope for Session (more complex random effects structures did not converge due to singular fits).
@@ -326,8 +346,8 @@ We found no evidence that the change in preferential looking to IDS between Sess
 
 \begin{figure}
 \centering
-\includegraphics{MB1T_supplement_files/figure-latex/unnamed-chunk-16-1.pdf}
-\caption{\label{fig:unnamed-chunk-16}Forest plot of test-retest reliability effect sizes. Each row represents Fisher's z transformed correlation coefficient and 95\% CI for a given lab and method (HPP = head-turn preference procedure; ET = eye-tracking; CF = central fixation). The black diamond represents the overall estimated effect size from the mixed-effects meta-analytic model.}
+\includegraphics{MB1T_supplement_files/figure-latex/unnamed-chunk-18-1.pdf}
+\caption{\label{fig:unnamed-chunk-18}Forest plot of test-retest reliability effect sizes. Each row represents Fisher's z transformed correlation coefficient and 95\% CI for a given lab and method (HPP = head-turn preference procedure; ET = eye-tracking; CF = central fixation). The black diamond represents the overall estimated effect size from the mixed-effects meta-analytic model.}
 \end{figure}
 
 In addition to the methods for assessing test-retest reliability reported in the main manuscript, we also investigated test-retest reliability across labs using a meta-analytic approach.
@@ -417,7 +437,7 @@ To check the robustness of our results, we also investigated whether we obtained
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:unnamed-chunk-25}Correlations between alternative dependent measures}
+\caption{\label{tab:unnamed-chunk-27}Correlations between alternative dependent measures}
 
 \begin{tabular}{lllll}
 \toprule
@@ -449,7 +469,7 @@ First, we consider the correlations between the three dependent measures we cons
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:unnamed-chunk-27}Coefficient estimates from a linear mixed-effects model predicting Log LT IDS preference in Session 2.}
+\caption{\label{tab:unnamed-chunk-29}Coefficient estimates from a linear mixed-effects model predicting Log LT IDS preference in Session 2.}
 
 \begin{tabular}{lllll}
 \toprule
@@ -467,11 +487,11 @@ Log LT IDS Preference Session 1 & -0.06 & 0.09 & -0.68 & 0.50\\
 
 \begin{figure}
 
-{\centering \includegraphics[width=5in]{MB1T_supplement_files/figure-latex/unnamed-chunk-28-1} 
+{\centering \includegraphics[width=5in]{MB1T_supplement_files/figure-latex/unnamed-chunk-30-1} 
 
 }
 
-\caption{IDS preferences (based on average log-looking times) of both sessions plotted against each other for each inclusion criterion. n indicates the number of included infants, r is the Pearson correlation coefficient as the indicator for reliability.}\label{fig:unnamed-chunk-28}
+\caption{IDS preferences (based on average log-looking times) of both sessions plotted against each other for each inclusion criterion. n indicates the number of included infants, r is the Pearson correlation coefficient as the indicator for reliability.}\label{fig:unnamed-chunk-30}
 \end{figure}
 
 In these analyses, we calculated IDS preference by first log-transforming looking times for each trial, computing the average log-transformed looking time for IDS and ADS for each participant, and calculating the difference between average IDS and ADS log-transformed looking times.
@@ -491,11 +511,11 @@ Stricter inclusion criteria increased the correlation somewhat, as in previous a
 
 \begin{figure}
 
-{\centering \includegraphics[width=5in]{MB1T_supplement_files/figure-latex/unnamed-chunk-30-1} 
+{\centering \includegraphics[width=5in]{MB1T_supplement_files/figure-latex/unnamed-chunk-32-1} 
 
 }
 
-\caption{IDS preferences (based on proportion IDS looking) of both sessions plotted against each other for each inclusion criterion. n indicates the number of included infants, r is the Pearson correlation coefficient as the indicator for reliability.}\label{fig:unnamed-chunk-30}
+\caption{IDS preferences (based on proportion IDS looking) of both sessions plotted against each other for each inclusion criterion. n indicates the number of included infants, r is the Pearson correlation coefficient as the indicator for reliability.}\label{fig:unnamed-chunk-32}
 \end{figure}
 
 \begin{table}[tbp]
@@ -503,7 +523,7 @@ Stricter inclusion criteria increased the correlation somewhat, as in previous a
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:unnamed-chunk-31}Coefficient estimates from a linear mixed-effects model predicting IDS preference (based on proportion IDS looking) in Session 2.}
+\caption{\label{tab:unnamed-chunk-33}Coefficient estimates from a linear mixed-effects model predicting IDS preference (based on proportion IDS looking) in Session 2.}
 
 \begin{tabular}{lllll}
 \toprule
@@ -628,7 +648,7 @@ There was a marginal, but non-significant relation in stimulus-specific IDS pref
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:unnamed-chunk-40}Linear mixed-effects model results predicting IDS preference in Session 2 from IDS preference in Session 1 at the stimulus level.}
+\caption{\label{tab:unnamed-chunk-42}Linear mixed-effects model results predicting IDS preference in Session 2 from IDS preference in Session 1 at the stimulus level.}
 
 \begin{tabular}{llllll}
 \toprule

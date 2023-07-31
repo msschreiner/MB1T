@@ -42,6 +42,7 @@ library(metafor)
 library(ggExtra)
 library(corrr)
 library(corx)
+library(cower)
 read_path <- here("data","processed")
 ```
 
@@ -92,9 +93,63 @@ all_agg_subjects_paired_retest <- read_csv(here(read_path,"all_agg_subjects_pair
   mutate(reversal_type=str_remove_all(reversal_type,pattern="_preference"))
 ```
 
-## S2.1. Time between test sessions
+## S2.1. Descriptives and power
 
-### S2.1.1. Reliability moderated by time between test sessions
+### S2.1.1. Additional descriptive information
+
+```{r descriptives}
+all_agg_subjects_paired_retest <- all_agg_subjects_paired_retest  %>%
+  mutate(
+    Method_short=case_when(
+      Method=="Eyetracking" ~ "ET",
+      Method=="central fixation" ~ "CF",
+      TRUE ~ Method
+    )
+  ) %>%
+  mutate(
+    Method=case_when(
+      Method=="Eyetracking" ~ "eye-tracking",
+      TRUE ~ Method
+    )
+  ) %>%
+  unite(lab_method,Lab,Method_short,sep=", ", remove=FALSE)
+# Differences in test-retest reliability between English and non-English learning infants
+# Assigning 1 to UBC and Madison as NAE labs. Remaining labs are non-NAE and are coded as 0.
+all_agg_subjects_paired_retest$NAE<-ifelse(all_agg_subjects_paired_retest$Lab=="InfantCog-UBC"| all_agg_subjects_paired_retest$Lab=="infantll-madison", 1, 0)
+
+all_agg_subjects_paired_retest <- all_agg_subjects_paired_retest %>%
+  group_by(Lab,Method) %>%
+  mutate(
+    N = n(),
+    `NAE Language` = ifelse(NAE==1,"NAE","non NAE")
+  )
+
+
+ggplot(all_agg_subjects_paired_retest,aes(Age,color=Method))+
+  theme_cowplot()+
+  geom_density(aes(linetype=`NAE Language`))+
+  facet_wrap(~lab_method)+
+  scale_color_ptol(name="Method")+
+  geom_label(aes(label=paste0("N = ",N)),x=300,y=0.0125,size=2)+
+  theme(strip.text.x = element_text(size = 8))
+```
+
+To highlight the distributions of the key moderators of interest, we include an additional plot representing the distribution of infant age among the 7 participating labs, split by method and language background (Figure 1).
+
+### S2.1.2. A note on (post-hoc) power
+
+```{r}
+#side analyses for approximate estimate of power to detect differences in two correlations
+#used in response to reviewers but not reported in the supplement - retaining here for ease of reference
+language_background_power <- power.indep.cor(r1 = 0.5, r2 = 0, n1 =37,n2=121)
+method_power <- power.indep.cor(r1 = 0.43, r2 = 0, n1 =68,n2=90)
+```
+
+Our final sample size (*N* = 158) --- although quite large for typical infant looking time studies --- had limited power to detect moderation effects. As a heuristic for approximate post-hoc power, we can consider the power to detect differences between correlations for our final sample. For the moderator of language background, we had *n* = 37 participants with a North American English language background and *n* =121 participants with non-North American English backgrounds. Given this sample size, differences between the two samples would have to be substantial in order to have reasonable power to detect a difference: assuming *r* = 0 for one sample, we would only reach 80% power to detect a difference if *r* ~ 0.5 for the other sample. We had slightly more power to detect differences for method, where we had *n* = 68 HPP observations and *n* = 90 non-HPP observations. For example, again assuming *r* = 0 for one sample, we would reach 80% power to detect differences once *r* ~ 0.43 for the second sample. Given the limited power to detect all but large effect sizes in our moderation analyses, we planned to treat any significant results from the moderator analyses with caution.
+
+## S2.2. Time between test sessions
+
+### S2.2.1. Reliability moderated by time between test sessions
 
 ```{r}
 #mean-center Diff_1 and age_between_sessions to make main effects interpretable
@@ -119,7 +174,7 @@ The number of days between the first and second testing session varied widely ac
 A more complex random effects structure including additional random slopes for number of days between test sessions and its interaction with IDS preference in Session 1 did not converge.
 We found no evidence that the number of days between test sessions moderated the relationship between IDS preference in Session 1 and 2. Neither the main effect of time between sessions, $\beta$=`r round(days_coefs[3,1],3)`, *SE*=`r round(days_coefs[3,2],2)`, *t*(`r round(days_coefs[3,3],1)`)=`r round(days_coefs[3,4],2)`, *p*=`r printp(days_coefs[3,5])`, nor the interaction term, $\beta$=`r round(days_coefs[4,1],3)`, *SE*=`r round(days_coefs[4,2],2)`, *t*(`r round(days_coefs[4,3],1)`)=`r round(days_coefs[4,4],2)`, *p*=`r printp(days_coefs[4,5])`, showed significant effects.
 
-### S2.1.2. Change in preferential looking moderated by time between test sessions
+### S2.2.2. Change in preferential looking moderated by time between test sessions
 
 ```{r}
 #APLT ~ time * time_between + (1+ time+time_between| lab) + (1+subject)
@@ -153,9 +208,9 @@ We included by-lab and by-participant random intercepts (more complex random eff
 There were two key results.
 We found no evidence that the change in preferential looking to IDS between Session 1 and Session 2 was moderated by days between test sessions, $\beta$=`r round(change_days_coefs[4,1],3)`, *SE*=`r round(change_days_coefs[4,2],3)`, *t*(`r round(change_days_coefs[4,3],1)`)=`r round(change_days_coefs[4,4],2)`, *p*=`r printp(change_days_coefs[4,5])`.
 
-## S2.2. Participant age
+## S2.3. Participant age
 
-### S2.2.1. Reliability moderated by participant age
+### S2.3.1. Reliability moderated by participant age
 
 ```{r}
 # Age model
@@ -180,7 +235,7 @@ To investigate the possibility that age moderated test-retest reliability, we fi
 The model included a by-lab random intercept and a by-lab random slope for IDS preference in Session 1.
 We found no evidence that age influenced test-retest reliability as indicated by the interaction between IDS preference in Session 1 and age, $\beta$=`r round(age_coefs[4,1],3)`, *SE*=`r round(age_coefs[4,2],3)`, *t*(`r round(age_coefs[4,3],1)`)=`r round(age_coefs[4,4],2)`, *p*=`r printp(age_coefs[4,5])`.
 
-### S2.2.2. Change in preferential looking moderated by participant age
+### S2.3.2. Change in preferential looking moderated by participant age
 
 ```{r}
 #APLT ~ time * ageC + (1+ time+ageC| lab) + (1+subject)
@@ -205,9 +260,9 @@ To investigate the potential of moderators to influence the overall magnitude of
 We included by-lab and by-participant random intercepts (more complex random effects structures did not converge due to singular fits).
 We found no evidence that the change in preferential looking to IDS between Session 1 and Session 2 was moderated by participant age, $\beta$=`r round(change_age_coefs[4,1],3)`, *SE*=`r round(change_age_coefs[4,2],3)`, *t*(`r round(change_age_coefs[4,3],1)`)=`r round(change_age_coefs[4,4],2)`, *p*=`r printp(change_age_coefs[4,5])`.
 
-## S2.3. Method
+## S2.4. Method
 
-### S2.3.1. IDS preference moderated by Method
+### S2.4.1. IDS preference moderated by Method
 
 ```{r}
 diff_session_method <- lmer(Diff ~ Session + Method+
@@ -218,7 +273,7 @@ chi_sq_test_session_method <- Anova(diff_session_method,type="III")
 
 In ManyBabies1, infants who participated in the headturn preference procedure showed a significantly larger magnitude of IDS preference, compared to central fixation and eye-tracking methods. Therefore, in the current study, we also explored whether the magnitude of IDS preference differed as a function of method. We fit a linear mixed-effects model predicting IDS preference from Session and Method (dummy-coded, with central fixation as the reference level), including by-lab and by-participant random intercepts. We found no significant difference in IDS preference across methods, ${\chi}^2$=`r round(chi_sq_test_session_method$Chisq[3],2)`, *p*=`r printp(chi_sq_test_session_method[3,3])`.
 
-### S2.3.2. Reliability moderated by Method
+### S2.4.2. Reliability moderated by Method
 
 ```{r}
 all_agg_subjects_paired_retest <- all_agg_subjects_paired_retest %>%
@@ -246,7 +301,7 @@ We tested whether method (eye-tracking vs. central fixation vs. headturn prefere
 The model included a by-lab random intercept and a by-lab random slope for IDS preference in Session 1 (models with more complex random effects structure including by-lab random effects for Method did not converge).
 We found no evidence that Method influenced test-retest reliability as indicated by the interaction between IDS preference in Session 1 and age, ${\chi}^2$=`r round(overall_chisq_test_method$Chisq[4],2)`, *p*=`r printp(overall_chisq_test_method[4,3])`.
 
-### S2.3.3. Reliability and its interaction with both method and age
+### S2.4.3. Reliability and its interaction with both method and age
 
 ```{r}
 #interaction including both age and method
@@ -308,7 +363,7 @@ In a more complex linear mixed-effects model (preregistered as part of our plann
 This effect appears to be mainly driven by older infants showing some evidence of test-retest reliability for the headturn preference procedure, *r* = `r round(filter(coef_table_method_age, Method=="HPP"&age_bin=="older")$cor,2)`, *p* = `r round(filter(coef_table_method_age, Method=="HPP"&age_bin=="older")$pvalue2,2)` (see Figure 2B).
 However, we believe these tentative findings should be treated with caution, due to the small size of our infant sample once binned by multiple moderating factors.
 
-### S2.3.4. Change in preferential looking moderated by age and method
+### S2.4.4. Change in preferential looking moderated by age and method
 
 ```{r}
 #APLT ~ time * ageC*method + (1+ test+ageC+method| lab) + (1+subject)
@@ -338,15 +393,11 @@ We fit a linear mixed-effects model predicting average IDS preference from the t
 We included a by-participant random intercept (more complex random effects structures did not converge due to singular fits).
 We found no evidence that the change in preferential looking to IDS between Session 1 and Session 2 was moderated by participant age and Method, $\beta$=`r round(change_age_method_coefs[12,1],3)`, *SE*=`r round(change_age_method_coefs[12,2],3)`, *t*(`r round(change_age_method_coefs[12,3],1)`)=`r round(change_age_method_coefs[12,4],2)`, *p*=`r printp(change_age_method_coefs[12,5])`.
 
-## S2.4. Language background
+## S2.5. Language background
 
-### S2.4.1. Reliability moderated by language background
+### S2.5.1. Reliability moderated by language background
 
 ```{r}
-# Differences in test-retest reliability between English and non-English learning infants
-# Assigning 1 to UBC and Madison as NAE labs. Remaining labs are non-NAE and are coded as 0.
-all_agg_subjects_paired_retest$NAE<-ifelse(all_agg_subjects_paired_retest$Lab=="InfantCog-UBC"| all_agg_subjects_paired_retest$Lab=="infantll-madison", 1, 0)
-
 #center NAE to make main effects interpretable
 all_agg_subjects_paired_retest <- all_agg_subjects_paired_retest %>%
   ungroup() %>%
@@ -393,7 +444,7 @@ NAE-learning infants showed greater IDS preferences than their non-NAE counterpa
 We therefore also assessed whether test-retest reliability interacted with children’s language background.
 A linear mixed-effects model predicting IDS preference in Session 2 based on IDS preference in Session 1 (mean-centered), NAE (centered), and their interaction, including Lab as a random intercept, revealed no interaction, $\beta$=`r round(nae_coefs[4,1],2)`, *SE*=`r round(nae_coefs[4,2],2)`, *t*(`r round(nae_coefs[4,3],1)`)=`r round(nae_coefs[4,4],2)`, *p*=`r printp(nae_coefs[4,5])` (Figure 1).
 
-### S2.4.2. Reliability and its interaction between language background and age
+### S2.5.2. Reliability and its interaction between language background and age
 
 ```{r}
 # Adding NAE to model
@@ -451,7 +502,7 @@ Figure 2 illustrates that this interaction was driven by a small set of older in
 Note that the mixed-effects analyses use Age as a continuous predictor --- age is median-split in Figure 2 to ease visualization.
 Given the small number of infants driving the three-way interaction and the confounded nature of this sample (with method and lab), we do not draw strong conclusions from the existence of this three-way interaction, but report it here to spur future investigations into how age and experience interacts with test-retest reliability.
 
-### S2.4.3. Change in preferential looking moderated by age and language background
+### S2.5.3. Change in preferential looking moderated by age and language background
 
 ```{r}
 # Assigning 1 to UBC and Madison as NAE labs. Remaining labs are non-NAE and are coded as 0.
