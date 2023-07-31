@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.30)  30 JUL 2023 19:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.30)  31 JUL 2023 01:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -670,46 +670,43 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 ] [2] [3]
 Underfull \vbox (badness 1838) has occurred while \output is active []
 
-[4] [5] [6] [7]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+[4] [5]
+Underfull \vbox (badness 3977) has occurred while \output is active []
 
-[8]
-Underfull \vbox (badness 7595) has occurred while \output is active []
+[6]
+Underfull \vbox (badness 7649) has occurred while \output is active []
 
-[9] [10]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[11]
-<Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf, id=163, 469.755pt x 325.215pt>
+[7] [8] [9] [10] [11{/Users/martincz/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/Users/martincz/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}]
+<Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf, id=166, 469.755pt x 325.215pt>
 File: Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type pdf)
 <use Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf>
-Package pdftex.def Info: Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf  used on input line 434.
+Package pdftex.def Info: Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf  used on input line 432.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[12{/Users/martincz/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/Users/martincz/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}] [13 <./Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf>]
-Underfull \vbox (badness 1028) has occurred while \output is active []
-
-[14{/Users/martincz/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
-<Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf, id=197, 578.16pt x 722.7pt>
+[12{/Users/martincz/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}] [13 <./Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf>] [14]
+<Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf, id=198, 578.16pt x 722.7pt>
 File: Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf Graphic file (type pdf)
 <use Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf>
-Package pdftex.def Info: Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf  used on input line 490.
+Package pdftex.def Info: Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf  used on input line 488.
 (pdftex.def)             Requested size: 361.3491pt x 451.68639pt.
 [15] [16 <./Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf>]
-<Retest_current_draft_files/figure-latex/fig3-1.pdf, id=216, 867.24pt x 1011.78pt>
+<Retest_current_draft_files/figure-latex/fig3-1.pdf, id=217, 867.24pt x 1011.78pt>
 File: Retest_current_draft_files/figure-latex/fig3-1.pdf Graphic file (type pdf)
 <use Retest_current_draft_files/figure-latex/fig3-1.pdf>
-Package pdftex.def Info: Retest_current_draft_files/figure-latex/fig3-1.pdf  used on input line 520.
+Package pdftex.def Info: Retest_current_draft_files/figure-latex/fig3-1.pdf  used on input line 518.
 (pdftex.def)             Requested size: 469.75827pt x 548.0513pt.
 
-LaTeX Warning: Float too large for page by 3.6112pt on input line 525.
+LaTeX Warning: Float too large for page by 3.6112pt on input line 523.
 
 [17] [18 <./Retest_current_draft_files/figure-latex/fig3-1.pdf>]
 Underfull \vbox (badness 7649) has occurred while \output is active []
 
 [19]
-Underfull \vbox (badness 3977) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[20] [21] [22]
+[20]
+Underfull \vbox (badness 1838) has occurred while \output is active []
+
+[21] [22]
 Underfull \vbox (badness 1028) has occurred while \output is active []
 
 [23]
@@ -724,18 +721,18 @@ LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2020/03/25>
  ***********
 Package rerunfilecheck Info: File `Retest_current_draft.out' has not changed.
-(rerunfilecheck)             Checksum: 47AED991D4037C0E69EA8B963F7EAA44;3776.
+(rerunfilecheck)             Checksum: 93F807056068CDCE2C1804C07EC4169D;3844.
  ) 
 Here is how much of TeX's memory you used:
  16069 strings out of 477197
- 260049 string characters out of 5812849
- 1930244 words of memory out of 5000000
+ 260075 string characters out of 5812849
+ 1932244 words of memory out of 5000000
  36666 multiletter control sequences out of 15000+600000
  601288 words of font info for 71 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 72i,11n,79p,1691b,587s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,11n,79p,1691b,599s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-Output written on Retest_current_draft.pdf (26 pages, 341567 bytes).
+Output written on Retest_current_draft.pdf (26 pages, 341958 bytes).
 PDF statistics:
  386 PDF objects out of 1000 (max. 8388607)
  333 compressed objects within 4 object streams
