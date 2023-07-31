@@ -488,7 +488,7 @@ For the HPP method, labs used their standard procedure, as in MB1.
 ### Speech stimuli.
 We used the identical training stimuli of piano music from MB1.
 A second set of naturalistic IDS and ADS recordings of mothers either talking to their infant or to an experimenter was created for the retest session by reversing the order of clips within each sequence of the original study.
-This resulted in eight new sequences of natural IDS and eight new sequences of natural ADS with a length of 18 seconds each.
+This resulted in eight reordered sequences of natural IDS and eight reordered sequences of natural ADS with a length of 18 seconds each.
  
 ### Procedure.
 Infants were retested using the identical procedure as during the first testing day: CF, HPP, or ET. 
