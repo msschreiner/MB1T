@@ -262,7 +262,7 @@ We found no evidence that the change in preferential looking to IDS between Sess
 
 ## S2.4. Method
 
-### S2.4.1. IDS preference moderated by Method
+### S2.4.1. IDS preference moderated by method
 
 ```{r}
 diff_session_method <- lmer(Diff ~ Session + Method+
@@ -273,7 +273,7 @@ chi_sq_test_session_method <- Anova(diff_session_method,type="III")
 
 In ManyBabies1, infants who participated in the headturn preference procedure showed a significantly larger magnitude of IDS preference, compared to central fixation and eye-tracking methods. Therefore, in the current study, we also explored whether the magnitude of IDS preference differed as a function of method. We fit a linear mixed-effects model predicting IDS preference from Session and Method (dummy-coded, with central fixation as the reference level), including by-lab and by-participant random intercepts. We found no significant difference in IDS preference across methods, ${\chi}^2$=`r round(chi_sq_test_session_method$Chisq[3],2)`, *p*=`r printp(chi_sq_test_session_method[3,3])`.
 
-### S2.4.2. Reliability moderated by Method
+### S2.4.2. Reliability moderated by method
 
 ```{r}
 all_agg_subjects_paired_retest <- all_agg_subjects_paired_retest %>%
