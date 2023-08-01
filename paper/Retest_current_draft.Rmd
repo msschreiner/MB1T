@@ -469,26 +469,29 @@ The mean age of infants included in the study was `r round(age_stats$mean, 0)` d
 
 ## Materials
 
+### Visual stimuli.
+The visual stimuli and instructions were identical to MB1.
+For the CF paradigm and ET, labs used a multicolored static checkerboard as the fixation stimulus as well as a multicolored moving circle with a ringing sound as an attention-getter between trials.
+For the HPP method, labs used their standard procedure, as in MB1.
+
+### Auditory stimuli.
+
 Our study was faced with a critical design choice: what stimuli to use to assess test-retest reliability. 
 One constraint on our study was that, since it was a follow-on to MB1, any stimulus we used would always be presented after the MB1 stimuli. 
 One option would be simply to bring back infants and have them hear exactly the same stimulus materials. 
 A weakness of this design would be the potential for stimulus familiarity effects, however, since infants would have heard the materials before. 
 Further complicating matters, infants might show a preference for or against a familiar stimulus depending on their age [@hunter1988multifactor]. 
 The ideal solution then would be to create a brand new stimulus set with the same characteristics.
-Unfortunately, because of the process of how MB1 stimuli were created, we did not have enough normed raw recordings available to make brand new stimulus items that conformed to the same standards as the MB1 stimuli. We therefore chose an intermediate path: we reversed the ordering of MB1 stimuli. Average looking times in MB1 were always lower than 9s per trial, even for the youngest children on the earliest trials (the group who looked the longest on average), so most children in MB1 did not hear the second half of most trials. 
-Thus, by reversing the order, we had a perfectly matched stimulus set that was relatively unfamiliar to most infants.
-The disadvantage of this design was that infants who looked longer might be more likely to hear a familiar clip heard in the previous study. 
-If infants then showed a familiarity preference --- an assumption which might not be true --- the end result could be to inflate our estimates of test-retest reliability slightly, since longer lookers would on average look longer at retest due to their familiarity preference. We view this risk as relatively low, but do note that it is a limitation of our design.
-
-### Visual stimuli.
-The visual stimuli and instructions were identical to MB1.
-For the CF paradigm and ET, labs used a multicolored static checkerboard as the fixation stimulus as well as a multicolored moving circle with a ringing sound as an attention-getter between trials.
-For the HPP method, labs used their standard procedure, as in MB1.
-
-### Speech stimuli.
-We used the identical training stimuli of piano music from MB1.
+Unfortunately, because of the process of how MB1 stimuli were created, we did not have enough normed raw recordings available to make brand new stimulus items that conformed to the same standards as the MB1 stimuli. 
+We therefore chose an intermediate path: we reversed the ordering of MB1 stimuli.
 A second set of naturalistic IDS and ADS recordings of mothers either talking to their infant or to an experimenter was created for the retest session by reversing the order of clips within each sequence of the original study.
 This resulted in eight reordered sequences of natural IDS and eight reordered sequences of natural ADS with a length of 18 seconds each.
+Average looking times in MB1 were always lower than 9s per trial, even for the youngest children on the earliest trials (the group who looked the longest on average), so most children in MB1 did not hear the second half of most trials. 
+Thus, by reversing the order, we had a perfectly matched stimulus set that was relatively unfamiliar to most infants.
+The disadvantage of this design was that infants who looked longer might be more likely to hear a familiar clip heard in the previous study. 
+If infants then showed a familiarity preference --- an assumption which might not be true --- the end result could be to inflate our estimates of test-retest reliability slightly, since longer lookers would on average look longer at retest due to their familiarity preference. 
+We view this risk as relatively low, but do note that it is a limitation of our design.
+In addition to the 16 reversed-order IDS and ADS speech stimuli, we used the identical training stimuli of piano music from MB1.
  
 ### Procedure.
 Infants were retested using the identical procedure as during the first testing day: CF, HPP, or ET. 
@@ -701,7 +704,8 @@ ggplot(all_agg_subjects_paired_retest,aes(Diff_1,Diff_2,color=Method))+
   scale_colour_ptol(name = "Method") +
   theme(legend.position=c(0.17,0.92),legend.title=element_text(size=8),legend.text=element_text(size=5), legend.key.height = unit(0.2, 'cm'), 
         legend.key.width = unit(0.2, 'cm'))+
-  geom_label(aes(label=paste0("Mean Age: ",round(`Mean age (days)`,0)," days")),x=2.5,y=-7,size=2)
+  geom_label(aes(label=paste0("Mean Age: ",round(`Mean age (days)`,0)," days")),x=2.5,y=-7,size=2,show.legend=FALSE)
+ 
 ```
 
 We assessed test-retest reliability in two planned, confirmatory analyses. 

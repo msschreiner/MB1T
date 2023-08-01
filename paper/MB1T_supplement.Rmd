@@ -40,7 +40,6 @@ library(tidymodels)
 library(car)
 library(metafor)
 library(ggExtra)
-library(corrr)
 library(corx)
 library(cower)
 read_path <- here("data","processed")
@@ -1239,13 +1238,13 @@ These results suggest that the condition-specific correlations in average lookin
 
 ```{r}
 agg_by_subj_item_paired <- data_clean %>%
-    select(Subject,Subject_Unique,Gender,Method, preterm,Session, Condition, stimulus, LT,Lab,days_between_sessions) %>% 
+    select(Subject,Subject_Unique,Gender,Method, preterm,Session, Condition, stimulus,trial_num, LT,Lab,days_between_sessions) %>% 
   group_by(Method, Lab,Subject, Subject_Unique, Gender, preterm,days_between_sessions,Condition,stimulus) %>%
   mutate(stimulus = str_remove(stimulus,"Retest")) %>%
   mutate(stimulus = str_remove(stimulus,"retest")) %>%
   filter(stimulus %in% c("ADS1","IDS1","ADS2","IDS2","ADS3","IDS3","ADS4", "IDS4","IDS5","ADS5","ADS6","IDS6","ADS7","IDS7","ADS8","IDS8")) %>%
-  pivot_wider(names_from = Session, values_from = LT) %>%
-  rename(LT_Test = `1`,LT_Retest=`2`)
+  pivot_wider(names_from = Session, values_from = c(LT,trial_num)) %>%
+  rename(LT_Test = LT_1,LT_Retest=LT_2)
 
 corr_lt_p3 <- ggplot(agg_by_subj_item_paired,aes(LT_Test,LT_Retest,color=Condition))+
   geom_point()+
@@ -1258,13 +1257,26 @@ corr_lt_p3 <- ggplot(agg_by_subj_item_paired,aes(LT_Test,LT_Retest,color=Conditi
 
 item_lt_relationship <- lmer(LT_Retest~LT_Test+(1+LT_Test|Subject_Unique)+(1|stimulus)+(1+LT_Test|Lab),data=agg_by_subj_item_paired, control=lmerControl(optimizer="bobyqa"))
 #model including a by-stimulus slope for LT_Test has a singular fit but yields similar results
+
+#same model but including the interaction with trial number in session 1
+agg_by_subj_item_paired <- agg_by_subj_item_paired %>%
+  ungroup() %>%
+  #center
+  mutate(
+    LT_Test_c = LT_Test - mean(LT_Test,na.rm=TRUE),
+    trial_num_1_c = trial_num_1 - mean(trial_num_1,na.rm=TRUE)
+  )
+item_lt_relationship_control_trial_num <- lmer(LT_Retest~LT_Test_c*trial_num_1_c+(1+LT_Test_c+trial_num_1_c|Subject_Unique)+(1|stimulus)+(1+LT_Test_c+trial_num_1_c|Lab),data=agg_by_subj_item_paired, control=lmerControl(optimizer="bobyqa"))
+#LT_Test is significant with a by-lab random slope for trial number, but model fit is singular
 ```
 
 Finally, we inspected item-level correlations between the two test sessions.
 Specifically, we investigated the relation between items composed of the same recording clips in Session 1 and Session 2 (but with a reversed order of clips between the two sessions).
 We fit a linear mixed-effects model predicting item-level looking time in Session 2 from item-level looking time in Session 1, including random intercepts for participant, item, and lab, as well as a random slope for item-level looking time in Session 1 for participant and lab.
 Item-level looking in Session 2 was related to item-level looking in Session 1, `r apa_print(item_lt_relationship)$full_result[["LT_Test"]]` (Figure 8C).
-Similar results hold if looking times are log-transformed
+Similar results hold if looking times are log-transformed.
+
+In ManyBabies1, the ordering of stimuli was counterbalanced, but some stimuli still appeared earlier in the experiment than others. For example, the IDS1 and ADS1 speech stimuli appeared on trials 1,2,5, or 6, while the IDS8 and ADS8 speech stimuli always occurred on the final two trials (trial number 15 or 16). This means that the interpretation of the correlations between individual speech stimuli must also take into account these stimuli tend to be occurring in earlier or later portions of the experiment (when infants are more or less attentive and show longer looking times in general). To further investigate the impact of trial number on by-item correlations in looking time, we fit an interaction model testing whether the magnitude of the item-level correlation depended on the trial number for a given session. We fit a linear mixed-effects predicting item-level looking time in Session 2 from the interaction between item-level looking time in Session 1 and trial number in Session 1 (trial numbers across sessions are almost always identical). The model included random intercepts for participant, item, and lab, as well as random slopes for item-level looking time and trial number in Session 1 for participant and lab. We indeed found that the magnitude of the item-level correlations in looking time between sessions depended on trial number (`r apa_print(item_lt_relationship_control_trial_num)$full_result[["LT_Test_c_trial_num_1_c"]]`), with the strength of the relation between sessions declining as trial number increased. While trial number was a strong predictor of Session 2 looking time (`r apa_print(item_lt_relationship_control_trial_num)$full_result[["trial_num_1_c"]]`), item-level looking in Session 1 only marginally predicted Session 2 looking when controlling for trial number (`r apa_print(item_lt_relationship_control_trial_num)$full_result[["LT_Test_c"]]`). Variation in item-level correlations is therefore at least partially due to the ordering of the stimuli in the experiment, rather than a sole function of differences between the stimuli *per se*.
 
 ```{r  sfig8, fig.cap="Correlations in average looking time (in s) between Session 1 and 2 (A) overall, (B) by condition, and (C) by item.", fig.align="center",fig.height = 16, fig.width = 12}
 top_row <- plot_grid(corr_lt_p1,corr_lt_p2, labels=c("A","B"),ncol=2)
@@ -1280,17 +1292,29 @@ plot_grid(top_row,corr_lt_p3,labels=c("","C"),nrow=2,rel_heights=c(1,2))
 #computes stimulus-level preference scores by pairing IDS1-ADS1, IDS2-ADS2, etc.
 #these two trials always occurred consecutively across all lists and sessions
 agg_by_subj_item_paired_pref <- data_clean  %>%
-  select(Subject,Subject_Unique,Gender,Method, preterm,Session, Condition, stimulus, LT,Lab) %>% 
+  mutate(
+    trial_pair_num = case_when(
+      trial_num %in% c(1,2) ~ 1,
+      trial_num %in% c(3,4) ~ 2,
+      trial_num %in% c(5,6) ~ 3,
+      trial_num %in% c(7,8) ~ 4,
+      trial_num %in% c(9,10) ~ 5,
+      trial_num %in% c(11,12) ~ 6,
+      trial_num %in% c(13,14) ~ 7,
+      trial_num %in% c(15,16) ~ 8
+    )
+  ) %>%
+  select(Subject,Subject_Unique,Gender,Method, preterm,Session, Condition, stimulus,trial_pair_num, LT,Lab) %>% 
   mutate(stimulus = str_remove(stimulus,"Retest")) %>%
   mutate(stimulus = str_remove(stimulus,"retest")) %>%
   filter(stimulus %in% c("ADS1","IDS1","ADS2","IDS2","ADS3","IDS3","ADS4", "IDS4","IDS5","ADS5","ADS6","IDS6","ADS7","IDS7","ADS8","IDS8")) %>%
   separate(stimulus,into = c("cond","stimulus_num"),sep="(?<=[A-Za-z])(?=[0-9])",remove=TRUE) %>%
   select(-cond) %>%
-  group_by(Method, Lab,Subject, Subject_Unique, Gender, preterm,Session,stimulus_num) %>%
+  group_by(Method, Lab,Subject, Subject_Unique, Gender, preterm,Session,stimulus_num,trial_pair_num) %>%
   pivot_wider(names_from = Condition,values_from=LT) %>%
   mutate(Diff = IDS - ADS, 
            Prop = IDS / (IDS + ADS)) %>%
-  pivot_wider(names_from = Session, values_from =c(IDS,ADS,Diff,Prop))
+  pivot_wider(names_from = Session, values_from =c(IDS,ADS,Diff,Prop,trial_pair_num))
 
 #not plotted
 fig8 <- ggplot(agg_by_subj_item_paired_pref ,aes(Diff_1,Diff_2))+
