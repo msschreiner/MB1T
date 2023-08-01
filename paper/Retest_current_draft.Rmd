@@ -185,17 +185,6 @@ Against this background, the current study investigates test-retest reliability 
 Within MB1, a multi-lab collaboration, we examine whether infants' preferential listening behavior to IDS and ADS is reliable across two different test sessions. 
 We also investigate the influence of various moderators on the reliability of IDS preference (e.g., time between test and retest; infants’ language background).
 
-Our study was faced with a critical design choice: what stimuli to use to assess test-retest reliability. 
-One constraint on our study was that, since it was a follow-on to MB1, any stimulus we used would always be presented after the MB1 stimuli. 
-One option would be simply to bring back infants and have them hear exactly the same stimulus materials. 
-A weakness of this design would be the potential for stimulus familiarity effects, however, since infants would have heard the materials before. 
-Further complicating matters, infants might show a preference for or against a familiar stimulus depending on their age [@hunter1988multifactor]. 
-The ideal solution then would be to create a brand new stimulus set with the same characteristics.
-Unfortunately, because of the process of how MB1 stimuli were created, we did not have enough normed raw recordings available to make brand new stimulus items that conformed to the same standards as the MB1 stimuli. We therefore chose an intermediate path: we reversed the ordering of MB1 stimuli. Average looking times in MB1 were always lower than 9s per trial, even for the youngest children on the earliest trials (the group who looked the longest on average), so most children in MB1 did not hear the second half of most trials. 
-Thus, by reversing the order, we had a perfectly matched stimulus set that was relatively unfamiliar to most infants.
-The disadvantage of this design was that infants who looked longer might be more likely to hear a familiar clip heard in the previous study. 
-If infants then showed a familiarity preference --- an assumption which might not be true --- the end result could be to inflate our estimates of test-retest reliability slightly, since longer lookers would on average look longer at retest due to their familiarity preference. We view this risk as relatively low, but do note that it is a limitation of our design. 
-
 The current study also explores whether there are any differences in test-retest reliability between three widely used methods: central fixation (CF), eye-tracking (ET), and the head-turn preference procedure (HPP).
 Exploring differences in CF, ET, and HPP, @junge2020contrasting provide experimental and meta-analytic evidence in favor of using the HPP in speech segmentation tasks.
 Similarly, the MB1 project reported an increase in the effect size for HPP compared to CF and ET [@manybabies2020quantifying].
@@ -479,6 +468,17 @@ We excluded `r n_exclude+n_exclude_session` additional participants (see Data Ex
 The mean age of infants included in the study was `r round(age_stats$mean, 0)` days (range: `r age_stats$min` -- `r age_stats$max` days; approximately `r age_stats$age_in_months` months).
 
 ## Materials
+
+Our study was faced with a critical design choice: what stimuli to use to assess test-retest reliability. 
+One constraint on our study was that, since it was a follow-on to MB1, any stimulus we used would always be presented after the MB1 stimuli. 
+One option would be simply to bring back infants and have them hear exactly the same stimulus materials. 
+A weakness of this design would be the potential for stimulus familiarity effects, however, since infants would have heard the materials before. 
+Further complicating matters, infants might show a preference for or against a familiar stimulus depending on their age [@hunter1988multifactor]. 
+The ideal solution then would be to create a brand new stimulus set with the same characteristics.
+Unfortunately, because of the process of how MB1 stimuli were created, we did not have enough normed raw recordings available to make brand new stimulus items that conformed to the same standards as the MB1 stimuli. We therefore chose an intermediate path: we reversed the ordering of MB1 stimuli. Average looking times in MB1 were always lower than 9s per trial, even for the youngest children on the earliest trials (the group who looked the longest on average), so most children in MB1 did not hear the second half of most trials. 
+Thus, by reversing the order, we had a perfectly matched stimulus set that was relatively unfamiliar to most infants.
+The disadvantage of this design was that infants who looked longer might be more likely to hear a familiar clip heard in the previous study. 
+If infants then showed a familiarity preference --- an assumption which might not be true --- the end result could be to inflate our estimates of test-retest reliability slightly, since longer lookers would on average look longer at retest due to their familiarity preference. We view this risk as relatively low, but do note that it is a limitation of our design.
 
 ### Visual stimuli.
 The visual stimuli and instructions were identical to MB1.
