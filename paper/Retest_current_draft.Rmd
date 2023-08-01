@@ -168,7 +168,7 @@ For example, research showing that infants’ behavior in speech perception task
 However, a necessary precondition for this link to be observable is that individual differences between infants can be measured with high reliability at these earlier stages, in order to ensure that measured inter-individual variation mainly reflects differences in children's abilities rather than measurement error. 
 How reliable are the measures used in infancy research?
 
-Previous attempts to address the reliability of measurements have typically been limited to adult populations [@hedge2018reliability], or have been conducted with small sample sizes [e.g., @houston2007assessing; @colombo1988infant].
+Previous attempts to address the reliability of measurements have typically been limited to adult populations [@hedge2018reliability;@oliveira_reliability_2023], or have been conducted with small sample sizes [e.g., @houston2007assessing; @colombo1988infant].
 For example, @houston2007assessing tested 10 9-month-old infants' speech discrimination in a visual habituation procedure in two test sessions 1-3 days apart and found a large correlation (*r* = .7).
 These data were subsequently included in a much larger systematic investigation of test-retest reliability in infant speech perception [@cristia2016test].
 <!-- For example, @colombo1988infant used a paired-comparison task, in which infants were familiarized with a stimulus and presented with the familiarized and a novel stimulus side-by-side at test. 
@@ -1068,6 +1068,15 @@ While most infants prefer IDS over ADS [@dunst2012preference], patterns of prefe
 These inconsistencies in looking behavior are especially important to consider in the context of relating a direction of preference to later language development, and can sometimes lead to seemingly contradictory findings. 
 That is, both familiarity and novelty responses have been suggested to be predictive of infants’ later linguistic abilities [@depaolis2014infants; @newman2006infants; @newman2016input].
 In light of our findings, researchers conducting longitudinal studies with experimental data from young infants predicting future outcomes should be cautious, as there may be large intra-individual variability affecting preference measurement.
+
+While we observed limited evidence for test-retest reliability using preference measures, we observed robust correlations for average looking times between session 1 and 2, both overall and for IDS and ADS stimuli considered separately (see also Supplementary Materials S9 for an investigation of item-level correlations).
+This finding is consistent with past results in infant looking time studies finding robust correlations in average looking times across multiple sessions [@marimon2022].
+This raises an apparent puzzle: why are overall looking times for ADS and IDS stimuli correlated, while difference scores are not?
+One explanation is that infants have stable individual differences in how long they look to stimuli, but little or no stable individual differences in preference, *per se*.
+This only partially explains the current pattern of results, however, because IDS looking time in session 1 predicted IDS looking time in session 2 even when controlling for ADS looking time, and vice versa (see S9). 
+In other words, the condition-specific looking time correlations are not fully explained by overall looking behavior.
+Another long-established explanation is that difference scores tend to have poor measurement reliability, because difference scores combine error from individual measurements into a composite score and increasing the ratio of error relative to the variance between participants [@hedge2018reliability;@lord_measurement_growth].
+Given the limitations of difference scores (and composite scores in general), one goal for future research will be to assess the use of trial-by-trial model-based approaches for estimating reliability [@rouder_psychometrics_2019;@haines_theoretically_2020].
 
 ## Limitations
 While we had an above-average sample size for a study in infant research, we were unable to approach the number of participants collected within the original MB1 study. 

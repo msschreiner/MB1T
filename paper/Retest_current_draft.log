@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.30)  31 JUL 2023 02:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.30)  1 AUG 2023 02:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -700,19 +700,22 @@ LaTeX Warning: Float too large for page by 3.6112pt on input line 523.
 [17] [18 <./Retest_current_draft_files/figure-latex/fig3-1.pdf>]
 Underfull \vbox (badness 7649) has occurred while \output is active []
 
-[19] [20]
-Underfull \vbox (badness 1838) has occurred while \output is active []
-
-[21] [22]
-Underfull \vbox (badness 1028) has occurred while \output is active []
-
-[23]
+[19] [20] [21]
 Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[22] [23]
+Underfull \vbox (badness 1028) has occurred while \output is active []
 
 [24]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[25] AED endfloat: Processing end Figures and Tables [26] (./Retest_current_draft.aux)
+[25]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[26]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[27] AED endfloat: Processing end Figures and Tables [28] (./Retest_current_draft.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2020/03/25>
@@ -721,18 +724,18 @@ Package rerunfilecheck Info: File `Retest_current_draft.out' has not changed.
 (rerunfilecheck)             Checksum: 93F807056068CDCE2C1804C07EC4169D;3844.
  ) 
 Here is how much of TeX's memory you used:
- 16069 strings out of 477197
- 260075 string characters out of 5812849
+ 16075 strings out of 477197
+ 260203 string characters out of 5812849
  1932244 words of memory out of 5000000
  36666 multiletter control sequences out of 15000+600000
  601288 words of font info for 71 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 72i,11n,79p,1691b,589s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,11n,79p,1691b,587s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-Output written on Retest_current_draft.pdf (26 pages, 341883 bytes).
+Output written on Retest_current_draft.pdf (28 pages, 345989 bytes).
 PDF statistics:
- 386 PDF objects out of 1000 (max. 8388607)
- 333 compressed objects within 4 object streams
- 117 named destinations out of 1000 (max. 500000)
+ 403 PDF objects out of 1000 (max. 8388607)
+ 348 compressed objects within 4 object streams
+ 123 named destinations out of 1000 (max. 500000)
  192 words of extra memory for PDF output out of 10000 (max. 10000000)
 
