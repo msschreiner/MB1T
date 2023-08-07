@@ -3,7 +3,12 @@
 \PassOptionsToPackage{hyphens}{url}
 %
 \documentclass[
+  english,
   man, donotrepeattitle,floatsintext]{apa6}
+\title{Manybabies1 Test-Retest Supplementary Materials}
+\author{\phantom{0}}
+\date{}
+
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
 \usepackage{iftex}
@@ -33,6 +38,14 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Manybabies1 Test-Retest Supplementary Materials},
+  pdflang={en-EN},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
 \usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -82,15 +95,6 @@
 \newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
-\ifLuaTeX
-\usepackage[bidi=basic]{babel}
-\else
-\usepackage[bidi=default]{babel}
-\fi
-\babelprovide[main,import]{english}
-% get rid of language-specific shorthands (see #6817):
-\let\LanguageShortHands\languageshorthands
-\def\languageshorthands#1{}
 % Manuscript styling
 \usepackage{upgreek}
 \captionsetup{font=singlespacing,justification=justified}
@@ -165,21 +169,19 @@
 
 \linenumbers
 \usepackage{csquotes}
+\ifXeTeX
+  % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
+  \usepackage{polyglossia}
+  \setmainlanguage[]{english}
+\else
+  \usepackage[main=english]{babel}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\fi
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
-\hypersetup{
-  pdftitle={Manybabies1 Test-Retest Supplementary Materials},
-  pdflang={en-EN},
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-
-\title{Manybabies1 Test-Retest Supplementary Materials}
-\author{\phantom{0}}
-\date{}
 
 
 \shorttitle{MB1T supplementary}
@@ -198,7 +200,10 @@
 \hypertarget{s1.-notes-on-and-deviations-from-the-preregistration}{%
 \section{S1. Notes on and deviations from the preregistration}\label{s1.-notes-on-and-deviations-from-the-preregistration}}
 
-Below, we have compiled a list of notes on and deviations from the preregistered methods and analyses available at \url{https://osf.io/v5f8t}.
+\hypertarget{s1.1.-deviations}{%
+\subsection{S1.1. Deviations}\label{s1.1.-deviations}}
+
+Below, we have compiled a list of deviations from the preregistered methods and analyses available at \url{https://osf.io/v5f8t}.
 
 \begin{itemize}
 \tightlist
@@ -217,6 +222,38 @@ Below, we have compiled a list of notes on and deviations from the preregistered
 \item
   While we fit all models described in the secondary analyses of the preregistration, including models investigating interactions between moderators, we interpret the more complex, three-way interaction models with caution. Our final sample size was smaller than we anticipated, which made our sample less well-powered to investigate more complex relationships between moderators. Moreover, the baseline model for these secondary interaction models was incorrectly specified in the preregistration (lower-order terms for the moderator were incorrectly removed in the planned baseline model), and we opt instead to report estimates using the more conventional method of comparing parameters of interest to models including all predictors except the main predictor of interest (e.g., estimating significance of three-way interaction terms by comparing the model fit to a model including only all lower-order predictors).
 \end{itemize}
+
+\hypertarget{s1.2.-additional-notes}{%
+\subsection{S1.2. Additional notes}\label{s1.2.-additional-notes}}
+
+While the original idea was to retest infants that contributed data to the original study, some labs had already finished data collection for MB1 but nevertheless agreed to collect a new set of data for MB1T. In addition, one lab already started data collection prior to the preregistration, however, this data had not been inspected or analysed prior to the preregistration. We here present a detailed list of our collected data in relation to the original MB1 study and the preregistration (see Table 1).
+
+\begin{table}[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:unnamed-chunk-1}Additional notes on data collection status of each lab in relation to preregistration and MB1.}
+
+\begin{tabular}{llll}
+\toprule
+Lab & \multicolumn{1}{c}{Method} & \multicolumn{1}{c}{Collection.prior.to.preregistration} & \multicolumn{1}{c}{MB1.as.Session.1}\\
+\midrule
+babylab-potsdam & HPP & No & No\\
+babyling-oslo & eye-tracking & No & No\\
+brookes-babylab & central fixation & No & No\\
+InfantCog-UBC & central fixation & No & Yes\\
+infantll-madison & HPP & No & No\\
+lancslab & eye-tracking & No & No\\
+wsi-goettingen & central fixation & Yes (n=14) & Yes\\
+wsi-goettingen & HPP & No & No\\
+\bottomrule
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
 
 \newpage
 
@@ -311,8 +348,8 @@ We found no evidence that the change in preferential looking to IDS between Sess
 
 \begin{figure}
 \centering
-\includegraphics{MB1T_supplement_files/figure-latex/unnamed-chunk-13-1.pdf}
-\caption{\label{fig:unnamed-chunk-13}Infants' preference in Session 1 and Session 2 with individual data points and regression lines color-coded by method (CF, ET, or HPP). Results are plotted separately for North American English-learning infants (right panel) and infants learning other languages and dialects (left panel).}
+\includegraphics{MB1T_supplement_files/figure-latex/unnamed-chunk-14-1.pdf}
+\caption{\label{fig:unnamed-chunk-14}Infants' preference in Session 1 and Session 2 with individual data points and regression lines color-coded by method (CF, ET, or HPP). Results are plotted separately for North American English-learning infants (right panel) and infants learning other languages and dialects (left panel).}
 \end{figure}
 
 NAE-learning infants showed greater IDS preferences than their non-NAE counterparts in MB1.
@@ -324,8 +361,8 @@ A linear mixed-effects model predicting IDS preference in Session 2 based on IDS
 
 \begin{figure}
 \centering
-\includegraphics{MB1T_supplement_files/figure-latex/unnamed-chunk-15-1.pdf}
-\caption{\label{fig:unnamed-chunk-15}Infants' preference in Session 1 and Session 2 with individual data points and regression lines color-coded by method for (A) younger and (B) older infants (median-split). Results are plotted separately for North American English-learning infants and infants learning other languages and dialects}
+\includegraphics{MB1T_supplement_files/figure-latex/unnamed-chunk-16-1.pdf}
+\caption{\label{fig:unnamed-chunk-16}Infants' preference in Session 1 and Session 2 with individual data points and regression lines color-coded by method for (A) younger and (B) older infants (median-split). Results are plotted separately for North American English-learning infants and infants learning other languages and dialects}
 \end{figure}
 
 We also fit a preregistered linear mixed-effects model predicting IDS preference in Session 2 from the three-way interaction between IDS preference in Session 1 (mean-centered), NAE (centered), participant age (mean-centered), and all lower order interactions.
@@ -346,8 +383,8 @@ We found no evidence that the change in preferential looking to IDS between Sess
 
 \begin{figure}
 \centering
-\includegraphics{MB1T_supplement_files/figure-latex/unnamed-chunk-18-1.pdf}
-\caption{\label{fig:unnamed-chunk-18}Forest plot of test-retest reliability effect sizes. Each row represents Fisher's z transformed correlation coefficient and 95\% CI for a given lab and method (HPP = head-turn preference procedure; ET = eye-tracking; CF = central fixation). The black diamond represents the overall estimated effect size from the mixed-effects meta-analytic model.}
+\includegraphics{MB1T_supplement_files/figure-latex/unnamed-chunk-19-1.pdf}
+\caption{\label{fig:unnamed-chunk-19}Forest plot of test-retest reliability effect sizes. Each row represents Fisher's z transformed correlation coefficient and 95\% CI for a given lab and method (HPP = head-turn preference procedure; ET = eye-tracking; CF = central fixation). The black diamond represents the overall estimated effect size from the mixed-effects meta-analytic model.}
 \end{figure}
 
 In addition to the methods for assessing test-retest reliability reported in the main manuscript, we also investigated test-retest reliability across labs using a meta-analytic approach.
@@ -437,7 +474,7 @@ To check the robustness of our results, we also investigated whether we obtained
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:unnamed-chunk-27}Correlations between alternative dependent measures}
+\caption{\label{tab:unnamed-chunk-28}Correlations between alternative dependent measures}
 
 \begin{tabular}{lllll}
 \toprule
@@ -469,7 +506,7 @@ First, we consider the correlations between the three dependent measures we cons
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:unnamed-chunk-29}Coefficient estimates from a linear mixed-effects model predicting Log LT IDS preference in Session 2.}
+\caption{\label{tab:unnamed-chunk-30}Coefficient estimates from a linear mixed-effects model predicting Log LT IDS preference in Session 2.}
 
 \begin{tabular}{lllll}
 \toprule
@@ -487,11 +524,11 @@ Log LT IDS Preference Session 1 & -0.06 & 0.09 & -0.68 & 0.50\\
 
 \begin{figure}
 
-{\centering \includegraphics[width=5in]{MB1T_supplement_files/figure-latex/unnamed-chunk-30-1} 
+{\centering \includegraphics[width=5in]{MB1T_supplement_files/figure-latex/unnamed-chunk-31-1} 
 
 }
 
-\caption{IDS preferences (based on average log-looking times) of both sessions plotted against each other for each inclusion criterion. n indicates the number of included infants, r is the Pearson correlation coefficient as the indicator for reliability.}\label{fig:unnamed-chunk-30}
+\caption{IDS preferences (based on average log-looking times) of both sessions plotted against each other for each inclusion criterion. n indicates the number of included infants, r is the Pearson correlation coefficient as the indicator for reliability.}\label{fig:unnamed-chunk-31}
 \end{figure}
 
 In these analyses, we calculated IDS preference by first log-transforming looking times for each trial, computing the average log-transformed looking time for IDS and ADS for each participant, and calculating the difference between average IDS and ADS log-transformed looking times.
@@ -511,11 +548,11 @@ Stricter inclusion criteria increased the correlation somewhat, as in previous a
 
 \begin{figure}
 
-{\centering \includegraphics[width=5in]{MB1T_supplement_files/figure-latex/unnamed-chunk-32-1} 
+{\centering \includegraphics[width=5in]{MB1T_supplement_files/figure-latex/unnamed-chunk-33-1} 
 
 }
 
-\caption{IDS preferences (based on proportion IDS looking) of both sessions plotted against each other for each inclusion criterion. n indicates the number of included infants, r is the Pearson correlation coefficient as the indicator for reliability.}\label{fig:unnamed-chunk-32}
+\caption{IDS preferences (based on proportion IDS looking) of both sessions plotted against each other for each inclusion criterion. n indicates the number of included infants, r is the Pearson correlation coefficient as the indicator for reliability.}\label{fig:unnamed-chunk-33}
 \end{figure}
 
 \begin{table}[tbp]
@@ -523,7 +560,7 @@ Stricter inclusion criteria increased the correlation somewhat, as in previous a
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:unnamed-chunk-33}Coefficient estimates from a linear mixed-effects model predicting IDS preference (based on proportion IDS looking) in Session 2.}
+\caption{\label{tab:unnamed-chunk-34}Coefficient estimates from a linear mixed-effects model predicting IDS preference (based on proportion IDS looking) in Session 2.}
 
 \begin{tabular}{lllll}
 \toprule
@@ -650,7 +687,7 @@ There was a marginal, but non-significant relation in stimulus-specific IDS pref
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:unnamed-chunk-42}Linear mixed-effects model results predicting IDS preference in Session 2 from IDS preference in Session 1 at the stimulus level.}
+\caption{\label{tab:unnamed-chunk-43}Linear mixed-effects model results predicting IDS preference in Session 2 from IDS preference in Session 1 at the stimulus level.}
 
 \begin{tabular}{llllll}
 \toprule
