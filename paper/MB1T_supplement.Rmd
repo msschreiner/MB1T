@@ -54,7 +54,7 @@ knitr::opts_chunk$set(cache.extra = knitr::rand_seed,echo = FALSE, warning = FAL
 \newpage
 # S1. Notes on and deviations from the preregistration
 
-## S1.1. Deviations
+## S1.1. Deviations from the preregistration
 
 Below, we have compiled a list of deviations from the preregistered methods and analyses available at [https://osf.io/v5f8t](https://osf.io/v5f8t).
 
@@ -80,9 +80,10 @@ additional.notes <- data.frame(
   "MB1 as Session 1" = c("No", "No", "No", "Yes", "No", "No", "Yes", "No")
 )
 
+names(additional.notes)[c(3,4)]<-c("Collection prior to preregistration","MB1 as Session 1")
 papaja::apa_table(additional.notes, 
-                  caption = "Additional notes on data collection status of each lab in relation to preregistration and MB1.", 
-                  format.args = list(digits = 0))
+                  caption = "Additional notes on data collection status of each lab in relation to preregistration and MB1.")
+                  #format.args = list(digits = 0))
 ```
 
 \newpage

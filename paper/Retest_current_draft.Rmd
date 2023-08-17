@@ -82,11 +82,11 @@ authornote: |
   **CRediT author statement.** Outside of the position of the first, the second, and the last author, authorship position was determined by sorting authors' last names in alphabetical order. An overview of authorship contributions following the CRediT taxonomy can be viewed here: https://docs.google.com/spreadsheets/d/1jDvb0xL1U6YbXrpPZ1UyfyQ7yYK9aXo002UaArqy35U/edit?usp=sharing.
 
 abstract: |
- Test-retest reliability --- establishing that measurements remain consistent across multiple testing sessions --- is critical to measuring, understanding, and predicting individual differences in infant language development. However, previous attempts to establish measurement reliability in infant speech perception tasks are limited, and reliability of frequently-used infant measures is largely unknown. The current study investigated the test-retest reliability of infants' preference for infant-directed speech (hereafter, IDS) over adult-directed speech (hereafter, ADS) in a large sample (*N*=158) in the context of the ManyBabies1 collaborative research project (hereafter, MB1; Frank et al., 2017; ManyBabies Consortium, 2020). Labs of the original MB1 study were asked to bring in participating infants for a second appointment retesting infants on their IDS preference. This approach allows us to estimate test-retest reliability across three different methods used to investigate preferential listening in infancy: the head-turn preference procedure, central fixation, and eye-tracking. Overall, we find no consistent evidence of test-retest reliability in measures of infants' speech preference (overall *r* = .09, 95% CI [-.06,.25]). While increasing the number of trials that infants needed to contribute for inclusion in the analysis revealed a numeric growth in test-retest reliability, it also considerably reduced the study's effective sample size.  Therefore, future research on infant development should take into account that not all experimental measures may be appropriate for assessing individual differences between infants.
+ Test-retest reliability --- establishing that measurements remain consistent across multiple testing sessions --- is critical to measuring, understanding, and predicting individual differences in infant language development. However, previous attempts to establish measurement reliability in infant speech perception tasks are limited, and reliability of frequently-used infant measures is largely unknown. The current study investigated the test-retest reliability of infants' preference for infant-directed speech (hereafter, IDS) over adult-directed speech (hereafter, ADS) in a large sample (*N*=158) in the context of the ManyBabies1 collaborative research project (hereafter, MB1; Frank et al., 2017; ManyBabies Consortium, 2020). Labs were asked to bring in participating infants for a second appointment retesting infants on their IDS preference. This approach allows us to estimate test-retest reliability across three different methods used to investigate preferential listening in infancy: the head-turn preference procedure, central fixation, and eye-tracking. Overall, we find no consistent evidence of test-retest reliability in measures of infants' speech preference (overall *r* = .09, 95% CI [-.06,.25]). While increasing the number of trials that infants needed to contribute for inclusion in the analysis revealed a numeric growth in test-retest reliability, it also considerably reduced the study's effective sample size.  Therefore, future research on infant development should take into account that not all experimental measures may be appropriate for assessing individual differences between infants.
   
   
 keywords          : "language acquisition; speech perception; infant-directed speech; adult-directed speech; test-retest reliability"
-wordcount         : "3998"
+wordcount         : "5084"
 
 bibliography      : ["r-references.bib"]
 
@@ -168,7 +168,7 @@ For example, research showing that infants’ behavior in speech perception task
 However, a necessary precondition for this link to be observable is that individual differences between infants can be measured with high reliability at these earlier stages, in order to ensure that measured inter-individual variation mainly reflects differences in children's abilities rather than measurement error. 
 How reliable are the measures used in infancy research?
 
-Previous attempts to address the reliability of measurements have typically been limited to adult populations [@hedge2018reliability;@oliveira_reliability_2023], or have been conducted with small sample sizes [e.g., @houston2007assessing; @colombo1988infant].
+Previous attempts to address the reliability of measurements have typically been limited to adult populations [@hedge2018reliability;@oliveira_reliability_2023], or have been conducted with small sample sizes [e.g., @colombo1988infant; @houston2007assessing].
 For example, @houston2007assessing tested 10 9-month-old infants' speech discrimination in a visual habituation procedure in two test sessions 1-3 days apart and found a large correlation (*r* = .7).
 These data were subsequently included in a much larger systematic investigation of test-retest reliability in infant speech perception [@cristia2016test].
 <!-- For example, @colombo1988infant used a paired-comparison task, in which infants were familiarized with a stimulus and presented with the familiarized and a novel stimulus side-by-side at test. 
@@ -183,17 +183,24 @@ Nevertheless, the results showed that reliability was extremely variable across 
 
 Against this background, the current study investigates test-retest reliability of infants' performance in a speech preference task. 
 Within MB1, a multi-lab collaboration, we examine whether infants' preferential listening behavior to IDS and ADS is reliable across two different test sessions. 
-We also investigate the influence of various moderators on the reliability of IDS preference (e.g., time between test and retest; infants’ language background).
+In addition, we investigate the influence of various moderators on the reliability of IDS preference.
 
-The current study also explores whether there are any differences in test-retest reliability between three widely used methods: central fixation (CF), eye-tracking (ET), and the head-turn preference procedure (HPP).
+First, the current study also explores whether there are any differences in test-retest reliability between three widely used methods: central fixation (CF), eye-tracking (ET), and the head-turn preference procedure (HPP).
 Exploring differences in CF, ET, and HPP, @junge2020contrasting provide experimental and meta-analytic evidence in favor of using the HPP in speech segmentation tasks.
 Similarly, the MB1 project reported an increase in the effect size for HPP compared to CF and ET [@manybabies2020quantifying].
 HPP requires gross motor movements relative to other methods, such as CF and ET paradigms, for which subtle eye movements towards a monitor located in front of the child are sufficient.
 One possible explanation for the stronger effects with HPP may be a higher sensitivity to the contingency of the presentation of auditory stimuli and infants’ head turns away from the typical forward-facing position.
 While these findings suggest that HPP may be a more sensitive index of infant preference, they do not necessarily imply higher reliability for individual infants’ performance using HPP.
 For example, @marimon2022 found no evidence for test-retest reliability when testing infants' prosodic preferences using the HPP method across three testing sessions, each 7-8 days apart on average.
-It remains an open question whether the same measures that produce larger effect sizes at the group-level also have higher test-retest reliability for individual infants [@byers2021six]. 
-Therefore, assessing the test-retest reliability of the different preference measures is crucial, so that researchers can make informed decisions about the appropriate methods for their particular research question. 
+
+Second, we aim to address whether there are age-related differences in test-retest reliability. Older participants of MB1 yielded larger effect sizes. Given that older infants have had more linguistic experience, we predict that their preference may be more stable than that of younger infants.
+
+Third, we will explore if test-retest reliability of the infants’ preference measure is moderated by their linguistic background. All infants are tested using a North American English (hereafter, NAE) stimulus set, which is either their native or non-native language. As NAE infants demonstrated larger effects within the original MB1 study, we assume that infants for whom NAE is not the native language may behave more variable and demonstrate less reliable results than English-learning infants.
+
+Last, we will assess whether time between test and retest influences the reliability of the preference measure. Time between test and retest session may vary across participants. We predict that longer times between test and retest may yield less reliable results.
+
+In sum, it remains an open question whether the same measures that produce larger effect sizes at the group-level also have higher test-retest reliability for individual infants [@byers2021six]. 
+Therefore, assessing the test-retest reliability of the different preference measures and the influence of various moderators is crucial, so that researchers can make informed decisions about the appropriate methods for their particular research question. 
 Critically, only measures with high test-retest reliability should be used for studies of individual differences.
 
 
@@ -457,8 +464,7 @@ stats_daysbetween <- all_agg_subjects_paired_retest %>%
   summarise_at(vars(days_between_sessions),funs(mean,min,max))
 ```
 
-Contributing labs were asked to re-recruit their monolingual participants between the ages of 6 to 12 months who had already participated in the MB1 project. 
-If participating labs had not committed to testing either of these age groups, they were also allowed to re-recruit participants from the youngest age group of 3- to 6-month-olds and/or the oldest age group of 12- to 15-month-olds. 
+Contributing labs were asked to recruit monolingual participants between the ages of 6 to 12 months. If participating labs could not commit to test either of these age groups, they were also allowed to recruit participants from the youngest age group of 3- to 6-month-olds and/or the oldest age group of 12- to 15-month-olds. 
 Labs were asked to contribute half (*n*=16) or full samples (*n*=32); however, a lab's data was included in the study regardless of the number of included infants. 
 The study was approved by each lab's respective ethics committee and parental consent was obtained for each infant prior to participation in the study.
 
@@ -500,7 +506,7 @@ However, infants whose time between test and retest exceeded 31 days were still 
 The mean number of days between test and retest was `r round(stats_daysbetween$mean, 1)` (range: `r stats_daysbetween$min` - `r stats_daysbetween$max`).
 
 A total of 18 trials, including two training, eight IDS, and eight ADS trials, were presented in one of four pseudo-randomized orders. 
-Trial length was either infant-controlled or fixed depending on the lab’s standard procedure: a trial stopped either if the infant looked away for 2 seconds or after the total trial duration of 18 seconds. 
+Trial length was either infant-controlled or fixed depending on the lab’s standard procedure\footnote{Labs using CF or HPP had infant-controlled trial length whereas labs using ET had fixed trial length.}: a trial stopped either if the infant looked away for 2 seconds or after the total trial duration of 18 seconds. 
 The online coding experimenter and the parent listened to music masked with the stimuli of the study via noise-cancelling headphones. 
 If the experimenter was in an adjacent room separate from the testing location, listening to masking music was optional for the experimenter.
  
@@ -1025,6 +1031,8 @@ This finding is consistent with past research suggesting low test-retest reliabi
 Given that most experimental procedures conducted in infant research are interested in the comparison of groups, individual differences between participants within a specific condition are usually minimized by the experimental procedure while differences between conditions are maximized. 
 Therefore, infant preference measures may be a good approach for capturing group-level phenomena, but may be less appropriate for examining individual differences in development.
 
+Assessing the influence of different moderators on test-retest reliability yielded similar deceiving results. While previous research suggests that HPP may be a more sensitive index of infant preference and speech segmentation abilities [@manybabies2020quantifying; @junge2020contrasting], we find no evidence for higher test-retest reliability for HPP relative to ET and CF. Similarly, our planned analyses with various other moderators such as time between test sessions, infants' language background, and infants' age did not appear to exert a discernible impact on the test-retest reliability of infants' speech preference. One possible explanation may be that these analyses are largely underpowered as by far fewer labs contributed to the study than we had anticipated by the time of the preregistration. Alternatively, method, time between test session, infants' language background, and age may simply not moderate the relationship of infant preference in the two test sessions.
+
 Consistent with general psychometric theory [e.g.,@debolt2020robust], stricter inclusion criteria --- and consequently a larger number of included test trials per participant --- tended to increase the magnitude of the correlation between test sessions. 
 However, this association was based on exploratory analyses and was in part only observed descriptively, and hence should be interpreted with caution. 
 A similar effect on the group-level was found in the MB1 project, where a stricter inclusion criterion led to bigger effect sizes [@manybabies2020quantifying]. 
@@ -1084,11 +1092,9 @@ Given the limitations of difference scores (and composite scores in general), on
 
 ## Limitations
 While we had an above-average sample size for a study in infant research, we were unable to approach the number of participants collected within the original MB1 study. 
-In addition to a delayed call, the extra effort of having to schedule a second lab visit for each participant and the fact that there were already other collaborative studies taking place simultaneously [MB1B, @byers2021multilab; MB1G, @byers2021development], might have contributed to a low participation rate.
-A higher sample size and a larger number of participating labs from different countries would have enabled us to conduct a more highly-powered test of differences in test-retest reliability across different methods, language backgrounds, and participant age.
+In addition to a delayed call, the extra effort of having to schedule a second lab visit for each participant and the fact that there were already other collaborative studies taking place simultaneously [MB1B, @byers2021multilab; MB1G, @byers2021development], might have contributed to a low participation rate. A higher sample size and a larger number of participating labs from different countries would have enabled us to conduct a more highly-powered test of differences in test-retest reliability across different methods, language backgrounds, and participant age.
 
-A further limitation concerns the stimuli. 
-While the order of the audio recording clips presented to infants within a given trial differed between the first and second session, the exact same stimulus material as in MB1 was used in both sessions.
+A further limitation concerns the stimuli. While the order of the audio recording clips presented to infants within a given trial differed between the first and second session, the exact same stimulus material as in MB1 was used in both sessions.
 In particular, all children heard the exact same voices in Session 1 and in Session 2.
 From a practical point of view, this was the most straightforward solution for coordinating the experiment within the larger MB1 project.
 However, familiarity effects might have influenced infants’ looking behavior. 
