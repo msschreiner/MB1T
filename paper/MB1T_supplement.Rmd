@@ -65,6 +65,7 @@ Below, we have compiled a list of deviations from the preregistered methods and 
 - In assessing the reliability of IDS using a linear mixed-effects model predicting IDS preference in session 2 from IDS preference in session 1, we also assessed the robustness of the results by fitting a second preregistered model with more complex random effects structure, including a by-lab random slope for IDS preference in session 1. This model is included in the main R markdown script and yields qualitatively equivalent results to the model reported in the manuscript that includes a by-lab random intercept only.
 - We report a series of secondary planned analyses in the Supplementary Materials exploring potential moderating variables of time between test sessions (S2.1), participant age (S2.2.), method (S2.3.), and the language background of the participants (S2.4.).
 - While we fit all models described in the secondary analyses of the preregistration, including models investigating interactions between moderators, we interpret the more complex, three-way interaction models with caution. Our final sample size was smaller than we anticipated, which made our sample less well-powered to investigate more complex relationships between moderators. Moreover, the baseline model for these secondary interaction models was incorrectly specified in the preregistration (lower-order terms for the moderator were incorrectly removed in the planned baseline model), and we opt instead to report estimates using the more conventional method of comparing parameters of interest to models including all predictors except the main predictor of interest (e.g., estimating significance of three-way interaction terms by comparing the model fit to a model including only all lower-order predictors).
+- In the by-lab meta-analysis of test-retest reliability (Supplementary Materials S3), we also separated the data by method, such that the data from one lab was split into data from the head-turn preference procedure and the central fixation method. We separated the data by both lab and method because differences in IDS preference across methods were observed in ManyBabies1 and because this approach was more consistent with the analytic approach in the rest of the manuscript. This decision does not qualitatively affect the conclusions of the meta-analysis, namely that there was no consistent evidence of test-retest reliability.
 
 ## S1.2. Additional notes
 
@@ -277,7 +278,7 @@ We found no evidence that the change in preferential looking to IDS between Sess
 
 ## S2.4. Method
 
-### S2.4.1. IDS preference moderated by method
+### S2.4.1. Differences in IDS preference across method
 
 ```{r}
 diff_session_method <- lmer(Diff ~ Session + Method+
