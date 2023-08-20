@@ -71,14 +71,8 @@ Below, we have compiled a list of deviations from the preregistered methods and 
 While the original idea was to retest infants that contributed data to the original study, some labs had already finished data collection for MB1 but nevertheless agreed to collect a new set of data for MB1T. In addition, one lab already started data collection prior to the preregistration, however, this data had not been inspected or analysed prior to the preregistration. We here present a detailed list of our collected data in relation to the original MB1 study and the preregistration (see Table 1).
 
 ```{r}
-
-#create data frame with additional information on each lab's data collection status in relation to the preregistration and to MB1
-additional.notes <- data.frame(
-  Lab = c("babylab-potsdam", "babyling-oslo", "brookes-babylab", "InfantCog-UBC", "infantll-madison", "lancslab", "wsi-goettingen", "wsi-goettingen"),
-  Method = c( "HPP","eye-tracking", "central fixation", "central fixation", "HPP", "eye-tracking", "central fixation", "HPP"),
-  "Collection prior to preregistration" = c("No", "No", "No", "No", "No", "No", "Yes (n=14)", "No"),
-  "MB1 as Session 1" = c("No", "No", "No", "Yes", "No", "No", "Yes", "No")
-)
+#read in meta data with additional information on each lab's data collection status in relation to the preregistration and to MB1
+additional.notes <- read.csv(here(read_path,"mb1t_data_collection_info.csv"))
 
 names(additional.notes)[c(3,4)]<-c("Collection prior to preregistration","MB1 as Session 1")
 papaja::apa_table(additional.notes, 
@@ -118,7 +112,7 @@ all_agg_subjects_paired_retest <- read_csv(here(read_path,"all_agg_subjects_pair
 
 ### S2.1.1. Additional descriptive information
 
-```{r descriptives}
+```{r fig.cap="Distribution of participant age for each lab and method. Method is highlighted by color and  language status is indicated by line type (solid = North American English; dashed = non-North American English).", fig.align="center"}
 all_agg_subjects_paired_retest <- all_agg_subjects_paired_retest  %>%
   mutate(
     Method_short=case_when(
@@ -381,7 +375,7 @@ coef_table_method_age <- all_agg_subjects_paired_retest %>%
 ```
 
 In a more complex linear mixed-effects model (preregistered as part of our planned secondary analyses) including the interaction between IDS preference in Session 1 (mean-centered), Method (dummy-coded, with central fixation as the reference level), participant age (mean-centered), and all lower order interactions, we find evidence for an interaction between method and age in predicting reliability, ${\chi}^2$=`r round(overall_chisq_test_method_age$Chisq[8],2)`, *p*=`r printp(overall_chisq_test_method_age[8,3])`.
-This effect appears to be mainly driven by older infants showing some evidence of test-retest reliability for the headturn preference procedure, *r* = `r round(filter(coef_table_method_age, Method=="HPP"&age_bin=="older")$cor,2)`, *p* = `r round(filter(coef_table_method_age, Method=="HPP"&age_bin=="older")$pvalue2,2)` (see Figure 2B).
+This effect appears to be mainly driven by older infants showing some evidence of test-retest reliability for the headturn preference procedure, *r* = `r round(filter(coef_table_method_age, Method=="HPP"&age_bin=="older")$cor,2)`, *p* = `r round(filter(coef_table_method_age, Method=="HPP"&age_bin=="older")$pvalue2,2)` (see Figure 3B).
 However, we believe these tentative findings should be treated with caution, due to the small size of our infant sample once binned by multiple moderating factors.
 
 ### S2.4.4. Change in preferential looking moderated by age and method
@@ -463,7 +457,7 @@ ggplot(all_agg_subjects_paired_retest, aes(x = Diff_1, y = Diff_2, col = Method)
 
 NAE-learning infants showed greater IDS preferences than their non-NAE counterparts in MB1.
 We therefore also assessed whether test-retest reliability interacted with children’s language background.
-A linear mixed-effects model predicting IDS preference in Session 2 based on IDS preference in Session 1 (mean-centered), NAE (centered), and their interaction, including Lab as a random intercept, revealed no interaction, $\beta$=`r round(nae_coefs[4,1],2)`, *SE*=`r round(nae_coefs[4,2],2)`, *t*(`r round(nae_coefs[4,3],1)`)=`r round(nae_coefs[4,4],2)`, *p*=`r printp(nae_coefs[4,5])` (Figure 1).
+A linear mixed-effects model predicting IDS preference in Session 2 based on IDS preference in Session 1 (mean-centered), NAE (centered), and their interaction, including Lab as a random intercept, revealed no interaction, $\beta$=`r round(nae_coefs[4,1],2)`, *SE*=`r round(nae_coefs[4,2],2)`, *t*(`r round(nae_coefs[4,3],1)`)=`r round(nae_coefs[4,4],2)`, *p*=`r printp(nae_coefs[4,5])` (Figure 2).
 
 ### S2.5.2. Reliability and its interaction between language background and age
 
@@ -487,9 +481,14 @@ p1 <- ggplot(filter(all_agg_subjects_paired_retest,age_bin=="younger"), aes(x = 
   scale_color_ptol(name = "Method") + 
   xlab("IDS preference in first session") + 
  # ylim(-3, 5) + 
-  theme(legend.position = "bottom", legend.box = "vertical",panel.background = element_rect(fill = "white",
+  theme(
+    #legend.position = "bottom", 
+    #legend.box = "vertical",
+    panel.background = element_rect(fill = "white",
                                 colour = "black",
                                 size = 0.5, linetype = "solid"),
+  #legend.title = element_text(size=8),
+  #legend.text = element_text(size=7),
   panel.grid.major = element_blank(), 
   panel.grid.minor = element_blank(),
   strip.background = element_blank())+
@@ -505,22 +504,38 @@ p2 <- ggplot(filter(all_agg_subjects_paired_retest,age_bin=="older"), aes(x = Di
   scale_color_ptol(name = "Method") + 
   xlab("IDS preference in first session") + 
  # ylim(-3, 5) + 
-  theme(legend.position = "bottom", legend.box = "vertical",panel.background = element_rect(fill = "white",
+  theme(
+    #legend.position = "bottom", 
+    #legend.box = "vertical",
+        panel.background = element_rect(fill = "white",
                                 colour = "black",
                                 size = 0.5, linetype = "solid"),
+  #legend.title = element_text(size=8),
+  #legend.text = element_text(size=7),
   panel.grid.major = element_blank(), 
   panel.grid.minor = element_blank(),
   strip.background = element_blank())+
   ggtitle("OLDER INFANTS") +
   theme(plot.title = element_text(hjust = 0.5))
 
-plot_grid(p1,p2,labels=c("A","B"))
+main_plot <- plot_grid(
+  p1+theme(legend.position="none"),
+  p2+theme(legend.position="none"),
+  labels=c("A","B"))
+
+legend <- get_legend(
+  p1 + 
+    guides(color = guide_legend(nrow = 1)) +
+    theme(legend.position = "bottom",legend.box = "vertical",legend.title = element_text(size=12),legend.text = element_text(size=10))
+)
+
+plot_grid(main_plot, legend, ncol = 1, rel_heights = c(1, .1))
 ```
 
 We also fit a preregistered linear mixed-effects model predicting IDS preference in Session 2 from the three-way interaction between IDS preference in Session 1 (mean-centered), NAE (centered), participant age (mean-centered), and all lower order interactions.
 We find evidence for an interaction between language background and age in predicting reliability, $\beta$=`r round(nae_age_coefs[8,1],2)`, *SE*=`r round(nae_age_coefs[8,2],3)`, *t*(`r round(nae_age_coefs[8,3],1)`)=`r round(nae_age_coefs[8,4],2)`, *p*=`r printp(nae_age_coefs[8,5])`.
-Figure 2 illustrates that this interaction was driven by a small set of older infants (all from a single lab and participating in the HPP method) showing a somewhat more reliable relationship between Session 1 and Session 2 looking.
-Note that the mixed-effects analyses use Age as a continuous predictor --- age is median-split in Figure 2 to ease visualization.
+Figure 3 illustrates that this interaction was driven by a small set of older infants (all from a single lab and participating in the HPP method) showing a somewhat more reliable relationship between Session 1 and Session 2 looking.
+Note that the mixed-effects analyses use Age as a continuous predictor --- age is median-split in Figure 3 to ease visualization.
 Given the small number of infants driving the three-way interaction and the confounded nature of this sample (with method and lab), we do not draw strong conclusions from the existence of this three-way interaction, but report it here to spur future investigations into how age and experience interacts with test-retest reliability.
 
 ### S2.5.3. Change in preferential looking moderated by age and language background
@@ -600,7 +615,7 @@ In addition to the methods for assessing test-retest reliability reported in the
 We used the metafor package [@R-metafor] to fit a mixed-effects meta-analytic model on z-transformed correlations for each combination of lab and method using sample size weighting. 
 The model included random intercepts for lab and method.
 The overall effect size estimate was not significantly different from zero, *b* = `r round(meta_model$beta[1],2)`, 95% CI = [`r round(meta_model$ci.lb,2)`, `r round(meta_model$ci.ub,2)`], *p* = `r round(meta_model$pval,2)`. 
-A forest plot of the effect sizes for each lab and method is shown in Figure 3.
+A forest plot of the effect sizes for each lab and method is shown in Figure 4.
 
 # S4. Analyses including a more restricted sample
 
@@ -648,7 +663,7 @@ lab_stats_6 <- lab_stats_6 %>%
   ))
 
 papaja::apa_table(lab_stats_6, 
-                  caption = "Statistics of the included labs for the restricted sample (min 6 trials contributed per session). n refers to the number of infants included in the analysis.", 
+                  caption = "Statistics of the included labs for the restricted sample (min 6 trials contributed per session). N refers to the number of infants included in the analysis.", 
                   format.args = list(digits = 0))
 
 # Are the ages for the full sample and the restricted sample similar?
@@ -671,7 +686,7 @@ all_agg_subjects_paired_s2_6 <- subset(all_agg_subjects_paired_6, all_agg_subjec
 ttestSession2_6 <- t.test(all_agg_subjects_paired_s2_6$Diff)
 ```
 
-The participants in the restricted sample --- contributing at least 6 IDS and ADS trials for both sessions --- were distributed across the contributing labs, methods, and language backgrounds (Table 1). There was no difference in average age between the main sample and the restricted sample (`r apa_print(t_test_age_restricted_sample)$statistic`). There was a robust preference for infant-directed speech in both session 1 (`r apa_print(ttestSession1_6)$statistic`) and session 2 (`r apa_print(ttestSession2_6)$statistic`). We observed no difference in IDS preference between the two sessions, $\beta$=`r round(diff_session_6_coefs[2,1],2)`, *SE*=`r round(diff_session_6_coefs[2,2],2)`, *p*=`r printp(diff_session_6_coefs[2,5])`. 
+The participants in the restricted sample --- contributing at least 6 IDS and ADS trials for both sessions --- were distributed across the contributing labs, methods, and language backgrounds (Table 2). There was no difference in average age between the main sample and the restricted sample (`r apa_print(t_test_age_restricted_sample)$statistic`). There was a robust preference for infant-directed speech in both session 1 (`r apa_print(ttestSession1_6)$statistic`) and session 2 (`r apa_print(ttestSession2_6)$statistic`). We observed no difference in IDS preference between the two sessions, $\beta$=`r round(diff_session_6_coefs[2,1],2)`, *SE*=`r round(diff_session_6_coefs[2,2],2)`, *p*=`r printp(diff_session_6_coefs[2,5])`. 
 
 ```{r}
 # Linear mixed model predicting difference score of session 2 from difference score of session 1
@@ -846,7 +861,7 @@ papaja::apa_table(dv_corr_table$apa, # apa contains the data.frame needed for ap
                   escape = T)
 ```
 
-First, we consider the correlations between the three dependent measures we considered for IDS preference: (a) a simple difference score between average IDS and ADS looking times (main manuscript), (b) a difference score between average log-transformed looking times, and (c) the proportion-based preference measure. As expected, the correlations between the alternative dependent measures was very high (all *r*s > `r round(min(dv_corr_table$r),2)`; Table 2).
+First, we consider the correlations between the three dependent measures we considered for IDS preference: (a) a simple difference score between average IDS and ADS looking times (main manuscript), (b) a difference score between average log-transformed looking times, and (c) the proportion-based preference measure. As expected, the correlations between the alternative dependent measures was very high (all *r*s > `r round(min(dv_corr_table$r),2)`; Table 3).
 
 ## S5.2. Log-transformed looking times
 
@@ -911,9 +926,9 @@ plot_exclusion_dataset(all_agg_subjects_paired_retest_8,minimum_trials=8,Limaxes
 
 In these analyses, we calculated IDS preference by first log-transforming looking times for each trial, computing the average log-transformed looking time for IDS and ADS for each participant, and calculating the difference between average IDS and ADS log-transformed looking times.
 We fit a linear mixed-effects model predicting IDS preference in Session 2 from IDS preference in Session 1, including a by-lab random intercept. 
-As in the analyses using average raw looking times, the results revealed no significant relationship between IDS preference in Session 1 and 2 (Table 3). 
+As in the analyses using average raw looking times, the results revealed no significant relationship between IDS preference in Session 1 and 2 (Table 4). 
 The Pearson correlation coefficient was also not statistically significant, `r apa_print(simplyOverallCorr_log_lt)$full_result`.
-Applying successively stricter inclusion criteria --- by requiring a higher number of valid trials per condition in each session --- showed a similar pattern to the main manuscript, such that correlations increased somewhat with stricter inclusion criteria, but substantially reduced the sample size at the same time (Figure 3).
+Applying successively stricter inclusion criteria --- by requiring a higher number of valid trials per condition in each session --- showed a similar pattern to the main manuscript, such that correlations increased somewhat with stricter inclusion criteria, but substantially reduced the sample size at the same time (Figure 5).
 
 ## S5.3. Proportion looking to IDS
 
@@ -925,9 +940,9 @@ simplyOverallCorr_prop<-cor.test(all_agg_subjects_paired_retest$Prop_session_1,
 
 Next, we calculated a proportion-based IDS preference measure by computing the average proportion (raw) looking time to IDS relative to total (raw) looking time to IDS and ADS for each subject (i.e., IDS looking time / (ADS looking time + IDS looking time)).
 We fit a linear mixed-effects model predicting proportion-based IDS preference in Session 2 from proportion-based IDS preference in Session 1, including a by-lab random intercept. 
-As in the analyses using other measures of IDS preference, the results revealed no significant relationship between IDS preference in Session 1 and 2 (Table 4). 
+As in the analyses using other measures of IDS preference, the results revealed no significant relationship between IDS preference in Session 1 and 2 (Table 5). 
 The Pearson correlation coefficient based on proportional IDS looking was also not statistically significant, `r apa_print(simplyOverallCorr_prop)$full_result`.
-Stricter inclusion criteria increased the correlation somewhat, as in previous analyses (Figure 4).
+Stricter inclusion criteria increased the correlation somewhat, as in previous analyses (Figure 6).
 
 ```{r fig.cap="IDS preferences (based on proportion IDS looking) of both sessions plotted against each other for each inclusion criterion. n indicates the number of included infants, r is the Pearson correlation coefficient as the indicator for reliability.", fig.align="center",out.width = "5in",fig.height = 8, fig.width = 8}
 par(mfrow = c(2, 2))
@@ -965,7 +980,7 @@ papaja::apa_table(coefs,
 
 To conduct a more fine-grained analysis of how stricter trial inclusion criteria affect test-retest reliability, we computed correlations while gradually increasing the number of total valid trials required for inclusion.
 For this analysis, we required a minimum of one IDS and one ADS trial and gradually increased the number of total valid trials required in both sessions (irrespective of IDS and ADS condition) from 2 to 16 (the maximum number of total trials).
-Figure 5 depicts the Pearson correlation coefficients for increasingly stricter requirements for the overall trial numbers of a given participant in both sessions.
+Figure 7 depicts the Pearson correlation coefficients for increasingly stricter requirements for the overall trial numbers of a given participant in both sessions.
 Correlations only increase and reach conventional levels of significance once the number of total required trials for both sessions is greater than 12.
 
 
@@ -1002,7 +1017,7 @@ correlation_trial_exclusion_seq <- all_agg_subjects_paired_retest %>%
   unnest(cols=correlation)
 ```
 
-```{r sfig5, fig.cap = "Pearson correlation coefficient with increasingly strict trial-level inclusion criteria. The x-axis depicts the required number of overall valid trials in both session 1 and session 2. Dots represent corresponding correlation coefficients, with 95 percent CIs. The sample size is shown above each dot."}
+```{r sfig7, fig.cap = "Pearson correlation coefficient with increasingly strict trial-level inclusion criteria. The x-axis depicts the required number of overall valid trials in both session 1 and session 2. Dots represent corresponding correlation coefficients, with 95 percent CIs. The sample size is shown above each dot."}
 ggplot(correlation_trial_exclusion_seq,aes(x=min_trials,y=r))+
   geom_hline(yintercept=0,linetype="dashed")+
   geom_point(size=4)+
@@ -1041,8 +1056,8 @@ Of the `r sum(reversal_tally$n)` total infants, `r round(filter(reversal_tally,r
 
 Next, we explored whether we could detect any systematic clustering of infants with distinct patterns of preference across the test and retest session.
 We took a bottom-up approach and conducted a *k*-means clustering of the test-retest difference data (here using log-transformed looking time data).
-We found little evidence of distinct clusters emerging from these groupings: the clusterings ranging from *k*=2 (2 clusters) to *k*=4 (4 clusters) appear to mainly track  whether participants are approximately above or below the mean looking time difference for test session 1 and test session 2 (Figure 6A).
-The diagnostic elbow plot shows little evidence of a qualitative improvement as the number of clusters is increased, which suggests little evidence for a distinctive set of clusters of participants who showed similar patterns of looking across the test and retest sessions (Figure 6B).
+We found little evidence of distinct clusters emerging from these groupings: the clusterings ranging from *k*=2 (2 clusters) to *k*=4 (4 clusters) appear to mainly track  whether participants are approximately above or below the mean looking time difference for test session 1 and test session 2 (Figure 8A).
+The diagnostic elbow plot shows little evidence of a qualitative improvement as the number of clusters is increased, which suggests little evidence for a distinctive set of clusters of participants who showed similar patterns of looking across the test and retest sessions (Figure 8B).
 
 ```{r}
 d <- all_agg_subjects_paired_retest %>% 
@@ -1077,7 +1092,7 @@ clusterings <-
   unnest(cols = c(glanced))
 ```
 
-```{r fig6, fig.cap = " (A) Results from the k-means clustering analysis of IDS preference (based on average log looking times) in session 1 and 2 for different numbers of k  and (B) the corresponding elbow plot of the total within-cluster sum of squares. In (A), points represent indvidual participants' magnitude of looking time difference at test sessions 1 (x-axis) and 2 (y-axis). The solid line indicates no preference for IDS vs. ADS, the dotted lines indicate mean IDS preference at test session 1 and 2, respectively. Colors indicate clusters from the k-means clustering for different values of k."}
+```{r fig8, fig.cap = " (A) Results from the k-means clustering analysis of IDS preference (based on average log looking times) in session 1 and 2 for different numbers of k  and (B) the corresponding elbow plot of the total within-cluster sum of squares. In (A), points represent indvidual participants' magnitude of looking time difference at test sessions 1 (x-axis) and 2 (y-axis). The solid line indicates no preference for IDS vs. ADS, the dotted lines indicate mean IDS preference at test session 1 and 2, respectively. Colors indicate clusters from the k-means clustering for different values of k."}
 p1 <- 
   ggplot(assignments, aes(x = Diff_log_lt_session_1, y = Diff_log_lt_session_2)) +
   geom_point(aes(color = .cluster), alpha = 0.8) + 
@@ -1139,8 +1154,8 @@ cor_trials <- cor.test(df_all_trials$Test,df_all_trials$Retest)
 cor_trials_out <- apa_print(cor_trials)
 ```
 
-```{r sfig7, fig.cap = "Correlation between the number of trials contributed in Session 1 and Session 2. Each data point represents one infant. Colored lines represent linear fits for each method."}
-# ordering levels of method as in language background plot (Figure 1 of Supplementary)
+```{r sfig9, fig.cap = "Correlation between the number of trials contributed in Session 1 and Session 2. Each data point represents one infant. Colored lines represent linear fits for each method."}
+# ordering levels of method as in language background plot (Figure 2 of Supplementary)
 df_all_trials$Method <- factor(df_all_trials$Method, levels = c("central fixation", "Eyetracking", "HPP"))
 # jittering individual data points in order to make overlapping data points visible
 trials <- ggplot(df_all_trials, aes(x=Test, y=Retest))+
@@ -1163,7 +1178,7 @@ Do infants who contribute a higher number of trials during their first testing s
 A positive correlation between trial numbers during the first and second session would indicate that there is some stability in a given infants' likelihood of remaining attentive throughout the experiment.
 On the other hand, the absence of a correlation would indicate that the number of trials a given infant contributes is not predictive of how many trials they might contribute during their next session.
 
-We found a strong positive correlation between number of trials contributed during the first and the second session `r cor_trials_out$full_result` (Figure 7). 
+We found a strong positive correlation between number of trials contributed during the first and the second session `r cor_trials_out$full_result` (Figure 9). 
 This result suggests that if infants contribute a higher number of trials in one session, compared to other infants, they are likely to contribute a higher number of trials in their next session.
 This finding is consistent with the hypothesis that how attentive infants are throughout an experiment (and hence how many trials they contribute) is a stable individual difference, at least for some infant looking time tasks.
 Researchers should therefore be mindful of the fact that decisions about including or excluding infants based on trials contributed may selectively sample a specific sub-set of the infant population they are studying [@debolt2020robust;@byers2021six].
@@ -1206,7 +1221,7 @@ results_overall_correlation_age  <- summary(m_overall_correlation_age)
 To what extent are participants looking times between the two sessions related?
 To test this question, we first investigated whether participants' overall looking times --- irrespective of condition --- were correlated between the first and second session.
 There was a robust correlation between average looking time in Session 1 and Session 2: infants with longer looking times during their first session also tended to look longer during their second session, `r apa_print(correlation_avg_looking)$full_result`.
-This relationship held even after controlling for number of trials in the first and second session, suggesting that the relation between average looking in Session 1 and 2 could not be entirely explained by the correlation in the number of trials contributed between the two sessions (S7), `r apa_print(m)$full_result[["mean_lt_1"]]` (Figure 8A).
+This relationship held even after controlling for number of trials in the first and second session, suggesting that the relation between average looking in Session 1 and 2 could not be entirely explained by the correlation in the number of trials contributed between the two sessions (S7), `r apa_print(m)$full_result[["mean_lt_1"]]` (Figure 10A).
 The result is also similar when controlling for participants' average age across the two test sessions, `r apa_print(results_overall_correlation_age)$full_result[["mean_lt_1"]]`.
 
 ```{r}
@@ -1252,7 +1267,7 @@ predicting_Retest_ADS_full <- lm(LT_Retest_ADS ~ LT_Test_IDS + LT_Test_ADS+mean_
 ```
 
 Next, we explored the extent to which average looking times for IDS and ADS stimuli were related.
-First, we found similar correlations in average looking time to IDS stimuli in Session 1 and 2, `r apa_print(correlation_IDS_LT)$full_result`, and ADS stimuli in Session 1 and 2, `r apa_print(correlation_ADS_LT)$full_result` (Figure 8B).
+First, we found similar correlations in average looking time to IDS stimuli in Session 1 and 2, `r apa_print(correlation_IDS_LT)$full_result`, and ADS stimuli in Session 1 and 2, `r apa_print(correlation_ADS_LT)$full_result` (Figure 10B).
 To test whether these correlations were specific to looking times for IDS or ADS stimuli alone, we fit linear regression models predicting average looking to IDS (or ADS) stimuli in Session 2 from average looking to IDS and ADS stimuli in Session 1.
 We found that average looking to IDS stimuli in Session 2 could be predicted from average looking to IDS stimuli in Session 1, even after controlling for average looking to ADS stimuli in Session 1, `r apa_print(predicting_Retest_IDS)$full_result[["LT_Test_IDS"]]`.
 Conversely, average looking to ADS stimuli in Session 2 could be predicted from average looking to ADS stimuli in Session 1, even after controlling for average looking to IDS stimuli in Session 1, `r apa_print(predicting_Retest_ADS)$full_result[["LT_Test_ADS"]]`.
@@ -1295,12 +1310,12 @@ item_lt_relationship_control_trial_num <- lmer(LT_Retest~LT_Test_c*trial_num_1_c
 Finally, we inspected item-level correlations between the two test sessions.
 Specifically, we investigated the relation between items composed of the same recording clips in Session 1 and Session 2 (but with a reversed order of clips between the two sessions).
 We fit a linear mixed-effects model predicting item-level looking time in Session 2 from item-level looking time in Session 1, including random intercepts for participant, item, and lab, as well as a random slope for item-level looking time in Session 1 for participant and lab.
-Item-level looking in Session 2 was related to item-level looking in Session 1, `r apa_print(item_lt_relationship)$full_result[["LT_Test"]]` (Figure 8C).
+Item-level looking in Session 2 was related to item-level looking in Session 1, `r apa_print(item_lt_relationship)$full_result[["LT_Test"]]` (Figure 10C).
 Similar results hold if looking times are log-transformed.
 
 In ManyBabies1, the ordering of stimuli was counterbalanced, but some stimuli still appeared earlier in the experiment than others. For example, the IDS1 and ADS1 speech stimuli appeared on trials 1,2,5, or 6, while the IDS8 and ADS8 speech stimuli always occurred on the final two trials (trial number 15 or 16). This means that the interpretation of the correlations between individual speech stimuli must also take into account these stimuli tend to be occurring in earlier or later portions of the experiment (when infants are more or less attentive and show longer looking times in general). To further investigate the impact of trial number on by-item correlations in looking time, we fit an interaction model testing whether the magnitude of the item-level correlation depended on the trial number for a given session. We fit a linear mixed-effects predicting item-level looking time in Session 2 from the interaction between item-level looking time in Session 1 and trial number in Session 1 (trial numbers across sessions are almost always identical). The model included random intercepts for participant, item, and lab, as well as random slopes for item-level looking time and trial number in Session 1 for participant and lab. We indeed found that the magnitude of the item-level correlations in looking time between sessions depended on trial number (`r apa_print(item_lt_relationship_control_trial_num)$full_result[["LT_Test_c_trial_num_1_c"]]`), with the strength of the relation between sessions declining as trial number increased. While trial number was a strong predictor of Session 2 looking time (`r apa_print(item_lt_relationship_control_trial_num)$full_result[["trial_num_1_c"]]`), item-level looking in Session 1 only marginally predicted Session 2 looking when controlling for trial number (`r apa_print(item_lt_relationship_control_trial_num)$full_result[["LT_Test_c"]]`). Variation in item-level correlations is therefore at least partially due to the ordering of the stimuli in the experiment, rather than a sole function of differences between the stimuli *per se*.
 
-```{r  sfig8, fig.cap="Correlations in average looking time (in s) between Session 1 and 2 (A) overall, (B) by condition, and (C) by item.", fig.align="center",fig.height = 16, fig.width = 12}
+```{r  sfig10, fig.cap="Correlations in average looking time (in s) between Session 1 and 2 (A) overall, (B) by condition, and (C) by item.", fig.align="center",fig.height = 16, fig.width = 12}
 top_row <- plot_grid(corr_lt_p1,corr_lt_p2, labels=c("A","B"),ncol=2)
 plot_grid(top_row,corr_lt_p3,labels=c("","C"),nrow=2,rel_heights=c(1,2))
 ```
@@ -1339,7 +1354,7 @@ agg_by_subj_item_paired_pref <- data_clean  %>%
   pivot_wider(names_from = Session, values_from =c(IDS,ADS,Diff,Prop,trial_pair_num))
 
 #not plotted
-fig8 <- ggplot(agg_by_subj_item_paired_pref ,aes(Diff_1,Diff_2))+
+fig11 <- ggplot(agg_by_subj_item_paired_pref ,aes(Diff_1,Diff_2))+
   geom_point()+
   geom_smooth(method="lm",color="black")+
   facet_wrap(~stimulus_num,ncol=4)+
@@ -1358,7 +1373,7 @@ Finally, we inspected on a more fine-grained item level whether IDS preference i
 To do so, we exploited the fact the specific IDS and ADS stimuli were paired together in test orders in both sessions, such that one IDS stimulus (e.g., IDS1) always occurred adjacently to a specific ADS stimulus (e.g., ADS1).
 We therefore computed stimulus-specific IDS preference scores by calculating the difference in raw looking time for each of the eight IDS-ADS stimulus pairs for each participant (whenever both trials in a given pair were available).
 We then fit a linear mixed-effects model predicting stimulus-specific IDS preference in Session 2 from stimulus-specific IDS preference in Session 1, including by-participant and by-lab random intercepts (models with more complex random effects structure, including by-item random effects, failed to converge).
-There was a marginal, but non-significant relation in stimulus-specific IDS preference between the two test sessions (Table 5).
+There was a marginal, but non-significant relation in stimulus-specific IDS preference between the two test sessions (Table 6).
 
 ```{r}
 apa_table(
