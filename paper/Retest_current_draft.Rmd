@@ -1101,8 +1101,7 @@ However, familiarity effects might have influenced infants’ looking behavior.
 Infants with longer looking times in their first session might have had more opportunity to recognize familiar audio clips in their second session.
 For infants with short looking times, familiar audio clips would only occur towards the end of second-session trials, thus offering infants less opportunity to recognize voices from their first session.
 Therefore, inconsistent familiarity with the stimulus material in the second session across infants might have artificially lowered test-retest reliability.
-Moreoever, infants' experience with a testing paradigm has been found to systematically affect looking time to familiar stimuli [@santolin_experience_2021], further complicating the interpretation of infant familiarity preferences in retest sessions.
-On the other hand, one factor that mitigates this concern is that infants' looking times generally declined in session 2 compared to session 1 [consistent with past work, e.g. @marimon2022], limiting opportunities for infants to encounter previously experienced stimulus material.
+On the other hand, one factor that mitigates this concern is that infants' looking times generally declined in session 2 compared to session 1 [consistent with past work, e.g. @marimon2022; @santolin_experience_2021], limiting opportunities for infants to encounter previously experienced stimulus material.
 
 # Conclusion
 Following the MB1 protocol, the current study could not detect test-retest reliability in measures of infants' preference for IDS over ADS.
