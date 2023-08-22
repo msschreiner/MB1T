@@ -1192,6 +1192,12 @@ Researchers should therefore be mindful of the fact that decisions about includi
 agg_by_subj_paired <- data_clean %>%
   select(Subject,Subject_Unique,Age,Gender,Method, preterm,Session, Condition, trial_num,LT,Lab,days_between_sessions) %>% 
   group_by(Method, Lab,Subject, Subject_Unique, Age,Gender, preterm,days_between_sessions,Session) %>%
+  mutate(
+    Method=case_when(
+      Method=="Eyetracking" ~ "eye-tracking",
+      TRUE ~ Method
+    )
+  )%>%
   summarize(mean_lt=mean(LT),
             N=n()) %>%
   pivot_wider(names_from = Session, values_from = c(mean_lt,N,Age)) %>%
@@ -1381,6 +1387,89 @@ apa_table(
   apa_lm_item_pref$table
   , caption = "Linear mixed-effects model results predicting IDS preference in Session 2 from IDS preference in Session 1 at the stimulus level."
 )
+```
+
+# S11. Overall looking times and test-retest IDS preference
+
+## S11.1. Correlations between overall looking time and IDS preference
+
+```{r}
+#integrate mean looking time data with paired IDS preference dataset
+all_agg_subjects_paired_retest <- all_agg_subjects_paired_retest %>%
+  left_join(select(agg_by_subj_paired,Lab, Method, Subject, Subject_Unique,days_between_sessions,mean_lt_1, mean_lt_2))
+
+#compute correlations
+session1_lt_pref_correlation <-cor.test(all_agg_subjects_paired_retest$mean_lt_1,
+         all_agg_subjects_paired_retest$Diff_1)
+session2_lt_pref_correlation <-cor.test(all_agg_subjects_paired_retest$mean_lt_2,
+         all_agg_subjects_paired_retest$Diff_2)
+```
+
+We also investigated whether preferential looking behavior varied as a function of infants' tendencies to look for longer or shorter periods of time on average across all stimuli. We found no evidence for a correlation between infants' average looking time and the magnitude of IDS preference (Figure 11), either in Session 1 (`r apa_print(session1_lt_pref_correlation)$full_result`) or in Session 2 (`r apa_print(session2_lt_pref_correlation)$full_result`).
+
+```{r  sfig11, fig.cap="Correlations between average looking time (in s) and IDS preference in (A) Session 1 and (B) Session 2.", fig.align="center"}
+
+#plot correlations
+p1 <- ggplot(all_agg_subjects_paired_retest,aes(mean_lt_1,Diff_1))+
+  geom_hline(yintercept=0.5,linetype="dashed")+
+  geom_point(size=1.5)+
+  geom_smooth(method="lm")+
+  theme_cowplot()+
+  ggtitle("SESSION 1")+
+  theme(plot.title = element_text(hjust = 0.5))+
+  ylab("IDS preference in Session 1")+
+  xlab("Average looking time (in s) in Session 1")+
+  coord_cartesian(xlim=c(0,16),ylim=c(-10,10))+
+  theme(axis.title=element_text(size=11))
+p2 <- ggplot(all_agg_subjects_paired_retest,aes(mean_lt_2,Diff_2))+
+  geom_hline(yintercept=0.5,linetype="dashed")+
+  geom_point(size=1.5)+
+  geom_smooth(method="lm")+
+  theme_cowplot()+
+  ggtitle("SESSION 2")+
+  theme(plot.title = element_text(hjust = 0.5))+
+  ylab("IDS preference in Session 2")+
+  xlab("Average looking time (in s) in Session 2")+
+  coord_cartesian(xlim=c(0,16),ylim=c(-10,10))+
+  theme(axis.title=element_text(size=11))
+plot_grid(p1,p2,labels=c("A","B"))
+```
+
+## S11.2. Does average looking time moderate test-retest reliability?
+
+```{r}
+#mean-centering average looking time
+all_agg_subjects_paired_retest <- all_agg_subjects_paired_retest %>%
+  ungroup() %>%
+  mutate(
+    mean_lt_1_c = mean_lt_1-mean(mean_lt_1),
+    mean_lt_2_c = mean_lt_2-mean(mean_lt_2),
+         )
+
+# Adding age to model
+mod_lmer_lt <- lmer(Diff_2 ~ Diff_1_c*mean_lt_1_c+(1+ Diff_1_c|Lab),
+              data=all_agg_subjects_paired_retest,REML=T)
+
+# Note models with more complex random effects structure did not converge (singular boundary fit), though they yielded qualitatively equivalent results.
+## random effects structure: (1+ Diff_1_c*mean_lt_1_c|Lab) --> singular boundary fit
+## random effects structure: (1+ Diff_1_c+mean_lt_1_c|Lab) --> singular boundary fit
+
+lt_coefs<-summary(mod_lmer_lt)$coefficients
+```
+
+- marginal effect
+- direction of the effect is consistent with a slight increase in test-retest reliability as average looking time increases (Figure 12), but no evidence for robust differences between long and short lookers.
+
+```{r  sfig12, fig.cap="Correlations between average looking time (in s) and IDS preference in (A) Session 1 and (B) Session 2.", fig.align="center"}
+all_agg_subjects_paired_retest <- all_agg_subjects_paired_retest %>%
+  mutate(looking_bin = cut(mean_lt_1, breaks = 2, labels = c("shorter looking","longer looking")))
+
+ggplot(all_agg_subjects_paired_retest,aes(Diff_1,Diff_2))+
+  geom_point(size=1.5)+
+  geom_smooth(method="lm",color="red")+
+  theme_cowplot()+
+  facet_wrap(~looking_bin)
+  
 ```
 
 
