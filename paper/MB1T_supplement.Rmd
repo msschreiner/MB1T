@@ -1,5 +1,5 @@
 ---
-title             : "Manybabies1 Test-Retest Supplementary Materials"
+title             : "ManyBabies1 Test-Retest Supplementary Materials"
 shorttitle        : "MB1T supplementary"
 
 figsintext        : yes
@@ -62,14 +62,14 @@ Below, we have compiled a list of deviations from the preregistered methods and 
 - A small number of infants whose time between sessions exceeded 31 days were still included in the analyses (*n* = 3). We included these participants for two reasons. First, the general philosophy in ManyBabies studies has been to err on the side of being inclusive, as long as the data from a given participant adds valid information to the study in question. Secondly, time between test session varied continuously across participants and we planned to assess the impact of time between test on reliability. We expected that including these participants should (if anything) provide additional information (and statistical power) by extending the range of a continuous predictor variable (time between test sessions) in our moderator analyses.
 - Consistent with analytic decisions in ManyBabies 1 [@manybabies2020quantifying], total looking times were truncated at 18 seconds (the maximum trial time) in the small number of cases where recorded looking times were slightly greater than 18s (presumably due to small measurement error in recording infant looking times).
 - In assessing differences in IDS preference between test and retest sessions, we preregistered an additional linear mixed-effects model including a by-lab random slope for session. This model yielded qualitatively equivalent results (see R markdown of the main manuscript). However, the model resulted in a singular fit, suggesting that the model specification may be overly complex and that its estimates should be interpreted with caution. We therefore focused only on the first preregistered model (including only by-lab and by-participant random intercepts) in reporting the analyses in the main manuscript.
-- In assessing the reliability of IDS using a linear mixed-effects model predicting IDS preference in session 2 from IDS preference in session 1, we also assessed the robustness of the results by fitting a second preregistered model with more complex random effects structure, including a by-lab random slope for IDS preference in session 1. This model is included in the main R markdown script and yields qualitatively equivalent results to the model reported in the manuscript that includes a by-lab random intercept only.
-- We report a series of secondary planned analyses in the Supplementary Materials exploring potential moderating variables of time between test sessions (S2.1), participant age (S2.2.), method (S2.3.), and the language background of the participants (S2.4.).
+- In assessing the reliability of IDS using a linear mixed-effects model predicting IDS preference in Session 2 from IDS preference in Session 1, we also assessed the robustness of the results by fitting a second preregistered model with more complex random effects structure, including a by-lab random slope for IDS preference in session 1. This model is included in the main R markdown script and yields qualitatively equivalent results to the model reported in the manuscript that includes a by-lab random intercept only.
+- We report a series of secondary planned analyses in the Supplementary Materials exploring potential moderating variables of time between test sessions (S2.1.), participant age (S2.2.), method (S2.3.), and the language background of the participants (S2.4.).
 - While we fit all models described in the secondary analyses of the preregistration, including models investigating interactions between moderators, we interpret the more complex, three-way interaction models with caution. Our final sample size was smaller than we anticipated, which made our sample less well-powered to investigate more complex relationships between moderators. Moreover, the baseline model for these secondary interaction models was incorrectly specified in the preregistration (lower-order terms for the moderator were incorrectly removed in the planned baseline model), and we opt instead to report estimates using the more conventional method of comparing parameters of interest to models including all predictors except the main predictor of interest (e.g., estimating significance of three-way interaction terms by comparing the model fit to a model including only all lower-order predictors).
-- In the by-lab meta-analysis of test-retest reliability (Supplementary Materials S3), we also separated the data by method, such that the data from one lab was split into data from the head-turn preference procedure and the central fixation method. We separated the data by both lab and method because differences in IDS preference across methods were observed in ManyBabies1 and because this approach was more consistent with the analytic approach in the rest of the manuscript. This decision does not qualitatively affect the conclusions of the meta-analysis, namely that there was no consistent evidence of test-retest reliability.
+- In the by-lab meta-analysis of test-retest reliability (S3), we also separated the data by method, such that the data from one lab was split into data from the head-turn preference procedure and the central fixation method. We separated the data by both lab and method because differences in IDS preference across methods were observed in MB1 and because this approach was more consistent with the analytic approach in the rest of the manuscript. This decision does not qualitatively affect the conclusions of the meta-analysis, namely that there was no consistent evidence of test-retest reliability.
 
 ## S1.2. Additional notes
 
-While the original idea was to retest infants that contributed data to the original study, some labs had already finished data collection for MB1 but nevertheless agreed to collect a new set of data for MB1T. In addition, one lab already started data collection prior to the preregistration, however, this data had not been inspected or analysed prior to the preregistration. We here present a detailed list of our collected data in relation to the original MB1 study and the preregistration (see Table 1).
+While the original idea was to retest infants that contributed data to the original study, some labs had already finished data collection for MB1 but nevertheless agreed to collect a new set of data for the MB1 test-retest spin off project. In addition, one lab already started data collection prior to the preregistration, however, this data had not been inspected or analyz^ed prior to the preregistration. We here present a detailed list of our collected data in relation to the original MB1 study and the preregistration (see Table 1).
 
 ```{r}
 #read in meta data with additional information on each lab's data collection status in relation to the preregistration and to MB1
@@ -221,7 +221,6 @@ change_days_coefs<-summary(mod_lmer_2.1.2)$coefficients
 In addition to assessing the influence of moderators on test-retest reliability, we also tested whether the difference in magnitude of the IDS preference between Session 1 and Session 2 depended on moderators of interest.
 To investigate the influence of time between test sessions, we fit a linear mixed-effects model predicting average IDS preference from Session (centered; Session 1 vs. Session 2), days between test sessions (mean-centered), and their interaction.
 We included by-lab and by-participant random intercepts (more complex random effects structures did not converge due to singular fits).
-There were two key results.
 We found no evidence that the change in preferential looking to IDS between Session 1 and Session 2 was moderated by days between test sessions, $\beta$=`r round(change_days_coefs[4,1],3)`, *SE*=`r round(change_days_coefs[4,2],3)`, *t*(`r round(change_days_coefs[4,3],1)`)=`r round(change_days_coefs[4,4],2)`, *p*=`r printp(change_days_coefs[4,5])`.
 
 ## S2.3. Participant age
@@ -287,7 +286,7 @@ diff_session_method <- lmer(Diff ~ Session + Method+
 chi_sq_test_session_method <- Anova(diff_session_method,type="III")
 ```
 
-In ManyBabies1, infants who participated in the headturn preference procedure showed a significantly larger magnitude of IDS preference, compared to central fixation and eye-tracking methods. Therefore, in the current study, we also explored whether the magnitude of IDS preference differed as a function of method. We fit a linear mixed-effects model predicting IDS preference from Session and Method (dummy-coded, with central fixation as the reference level), including by-lab and by-participant random intercepts. We found no significant difference in IDS preference across methods, ${\chi}^2$=`r round(chi_sq_test_session_method$Chisq[3],2)`, *p*=`r printp(chi_sq_test_session_method[3,3])`.
+In MB1, infants who participated in the HPP showed a significantly larger magnitude of IDS preference, compared to central fixation and eye-tracking methods. Therefore, in the current study, we also explored whether the magnitude of IDS preference differed as a function of method. We fit a linear mixed-effects model predicting IDS preference from Session and Method (dummy-coded, with central fixation as the reference level), including by-lab and by-participant random intercepts. We found no significant difference in IDS preference across methods, ${\chi}^2$=`r round(chi_sq_test_session_method$Chisq[3],2)`, *p*=`r printp(chi_sq_test_session_method[3,3])`.
 
 ### S2.4.2. Reliability moderated by method
 
@@ -376,7 +375,7 @@ coef_table_method_age <- all_agg_subjects_paired_retest %>%
 ```
 
 In a more complex linear mixed-effects model (preregistered as part of our planned secondary analyses) including the interaction between IDS preference in Session 1 (mean-centered), Method (dummy-coded, with central fixation as the reference level), participant age (mean-centered), and all lower order interactions, we find evidence for an interaction between method and age in predicting reliability, ${\chi}^2$=`r round(overall_chisq_test_method_age$Chisq[8],2)`, *p*=`r printp(overall_chisq_test_method_age[8,3])`.
-This effect appears to be mainly driven by older infants showing some evidence of test-retest reliability for the headturn preference procedure, *r* = `r round(filter(coef_table_method_age, Method=="HPP"&age_bin=="older")$cor,2)`, *p* = `r round(filter(coef_table_method_age, Method=="HPP"&age_bin=="older")$pvalue2,2)` (see Figure 3B).
+This effect appears to be mainly driven by older infants showing some evidence of test-retest reliability for the HPP, *r* = `r round(filter(coef_table_method_age, Method=="HPP"&age_bin=="older")$cor,2)`, *p* = `r round(filter(coef_table_method_age, Method=="HPP"&age_bin=="older")$pvalue2,2)` (see Figure 3B).
 However, we believe these tentative findings should be treated with caution, due to the small size of our infant sample once binned by multiple moderating factors.
 
 ### S2.4.4. Change in preferential looking moderated by age and method
@@ -405,7 +404,7 @@ overall_chisq_test_change_age_method <- Anova(mod_lmer_2.3.3,type="III")
 change_age_method_coefs<-summary(mod_lmer_2.3.3)$coefficients
 ```
 
-We fit a linear mixed-effects model predicting average IDS preference from the three-way interaction of Session (centered; Session 1 vs. Session 2), participant age (mean-centered), Method (dummy-coded, with central fixation as the reference level) and all lower order predictors.
+We fit a linear mixed-effects model predicting average IDS preference from the three-way interaction of Session (centered; Session 1 vs. Session 2), participant age (mean-centered), Method (dummy-coded, with central fixation as the reference level), and all lower order predictors.
 We included a by-participant random intercept (more complex random effects structures did not converge due to singular fits).
 We found no evidence that the change in preferential looking to IDS between Session 1 and Session 2 was moderated by participant age and Method, $\beta$=`r round(change_age_method_coefs[12,1],3)`, *SE*=`r round(change_age_method_coefs[12,2],3)`, *t*(`r round(change_age_method_coefs[12,3],1)`)=`r round(change_age_method_coefs[12,4],2)`, *p*=`r printp(change_age_method_coefs[12,5])`.
 
@@ -472,7 +471,7 @@ nae_age_coefs<-summary(mod_lmer_2.4.2)$coefficients
 ```
 
 
-```{r fig.cap = "Infants' preference in Session 1 and Session 2 with individual data points and regression lines color-coded by method for (A) younger and (B) older infants (median-split). Results are plotted separately for North American English-learning infants and infants learning other languages and dialects"}
+```{r fig.cap = "Infants' preference in Session 1 and Session 2 with individual data points and regression lines color-coded by method for (A) younger and (B) older infants (median-split). Results are plotted separately for North American English-learning infants and infants learning other languages and dialects."}
 p1 <- ggplot(filter(all_agg_subjects_paired_retest,age_bin=="younger"), aes(x = Diff_1, y = Diff_2, col = Method)) +
   geom_point() +
   geom_smooth(method = "lm", se=FALSE) + 
@@ -687,7 +686,7 @@ all_agg_subjects_paired_s2_6 <- subset(all_agg_subjects_paired_6, all_agg_subjec
 ttestSession2_6 <- t.test(all_agg_subjects_paired_s2_6$Diff)
 ```
 
-The participants in the restricted sample --- contributing at least 6 IDS and ADS trials for both sessions --- were distributed across the contributing labs, methods, and language backgrounds (Table 2). There was no difference in average age between the main sample and the restricted sample (`r apa_print(t_test_age_restricted_sample)$statistic`). There was a robust preference for infant-directed speech in both session 1 (`r apa_print(ttestSession1_6)$statistic`) and session 2 (`r apa_print(ttestSession2_6)$statistic`). We observed no difference in IDS preference between the two sessions, $\beta$=`r round(diff_session_6_coefs[2,1],2)`, *SE*=`r round(diff_session_6_coefs[2,2],2)`, *p*=`r printp(diff_session_6_coefs[2,5])`. 
+The participants in the restricted sample --- contributing at least 6 IDS and ADS trials for both sessions --- were distributed across the contributing labs, methods, and language backgrounds (Table 2). There was no difference in average age between the main sample and the restricted sample, `r apa_print(t_test_age_restricted_sample)$statistic`. There was a robust preference for IDS in both Session 1, `r apa_print(ttestSession1_6)$statistic`, and Session 2, `r apa_print(ttestSession2_6)$statistic`. We observed no difference in IDS preference between the two sessions, $\beta$=`r round(diff_session_6_coefs[2,1],2)`, *SE*=`r round(diff_session_6_coefs[2,2],2)`, *p*=`r printp(diff_session_6_coefs[2,5])`. 
 
 ```{r}
 # Linear mixed model predicting difference score of session 2 from difference score of session 1
@@ -700,7 +699,7 @@ simplyOverallCorr_6<-cor.test(all_agg_subjects_paired_retest_6$Diff_1,
          all_agg_subjects_paired_retest_6$Diff_2)
 ```
 
-Interestingly, while there was a significant simple correlation between IDS preference in session 1 and session 2 (`r apa_print(simplyOverallCorr_6)$full_result`), we found that IDS preference in session 1 did not significantly predict IDS preference in session 2 in a linear mixed-effects model including a by-lab random intercept, $\beta$=`r round(mod_lmer_6_coefs[2,1],2)`, *SE*=`r round(mod_lmer_6_coefs[2,2],2)`, *p*=`r printp(mod_lmer_6_coefs[2,5])`. 
+Interestingly, while there was a significant simple correlation between IDS preference in session 1 and session 2, `r apa_print(simplyOverallCorr_6)$full_result`, we found that IDS preference in Session 1 did not significantly predict IDS preference in Session 2 in a linear mixed-effects model including a by-lab random intercept, $\beta$=`r round(mod_lmer_6_coefs[2,1],2)`, *SE*=`r round(mod_lmer_6_coefs[2,2],2)`, *p*=`r printp(mod_lmer_6_coefs[2,5])`. 
 
 ## S4.2. Moderator analyses including a more restricted sample
 
@@ -740,7 +739,7 @@ age_coefs_6<-summary(mod_lmer_2.2_6)$coefficients
 
 ```
 
-To investigate the possibility that age moderated test-retest reliability in the restricted sample, we fit a linear mixed-effects model predicting IDS preference in Session 2 from IDS preference in Session 1 (mean-centered), participant age (mean-centered) and their interaction.
+To investigate the possibility that age moderated test-retest reliability in the restricted sample, we fit a linear mixed-effects model predicting IDS preference in Session 2 from IDS preference in Session 1 (mean-centered), participant age (mean-centered), and their interaction.
 The model included a by-lab random intercept and a by-lab random slope for IDS preference in Session 1.
 We found no evidence that age influenced test-retest reliability as indicated by the interaction between IDS preference in Session 1 and age, $\beta$=`r round(age_coefs_6[4,1],3)`, *SE*=`r round(age_coefs_6[4,2],3)`, *t*(`r round(age_coefs_6[4,3],1)`)=`r round(age_coefs_6[4,4],2)`, *p*=`r printp(age_coefs_6[4,5])`.
 
@@ -812,9 +811,9 @@ coef_table_6 <- all_agg_subjects_paired_retest_6 %>%
   )
 ```
 
-We tested whether method (eye-tracking vs. central fixation vs. headturn preference procedure) moderated test-retest reliability by fitting a linear mixed-effects model predicting IDS preference in Session 2 from IDS preference in Session 1 (mean-centered), Method (dummy-coded, with central fixation as the reference level) and their interaction.
+We tested whether method (ET vs. CF vs. HPP) moderated test-retest reliability by fitting a linear mixed-effects model predicting IDS preference in Session 2 from IDS preference in Session 1 (mean-centered), Method (dummy-coded, with CF as the reference level), and their interaction.
 The model included a by-lab random intercept and a by-lab random slope for IDS preference in Session 1.
-We found no evidence that Method influenced test-retest reliability as indicated by the interaction between IDS preference in Session 1 and age, ${\chi}^2$=`r round(overall_chisq_test_method$Chisq[4],2)`, *p*=`r printp(overall_chisq_test_method[4,3])`. There was no significant relationship between IDS preference for session 1 and session 2 for each method considered separately (central fixation:$\beta$=`r round(coef_table_6$estimate[1],3)`, *SE*=`r round(coef_table_6$SE[1],2)`, *p*=`r printp(coef_table_6$pvalue[1])`; HPP: $\beta$=`r round(coef_table_6$estimate[2],3)`, *SE*=`r round(coef_table_6$SE[2],2)`, *p*=`r printp(coef_table_6$pvalue[2])`; eye-tracking: $\beta$=`r round(coef_table_6$estimate[3],3)`, *SE*=`r round(coef_table_6$SE[3],2)`, *p*=`r printp(coef_table_6$pvalue[3])`)
+We found no evidence that Method influenced test-retest reliability as indicated by the interaction between IDS preference in Session 1 and age, ${\chi}^2$=`r round(overall_chisq_test_method$Chisq[4],2)`, *p*=`r printp(overall_chisq_test_method[4,3])`. There was no significant relationship between IDS preference for Session 1 and Session 2 for each method considered separately, CF: $\beta$=`r round(coef_table_6$estimate[1],3)`, *SE*=`r round(coef_table_6$SE[1],2)`, *p*=`r printp(coef_table_6$pvalue[1])`; HPP: $\beta$=`r round(coef_table_6$estimate[2],3)`, *SE*=`r round(coef_table_6$SE[2],2)`, *p*=`r printp(coef_table_6$pvalue[2])`; eye-tracking: $\beta$=`r round(coef_table_6$estimate[3],3)`, *SE*=`r round(coef_table_6$SE[3],2)`, *p*=`r printp(coef_table_6$pvalue[3])`.
 
 
 
@@ -862,7 +861,7 @@ papaja::apa_table(dv_corr_table$apa, # apa contains the data.frame needed for ap
                   escape = T)
 ```
 
-First, we consider the correlations between the three dependent measures we considered for IDS preference: (a) a simple difference score between average IDS and ADS looking times (main manuscript), (b) a difference score between average log-transformed looking times, and (c) the proportion-based preference measure. As expected, the correlations between the alternative dependent measures was very high (all *r*s > `r round(min(dv_corr_table$r),2)`; Table 3).
+First, we consider the correlations between the three dependent measures we considered for IDS preference: (a) a simple difference score between average IDS and ADS looking times (main manuscript), (b) a difference score between average log-transformed looking times, and (c) the proportion-based preference measure. As expected, the correlations between the alternative dependent measures were very high, all *r*-values >= `r round(min(dv_corr_table$r),2)` (Table 3).
 
 ## S5.2. Log-transformed looking times
 
@@ -1018,7 +1017,7 @@ correlation_trial_exclusion_seq <- all_agg_subjects_paired_retest %>%
   unnest(cols=correlation)
 ```
 
-```{r sfig7, fig.cap = "Pearson correlation coefficient with increasingly strict trial-level inclusion criteria. The x-axis depicts the required number of overall valid trials in both session 1 and session 2. Dots represent corresponding correlation coefficients, with 95 percent CIs. The sample size is shown above each dot."}
+```{r sfig7, fig.cap = "Pearson correlation coefficient with increasingly strict trial-level inclusion criteria. The x-axis depicts the required number of overall valid trials in both Session 1 and Session 2. Dots represent corresponding correlation coefficients, with 95 percent CIs. The sample size is shown above each dot."}
 ggplot(correlation_trial_exclusion_seq,aes(x=min_trials,y=r))+
   geom_hline(yintercept=0,linetype="dashed")+
   geom_point(size=4)+
@@ -1049,15 +1048,15 @@ percent_consistent <- total_consistent/total_n
 ```
 
 We also conducted analyses to explore whether there were any patterns of preference reversal across test sessions.
-While there was no strong correlation in the magnitude of IDS preference between test session 1 and test session 2, here we asked whether infants consistently expressed the same preference across test sessions.
+While there was no strong correlation in the magnitude of IDS preference between Session 1 and Session 2, here we asked whether infants consistently expressed the same preference across test sessions.
 Overall, `r round(percent_consistent,3)*100 `% of the infants had a consistent preference from test to retest session.
 Of the `r sum(reversal_tally$n)` total infants, `r round(filter(reversal_tally,reversal_type=="IDS_IDS")$n/sum(reversal_tally$n),3)*100`% of infants showed a consistent IDS preference and `r round(filter(reversal_tally,reversal_type=="ADS_ADS")$n/sum(reversal_tally$n),3)*100`% showed a consistent ADS preference.
-`r round(filter(reversal_tally,reversal_type=="IDS_ADS")$n/sum(reversal_tally$n),3)*100`% of infants switched from an IDS preference at test session 1 to an ADS preference at test session 2 and `r round(filter(reversal_tally,reversal_type=="ADS_IDS")$n/sum(reversal_tally$n),3)*100`% switched from an ADS preference to an IDS preference. 
+`r round(filter(reversal_tally,reversal_type=="IDS_ADS")$n/sum(reversal_tally$n),3)*100`% of infants switched from an IDS preference at Session 1 to an ADS preference at Session 2 and `r round(filter(reversal_tally,reversal_type=="ADS_IDS")$n/sum(reversal_tally$n),3)*100`% switched from an ADS preference to an IDS preference. 
 
 
 Next, we explored whether we could detect any systematic clustering of infants with distinct patterns of preference across the test and retest session.
 We took a bottom-up approach and conducted a *k*-means clustering of the test-retest difference data (here using log-transformed looking time data).
-We found little evidence of distinct clusters emerging from these groupings: the clusterings ranging from *k*=2 (2 clusters) to *k*=4 (4 clusters) appear to mainly track  whether participants are approximately above or below the mean looking time difference for test session 1 and test session 2 (Figure 8A).
+We found little evidence of distinct clusters emerging from these groupings: the clusterings ranging from *k*=2 (2 clusters) to *k*=4 (4 clusters) appear to mainly track  whether participants are approximately above or below the mean looking time difference for Session 1 and Session 2 (Figure 8A).
 The diagnostic elbow plot shows little evidence of a qualitative improvement as the number of clusters is increased, which suggests little evidence for a distinctive set of clusters of participants who showed similar patterns of looking across the test and retest sessions (Figure 8B).
 
 ```{r}
@@ -1093,7 +1092,7 @@ clusterings <-
   unnest(cols = c(glanced))
 ```
 
-```{r fig8, fig.cap = " (A) Results from the k-means clustering analysis of IDS preference (based on average log looking times) in session 1 and 2 for different numbers of k  and (B) the corresponding elbow plot of the total within-cluster sum of squares. In (A), points represent indvidual participants' magnitude of looking time difference at test sessions 1 (x-axis) and 2 (y-axis). The solid line indicates no preference for IDS vs. ADS, the dotted lines indicate mean IDS preference at test session 1 and 2, respectively. Colors indicate clusters from the k-means clustering for different values of k."}
+```{r fig8, fig.cap = " (A) Results from the k-means clustering analysis of IDS preference (based on average log looking times) in Session 1 and 2 for different numbers of k,  and (B) the corresponding elbow plot of the total within-cluster sum of squares. In (A), points represent indvidual participants' magnitude of looking time difference at Sessions 1 (x-axis) and 2 (y-axis). The solid line indicates no preference for IDS vs. ADS, the dotted lines indicate mean IDS preference at Session 1 and 2, respectively. Colors indicate clusters from the k-means clustering for different values of k."}
 p1 <- 
   ggplot(assignments, aes(x = Diff_log_lt_session_1, y = Diff_log_lt_session_2)) +
   geom_point(aes(color = .cluster), alpha = 0.8) + 
@@ -1179,7 +1178,7 @@ Do infants who contribute a higher number of trials during their first testing s
 A positive correlation between trial numbers during the first and second session would indicate that there is some stability in a given infants' likelihood of remaining attentive throughout the experiment.
 On the other hand, the absence of a correlation would indicate that the number of trials a given infant contributes is not predictive of how many trials they might contribute during their next session.
 
-We found a strong positive correlation between number of trials contributed during the first and the second session `r cor_trials_out$full_result` (Figure 9). 
+We found a strong positive correlation between number of trials contributed during the first and the second session, `r cor_trials_out$full_result` (Figure 9). 
 This result suggests that if infants contribute a higher number of trials in one session, compared to other infants, they are likely to contribute a higher number of trials in their next session.
 This finding is consistent with the hypothesis that how attentive infants are throughout an experiment (and hence how many trials they contribute) is a stable individual difference, at least for some infant looking time tasks.
 Researchers should therefore be mindful of the fact that decisions about including or excluding infants based on trials contributed may selectively sample a specific sub-set of the infant population they are studying [@debolt2020robust;@byers2021six].
@@ -1320,7 +1319,7 @@ We fit a linear mixed-effects model predicting item-level looking time in Sessio
 Item-level looking in Session 2 was related to item-level looking in Session 1, `r apa_print(item_lt_relationship)$full_result[["LT_Test"]]` (Figure 10C).
 Similar results hold if looking times are log-transformed.
 
-In ManyBabies1, the ordering of stimuli was counterbalanced, but some stimuli still appeared earlier in the experiment than others. For example, the IDS1 and ADS1 speech stimuli appeared on trials 1,2,5, or 6, while the IDS8 and ADS8 speech stimuli always occurred on the final two trials (trial number 15 or 16). This means that the interpretation of the correlations between individual speech stimuli must also take into account these stimuli tend to be occurring in earlier or later portions of the experiment (when infants are more or less attentive and show longer looking times in general). To further investigate the impact of trial number on by-item correlations in looking time, we fit an interaction model testing whether the magnitude of the item-level correlation depended on the trial number for a given session. We fit a linear mixed-effects predicting item-level looking time in Session 2 from the interaction between item-level looking time in Session 1 and trial number in Session 1 (trial numbers across sessions are almost always identical). The model included random intercepts for participant, item, and lab, as well as random slopes for item-level looking time and trial number in Session 1 for participant and lab. We indeed found that the magnitude of the item-level correlations in looking time between sessions depended on trial number (`r apa_print(item_lt_relationship_control_trial_num)$full_result[["LT_Test_c_trial_num_1_c"]]`), with the strength of the relation between sessions declining as trial number increased. While trial number was a strong predictor of Session 2 looking time (`r apa_print(item_lt_relationship_control_trial_num)$full_result[["trial_num_1_c"]]`), item-level looking in Session 1 only marginally predicted Session 2 looking when controlling for trial number (`r apa_print(item_lt_relationship_control_trial_num)$full_result[["LT_Test_c"]]`). Variation in item-level correlations is therefore at least partially due to the ordering of the stimuli in the experiment, rather than a sole function of differences between the stimuli *per se*.
+In MB1, the ordering of stimuli was counterbalanced, but some stimuli still appeared earlier in the experiment than others. For example, the IDS1 and ADS1 speech stimuli appeared on trials 1,2,5, or 6, while the IDS8 and ADS8 speech stimuli always occurred on the final two trials (trial number 15 or 16). This means that the interpretation of the correlations between individual speech stimuli must also take into account these stimuli tend to be occurring in earlier or later portions of the experiment (when infants are more or less attentive and show longer looking times in general). To further investigate the impact of trial number on by-item correlations in looking time, we fit an interaction model testing whether the magnitude of the item-level correlation depended on the trial number for a given session. We fit a linear mixed-effects model predicting item-level looking time in Session 2 from the interaction between item-level looking time in Session 1 and trial number in Session 1 (trial numbers across sessions are almost always identical). The model included random intercepts for participant, item, and lab, as well as random slopes for item-level looking time and trial number in Session 1 for participant and lab. We indeed found that the magnitude of the item-level correlations in looking time between sessions depended on trial number, `r apa_print(item_lt_relationship_control_trial_num)$full_result[["LT_Test_c_trial_num_1_c"]]`, with the strength of the relation between sessions declining as trial number increased. While trial number was a strong predictor of Session 2 looking time, `r apa_print(item_lt_relationship_control_trial_num)$full_result[["trial_num_1_c"]]`, item-level looking in Session 1 only marginally predicted Session 2 looking when controlling for trial number, `r apa_print(item_lt_relationship_control_trial_num)$full_result[["LT_Test_c"]]`. Variation in item-level correlations is therefore at least partially due to the ordering of the stimuli in the experiment, rather than a sole function of differences between the stimuli *per se*.
 
 ```{r  sfig10, fig.cap="Correlations in average looking time (in s) between Session 1 and 2 (A) overall, (B) by condition, and (C) by item.", fig.align="center",fig.height = 16, fig.width = 12}
 top_row <- plot_grid(corr_lt_p1,corr_lt_p2, labels=c("A","B"),ncol=2)

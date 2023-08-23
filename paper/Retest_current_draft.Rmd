@@ -82,11 +82,11 @@ authornote: |
   **CRediT author statement.** Outside of the position of the first, the second, and the last author, authorship position was determined by sorting authors' last names in alphabetical order. An overview of authorship contributions following the CRediT taxonomy can be viewed here: https://docs.google.com/spreadsheets/d/1jDvb0xL1U6YbXrpPZ1UyfyQ7yYK9aXo002UaArqy35U/edit?usp=sharing.
 
 abstract: |
- Test-retest reliability --- establishing that measurements remain consistent across multiple testing sessions --- is critical to measuring, understanding, and predicting individual differences in infant language development. However, previous attempts to establish measurement reliability in infant speech perception tasks are limited, and reliability of frequently-used infant measures is largely unknown. The current study investigated the test-retest reliability of infants' preference for infant-directed speech (hereafter, IDS) over adult-directed speech (hereafter, ADS) in a large sample (*N*=158) in the context of the ManyBabies1 collaborative research project (hereafter, MB1; Frank et al., 2017; ManyBabies Consortium, 2020). Labs were asked to bring in participating infants for a second appointment retesting infants on their IDS preference. This approach allows us to estimate test-retest reliability across three different methods used to investigate preferential listening in infancy: the head-turn preference procedure, central fixation, and eye-tracking. Overall, we find no consistent evidence of test-retest reliability in measures of infants' speech preference (overall *r* = .09, 95% CI [-.06,.25]). While increasing the number of trials that infants needed to contribute for inclusion in the analysis revealed a numeric growth in test-retest reliability, it also considerably reduced the study's effective sample size.  Therefore, future research on infant development should take into account that not all experimental measures may be appropriate for assessing individual differences between infants.
+ Test-retest reliability --- establishing that measurements remain consistent across multiple testing sessions --- is critical to measuring, understanding, and predicting individual differences in infant language development. However, previous attempts to establish measurement reliability in infant speech perception tasks are limited, and reliability of frequently-used infant measures is largely unknown. The current study investigated the test-retest reliability of infants' preference for infant-directed speech (hereafter, IDS) over adult-directed speech (hereafter, ADS) in a large sample (*N*=158) in the context of the ManyBabies1 collaborative research project (hereafter, MB1; Frank et al., 2017; ManyBabies Consortium, 2020). Labs were asked to bring in participating infants for a second appointment retesting infants on their IDS preference. This approach allows us to estimate test-retest reliability across three different methods used to investigate preferential listening in infancy: the head-turn preference procedure, central fixation, and eye-tracking. Overall, we find no consistent evidence of test-retest reliability in measures of infants' speech preference (overall *r* = .09, 95% CI [-.06,.25]). While increasing the number of trials that infants needed to contribute for inclusion in the analysis revealed a numeric growth in test-retest reliability, it also considerably reduced the study's effective sample size. Therefore, future research on infant development should take into account that not all experimental measures may be appropriate for assessing individual differences between infants.
   
   
 keywords          : "language acquisition; speech perception; infant-directed speech; adult-directed speech; test-retest reliability"
-wordcount         : "5084"
+wordcount         : "5072"
 
 bibliography      : ["r-references.bib"]
 
@@ -212,7 +212,7 @@ We preregistered the current study on the Open Science Framework (https://osf.io
 
 ## Data Collection
 
-A call was issued to all labs participating in the original MB1 study on January 24th, 2018 [@manybabies2020quantifying]. The collection of retest session data was initially set to end on May 31st, 2018, one month after the end date of the original MB1 project. Due to the fact that the original MB1 project extended the time frame for data collection and the late start of data collection for the MB1 test-retest study, we also allowed participating labs to continue data collection past the scheduled end date.
+A call was issued to all labs participating in the original MB1 study on January 29th, 2018 [@manybabies2020quantifying]. The collection of retest session data was initially set to end on May 31st, 2018, one month after the end date of the original MB1 project. Due to the fact that the original MB1 project extended the time frame for data collection and the late start of data collection for the MB1 test-retest study, we also allowed participating labs to continue data collection past the scheduled end date.
 
 ## Participants
 
@@ -470,8 +470,8 @@ The study was approved by each lab's respective ethics committee and parental co
 
 Our final sample consisted of `r n` monolingual infants from `r n_labs` different labs (Table 1). 
 In order to be included in the study, infants needed a minimum of 90% first language exposure, to be born full term with no known developmental disorders, and normal hearing and vision.
-We excluded `r n_exclude+n_exclude_session` additional participants (see Data Exclusion section for details). 
-The mean age of infants included in the study was `r round(age_stats$mean, 0)` days (range: `r age_stats$min` -- `r age_stats$max` days; approximately `r age_stats$age_in_months` months).
+We excluded `r n_exclude+n_exclude_session` additional participants (see Data exclusion section for details). 
+The mean age of infants included in the study was `r round(age_stats$mean, 0)` days (approximately `r age_stats$age_in_months` months; range: `r age_stats$min` -- `r age_stats$max` days).
 
 ## Materials
 
@@ -494,7 +494,7 @@ A second set of naturalistic IDS and ADS recordings of mothers either talking to
 This resulted in eight reordered sequences of natural IDS and eight reordered sequences of natural ADS with a length of 18 seconds each.
 Average looking times in MB1 were always lower than 9s per trial, even for the youngest children on the earliest trials (the group who looked the longest on average), so most children in MB1 did not hear the second half of most trials. 
 Thus, by reversing the order, we had a perfectly matched stimulus set that was relatively unfamiliar to most infants.
-The disadvantage of this design was that infants who looked longer might be more likely to hear a familiar clip heard in the previous study. 
+The disadvantage of this design was that infants who looked longer might be more likely to hear a familiar clip heard in the previous session. 
 If infants then showed a familiarity preference --- an assumption which might not be true --- the end result could be to inflate our estimates of test-retest reliability slightly, since longer lookers would on average look longer at retest due to their familiarity preference. 
 We view this risk as relatively low, but do note that it is a limitation of our design.
 In addition to the 16 reversed-order IDS and ADS speech stimuli, we used the identical training stimuli of piano music from MB1.
@@ -544,7 +544,7 @@ lab_stats <- lab_stats %>%
   ))
 
 papaja::apa_table(lab_stats, 
-                  caption = "Statistics of the included labs. n refers to the number of infants included in the final analysis.", 
+                  caption = "Statistics of the included labs. N refers to the number of infants included in the final analysis.", 
                   format.args = list(digits = 0))
 
 ```
@@ -618,6 +618,7 @@ rownames(coefs) <- c("Intercept", "IDS Preference Session 1")
 
 papaja::apa_table(coefs, 
                   caption = "Coefficient estimates from a linear mixed effects model predicting IDS preference in Session 2.", 
+                  col.names=c("", "Estimate","$SE$", "$t$", "$p$"),
                   format.args = list(digits = 2))
 
 # Preference Reversal
@@ -772,14 +773,14 @@ coef_table <- all_agg_subjects_paired_retest %>%
   
 papaja::apa_table(coef_table, 
                   caption = "Coefficient estimates from a linear mixed effects model predicting IDS preference in Session 2 and Pearson correlation coefficient for each method separately.", 
-                  col.names = c("Method","beta","SE","p","Pearson r"),
+                  col.names = c("Method","$beta$","$SE$","$p$","Pearson $r$"),
                   format.args = list(digits = 2))
 ```
 
 To investigate the test-retest reliability of each specific method, we computed Pearson correlation coefficients and the same mixed-effects model described above for HPP, CF, and ET separately (Table 4) in additional exploratory analyses. 
 None of the three methods showed evidence of test-retest reliability. 
 Neither the Pearson correlation coefficients nor the coefficients of the multilevel analysis were significant, all *p*-values > `r floor(min(coef_table$pvalue)*100)*0.01`.
-In planned secondary analyses, we found that time between test sessions, participant age, method, and language background did not moderate the relationship between IDS preference in session 1 and session 2 (see Supplementary Materials S2).
+In planned secondary analyses, we found that time between test sessions, participant age, method, and language background did not moderate the relationship between IDS preference in Session 1 and Session 2 (see Supplementary Materials S2).
 Taken together, we find no significant evidence of test-retest reliability across our preregistered analyses.
 
 ## Exploratory analyses with different inclusion criteria
@@ -937,7 +938,7 @@ trials <- ggplot(df_all_trials, aes(x=Test, y=Retest))+
 p1 <- ggMarginal(trials, groupColour = TRUE, groupFill = TRUE,alpha=0.3)
 ```
 
-We found a strong positive correlation between number of trials contributed during the first and the second session `r cor_trials_out$full_result` (Figure 3A). 
+We found a strong positive correlation between number of trials contributed during the first and the second session, `r cor_trials_out$full_result` (Figure 3A). 
 In other words, if infants contributed a higher number of trials in one session, compared to other infants, they were likely to contribute a higher number of trials in their next session.
 This finding is consistent with the hypothesis that how attentive infants are throughout an experiment (and hence how many trials they contribute) is a stable individual difference, at least for some infant looking time tasks.
 
@@ -1013,7 +1014,7 @@ predicting_Retest_ADS_age <- lm(LT_Retest_ADS ~ LT_Test_ADS + mean_age,data=agg_
 To what extent are participants looking times between the two sessions related?
 To test this question, we investigated whether participants' overall looking times --- irrespective of condition --- were correlated between the first and second session.
 There was a robust correlation between average looking time in Session 1 and Session 2: infants with longer looking times during their first session also tended to look longer during their second session, `r apa_print(correlation_avg_looking)$full_result` (Figure 3B).
-This relationship held even after controlling for number of trials (`r apa_print(m)$full_result[["mean_lt_1"]]`) and participants' average age (`r apa_print(results_overall_correlation_age)$full_result[["mean_lt_1"]]`) across the two test sessions in linear regression models.
+This relationship held even after controlling for number of trials, `r apa_print(m)$full_result[["mean_lt_1"]]`, and participants' average age ,`r apa_print(results_overall_correlation_age)$full_result[["mean_lt_1"]]`, across the two test sessions in linear regression models.
 Finally, we found similar correlations in average looking time to IDS stimuli in Session 1 and 2, `r apa_print(correlation_IDS_LT)$full_result`, and ADS stimuli in Session 1 and 2, `r apa_print(correlation_ADS_LT)$full_result` (Figure 3C; see Supplementary Materials S9 and S10 for further details, including an investigation of item-level correlations).
 
 ```{r fig3, fig.cap="(A) Correlation between the number of trials contributed in Session 1 and Session 2. Each data point represents one infant. Colored lines represent linear fits for each method. (B) Overall correlations in average looking time (in s) between Session 1 and 2. (C) Correlations in average looking time (in s) between sessions, split by IDS/ADS condition.", fig.align="center",fig.height = 14, fig.width = 12}
@@ -1024,7 +1025,7 @@ plot_grid(p1,bottom_row,labels=c("A",""),nrow=2,rel_heights=c(1,1))
 # General Discussion
 
 The current study investigated the test-retest reliability of infants' preference for IDS over ADS. 
-As part of the original MB1 project, we tested the IDS preference of infants in two separate test sessions to assess the extent to which their pattern of preference would remain consistent. 
+As spin-off of the original MB1 project, we tested the IDS preference of infants in two separate test sessions to assess the extent to which their pattern of preference would remain consistent. 
 While we replicated the original effect of infants’ speech preference for IDS over ADS for both the test and retest session on the group-level, we found that infants' speech preference measures showed no evidence of test-retest reliability. 
 In other words, we were unable to detect stable individual differences in infants' preference for IDS. 
 This finding is consistent with past research suggesting low test-retest reliability in other infant paradigms [@cristia2016test]. 
@@ -1085,7 +1086,7 @@ While we observed limited evidence for test-retest reliability using preference 
 This finding is consistent with past results in infant looking time studies finding robust correlations in average looking times across multiple sessions [@marimon2022].
 It also raises an apparent puzzle: why are overall looking times for ADS and IDS stimuli correlated, while difference scores are not?
 One explanation is that infants have stable individual differences in how long they look to stimuli, but little or no stable individual differences in their preference for one stimulus type over another.
-This only partially explains the current pattern of results, however, because IDS looking time in session 1 predicted IDS looking time in session 2 even when controlling for ADS looking time, and vice versa (see S9). 
+This only partially explains the current pattern of results, however, because IDS looking time in Session 1 predicted IDS looking time in Session 2 even when controlling for ADS looking time, and vice versa (see Supplementary Materials S9). 
 In other words, the condition-specific looking time correlations are not fully explained by overall looking behavior.
 Another long-established explanation is that difference scores tend to have poor measurement reliability, because difference scores combine error from individual measurements into a composite score and increasing the ratio of error relative to the variance between participants [@hedge2018reliability;@lord_measurement_growth].
 Given the limitations of difference scores (and composite scores in general), one goal for future research will be to assess the use of trial-by-trial model-based approaches for estimating reliability [@rouder_psychometrics_2019;@haines_theoretically_2020].
@@ -1101,7 +1102,7 @@ However, familiarity effects might have influenced infants’ looking behavior.
 Infants with longer looking times in their first session might have had more opportunity to recognize familiar audio clips in their second session.
 For infants with short looking times, familiar audio clips would only occur towards the end of second-session trials, thus offering infants less opportunity to recognize voices from their first session.
 Therefore, inconsistent familiarity with the stimulus material in the second session across infants might have artificially lowered test-retest reliability.
-On the other hand, one factor that mitigates this concern is that infants' looking times generally declined in session 2 compared to session 1 [consistent with past work, e.g. @marimon2022; @santolin_experience_2021], limiting opportunities for infants to encounter previously experienced stimulus material.
+On the other hand, one factor that mitigates this concern is that infants' looking times generally declined in Session 2 compared to Session 1 [consistent with past work, e.g. @marimon2022; @santolin_experience_2021], limiting opportunities for infants to encounter previously experienced stimulus material.
 
 # Conclusion
 Following the MB1 protocol, the current study could not detect test-retest reliability in measures of infants' preference for IDS over ADS.
