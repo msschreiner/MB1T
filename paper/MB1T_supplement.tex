@@ -3,12 +3,7 @@
 \PassOptionsToPackage{hyphens}{url}
 %
 \documentclass[
-  english,
   man, donotrepeattitle,floatsintext]{apa6}
-\title{ManyBabies1 Test-Retest Supplementary Materials}
-\author{\phantom{0}}
-\date{}
-
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
 \usepackage{iftex}
@@ -38,14 +33,6 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  pdftitle={ManyBabies1 Test-Retest Supplementary Materials},
-  pdflang={en-EN},
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
 \usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -95,6 +82,15 @@
 \newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{english}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
 % Manuscript styling
 \usepackage{upgreek}
 \captionsetup{font=singlespacing,justification=justified}
@@ -169,19 +165,21 @@
 
 \linenumbers
 \usepackage{csquotes}
-\ifXeTeX
-  % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
-  \usepackage{polyglossia}
-  \setmainlanguage[]{english}
-\else
-  \usepackage[main=english]{babel}
-% get rid of language-specific shorthands (see #6817):
-\let\LanguageShortHands\languageshorthands
-\def\languageshorthands#1{}
-\fi
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={ManyBabies1 Test-Retest Supplementary Materials},
+  pdflang={en-EN},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{ManyBabies1 Test-Retest Supplementary Materials}
+\author{\phantom{0}}
+\date{}
 
 
 \shorttitle{MB1T supplementary}
@@ -228,7 +226,7 @@ Below, we have compiled a list of deviations from the preregistered methods and 
 \hypertarget{s1.2.-additional-notes}{%
 \subsection{S1.2. Additional notes}\label{s1.2.-additional-notes}}
 
-While the original idea was to retest infants that contributed data to the original study, some labs had already finished data collection for MB1 but nevertheless agreed to collect a new set of data for the MB1 test-retest spin off project. In addition, one lab already started data collection prior to the preregistration, however, this data had not been inspected or analyz\^{}ed prior to the preregistration. We here present a detailed list of our collected data in relation to the original MB1 study and the preregistration (see Table 1).
+While the original idea was to retest infants that contributed data to the original study, some labs had already finished data collection for MB1 but nevertheless agreed to collect a new set of data for the MB1 test-retest spin off project. In addition, one lab already started data collection prior to the preregistration, however, this data had not been inspected or analyzed prior to the preregistration. We here present a detailed list of our collected data in relation to the original MB1 study and the preregistration (see Table 1).
 
 \begin{table}[tbp]
 
@@ -662,7 +660,7 @@ We found that average looking to IDS stimuli in Session 2 could be predicted fro
 Conversely, average looking to ADS stimuli in Session 2 could be predicted from average looking to ADS stimuli in Session 1, even after controlling for average looking to IDS stimuli in Session 1, \(b = 0.36\), 95\% CI \([0.14, 0.58]\), \(t(155) = 3.20\), \(p = .002\).
 These results suggest that the condition-specific correlations in average looking time cannot be fully explained by the fact that infants' overall looking times between sessions are correlated.
 
-Finally, we inspected item-level correlations between the two test sessions.
+We also inspected item-level correlations between the two test sessions.
 Specifically, we investigated the relation between items composed of the same recording clips in Session 1 and Session 2 (but with a reversed order of clips between the two sessions).
 We fit a linear mixed-effects model predicting item-level looking time in Session 2 from item-level looking time in Session 1, including random intercepts for participant, item, and lab, as well as a random slope for item-level looking time in Session 1 for participant and lab.
 Item-level looking in Session 2 was related to item-level looking in Session 1, \(\hat{\beta} = 0.17\), 95\% CI \([0.07, 0.27]\), \(t(5.52) = 3.38\), \(p = .017\) (Figure 10C).
@@ -731,13 +729,9 @@ We also investigated whether preferential looking behavior varied as a function 
 \hypertarget{s11.2.-does-average-looking-time-moderate-test-retest-reliability}{%
 \subsection{S11.2. Does average looking time moderate test-retest reliability?}\label{s11.2.-does-average-looking-time-moderate-test-retest-reliability}}
 
-\begin{itemize}
-\tightlist
-\item
-  marginal effect
-\item
-  direction of the effect is consistent with a slight increase in test-retest reliability as average looking time increases (Figure 12), but no evidence for robust differences between long and short lookers.
-\end{itemize}
+Do longer lookers or shorter lookers show a tendency towards higher test-retest reliability?
+Next, we tested whether infants' tendency to look for longer or shorter periods (during Session 1) moderated test-retest reliability.
+We fit a linear mixed-effects model predicting IDS preference in Session 2 from the interaction of IDS preference in Session 1 and average looking time in Session 1. The model included a by-lab random intercept and a by-lab random slope for IDS preference (Session 1). Average looking time during Session 1 did not significantly moderate test-retest reliability, \(\beta\)=0.07, \emph{SE}=0.04, \emph{t}(121.50)=1.79, \emph{p}=.076. The direction of this marginal, non-significant effect is consistent with a slight increase in test-retest reliability as average looking time increases (Figure 12). However, overall, we find no significant evidence for robust differences between long and short lookers.
 
 \begin{figure}
 

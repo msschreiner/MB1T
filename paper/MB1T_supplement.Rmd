@@ -69,7 +69,7 @@ Below, we have compiled a list of deviations from the preregistered methods and 
 
 ## S1.2. Additional notes
 
-While the original idea was to retest infants that contributed data to the original study, some labs had already finished data collection for MB1 but nevertheless agreed to collect a new set of data for the MB1 test-retest spin off project. In addition, one lab already started data collection prior to the preregistration, however, this data had not been inspected or analyz^ed prior to the preregistration. We here present a detailed list of our collected data in relation to the original MB1 study and the preregistration (see Table 1).
+While the original idea was to retest infants that contributed data to the original study, some labs had already finished data collection for MB1 but nevertheless agreed to collect a new set of data for the MB1 test-retest spin off project. In addition, one lab already started data collection prior to the preregistration, however, this data had not been inspected or analyzed prior to the preregistration. We here present a detailed list of our collected data in relation to the original MB1 study and the preregistration (see Table 1).
 
 ```{r}
 #read in meta data with additional information on each lab's data collection status in relation to the preregistration and to MB1
@@ -1313,7 +1313,7 @@ item_lt_relationship_control_trial_num <- lmer(LT_Retest~LT_Test_c*trial_num_1_c
 #LT_Test is significant with a by-lab random slope for trial number, but model fit is singular
 ```
 
-Finally, we inspected item-level correlations between the two test sessions.
+We also inspected item-level correlations between the two test sessions.
 Specifically, we investigated the relation between items composed of the same recording clips in Session 1 and Session 2 (but with a reversed order of clips between the two sessions).
 We fit a linear mixed-effects model predicting item-level looking time in Session 2 from item-level looking time in Session 1, including random intercepts for participant, item, and lab, as well as a random slope for item-level looking time in Session 1 for participant and lab.
 Item-level looking in Session 2 was related to item-level looking in Session 1, `r apa_print(item_lt_relationship)$full_result[["LT_Test"]]` (Figure 10C).
@@ -1456,8 +1456,9 @@ mod_lmer_lt <- lmer(Diff_2 ~ Diff_1_c*mean_lt_1_c+(1+ Diff_1_c|Lab),
 lt_coefs<-summary(mod_lmer_lt)$coefficients
 ```
 
-- marginal effect
-- direction of the effect is consistent with a slight increase in test-retest reliability as average looking time increases (Figure 12), but no evidence for robust differences between long and short lookers.
+Do longer lookers or shorter lookers show a tendency towards higher test-retest reliability?
+Next, we tested whether infants' tendency to look for longer or shorter periods (during Session 1) moderated test-retest reliability.
+We fit a linear mixed-effects model predicting IDS preference in Session 2 from the interaction of IDS preference in Session 1 and average looking time in Session 1. The model included a by-lab random intercept and a by-lab random slope for IDS preference (Session 1). Average looking time during Session 1 did not significantly moderate test-retest reliability, $\beta$=`r round(lt_coefs[4,1],2)`, *SE*=`r round(lt_coefs[4,2],3)`, *t*(`r round(lt_coefs[4,3],1)`)=`r round(lt_coefs[4,4],2)`, *p*=`r printp(lt_coefs[4,5])`. The direction of this marginal, non-significant effect is consistent with a slight increase in test-retest reliability as average looking time increases (Figure 12). However, overall, we find no significant evidence for robust differences between long and short lookers.
 
 ```{r  sfig12, fig.cap="Correlations between average looking time (in s) and IDS preference in (A) Session 1 and (B) Session 2.", fig.align="center"}
 all_agg_subjects_paired_retest <- all_agg_subjects_paired_retest %>%
@@ -1467,7 +1468,9 @@ ggplot(all_agg_subjects_paired_retest,aes(Diff_1,Diff_2))+
   geom_point(size=1.5)+
   geom_smooth(method="lm",color="red")+
   theme_cowplot()+
-  facet_wrap(~looking_bin)
+  facet_wrap(~looking_bin)+
+  xlab("IDS preference in Session 1")+
+  ylab("IDS preference in Session 2")
   
 ```
 
