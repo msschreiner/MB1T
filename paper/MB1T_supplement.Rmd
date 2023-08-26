@@ -1248,6 +1248,7 @@ corr_lt_p2 <- ggplot(agg_by_subj_condition_paired,aes(LT_Test,LT_Retest,color=Co
   facet_wrap(~Condition)+
   theme_cowplot()+
   theme(legend.position="none")+
+  scale_color_brewer(palette="Set1",direction=-1)+
   xlab("Average Looking Time (in s) in first session")+
   ylab("Average Looking Time (in s) in second session")
 
@@ -1295,6 +1296,7 @@ corr_lt_p3 <- ggplot(agg_by_subj_item_paired,aes(LT_Test,LT_Retest,color=Conditi
   facet_wrap(~stimulus)+
   theme_cowplot()+
   theme(legend.position="none")+
+  scale_color_brewer(palette="Set1",direction=-1)+
   xlab("Looking Time (in s) in first session")+
   ylab("Looking Time (in s) in second session")
 

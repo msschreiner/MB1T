@@ -3,12 +3,7 @@
 \PassOptionsToPackage{hyphens}{url}
 %
 \documentclass[
-  english,
   man,floatsintext]{apa6}
-\title{Limited evidence of test-retest reliability in infant-directed speech preference in a large preregistered infant experiment}
-\author{Melanie S. Schreiner\textsuperscript{1,2}, Martin Zettersten\textsuperscript{3,4}, Christina Bergmann\textsuperscript{5}, Michael C. Frank\textsuperscript{6}, Tom Fritzsche\textsuperscript{7}, Nayeli Gonzalez-Gomez\textsuperscript{8}, Kiley Hamlin\textsuperscript{9}, Natalia Kartushina\textsuperscript{10}, Danielle J. Kellier\textsuperscript{11}, Nivedita Mani\textsuperscript{1,2}, Julien Mayor\textsuperscript{10}, Jenny Saffran\textsuperscript{3}, Mohinish Shukla\textsuperscript{12}, Priya Silverstein\textsuperscript{13, 14}, Melanie Soderstrom\textsuperscript{15}, \& Matthias Lippold\textsuperscript{1,2}}
-\date{}
-
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
 \usepackage{iftex}
@@ -38,16 +33,6 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  pdftitle={Limited evidence of test-retest reliability in infant-directed speech preference in a large preregistered infant experiment},
-  pdfauthor={Melanie S. Schreiner1,2, Martin Zettersten3,4, Christina Bergmann5, Michael C. Frank6, Tom Fritzsche7, Nayeli Gonzalez-Gomez8, Kiley Hamlin9, Natalia Kartushina10, Danielle J. Kellier11, Nivedita Mani1,2, Julien Mayor10, Jenny Saffran3, Mohinish Shukla12, Priya Silverstein13, 14, Melanie Soderstrom15, \& Matthias Lippold1,2},
-  pdflang={en-EN},
-  pdfkeywords={language acquisition; speech perception; infant-directed speech; adult-directed speech; test-retest reliability},
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
 \usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -97,6 +82,15 @@
 \newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{english}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
 % Manuscript styling
 \usepackage{upgreek}
 \captionsetup{font=singlespacing,justification=justified}
@@ -172,19 +166,23 @@
 
 \linenumbers
 \usepackage{csquotes}
-\ifXeTeX
-  % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
-  \usepackage{polyglossia}
-  \setmainlanguage[]{english}
-\else
-  \usepackage[main=english]{babel}
-% get rid of language-specific shorthands (see #6817):
-\let\LanguageShortHands\languageshorthands
-\def\languageshorthands#1{}
-\fi
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Limited evidence of test-retest reliability in infant-directed speech preference in a large preregistered infant experiment},
+  pdfauthor={Melanie S. Schreiner1,2, Martin Zettersten3,4, Christina Bergmann5, Michael C. Frank6, Tom Fritzsche7, Nayeli Gonzalez-Gomez8, Kiley Hamlin9, Natalia Kartushina10, Danielle J. Kellier11, Nivedita Mani1,2, Julien Mayor10, Jenny Saffran3, Mohinish Shukla12, Priya Silverstein13, 14, Melanie Soderstrom15, \& Matthias Lippold1,2},
+  pdflang={en-EN},
+  pdfkeywords={language acquisition; speech perception; infant-directed speech; adult-directed speech; test-retest reliability},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Limited evidence of test-retest reliability in infant-directed speech preference in a large preregistered infant experiment}
+\author{Melanie S. Schreiner\textsuperscript{1,2}, Martin Zettersten\textsuperscript{3,4}, Christina Bergmann\textsuperscript{5}, Michael C. Frank\textsuperscript{6}, Tom Fritzsche\textsuperscript{7}, Nayeli Gonzalez-Gomez\textsuperscript{8}, Kiley Hamlin\textsuperscript{9}, Natalia Kartushina\textsuperscript{10}, Danielle J. Kellier\textsuperscript{11}, Nivedita Mani\textsuperscript{1,2}, Julien Mayor\textsuperscript{10}, Jenny Saffran\textsuperscript{3}, Mohinish Shukla\textsuperscript{12}, Priya Silverstein\textsuperscript{13, 14}, Melanie Soderstrom\textsuperscript{15}, \& Matthias Lippold\textsuperscript{1,2}}
+\date{}
 
 
 \shorttitle{test-retest reliability of infant-directed speech preference}
@@ -272,7 +270,7 @@ Third, we will explore if test-retest reliability of the infants' preference mea
 
 Last, we will assess whether time between test and retest influences the reliability of the preference measure. Time between test and retest session may vary across participants. We predict that longer times between test and retest may yield less reliable results.
 
-In sum, it remains an open question whether the same measures that produce larger effect sizes at the group-level also have higher test-retest reliability for individual infants (Byers-Heinlein et al., 2021).
+In sum, it remains an open question whether the same measures that produce larger effect sizes at the group-level also have higher test-retest reliability for individual infants (Byers-Heinlein, Bergmann, et al., 2021).
 Therefore, assessing the test-retest reliability of the different preference measures and the influence of various moderators is crucial, so that researchers can make informed decisions about the appropriate methods for their particular research question.
 Critically, only measures with high test-retest reliability should be used for studies of individual differences.
 
@@ -557,7 +555,7 @@ In addition, drop out may not be random, and so having high drop-out rates can f
 In fact, the number of trials individual infants contributed was highly correlated between test sessions in the current study (see Supplementary Materials S6).
 Particularly in the context of turning individual differences measures into diagnostic tools, high drop-out rates have an additional limitation of not being broadly usable.
 
-Even under best-case scenarios, reliability remained quite low. For example, when restricting the sample to infants contributing at least 6 trials in each condition in both sessions, we obtained a correlation of \emph{r} = 0.22 and an intra-class correlation coefficient of \(\alpha\) = 0.36. As Byers-Heinlein et al. (2021) outline, low measurement reliability severely restricts power for detecting relationships between measures. Using the same approach as Byers-Heinlein et al. (2021), we estimate that over 682 infants would be needed to have at least 80\% power to observe a true correlation of \emph{r} = .3 between two measurements, assuming an intra-class correlation coefficient as large as that observed in our restricted sample (\(\alpha\) = 0.36). Even a very large true correlation of \emph{r} = .7 would require a sample size of over 120 infants. In other words, even under optimistic estimates of reliability based on strict inclusion criteria, the low reliability of IDS preference measures would severely limit the feasibility of individual difference and longitudinal research using current methods.
+Even under best-case scenarios, reliability remained quite low. For example, when restricting the sample to infants contributing at least 6 trials in each condition in both sessions, we obtained a correlation of \emph{r} = 0.22 and an intra-class correlation coefficient of \(\alpha\) = 0.36. As Byers-Heinlein, Bergmann, et al. (2021) outline, low measurement reliability severely restricts power for detecting relationships between measures. Using the same approach as Byers-Heinlein, Bergmann, et al. (2021), we estimate that over 682 infants would be needed to have at least 80\% power to observe a true correlation of \emph{r} = .3 between two measurements, assuming an intra-class correlation coefficient as large as that observed in our restricted sample (\(\alpha\) = 0.36). Even a very large true correlation of \emph{r} = .7 would require a sample size of over 120 infants. In other words, even under optimistic estimates of reliability based on strict inclusion criteria, the low reliability of IDS preference measures would severely limit the feasibility of individual difference and longitudinal research using current methods.
 
 An alternative approach to increasing the number of valid trials is to increase the number of experimental trials.
 This approach seeks to increase the likelihood that participants will contribute sufficient trials (after trial-level exclusions) to allow for precise individual-level estimates (DeBolt et al., 2020; see also Silverstein, Feng, Westermann, Parise, \& Twomey, 2021).
