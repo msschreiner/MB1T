@@ -1270,7 +1270,7 @@ agg_by_subj_item_paired_pref <- data_clean  %>%
   pivot_wider(names_from = Session, values_from =c(IDS,ADS,Diff,Prop,trial_pair_num))
 
 #not plotted
-fig11 <- ggplot(agg_by_subj_item_paired_pref ,aes(Diff_1,Diff_2))+
+optional_fig <- ggplot(agg_by_subj_item_paired_pref ,aes(Diff_1,Diff_2))+
   geom_point()+
   geom_smooth(method="lm",color="black")+
   facet_wrap(~stimulus_num,ncol=4)+
