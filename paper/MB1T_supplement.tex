@@ -622,65 +622,37 @@ The diagnostic elbow plot shows little evidence of a qualitative improvement as 
 
 \newpage
 
-\hypertarget{s8.-relation-between-number-of-contributed-trials-in-each-session}{%
-\section{S8. Relation between number of contributed trials in each session}\label{s8.-relation-between-number-of-contributed-trials-in-each-session}}
+\hypertarget{s8.-correlations-in-average-looking-times-between-sessions}{%
+\section{S8. Correlations in average looking times between sessions}\label{s8.-correlations-in-average-looking-times-between-sessions}}
 
-\begin{figure}
-\centering
-\includegraphics{MB1T_supplement_files/figure-latex/sfig9-1.pdf}
-\caption{\label{fig:sfig9}Correlation between the number of trials contributed in Session 1 and Session 2. Each data point represents one infant. Colored lines represent linear fits for each method.}
-\end{figure}
-
-Are there stable individual differences in how likely an infant is to contribute a high number of trials?
-To answer this question, we conducted an exploratory analysis investigating whether there is a relationship between the number of trials an infant contributed in Session 1 and Session 2.
-Do infants who contribute a higher number of trials during their first testing session also tend to contribute more trials during their second testing session?
-A positive correlation between trial numbers during the first and second session would indicate that there is some stability in a given infants' likelihood of remaining attentive throughout the experiment.
-On the other hand, the absence of a correlation would indicate that the number of trials a given infant contributes is not predictive of how many trials they might contribute during their next session.
-
-We found a strong positive correlation between number of trials contributed during the first and the second session, \(r = .58\), 95\% CI \([.47, .67]\), \(t(160) = 9.00\), \(p < .001\) (Figure 9).
-This result suggests that if infants contribute a higher number of trials in one session, compared to other infants, they are likely to contribute a higher number of trials in their next session.
-This finding is consistent with the hypothesis that how attentive infants are throughout an experiment (and hence how many trials they contribute) is a stable individual difference, at least for some infant looking time tasks.
-Researchers should therefore be mindful of the fact that decisions about including or excluding infants based on trials contributed may selectively sample a specific sub-set of the infant population they are studying (Byers-Heinlein, Bergmann, \& Savalei, 2021; DeBolt, Rhemtulla, \& Oakes, 2020).
-
-\newpage
-
-\hypertarget{s9.-correlations-in-average-looking-times-between-sessions}{%
-\section{S9. Correlations in average looking times between sessions}\label{s9.-correlations-in-average-looking-times-between-sessions}}
-
-To what extent are participants looking times between the two sessions related?
-To test this question, we first investigated whether participants' overall looking times --- irrespective of condition --- were correlated between the first and second session.
-There was a robust correlation between average looking time in Session 1 and Session 2: infants with longer looking times during their first session also tended to look longer during their second session, \(r = .45\), 95\% CI \([.31, .57]\), \(t(156) = 6.28\), \(p < .001\).
-This relationship held even after controlling for number of trials in the first and second session, suggesting that the relation between average looking in Session 1 and 2 could not be entirely explained by the correlation in the number of trials contributed between the two sessions (S7), \(b = 0.42\), 95\% CI \([0.27, 0.58]\), \(t(154) = 5.52\), \(p < .001\) (Figure 10A).
-The result is also similar when controlling for participants' average age across the two test sessions, \(b = 0.44\), 95\% CI \([0.30, 0.59]\), \(t(155) = 6.16\), \(p < .001\).
-
-Next, we explored the extent to which average looking times for IDS and ADS stimuli were related.
-First, we found similar correlations in average looking time to IDS stimuli in Session 1 and 2, \(r = .38\), 95\% CI \([.24, .51]\), \(t(156) = 5.19\), \(p < .001\), and ADS stimuli in Session 1 and 2, \(r = .40\), 95\% CI \([.26, .53]\), \(t(156) = 5.49\), \(p < .001\) (Figure 10B).
+As reported in the main manuscript, we found that infants' average looking time was correlated between their two testing sessions.
+We also found similar correlations in average looking time to IDS stimuli in Session 1 and 2, \(r = .38\), 95\% CI \([.24, .51]\), \(t(156) = 5.19\), \(p < .001\), and ADS stimuli in Session 1 and 2, \(r = .40\), 95\% CI \([.26, .53]\), \(t(156) = 5.49\), \(p < .001\).
 To test whether these correlations were specific to looking times for IDS or ADS stimuli alone, we fit linear regression models predicting average looking to IDS (or ADS) stimuli in Session 2 from average looking to IDS and ADS stimuli in Session 1.
 We found that average looking to IDS stimuli in Session 2 could be predicted from average looking to IDS stimuli in Session 1, even after controlling for average looking to ADS stimuli in Session 1, \(b = 0.21\), 95\% CI \([0.01, 0.41]\), \(t(155) = 2.11\), \(p = .037\).
 Conversely, average looking to ADS stimuli in Session 2 could be predicted from average looking to ADS stimuli in Session 1, even after controlling for average looking to IDS stimuli in Session 1, \(b = 0.36\), 95\% CI \([0.14, 0.58]\), \(t(155) = 3.20\), \(p = .002\).
 These results suggest that the condition-specific correlations in average looking time cannot be fully explained by the fact that infants' overall looking times between sessions are correlated.
 
-We also inspected item-level correlations between the two test sessions.
+We next inspected item-level correlations between the two test sessions.
 Specifically, we investigated the relation between items composed of the same recording clips in Session 1 and Session 2 (but with a reversed order of clips between the two sessions).
 We fit a linear mixed-effects model predicting item-level looking time in Session 2 from item-level looking time in Session 1, including random intercepts for participant, item, and lab, as well as a random slope for item-level looking time in Session 1 for participant and lab.
-Item-level looking in Session 2 was related to item-level looking in Session 1, \(\hat{\beta} = 0.17\), 95\% CI \([0.07, 0.27]\), \(t(5.52) = 3.38\), \(p = .017\) (Figure 10C).
+Item-level looking in Session 2 was related to item-level looking in Session 1, \(\hat{\beta} = 0.17\), 95\% CI \([0.07, 0.27]\), \(t(5.52) = 3.38\), \(p = .017\) (Figure 9).
 Similar results hold if looking times are log-transformed.
 
 In MB1, the ordering of stimuli was counterbalanced, but some stimuli still appeared earlier in the experiment than others. For example, the IDS1 and ADS1 speech stimuli appeared on trials 1,2,5, or 6, while the IDS8 and ADS8 speech stimuli always occurred on the final two trials (trial number 15 or 16). This means that the interpretation of the correlations between individual speech stimuli must also take into account these stimuli tend to be occurring in earlier or later portions of the experiment (when infants are more or less attentive and show longer looking times in general). To further investigate the impact of trial number on by-item correlations in looking time, we fit an interaction model testing whether the magnitude of the item-level correlation depended on the trial number for a given session. We fit a linear mixed-effects model predicting item-level looking time in Session 2 from the interaction between item-level looking time in Session 1 and trial number in Session 1 (trial numbers across sessions are almost always identical). The model included random intercepts for participant, item, and lab, as well as random slopes for item-level looking time and trial number in Session 1 for participant and lab. We indeed found that the magnitude of the item-level correlations in looking time between sessions depended on trial number, \(\hat{\beta} = -0.01\), 95\% CI \([-0.02, 0.00]\), \(t(1,200.31) = -2.53\), \(p = .012\), with the strength of the relation between sessions declining as trial number increased. While trial number was a strong predictor of Session 2 looking time, \(\hat{\beta} = -0.28\), 95\% CI \([-0.36, -0.20]\), \(t(8.67) = -6.85\), \(p < .001\), item-level looking in Session 1 only marginally predicted Session 2 looking when controlling for trial number, \(\hat{\beta} = 0.10\), 95\% CI \([0.01, 0.20]\), \(t(6.47) = 2.12\), \(p = .075\). Variation in item-level correlations is therefore at least partially due to the ordering of the stimuli in the experiment, rather than a sole function of differences between the stimuli \emph{per se}.
 
 \begin{figure}
 
-{\centering \includegraphics{MB1T_supplement_files/figure-latex/sfig10-1} 
+{\centering \includegraphics{MB1T_supplement_files/figure-latex/sfig9-1} 
 
 }
 
-\caption{Correlations in average looking time (in s) between Session 1 and 2 (A) overall, (B) by condition, and (C) by item.}\label{fig:sfig10}
+\caption{Correlations in average looking time (in s) between Session 1 and 2 (A) overall, (B) by condition, and (C) by item.}\label{fig:sfig9}
 \end{figure}
 
 \newpage
 
-\hypertarget{s10.-by-item-pair-preference-scores-across-sessions}{%
-\section{S10. By-item-pair preference scores across sessions}\label{s10.-by-item-pair-preference-scores-across-sessions}}
+\hypertarget{s9.-by-item-pair-preference-scores-across-sessions}{%
+\section{S9. By-item-pair preference scores across sessions}\label{s9.-by-item-pair-preference-scores-across-sessions}}
 
 Finally, we inspected on a more fine-grained item level whether IDS preference in Session 1 was related to IDS preference in Session 2.
 To do so, we exploited the fact the specific IDS and ADS stimuli were paired together in test orders in both sessions, such that one IDS stimulus (e.g., IDS1) always occurred adjacently to a specific ADS stimulus (e.g., ADS1).
@@ -693,7 +665,7 @@ There was a marginal, but non-significant relation in stimulus-specific IDS pref
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:unnamed-chunk-44}Linear mixed-effects model results predicting IDS preference in Session 2 from IDS preference in Session 1 at the stimulus level.}
+\caption{\label{tab:unnamed-chunk-42}Linear mixed-effects model results predicting IDS preference in Session 2 from IDS preference in Session 1 at the stimulus level.}
 
 \begin{tabular}{llllll}
 \toprule
@@ -709,13 +681,29 @@ Diff 1 & 0.07 & {}[-0.01, 0.14] & 1.79 & 718.46 & .074\\
 
 \end{table}
 
-\hypertarget{s11.-overall-looking-times-and-test-retest-ids-preference}{%
-\section{S11. Overall looking times and test-retest IDS preference}\label{s11.-overall-looking-times-and-test-retest-ids-preference}}
+\hypertarget{s10.-overall-looking-times-and-test-retest-ids-preference}{%
+\section{S10. Overall looking times and test-retest IDS preference}\label{s10.-overall-looking-times-and-test-retest-ids-preference}}
 
-\hypertarget{s11.1.-correlations-between-overall-looking-time-and-ids-preference}{%
-\subsection{S11.1. Correlations between overall looking time and IDS preference}\label{s11.1.-correlations-between-overall-looking-time-and-ids-preference}}
+\hypertarget{s10.1.-correlations-between-overall-looking-time-and-ids-preference}{%
+\subsection{S10.1. Correlations between overall looking time and IDS preference}\label{s10.1.-correlations-between-overall-looking-time-and-ids-preference}}
 
-We also investigated whether preferential looking behavior varied as a function of infants' tendencies to look for longer or shorter periods of time on average across all stimuli. We found no evidence for a correlation between infants' average looking time and the magnitude of IDS preference (Figure 11), either in Session 1 (\(r = .05\), 95\% CI \([-.11, .20]\), \(t(156) = 0.61\), \(p = .543\)) or in Session 2 (\(r = -.06\), 95\% CI \([-.21, .10]\), \(t(156) = -0.70\), \(p = .483\)).
+We also investigated whether preferential looking behavior varied as a function of infants' tendencies to look for longer or shorter periods of time on average across all stimuli. We found no evidence for a correlation between infants' average looking time and the magnitude of IDS preference (Figure 10), either in Session 1 (\(r = .05\), 95\% CI \([-.11, .20]\), \(t(156) = 0.61\), \(p = .543\)) or in Session 2 (\(r = -.06\), 95\% CI \([-.21, .10]\), \(t(156) = -0.70\), \(p = .483\)).
+
+\begin{figure}
+
+{\centering \includegraphics{MB1T_supplement_files/figure-latex/sfig10-1} 
+
+}
+
+\caption{Correlations between average looking time (in s) and IDS preference in (A) Session 1 and (B) Session 2.}\label{fig:sfig10}
+\end{figure}
+
+\hypertarget{s10.2.-does-average-looking-time-moderate-test-retest-reliability}{%
+\subsection{S10.2. Does average looking time moderate test-retest reliability?}\label{s10.2.-does-average-looking-time-moderate-test-retest-reliability}}
+
+Do longer lookers or shorter lookers show a tendency towards higher test-retest reliability?
+Next, we tested whether infants' tendency to look for longer or shorter periods (during Session 1) moderated test-retest reliability.
+We fit a linear mixed-effects model predicting IDS preference in Session 2 from the interaction of IDS preference in Session 1 and average looking time in Session 1. The model included a by-lab random intercept and a by-lab random slope for IDS preference (Session 1). Average looking time during Session 1 did not significantly moderate test-retest reliability, \(\beta\)=0.07, \emph{SE}=0.04, \emph{t}(121.50)=1.79, \emph{p}=.076. The direction of this marginal, non-significant effect is consistent with a slight increase in test-retest reliability as average looking time increases (Figure 11). However, overall, we find no significant evidence for robust differences between long and short lookers.
 
 \begin{figure}
 
@@ -724,22 +712,6 @@ We also investigated whether preferential looking behavior varied as a function 
 }
 
 \caption{Correlations between average looking time (in s) and IDS preference in (A) Session 1 and (B) Session 2.}\label{fig:sfig11}
-\end{figure}
-
-\hypertarget{s11.2.-does-average-looking-time-moderate-test-retest-reliability}{%
-\subsection{S11.2. Does average looking time moderate test-retest reliability?}\label{s11.2.-does-average-looking-time-moderate-test-retest-reliability}}
-
-Do longer lookers or shorter lookers show a tendency towards higher test-retest reliability?
-Next, we tested whether infants' tendency to look for longer or shorter periods (during Session 1) moderated test-retest reliability.
-We fit a linear mixed-effects model predicting IDS preference in Session 2 from the interaction of IDS preference in Session 1 and average looking time in Session 1. The model included a by-lab random intercept and a by-lab random slope for IDS preference (Session 1). Average looking time during Session 1 did not significantly moderate test-retest reliability, \(\beta\)=0.07, \emph{SE}=0.04, \emph{t}(121.50)=1.79, \emph{p}=.076. The direction of this marginal, non-significant effect is consistent with a slight increase in test-retest reliability as average looking time increases (Figure 12). However, overall, we find no significant evidence for robust differences between long and short lookers.
-
-\begin{figure}
-
-{\centering \includegraphics{MB1T_supplement_files/figure-latex/sfig12-1} 
-
-}
-
-\caption{Correlations between average looking time (in s) and IDS preference in (A) Session 1 and (B) Session 2.}\label{fig:sfig12}
 \end{figure}
 
 \newpage
@@ -753,12 +725,6 @@ We fit a linear mixed-effects model predicting IDS preference in Session 2 from 
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}
-\leavevmode\vadjust pre{\hypertarget{ref-byers2021six}{}}%
-Byers-Heinlein, K., Bergmann, C., \& Savalei, V. (2021). Six solutions for more reliable infant research. \emph{Infant and Child Development}, e2296.
-
-\leavevmode\vadjust pre{\hypertarget{ref-debolt2020robust}{}}%
-DeBolt, M. C., Rhemtulla, M., \& Oakes, L. M. (2020). Robust data and power in infant research: A case study of the effect of number of infants and number of trials in visual preference procedures. \emph{Infancy}, \emph{25}(4), 393--419.
-
 \leavevmode\vadjust pre{\hypertarget{ref-manybabies2020quantifying}{}}%
 ManyBabies Consortium. (2020). Quantifying sources of variability in infancy research using the infant-directed-speech preference. \emph{Advances in Methods and Practices in Psychological Science}, \emph{3}(1), 24--52.
 
