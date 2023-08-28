@@ -280,6 +280,8 @@ df_all_exclude_preterm <- df_all %>%
   filter(preterm=="preterm") %>%
   select(Subject_Unique,preterm) %>%
   distinct()
+#add excluded preterm infants to tally
+excludeID <- unique(c(excludeID,df_all_exclude_preterm$Subject_Unique))
 df_all <- df_all %>%
   filter(preterm!="preterm")
 

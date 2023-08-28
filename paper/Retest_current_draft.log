@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.30)  27 AUG 2023 15:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.30)  28 AUG 2023 02:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -670,36 +670,29 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 ] [2] [3]
 Underfull \vbox (badness 1838) has occurred while \output is active []
 
-[4] [5] [6] [7] [8] [9]
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 344.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 344.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 344.
-[10] [11{/Users/martincz/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/Users/martincz/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}]
-<Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf, id=168, 469.755pt x 325.215pt>
+[4] [5] [6] [7] [8] [9] [10] [11{/Users/martincz/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/Users/martincz/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}]
+<Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf, id=164, 469.755pt x 325.215pt>
 File: Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type pdf)
 <use Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf>
-Package pdftex.def Info: Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf  used on input line 443.
+Package pdftex.def Info: Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf  used on input line 444.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [12]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [13{/Users/martincz/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}] [14 <./Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf>]
-<Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf, id=200, 578.16pt x 722.7pt>
+<Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf, id=196, 578.16pt x 722.7pt>
 File: Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf Graphic file (type pdf)
 <use Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf>
-Package pdftex.def Info: Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf  used on input line 499.
+Package pdftex.def Info: Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf  used on input line 500.
 (pdftex.def)             Requested size: 361.3491pt x 451.68639pt.
 [15] [16 <./Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf>]
-<Retest_current_draft_files/figure-latex/fig3-1.pdf, id=219, 867.24pt x 1011.78pt>
+<Retest_current_draft_files/figure-latex/fig3-1.pdf, id=215, 867.24pt x 1011.78pt>
 File: Retest_current_draft_files/figure-latex/fig3-1.pdf Graphic file (type pdf)
 <use Retest_current_draft_files/figure-latex/fig3-1.pdf>
-Package pdftex.def Info: Retest_current_draft_files/figure-latex/fig3-1.pdf  used on input line 529.
+Package pdftex.def Info: Retest_current_draft_files/figure-latex/fig3-1.pdf  used on input line 530.
 (pdftex.def)             Requested size: 469.75827pt x 548.0513pt.
 
-LaTeX Warning: Float too large for page by 3.6112pt on input line 534.
+LaTeX Warning: Float too large for page by 3.6112pt on input line 535.
 
 [17] [18 <./Retest_current_draft_files/figure-latex/fig3-1.pdf>]
 Underfull \vbox (badness 1838) has occurred while \output is active []
@@ -728,18 +721,18 @@ Package rerunfilecheck Info: File `Retest_current_draft.out' has not changed.
 (rerunfilecheck)             Checksum: 3EFBE03E226D8182960E4964261F8647;3854.
  ) 
 Here is how much of TeX's memory you used:
- 16130 strings out of 477197
- 260817 string characters out of 5812849
+ 16079 strings out of 477197
+ 260266 string characters out of 5812849
  1932244 words of memory out of 5000000
- 36698 multiletter control sequences out of 15000+600000
- 630939 words of font info for 100 fonts, out of 8000000 for 9000
+ 36666 multiletter control sequences out of 15000+600000
+ 601288 words of font info for 71 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 72i,11n,79p,1667b,605s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-Output written on Retest_current_draft.pdf (29 pages, 397441 bytes).
+ 72i,11n,79p,1640b,605s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
+Output written on Retest_current_draft.pdf (29 pages, 349955 bytes).
 PDF statistics:
- 426 PDF objects out of 1000 (max. 8388607)
- 366 compressed objects within 4 object streams
- 128 named destinations out of 1000 (max. 500000)
+ 414 PDF objects out of 1000 (max. 8388607)
+ 358 compressed objects within 4 object streams
+ 127 named destinations out of 1000 (max. 500000)
  192 words of extra memory for PDF output out of 10000 (max. 10000000)
 
