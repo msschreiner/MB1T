@@ -66,9 +66,9 @@ df_all <- df_trial %>%
   mutate(
     session_error = case_when(
       session_error_type == "preterm exclusion" ~ "noerror",
-      TRUE ~ "error"
+      TRUE ~ session_error
     )
-  )
+  ) %>%
   organize_columns(columns_to_use = cols_to_keep)  #rename and select key columns
 
 # write data for analysis
