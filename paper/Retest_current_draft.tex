@@ -3,7 +3,12 @@
 \PassOptionsToPackage{hyphens}{url}
 %
 \documentclass[
+  english,
   man,floatsintext]{apa6}
+\title{Limited evidence of test-retest reliability in infant-directed speech preference in a large preregistered infant experiment}
+\author{Melanie S. Schreiner\textsuperscript{1,2}, Martin Zettersten\textsuperscript{3,4}, Christina Bergmann\textsuperscript{5}, Michael C. Frank\textsuperscript{6}, Tom Fritzsche\textsuperscript{7}, Nayeli Gonzalez-Gomez\textsuperscript{8}, Kiley Hamlin\textsuperscript{9}, Natalia Kartushina\textsuperscript{10}, Danielle J. Kellier\textsuperscript{11}, Nivedita Mani\textsuperscript{1,2}, Julien Mayor\textsuperscript{10}, Jenny Saffran\textsuperscript{3}, Mohinish Shukla\textsuperscript{12}, Priya Silverstein\textsuperscript{13, 14}, Melanie Soderstrom\textsuperscript{15}, \& Matthias Lippold\textsuperscript{1,2}}
+\date{}
+
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
 \usepackage{iftex}
@@ -33,6 +38,16 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Limited evidence of test-retest reliability in infant-directed speech preference in a large preregistered infant experiment},
+  pdfauthor={Melanie S. Schreiner1,2, Martin Zettersten3,4, Christina Bergmann5, Michael C. Frank6, Tom Fritzsche7, Nayeli Gonzalez-Gomez8, Kiley Hamlin9, Natalia Kartushina10, Danielle J. Kellier11, Nivedita Mani1,2, Julien Mayor10, Jenny Saffran3, Mohinish Shukla12, Priya Silverstein13, 14, Melanie Soderstrom15, \& Matthias Lippold1,2},
+  pdflang={en-EN},
+  pdfkeywords={language acquisition; speech perception; infant-directed speech; adult-directed speech; test-retest reliability},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
 \usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -82,15 +97,6 @@
 \newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
-\ifLuaTeX
-\usepackage[bidi=basic]{babel}
-\else
-\usepackage[bidi=default]{babel}
-\fi
-\babelprovide[main,import]{english}
-% get rid of language-specific shorthands (see #6817):
-\let\LanguageShortHands\languageshorthands
-\def\languageshorthands#1{}
 % Manuscript styling
 \usepackage{upgreek}
 \captionsetup{font=singlespacing,justification=justified}
@@ -166,23 +172,19 @@
 
 \linenumbers
 \usepackage{csquotes}
+\ifXeTeX
+  % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
+  \usepackage{polyglossia}
+  \setmainlanguage[]{english}
+\else
+  \usepackage[main=english]{babel}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\fi
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
-\hypersetup{
-  pdftitle={Limited evidence of test-retest reliability in infant-directed speech preference in a large preregistered infant experiment},
-  pdfauthor={Melanie S. Schreiner1,2, Martin Zettersten3,4, Christina Bergmann5, Michael C. Frank6, Tom Fritzsche7, Nayeli Gonzalez-Gomez8, Kiley Hamlin9, Natalia Kartushina10, Danielle J. Kellier11, Nivedita Mani1,2, Julien Mayor10, Jenny Saffran3, Mohinish Shukla12, Priya Silverstein13, 14, Melanie Soderstrom15, \& Matthias Lippold1,2},
-  pdflang={en-EN},
-  pdfkeywords={language acquisition; speech perception; infant-directed speech; adult-directed speech; test-retest reliability},
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-
-\title{Limited evidence of test-retest reliability in infant-directed speech preference in a large preregistered infant experiment}
-\author{Melanie S. Schreiner\textsuperscript{1,2}, Martin Zettersten\textsuperscript{3,4}, Christina Bergmann\textsuperscript{5}, Michael C. Frank\textsuperscript{6}, Tom Fritzsche\textsuperscript{7}, Nayeli Gonzalez-Gomez\textsuperscript{8}, Kiley Hamlin\textsuperscript{9}, Natalia Kartushina\textsuperscript{10}, Danielle J. Kellier\textsuperscript{11}, Nivedita Mani\textsuperscript{1,2}, Julien Mayor\textsuperscript{10}, Jenny Saffran\textsuperscript{3}, Mohinish Shukla\textsuperscript{12}, Priya Silverstein\textsuperscript{13, 14}, Melanie Soderstrom\textsuperscript{15}, \& Matthias Lippold\textsuperscript{1,2}}
-\date{}
 
 
 \shorttitle{test-retest reliability of infant-directed speech preference}
@@ -259,7 +261,7 @@ By collecting data from multiple labs, we were able to conduct a preregistered, 
 In addition to assessing overall test-retest reliability, we also planned to investigate the influence of several potential moderators on the reliability of IDS preference: the experimental method, infants' age and linguistic background, and the time between test sessions.
 
 One main moderator analysis of interest was whether there were any differences in test-retest reliability between three widely used methods: central fixation (CF), eye-tracking (ET), and the head-turn preference procedure (HPP).
-Exploring differences in CF, ET, and HPP, Junge et al. (2020) provided experimental and meta-analytic evidence in favor of using the HPP in speech segmentation tasks.
+Exploring differences in CF, ET, and HPP, Junge et al. (2020) provided experimental and meta-analytic evidence in favor of using HPP in speech segmentation tasks.
 Similarly, the MB1 project reported an increase in the effect size for HPP compared to CF and ET (ManyBabies Consortium, 2020).
 HPP requires gross motor movements relative to other methods, such as CF and ET paradigms, for which subtle eye movements towards a monitor located in front of the child are sufficient.
 One possible explanation for the stronger effects with HPP may be a higher sensitivity to the contingency of the presentation of auditory stimuli and infants' head turns away from the typical forward-facing position.
@@ -294,7 +296,7 @@ A call was issued to all labs participating in the original MB1 study on January
 \subsection{Participants}\label{participants}}
 
 Contributing labs were asked to recruit monolingual participants between the ages of 6 to 12 months. If participating labs could not commit to test either of these age groups, they were also allowed to recruit participants from the youngest age group of 3- to 6-month-olds and/or the oldest age group of 12- to 15-month-olds.
-Labs were asked to contribute half (\emph{n}=16) or full samples (\emph{n}=32); however, a lab's data was included in the study regardless of the number of included infants.
+Labs were asked to contribute half (\emph{n}=16) or full samples (\emph{n}=32), however, a lab's data was included in the study regardless of the number of included infants.
 The study was approved by each lab's respective ethics committee and parental consent was obtained for each infant prior to participation in the study.
 
 Our final sample consisted of 158 monolingual infants from 7 different labs (Table 1).
@@ -399,7 +401,7 @@ There was no significant difference in the magnitude of infants' preference betw
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:descriptives_table1}Average looking times (in seconds) for each session and condition}
+\caption{\label{tab:descriptives_table1}Average looking times (in seconds) for each session and condition.}
 
 \begin{tabular}{lllll}
 \toprule
