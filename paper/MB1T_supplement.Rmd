@@ -146,7 +146,7 @@ ggplot(all_agg_subjects_paired_retest,aes(Age,color=Method))+
   geom_density(aes(linetype=`NAE Language`))+
   facet_wrap(~lab_method)+
   scale_color_ptol(name="Method")+
-  geom_label(aes(label=paste0("N = ",N)),x=300,y=0.0125,size=2)+
+  geom_label(aes(label=paste0("N = ",N)),x=300,y=0.0125,size=2,show.legend=FALSE)+
   theme(strip.text.x = element_text(size = 8))
 ```
 
@@ -1373,9 +1373,9 @@ Do longer lookers or shorter lookers show a tendency towards higher test-retest 
 Next, we tested whether infants' tendency to look for longer or shorter periods (during Session 1) moderated test-retest reliability.
 We fit a linear mixed-effects model predicting IDS preference in Session 2 from the interaction of IDS preference in Session 1 and average looking time in Session 1. The model included a by-lab random intercept and a by-lab random slope for IDS preference (Session 1). Average looking time during Session 1 did not significantly moderate test-retest reliability, $\beta$=`r round(lt_coefs[4,1],2)`, *SE*=`r round(lt_coefs[4,2],3)`, *t*(`r round(lt_coefs[4,3],1)`)=`r round(lt_coefs[4,4],2)`, *p*=`r printp(lt_coefs[4,5])`. The direction of this marginal, non-significant effect is consistent with a slight increase in test-retest reliability as average looking time increases (Figure 11). However, overall, we find no significant evidence for robust differences between long and short lookers.
 
-```{r  sfig11, fig.cap="Correlations between average looking time (in s) and IDS preference for infants with (A) shorter looking and (B) longer looking.", fig.align="center"}
+```{r  sfig11, fig.cap="Correlations between average looking time (in s) and IDS preference for infants with shorter looking (left panel) and longer looking (right panel).", fig.align="center"}
 all_agg_subjects_paired_retest <- all_agg_subjects_paired_retest %>%
-  mutate(looking_bin = cut(mean_lt_1, breaks = 2, labels = c("A shorter looking"," B longer looking")))
+  mutate(looking_bin = cut(mean_lt_1, breaks = 2, labels = c("shorter looking","longer looking")))
 
 ggplot(all_agg_subjects_paired_retest,aes(Diff_1,Diff_2))+
   geom_point(size=1.5)+
