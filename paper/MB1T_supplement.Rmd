@@ -137,7 +137,7 @@ all_agg_subjects_paired_retest <- all_agg_subjects_paired_retest %>%
   group_by(Lab,Method) %>%
   mutate(
     N = n(),
-    `NAE Language` = ifelse(NAE==1,"NAE","non NAE")
+    `NAE Language` = ifelse(NAE==1,"NAE","non-NAE")
   )
 
 
@@ -146,7 +146,7 @@ ggplot(all_agg_subjects_paired_retest,aes(Age,color=Method))+
   geom_density(aes(linetype=`NAE Language`))+
   facet_wrap(~lab_method)+
   scale_color_ptol(name="Method")+
-  geom_label(aes(label=paste0("N = ",N)),x=300,y=0.0125,size=2,show.legend=FALSE)+
+  geom_label(aes(label=paste0("n = ",N)),x=300,y=0.0125,size=2,show.legend=FALSE)+
   theme(strip.text.x = element_text(size = 8))
 ```
 
@@ -286,7 +286,7 @@ diff_session_method <- lmer(Diff ~ Session + Method+
 chi_sq_test_session_method <- Anova(diff_session_method,type="III")
 ```
 
-In MB1, infants who participated in the head-turn preference paradigm (hereafter, HPP) showed a significantly larger magnitude of IDS preference, compared to central fixation (hereafter, CF) and eye-tracking (hereafter, ET) methods. Therefore, in the current study, we also explored whether the magnitude of IDS preference differed as a function of method. We fit a linear mixed-effects model predicting IDS preference from Session and Method (dummy-coded, with central fixation as the reference level), including by-lab and by-participant random intercepts. We found no significant difference in IDS preference across methods, ${\chi}^2$(2)=`r round(chi_sq_test_session_method$Chisq[3],2)`, *p*=`r printp(chi_sq_test_session_method[3,3])`.
+In MB1, infants who participated in the head-turn preference procedure (hereafter, HPP) showed a significantly larger magnitude of IDS preference, compared to central fixation (hereafter, CF) and eye-tracking (hereafter, ET) methods. Therefore, in the current study, we also explored whether the magnitude of IDS preference differed as a function of method. We fit a linear mixed-effects model predicting IDS preference from Session and Method (dummy-coded, with central fixation as the reference level), including by-lab and by-participant random intercepts. We found no significant difference in IDS preference across methods, ${\chi}^2$(2)=`r round(chi_sq_test_session_method$Chisq[3],2)`, *p*=`r printp(chi_sq_test_session_method[3,3])`.
 
 ### S2.4.2. Reliability moderated by method
 
