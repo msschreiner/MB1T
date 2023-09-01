@@ -925,7 +925,7 @@ cor_trials <- cor.test(df_all_trials$Test,df_all_trials$Retest)
 cor_trials_out <- apa_print(cor_trials)
 ```
 
-```{r sfig7, fig.cap = "Correlation between the number of trials contributed in Session 1 and Session 2. Each data point represents one infant. Colored lines represent linear fits for each method."}
+```{r}
 # ordering levels of method as in language background plot (Figure 1 of Supplementary)
 df_all_trials <- df_all_trials  %>%
   mutate(
