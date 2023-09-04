@@ -1,15 +1,95 @@
-\begin{longtable}[t]{lrrll}
-\caption{\label{tab:labs}Statistics of the included labs. n refers to the number of infants included in the final analysis.}\\
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:labs}Statistics of the included labs. N refers to the number of infants included in the final analysis.}
+
+\begin{tabular}{lllll}
 \toprule
-Lab & Mean age (days) & N & Method & Language\\
+Lab & \multicolumn{1}{c}{Method} & \multicolumn{1}{c}{Language} & \multicolumn{1}{c}{Mean age (days)} & \multicolumn{1}{c}{N}\\
 \midrule
-babylab-potsdam & 227 & 22 & HPP & German\\
-babyling-oslo & 249 & 10 & Eyetracking & Norwegian\\
-brookes-babylab & 264 & 15 & central fixation & English\\
-InfantCog-UBC & 137 & 5 & central fixation & English\\
-infantll-madison & 231 & 31 & HPP & English\\
-\addlinespace
-lancslab & 236 & 16 & Eyetracking & English\\
-wsi-goettingen & 269 & 55 & central fixation, HPP & German\\
+InfantCog-UBC & central fixation & English & 147 & 7\\
+babylab-potsdam & HPP & German & 227 & 22\\
+babyling-oslo & eye-tracking & Norwegian & 249 & 10\\
+brookes-babylab & central fixation & English & 267 & 18\\
+infantll-madison & HPP & English & 230 & 30\\
+lancslab & eye-tracking & English & 236 & 16\\
+wsi-goettingen & HPP & German & 242 & 16\\
+wsi-goettingen & central fixation & German & 280 & 39\\
 \bottomrule
-\end{longtable}
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+
+\end{table*}
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:descriptives_table1}Average looking times (in seconds) for each session and condition.}
+
+\begin{tabular}{lllll}
+\toprule
+Trial type & Session 1 Mean & Session 1 $SD$ & Session 2 Mean & Session 2 $SD$\\
+\midrule
+ADS & 7.71 & 2.77 & 6.96 & 2.92\\
+IDS & 8.76 & 2.84 & 7.75 & 2.75\\
+\bottomrule
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+
+\end{table*}
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:coef_table2}Coefficient estimates from a linear mixed effects model predicting IDS preference in Session 2.}
+
+\begin{tabular}{lllll}
+\toprule
+ & Estimate & $SE$ & $t$ & $p$\\
+\midrule
+Intercept & 0.87 & 0.46 & 1.92 & 0.10\\
+IDS Preference Session 1 & 0.04 & 0.09 & 0.41 & 0.68\\
+\bottomrule
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+
+\end{table*}
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:unnamed-chunk-6}Coefficient estimates from a linear mixed effects model predicting IDS preference in Session 2 and Pearson correlation coefficient for each method separately.}
+
+\begin{tabular}{lllll}
+\toprule
+Method & $beta$ & $SE$ & $p$ & Pearson $r$\\
+\midrule
+central fixation & -0.20 & 0.12 & 0.12 & 0.08\\
+HPP & 0.15 & 0.14 & 0.28 & 0.13\\
+eye-tracking & 0.03 & 0.16 & 0.84 & 0.02\\
+\bottomrule
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+
+\end{table*}

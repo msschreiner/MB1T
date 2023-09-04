@@ -16,7 +16,7 @@ bibliography      : ["r-references.bib"]
 
 documentclass     : "apa6"
 classoption       : "man, donotrepeattitle"
-output            : papaja::apa6_pdf
+output            : papaja::apa6_docx
 ---
 
 ```{r setup, include = FALSE}
