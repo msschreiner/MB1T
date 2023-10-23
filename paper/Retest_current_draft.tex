@@ -5,16 +5,19 @@
 \documentclass[
   man,floatsintext]{apa6}
 \usepackage{amsmath,amssymb}
-\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -171,7 +174,7 @@
 \fi
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
+\urlstyle{same}
 \hypersetup{
   pdftitle={Limited evidence of test-retest reliability in infant-directed speech preference in a large preregistered infant experiment},
   pdfauthor={Melanie S. Schreiner1,2, Martin Zettersten3,4, Christina Bergmann5, Michael C. Frank6, Tom Fritzsche7, Nayeli Gonzalez-Gomez8, Kiley Hamlin9, Natalia Kartushina10, Danielle J. Kellier11, Nivedita Mani1,2, Julien Mayor10, Jenny Saffran3, Mohinish Shukla12, Priya Silverstein13, 14, Melanie Soderstrom15, \& Matthias Lippold1,2},
@@ -462,7 +465,7 @@ Moreover, no significant correlations emerged in each sample considered separate
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:unnamed-chunk-6}Coefficient estimates from a linear mixed effects model predicting IDS preference in Session 2 and Pearson correlation coefficient for each method separately.}
+\caption{\label{tab:unnamed-chunk-7}Coefficient estimates from a linear mixed effects model predicting IDS preference in Session 2 and Pearson correlation coefficient for each method separately.}
 
 \begin{tabular}{lllll}
 \toprule
@@ -497,11 +500,11 @@ The analyses provide tentative evidence that stricter inclusion criteria may lea
 
 \begin{figure}
 
-{\centering \includegraphics[width=5in]{Retest_current_draft_files/figure-latex/unnamed-chunk-8-1} 
+{\centering \includegraphics[width=5in]{Retest_current_draft_files/figure-latex/unnamed-chunk-9-1} 
 
 }
 
-\caption{IDS preferences of both sessions plotted against each other for each inclusion criterion. \textit{n} indicates the number of included infants, \textit{r} is the Pearson correlation coefficient as the indicator for reliability.}\label{fig:unnamed-chunk-8}
+\caption{IDS preferences of both sessions plotted against each other for each inclusion criterion. \textit{n} indicates the number of included infants, \textit{r} is the Pearson correlation coefficient as the indicator for reliability.}\label{fig:unnamed-chunk-9}
 \end{figure}
 
 \hypertarget{correlations-between-sessions-for-number-of-trials-contributed-and-overall-looking-time}{%

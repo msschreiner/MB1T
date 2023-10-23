@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.30)  4 SEP 2023 01:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.30)  23 OCT 2023 17:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -326,7 +326,7 @@ Language: nil 2023/07/15 v3.92 Nil language
 \everypar=\toks28
 (/Users/martincz/Library/TinyTeX/texmf-dist/tex/generic/babel/locale/en/babel-english.tex)
 Package babel Info: Importing data for english
-(babel)             from babel-en.ini. Reported on input line 90.
+(babel)             from babel-en.ini. Reported on input line 93.
 (/Users/martincz/Library/TinyTeX/texmf-dist/tex/latex/was/upgreek.sty
 Package: upgreek 2003/02/12 v2.0 (WaS)
 Package upgreek Info: Using Euler Roman for upright Greek on input line 31.
@@ -549,24 +549,24 @@ Package csquotes Info: Redefining alias 'default' -> 'english'.
 (./Retest_current_draft.aux)
 \openout1 = `Retest_current_draft.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 212.
-LaTeX Font Info:    ... okay on input line 212.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 212.
-LaTeX Font Info:    ... okay on input line 212.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 212.
-LaTeX Font Info:    ... okay on input line 212.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 212.
-LaTeX Font Info:    ... okay on input line 212.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 212.
-LaTeX Font Info:    ... okay on input line 212.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 212.
-LaTeX Font Info:    ... okay on input line 212.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 212.
-LaTeX Font Info:    ... okay on input line 212.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 212.
-LaTeX Font Info:    ... okay on input line 212.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 212.
-LaTeX Font Info:    ... okay on input line 212.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 215.
+LaTeX Font Info:    ... okay on input line 215.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 215.
+LaTeX Font Info:    ... okay on input line 215.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 215.
+LaTeX Font Info:    ... okay on input line 215.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 215.
+LaTeX Font Info:    ... okay on input line 215.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 215.
+LaTeX Font Info:    ... okay on input line 215.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 215.
+LaTeX Font Info:    ... okay on input line 215.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 215.
+LaTeX Font Info:    ... okay on input line 215.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 215.
+LaTeX Font Info:    ... okay on input line 215.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 215.
+LaTeX Font Info:    ... okay on input line 215.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -617,42 +617,42 @@ Package caption Info: longtable package is loaded.
 Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
 )
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring OFF on input line 212.
+Package hyperref Info: Link coloring OFF on input line 215.
 (./Retest_current_draft.out) (./Retest_current_draft.out)
 \@outlinefile=\write5
 \openout5 = `Retest_current_draft.out'.
 
-LaTeX Font Info:    Trying to load font information for T1+lmss on input line 214.
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 217.
 (/Users/martincz/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 214.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 217.
 (/Users/martincz/Library/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 214.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 217.
 (/Users/martincz/Library/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 214.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 217.
 (/Users/martincz/Library/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 214.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 217.
 (/Users/martincz/Library/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 214.
+(Font)              <12> on input line 217.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 214.
+(Font)              <8> on input line 217.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 214.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 214.
+(Font)              <6> on input line 217.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 217.
 (/Users/martincz/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 214.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 217.
 (/Users/martincz/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
@@ -674,25 +674,25 @@ Underfull \vbox (badness 1838) has occurred while \output is active []
 <Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf, id=164, 469.755pt x 325.215pt>
 File: Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type pdf)
 <use Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf>
-Package pdftex.def Info: Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf  used on input line 444.
+Package pdftex.def Info: Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf  used on input line 447.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [12]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [13{/Users/martincz/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}] [14 <./Retest_current_draft_files/figure-latex/unnamed-chunk-5-1.pdf>]
-<Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf, id=196, 578.16pt x 722.7pt>
-File: Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf Graphic file (type pdf)
-<use Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf>
-Package pdftex.def Info: Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf  used on input line 500.
+<Retest_current_draft_files/figure-latex/unnamed-chunk-9-1.pdf, id=196, 578.16pt x 722.7pt>
+File: Retest_current_draft_files/figure-latex/unnamed-chunk-9-1.pdf Graphic file (type pdf)
+<use Retest_current_draft_files/figure-latex/unnamed-chunk-9-1.pdf>
+Package pdftex.def Info: Retest_current_draft_files/figure-latex/unnamed-chunk-9-1.pdf  used on input line 503.
 (pdftex.def)             Requested size: 361.3491pt x 451.68639pt.
-[15] [16 <./Retest_current_draft_files/figure-latex/unnamed-chunk-8-1.pdf>]
+[15] [16 <./Retest_current_draft_files/figure-latex/unnamed-chunk-9-1.pdf>]
 <Retest_current_draft_files/figure-latex/fig3-1.pdf, id=215, 867.24pt x 1011.78pt>
 File: Retest_current_draft_files/figure-latex/fig3-1.pdf Graphic file (type pdf)
 <use Retest_current_draft_files/figure-latex/fig3-1.pdf>
-Package pdftex.def Info: Retest_current_draft_files/figure-latex/fig3-1.pdf  used on input line 530.
+Package pdftex.def Info: Retest_current_draft_files/figure-latex/fig3-1.pdf  used on input line 533.
 (pdftex.def)             Requested size: 469.75827pt x 548.0513pt.
 
-LaTeX Warning: Float too large for page by 3.6112pt on input line 535.
+LaTeX Warning: Float too large for page by 3.6112pt on input line 538.
 
 [17] [18 <./Retest_current_draft_files/figure-latex/fig3-1.pdf>]
 Underfull \vbox (badness 1838) has occurred while \output is active []

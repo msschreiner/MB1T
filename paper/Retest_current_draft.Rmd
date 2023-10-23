@@ -717,7 +717,6 @@ ggplot(all_agg_subjects_paired_retest,aes(Diff_1,Diff_2,color=Method))+
   theme(legend.position=c(0.17,0.92),legend.title=element_text(size=8),legend.text=element_text(size=5), legend.key.height = unit(0.2, 'cm'), 
         legend.key.width = unit(0.2, 'cm'))+
   geom_label(aes(label=paste0("Mean Age: ",round(`Mean age (days)`,0)," days")),x=2.5,y=-7,size=2,show.legend=FALSE)
- 
 ```
 
 We assessed test-retest reliability in two planned, confirmatory analyses. 
@@ -728,6 +727,26 @@ While a simple correlation coefficient might overestimate the test-retest reliab
 The size of the correlation coefficient was not statistically different from zero and the estimate was small, `r apa_print(simplyOverallCorr)$full_result`. 
 Moreover, no significant correlations emerged in each sample considered separately (Figure 1; see Supplementary Materials S3 for a meta-analytic approach).
  `r perc_reversal`% of the infants reversed their direction of preference for IDS versus ADS from the test to the retest session (see Supplementary Materials S7 for additional analyses of infants' patterns of preferential looking across sessions). 
+ 
+```{r}
+#overall correlation
+corr_plot_test_retest <- ggplot(filter(all_agg_subjects_paired_retest,Diff_2>-5),aes(Diff_1,Diff_2))+
+  geom_hline(yintercept=0,linetype="dashed")+
+  geom_vline(xintercept=0,linetype="dashed")+
+  geom_point()+
+  geom_smooth(method="lm",color="black")+
+  theme_cowplot()+
+  theme(legend.position="none")+
+  theme(axis.title=element_text(size=24),axis.text=element_text(size=20))+
+  scale_x_continuous(breaks=c(-4,-2,0,2,4,6,8,10),limits=c(-5,10.5))+
+  scale_y_continuous(breaks=c(-4,-2,0,2,4,6,8,10),limits=c(-5,10.5))+
+  xlab("IDS preferential looking in first session")+
+  ylab("IDS preferential looking in second session")+
+  annotate(geom="text",x=6,y=9,label=expression(~italic(r)~"=.09, 95% CI [-.06,.25], "~italic(p)~"=.24"),size=8)+
+  annotate("rect",xmin=2,xmax=10,ymin=8.25,ymax=9.75,fill=NA,color="black")
+ggsave(here("figures","raw_test_retest_correlation.png"),bg = "white",width=12,height=9)
+```
+
 
 ```{r results="asis",warning=FALSE,message=FALSE}
 #function for computing coefficient table from lmer model and correlation reliability
