@@ -193,7 +193,7 @@ Similarly, the MB1 project reported an increase in the effect size for HPP compa
 HPP requires gross motor movements relative to other methods, such as CF and ET paradigms, for which subtle eye movements towards a monitor located in front of the child are sufficient.
 One possible explanation for the stronger effects with HPP may be a higher sensitivity to the contingency of the presentation of auditory stimuli and infants’ head turns away from the typical forward-facing position.
 While these findings suggest that HPP may be a more sensitive index of infant preference, they do not necessarily imply higher reliability for individual infants’ performance using HPP.
-For example, @marimon2022 found no evidence for test-retest reliability when testing infants' prosodic preferences using the HPP method across three testing sessions, each 7-8 days apart on average.
+For example, @marimon2022 found no evidence for the test-retest reliability of infants' prosodic preferences (as measured by a difference score) using the HPP method across three testing sessions, each 7-8 days apart on average.
 It remains an open question whether the same measures that produce larger effect sizes at the group-level also have higher test-retest reliability for individual infants [@byers2021six].
 In the current study, we therefore assessed whether HPP yields higher test-retest reliability compared to CF and ET in looking-time measures of IDS preference.
 
@@ -203,8 +203,7 @@ Given that older infants have had more linguistic experience, we predicted that 
 Infants also varied with respect to their linguistic background. 
 All infants were tested using a North American English (hereafter, NAE) stimulus set, which was either their native or non-native language. 
 We predicted that infants for whom NAE was not their native language --- and who therefore had little or no experience with NAE --- would demonstrate more variable and less reliable looking behavior than English-learning infants.
-Finally, we assessed whether time between test and retest influenced the reliability of the preference measure. 
-Specifically, we investigated whether test-retest reliability decreased for participants with longer durations between their first and second test session.
+In our final planned moderator analysis, we assessed whether time between test and retest influenced the reliability of the preference measure by investigating whether test-retest reliability decreased for participants with longer durations between their first and second test session.
 
 # Method
 
