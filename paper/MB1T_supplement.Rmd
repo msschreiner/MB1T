@@ -1039,7 +1039,7 @@ ggplot(correlation_trial_exclusion_seq,aes(x=min_trials,y=r))+
 
 ## S6.2. Simulation with subset of participants
 
-In order to further investigate sources of variance, we conducted a simulation with the subset of participants who started to show a significant correlation (see Figure 7, e.g., the 98 participants with 12 trials each), sampling subsets of trials for those participants (in increments of two, i.e., 2, 4, 6, and 8 trail pairs).
+In order to further investigate sources of variance, we conducted a simulation with the subset of participants who started to show a significant correlation (see Figure 7, e.g., the 98 participants with 12 trials each), sampling subsets of trials for those participants (in increments of two, i.e., 2, 4, 6, and 8 trial pairs).
 ```{r, warning=FALSE, message=FALSE, echo=FALSE, results= 'hide'}
 # function for random selection of trial pairs per Session and Condition of overall trials and computing correlations
 
@@ -1089,7 +1089,7 @@ Outcome_sim_sum<-Outcome_sim %>% group_by(Trials,num_slices) %>% summarise(r_mea
 
 ```
 
-```{r fig8, fig.cap = "Results of the simulation of randomly selected trial pairs of participants that contributed at least 12 valid trails for the test and retest session. (A) shows the mean Pearson correlation for participants that contributed at least 12 valid trail pairs, and (B) shows the mean Pearson correlation for participants that contributed 16 valid trail pairs."}
+```{r fig8, fig.cap = "Results of the simulation of randomly selected trial pairs of participants that contributed at least 12 valid trials for the test and retest session. (A) shows the mean Pearson correlation for participants that contributed at least 12 valid trial pairs, and (B) shows the mean Pearson correlation for participants that contributed 16 valid trial pairs."}
 
 p6.12 <- ggplot(Outcome_sim_sum[Outcome_sim_sum$Trials==12,],aes(x=num_slices,y=r_mean))+
   geom_hline(yintercept=0,linetype="dashed")+
