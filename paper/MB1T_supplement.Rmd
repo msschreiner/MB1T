@@ -49,6 +49,7 @@ read_path <- here("data","processed")
 # Seed for random number generation
 set.seed(42)
 knitr::opts_chunk$set(cache.extra = knitr::rand_seed,echo = FALSE, warning = FALSE, message = FALSE)
+RUN_SIMULATIONS = FALSE
 ```
 
 \newpage
@@ -1039,77 +1040,162 @@ ggplot(correlation_trial_exclusion_seq,aes(x=min_trials,y=r))+
 
 ## S6.2. Simulation with subset of participants
 
-In order to further investigate sources of variance, we conducted a simulation with the subset of participants who started to show a significant correlation (see Figure 7, e.g., the 98 participants with 12 trials each), sampling subsets of trials for those participants (in increments of two, i.e., 2, 4, 6, and 8 trial pairs).
-```{r, warning=FALSE, message=FALSE, echo=FALSE, results= 'hide'}
-# function for random selection of trial pairs per Session and Condition of overall trials and computing correlations
+In order to further investigate sources of variance, we conducted a simulation with subsets of participants who started to show a significant correlation (see Figure 7, e.g., the 113 participants with 12 trials each), resampling increasingly larger numbers of trials for each subset and computing the average resulting test-retest correlation. sampling subsets of trials for those participants (in increments of two, i.e., 2, 4, 6, and 8 trial pairs).
 
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE, results= 'hide', eval=RUN_SIMULATIONS}
+# function for random selection of trial pairs per Session and Condition of overall trials and computing correlations
 correlation_test_retest_sampled_trials <- function(dataset,num_slices=1) {
   #filter dataset
-    current_dataset <- dataset %>% group_by(Subject_Unique,Session,Condition) %>% slice_sample(n = num_slices) %>%
-    summarise(mean_lt=mean(LT)) %>% pivot_wider(names_from = Condition,values_from = mean_lt) %>% mutate(Diff=IDS-ADS) %>%
-    select(-(c("ADS","IDS"))) %>%  pivot_wider(names_from = Session,values_from = Diff, names_prefix = "Diff_") %>% ungroup()
+  current_dataset <- dataset %>% 
+      group_by(Subject_Unique,Session,Condition) %>% 
+      slice_sample(n = num_slices) %>%
+      summarise(mean_lt=mean(LT),.groups="drop_last") %>% 
+      pivot_wider(names_from = Condition,values_from = mean_lt) %>% 
+      mutate(Diff=IDS-ADS) %>%
+      select(-(c("ADS","IDS"))) %>%  
+      pivot_wider(names_from = Session,values_from = Diff, names_prefix = "Diff_") %>% 
+      ungroup()
     
   #compute the test-retest correlation
   correlation <- cor.test(current_dataset$Diff_1,current_dataset$Diff_2)
-    return(correlation$estimate)
+  return(list(correlation=correlation$estimate,N=length(unique(current_dataset$Subject_Unique))))
 }
+
+#compute correlation for a specific trial number
+compute_retest_correlation_subset <- function(min_trial_number,num_slices,index=1,print_message=TRUE) {
+  
+  # create subset datasets based on minumum trial number
+  all_agg_subjects_paired_retest_atleast_t_trials <- all_agg_subjects_paired_retest %>%
+    filter(total_trial_n_session_1>=min_trial_number&total_trial_n_session_2>=min_trial_number)
+  all_subjects_atleast_t_trials <- data_clean %>% 
+    filter(Subject_Unique %in% all_agg_subjects_paired_retest_atleast_t_trials$Subject_Unique)
+  
+  if (print_message) {
+    #print information about the run
+    print(paste("run index:", index,"| min trials:",min_trial_number,"| num slices:",num_slices))
+  }
+  
+  #compute resampled correlation
+  return(correlation_test_retest_sampled_trials(all_subjects_atleast_t_trials,num_slices))
+  
+}
+
 
 # Start simulation for participants with at least 12 valid trials (6 valid trials pairs) for both test and retest session
 
 N = seq(1,100) # Number of iterations
 
-Trials = seq(12,16) # Select the number of required trials
+Trials = seq(2,16) # Select the number of required trials
 
-num_slices = c(2,4,6,8) # Select the number of needed trial pairs for inclusion
+num_slices = c(1,2,3,4,5,6,7,8) # Select the number of needed trial pairs for inclusion
 
+#run sumpulations
+simulation_outcome <-expand.grid(N = N,Trials = Trials,num_slices = num_slices) %>%
+  mutate(
+    results = pmap(list(Trials,num_slices,N),compute_retest_correlation_subset),
+    correlation = map_dbl(results,'correlation'),
+    sample_size = map_dbl(results,'N')
+  ) %>%
+  select(-results)
 
-Outcome_sim<-expand.grid(N = N,Trials = Trials,num_slices = num_slices,r=NA)
-
-
-Outcome_sim$r[Outcome_sim$Trials==2&Outcome_sim$num_slices==2]
-
-for (t in Trials) {
-  
-  for (n in num_slices){
-    
-    
-  all_agg_subjects_paired_retest_atleast_12_trials<-all_agg_subjects_paired_retest %>% filter(total_trial_n_session_1>=t&total_trial_n_session_2>=t)
-  all_subjects_atleast_12_trials<- data_clean%>% filter(Subject_Unique %in% all_agg_subjects_paired_retest_atleast_12_trials$Subject_Unique)
-
-  
-  correlation<-replicate(100,correlation_test_retest_sampled_trials(all_subjects_atleast_12_trials,n))
-  
-  Outcome_sim$r[N==seq(1:100)&Outcome_sim$Trials==t&Outcome_sim$num_slices==n]<-correlation
-    
-  }
- 
-}
-
-Outcome_sim_sum<-Outcome_sim %>% group_by(Trials,num_slices) %>% summarise(r_mean=mean(r),r_sd=sd(r))
-
+#save the resulting data frame
+write_csv(simulation_outcome, here("data","processed", "resampling_retest_correlation_simulation_outcome.csv"))
 ```
 
-```{r fig8, fig.cap = "Results of the simulation of randomly selected trial pairs of participants that contributed at least 12 valid trials for the test and retest session. (A) shows the mean Pearson correlation for participants that contributed at least 12 valid trial pairs, and (B) shows the mean Pearson correlation for participants that contributed 16 valid trial pairs."}
+```{r fig8, fig.cap = "Results of the simulation showing how test-rest correlations increase with the number of trial pairs included in the analysis. The data is facetted by the number of overall trials required for inclusion (11-16 overall trials; compare Figure 7), including. The x-axis depicts the number of trial pairs (randomly resampled per participant with replacement) in the analysis, and the y-axis shows the mean Pearson correlation coefficient between test and retest IDS preference (difference score). Error bars represent 95% CIs. The number of included participants is shown above each data point."}
 
-p6.12 <- ggplot(Outcome_sim_sum[Outcome_sim_sum$Trials==12,],aes(x=num_slices,y=r_mean))+
-  geom_hline(yintercept=0,linetype="dashed")+
-  geom_point(size=4)+
-  xlab("Number of randomly \n selected trial pairs")+
-  ylab("Mean Pearson correlation coefficient")+
-  ylim(-0.1,1)+
-  scale_x_continuous(breaks=c(2,4,6,8))+        theme_cowplot()
+#read in simulation data
+simulation_outcome <- read_csv(here("data","processed", "resampling_retest_correlation_simulation_outcome.csv"))
 
-p6.16 <- ggplot(Outcome_sim_sum[Outcome_sim_sum$Trials==16,],aes(x=num_slices,y=r_mean))+
+#summarize simulation data
+simulation_outcome_summarized <-simulation_outcome %>% 
+  group_by(sample_size,Trials,num_slices) %>% 
+  summarise(N=n(),r_mean=mean(correlation),r_sd=sd(correlation)) %>%
+  mutate(
+    lower_ci = r_mean - (1.96 * r_sd / sqrt(N)),
+    upper_ci = r_mean + (1.96 * r_sd / sqrt(N))
+    )
+
+#plot
+ggplot(simulation_outcome_summarized,aes(x=num_slices,y=r_mean,color=as.factor(Trials)))+
+  geom_smooth(method="lm",alpha=0.5, fill="#d3d4d3")+
   geom_hline(yintercept=0,linetype="dashed")+
-  geom_point(size=4)+
-  xlab("Number of randomly \n selected trial pairs")+
-  ylab("Mean Pearson correlation coefficient")+
-  ylim(-0.1,1)+
+  geom_point(size=1.5)+
+  geom_errorbar(aes(ymin=lower_ci,ymax=upper_ci),width=0)+
+  geom_label(aes(label=paste0("n = ",sample_size)),x=3,y=0.4,size=4,show.legend=FALSE)+
+  xlab("Number of randomly resampled trial pairs (with replacement)")+
+  ylab("Average test-retest correlation coefficient")+
+  scale_color_viridis_d(name="Minimum number of \ncontributed trials in subset")+
+  ylim(-0.1,0.5)+
   scale_x_continuous(breaks=c(2,4,6,8))+
-  theme_cowplot()
-
-plot_grid(p6.12,p6.16,labels=c("A","B"))
+  theme_cowplot()+
+  theme(legend.position="none")+
+  facet_wrap(~Trials,nrow=3)
 ```
+
+# S6.3. Predictiveness of IDS preferences across trials within a trial
+
+```{r warning=FALSE, message=FALSE, echo=FALSE, results= 'hide'}
+#create a data frame of paired IDS preferences for each subject
+agg_by_subj_paired_preference <- data_clean %>%
+  #split the stimulus column into a column stimulus_name and stimulus_id based on where the numeric value appears
+  separate(stimulus, into = c("stimulus_name", "stimulus_id"), sep = "(?<=[A-Za-z])(?=[0-9])",remove=FALSE) %>%
+  ungroup() %>%
+  #combine trial numbers into pairs with 1,2 being 1, 3,4 being 2, etc.
+  mutate(trial_pair = ceiling(trial_num / 2)) %>%
+  #relocate trial_pair column after trial_num
+  relocate(trial_pair,.after = "trial_num") %>%
+  #throw out the odd stimulus trials with MB in them
+  filter(!grepl("MB",stimulus_name)) %>%
+  select(Subject,Subject_Unique,Lab,Session,Age,days_between_sessions,total_trial_n,stimulus_id,stimulus_name,trial_pair,LT,log_lt) %>%
+  group_by(Subject,Subject_Unique,Lab,Session,Age,days_between_sessions,total_trial_n,stimulus_id,trial_pair) %>%
+  #pivot wider to get IDS and ADS looking times (LT) for each trial; also get log looking times for IDS and ADS from column log_lt
+  pivot_wider(names_from = stimulus_name,values_from = c(LT,log_lt)) %>%
+  mutate(
+    Diff = LT_IDS - LT_ADS,
+    Prop = LT_IDS / (LT_IDS + LT_ADS),
+    Diff_log_lt = log_lt_IDS - log_lt_ADS,
+    Prop_log_lt = log_lt_IDS / (log_lt_IDS + log_lt_ADS)
+  ) 
+
+#add a column representing the Diff of the previous trial_pair within each Subject and Session
+agg_by_subj_paired_preference <- agg_by_subj_paired_preference %>%
+  ungroup() %>%
+  group_by(Subject,Subject_Unique,Lab,Session) %>%
+  mutate(Diff_prev = dplyr::lag(Diff,order_by=trial_pair)) %>%
+  #also compute mean diff
+  mutate(mean_Diff = mean(Diff,na.rm=TRUE)) %>%
+  mutate(Diff_from_mean = Diff-mean_Diff,
+         Diff_from_prev = Diff-Diff_prev)
+
+
+#predict Diff from Diff_prev
+m <- lmer(Diff ~ Diff_prev*trial_pair + (1|Subject) + (1+Diff_prev|Lab), data = agg_by_subj_paired_preference)
+summary(m)
+
+ggplot(agg_by_subj_paired_preference,aes(Diff_prev,Diff))+
+  geom_point()+
+  geom_smooth(method="lm")+
+  facet_wrap(~trial_pair)
+
+
+#plot average Diff by trial_pair with standard error bars
+ggplot(agg_by_subj_paired_preference,aes(x=trial_pair,y=Diff))+
+  stat_summary(fun=mean,geom="point",size=3)+
+  stat_summary(fun=mean,geom="line")+
+  stat_summary(fun.data=mean_se,geom="errorbar")+
+  xlab("Trial pair")+
+  ylab("Average IDS preference (Diff)")+
+  theme_cowplot()+
+  facet_wrap(~Session)
+
+
+```
+
+Later trials less meaningful?
+
+i.e. what if we don't sample from later trials/ cut out some later ones.
 
 \newpage
 
