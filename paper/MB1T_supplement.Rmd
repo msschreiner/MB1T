@@ -1115,7 +1115,11 @@ simulation_outcome_summarized <-simulation_outcome %>%
   mutate(
     lower_ci = r_mean - (1.96 * r_sd / sqrt(N)),
     upper_ci = r_mean + (1.96 * r_sd / sqrt(N))
-    )
+    ) %>%
+  #just in case this comes in handy to use
+  mutate(
+    trials_squared = sqrt(num_slices*2)
+  )
 
 #plot
 ggplot(simulation_outcome_summarized,aes(x=num_slices,y=r_mean,color=as.factor(Trials)))+
@@ -1132,6 +1136,23 @@ ggplot(simulation_outcome_summarized,aes(x=num_slices,y=r_mean,color=as.factor(T
   theme_cowplot()+
   theme(legend.position="none")+
   facet_wrap(~Trials,nrow=3)
+
+#plot
+#just in case useful for showing the r ~ sqrt(N) relationship
+# ggplot(simulation_outcome_summarized,aes(x=trials_squared,y=r_mean,color=as.factor(Trials)))+
+#   geom_smooth(method="lm",alpha=0.5, fill="#d3d4d3")+
+#   geom_hline(yintercept=0,linetype="dashed")+
+#   geom_point(size=1.5)+
+#   geom_errorbar(aes(ymin=lower_ci,ymax=upper_ci),width=0)+
+#   geom_label(aes(label=paste0("n = ",sample_size)),x=3,y=0.4,size=4,show.legend=FALSE)+
+#   xlab("Squared number of randomly resampled trials (with replacement)")+
+#   ylab("Average test-retest correlation coefficient")+
+#   scale_color_viridis_d(name="Minimum number of \ncontributed trials in subset")+
+#   ylim(-0.1,0.5)+
+#   #scale_x_continuous(breaks=c(2,4,6,8))+
+#   theme_cowplot()+
+#   theme(legend.position="none")+
+#   facet_wrap(~Trials,nrow=3)
 ```
 
 # S6.3. Predictiveness of IDS preferences across trials within a trial
