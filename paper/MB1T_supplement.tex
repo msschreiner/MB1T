@@ -616,15 +616,6 @@ In order to further investigate sources of variance, we conducted a simulation w
 \caption{\label{fig:fig8}Results of the simulation showing how test-rest correlations increase with the number of trial pairs included in the analysis. The data is facetted by the number of overall trials required for inclusion (11-16 overall trials; compare Figure 7), including. The x-axis depicts the number of trial pairs (randomly resampled per participant with replacement) in the analysis, and the y-axis shows the mean Pearson correlation coefficient between test and retest IDS preference (difference score). Error bars represent 95\% CIs. The number of included participants is shown above each data point.}
 \end{figure}
 
-\hypertarget{s6.3.-predictiveness-of-ids-preferences-across-trials-within-a-trial}{%
-\section{S6.3. Predictiveness of IDS preferences across trials within a trial}\label{s6.3.-predictiveness-of-ids-preferences-across-trials-within-a-trial}}
-
-\includegraphics{MB1T_supplement_files/figure-latex/unnamed-chunk-38-1.pdf} \includegraphics{MB1T_supplement_files/figure-latex/unnamed-chunk-38-2.pdf}
-
-Later trials less meaningful?
-
-i.e.~what if we don't sample from later trials/ cut out some later ones.
-
 \newpage
 
 \hypertarget{s7.-patterns-of-preference-across-sessions}{%
@@ -681,7 +672,7 @@ In MB1, the ordering of stimuli was counterbalanced, but some stimuli still appe
 \hypertarget{s9.-by-item-pair-preference-scores-across-sessions}{%
 \section{S9. By-item-pair preference scores across sessions}\label{s9.-by-item-pair-preference-scores-across-sessions}}
 
-Finally, we inspected on a more fine-grained item level whether IDS preference in Session 1 was related to IDS preference in Session 2.
+We also inspected on a more fine-grained item level whether IDS preference in Session 1 was related to IDS preference in Session 2.
 To do so, we exploited the fact the specific IDS and ADS stimuli were paired together in test orders in both sessions, such that one IDS stimulus (e.g., IDS1) always occurred adjacently to a specific ADS stimulus (e.g., ADS1).
 We therefore computed stimulus-specific IDS preference scores by calculating the difference in raw looking time for each of the eight IDS-ADS stimulus pairs for each participant (whenever both trials in a given pair were available).
 We then fit a linear mixed-effects model predicting stimulus-specific IDS preference in Session 2 from stimulus-specific IDS preference in Session 1, including by-participant and by-lab random intercepts (models with more complex random effects structure, including by-item random effects, failed to converge).
@@ -692,7 +683,7 @@ There was a marginal, but non-significant relation in stimulus-specific IDS pref
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:unnamed-chunk-44}Linear mixed-effects model results predicting IDS preference in Session 2 from IDS preference in Session 1 at the stimulus level.}
+\caption{\label{tab:unnamed-chunk-43}Linear mixed-effects model results predicting IDS preference in Session 2 from IDS preference in Session 1 at the stimulus level.}
 
 \begin{tabular}{llllll}
 \toprule
@@ -740,6 +731,60 @@ We fit a linear mixed-effects model predicting IDS preference in Session 2 from 
 
 \caption{Correlations between average looking time (in s) and IDS preference for infants with shorter looking (left panel) and longer looking (right panel).}\label{fig:fig11}
 \end{figure}
+
+\hypertarget{s11.-changes-in-looking-time-and-preferential-looking-across-trials}{%
+\section{S11. Changes in looking time and preferential looking across trials}\label{s11.-changes-in-looking-time-and-preferential-looking-across-trials}}
+
+\hypertarget{s11.1.-changes-in-looking-time-across-trials}{%
+\subsection{S11.1. Changes in looking time across trials}\label{s11.1.-changes-in-looking-time-across-trials}}
+
+In this section, we explore how looking time changes across trials --- a major source of variation in infants' general looking behavior.
+In general, and as expected, looking time shows a steep decline across trials, both in the first and second session (Figure 13).
+
+\begin{figure}
+
+{\centering \includegraphics{MB1T_supplement_files/figure-latex/fig13-1} 
+
+}
+
+\caption{(A) Looking time (in s) across trials, facetted by Session (left panel: first Session; right panel: second session). The blue line represents a loess fit through the data. Error bands represent 95\% CIs. Boxplots show the distribution of looking times within each trial number. (B) Looking time across trials split by condition (IDS vs. ADS) and Session (facetted). Each line represents a loess fit, with 95\% CI error bands.}\label{fig:fig13}
+\end{figure}
+
+\hypertarget{s11.2.-changes-in-preferential-looking-across-trials}{%
+\subsection{S11.2. Changes in preferential looking across trials}\label{s11.2.-changes-in-preferential-looking-across-trials}}
+
+\begin{figure}
+
+{\centering \includegraphics{MB1T_supplement_files/figure-latex/fig14-1} 
+
+}
+
+\caption{IDS preference (IDS-ADS) for pairs of (adjacent) trials, for Session 1 (left panel) and Session 2 (right panel). Error bars represent +1/-1 SEs. The blue line represents a loess fit through the data with 95\% confidence bands.}\label{fig:fig14}
+\end{figure}
+
+The most important question for measuring IDS preference is whether infants' preferential looking to IDS shows systematic changes across the course of the experiment.
+To investigate changes in preferential looking across the experiment, we grouped IDS and ADS trials into adjacent pairs (again exploiting the fact that IDS and ADS trials always occurred on adjacent trials, see S9) and computed difference scores for each pair.
+Figure 14 depicts the change in average IDS preference across each session.
+To test whether IDS preference changed across the experiment, we fit a linear mixed-effects model predicting IDS preference (difference score per trial pair) from trial pair (centered), including by-participant and by-lab random intercepts and by-participant and by-lab random slopes for trial pair.
+We did not find a significant effect of trial pair, \(\hat{\beta} = -0.10\), 95\% CI \([-0.22, 0.02]\), \(t(3.98) = -1.68\), \(p = .169\).
+
+\hypertarget{s12.-decomposing-sources-of-variance}{%
+\section{S12. Decomposing sources of variance}\label{s12.-decomposing-sources-of-variance}}
+
+Finally, to understand the main sources of variation in infants' looking behavior in more depth, we fit successively more complex linear mixed-effects models predicting (log-transformed) looking times including the main predictors that explained substantial variance or were of primary interest.
+We fit these models on the level of individual trials, in order to explore sources of variation at the trial-, session-, and participant-level simultaneously.
+Due to limitations of the \texttt{r2mlm} package, we could only include a single random effect and so chose to include by-participant random effects (and no by-lab random effects), given our primary interest in understanding sources of variance within and between participants.
+First, we sequentially included the within-participant predictors (trial number, then condition, then session) that explained the most variation in infant looking behavior, including a by-participant random intercept and random slopes for each predictor.
+The final model included fixed effects for the within-participant predictors for trial number, condition, and session (including a by-participant random intercept and random slopes for these predictors) and fixed effects for the between-participant predictors age, method, language background, and days between test sessions.
+Table XX shows the results of this final model - note that no evidence of multi-collinearity was observed.
+We then used the R packages \texttt{r2mlm} and \texttt{performance} to decompose variance in looking behavior explained within each model.
+We show the results of variance decomposition in Figure XX and Table XX.
+In general, the model including the full set of predictors could explain a substantial amount of total variance in infants' looking behavior (Figure XX), mainly driven by variance explained by mean variation between participants and the variation explained by the slopes varying within participant (in particular trial number, as well as condition and session).
+The between-participant fixed effects in the model explained only a small proportion of additional variance.
+Table XX shows the intra-class correlation (ICC) for each mixed-effects model.
+The ICC represents the proportion of variance in looking behavior that can be attributed to participant grouping in the data.
+It can be interpreted as indicating to what extent individual measurements of looking behavior within the same participant resemble one another (i.e., how reliable they are).
+We find that ultimately about a third of the variance (\textasciitilde0.3) could be attributed to participant grouping in the data once including the within-participant predictors related to trial number, session, and condition.
 
 \newpage
 

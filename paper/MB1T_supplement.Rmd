@@ -42,6 +42,8 @@ library(metafor)
 library(ggExtra)
 library(corx)
 library(cower)
+library(r2mlm)
+library(performance)
 read_path <- here("data","processed")
 ```
 
@@ -1155,68 +1157,6 @@ ggplot(simulation_outcome_summarized,aes(x=num_slices,y=r_mean,color=as.factor(T
 #   facet_wrap(~Trials,nrow=3)
 ```
 
-# S6.3. Predictiveness of IDS preferences across trials within a trial
-
-```{r warning=FALSE, message=FALSE, echo=FALSE, results= 'hide'}
-#create a data frame of paired IDS preferences for each subject
-agg_by_subj_paired_preference <- data_clean %>%
-  #split the stimulus column into a column stimulus_name and stimulus_id based on where the numeric value appears
-  separate(stimulus, into = c("stimulus_name", "stimulus_id"), sep = "(?<=[A-Za-z])(?=[0-9])",remove=FALSE) %>%
-  ungroup() %>%
-  #combine trial numbers into pairs with 1,2 being 1, 3,4 being 2, etc.
-  mutate(trial_pair = ceiling(trial_num / 2)) %>%
-  #relocate trial_pair column after trial_num
-  relocate(trial_pair,.after = "trial_num") %>%
-  #throw out the odd stimulus trials with MB in them
-  filter(!grepl("MB",stimulus_name)) %>%
-  select(Subject,Subject_Unique,Lab,Session,Age,days_between_sessions,total_trial_n,stimulus_id,stimulus_name,trial_pair,LT,log_lt) %>%
-  group_by(Subject,Subject_Unique,Lab,Session,Age,days_between_sessions,total_trial_n,stimulus_id,trial_pair) %>%
-  #pivot wider to get IDS and ADS looking times (LT) for each trial; also get log looking times for IDS and ADS from column log_lt
-  pivot_wider(names_from = stimulus_name,values_from = c(LT,log_lt)) %>%
-  mutate(
-    Diff = LT_IDS - LT_ADS,
-    Prop = LT_IDS / (LT_IDS + LT_ADS),
-    Diff_log_lt = log_lt_IDS - log_lt_ADS,
-    Prop_log_lt = log_lt_IDS / (log_lt_IDS + log_lt_ADS)
-  ) 
-
-#add a column representing the Diff of the previous trial_pair within each Subject and Session
-agg_by_subj_paired_preference <- agg_by_subj_paired_preference %>%
-  ungroup() %>%
-  group_by(Subject,Subject_Unique,Lab,Session) %>%
-  mutate(Diff_prev = dplyr::lag(Diff,order_by=trial_pair)) %>%
-  #also compute mean diff
-  mutate(mean_Diff = mean(Diff,na.rm=TRUE)) %>%
-  mutate(Diff_from_mean = Diff-mean_Diff,
-         Diff_from_prev = Diff-Diff_prev)
-
-
-#predict Diff from Diff_prev
-m <- lmer(Diff ~ Diff_prev*trial_pair + (1|Subject) + (1+Diff_prev|Lab), data = agg_by_subj_paired_preference)
-summary(m)
-
-ggplot(agg_by_subj_paired_preference,aes(Diff_prev,Diff))+
-  geom_point()+
-  geom_smooth(method="lm")+
-  facet_wrap(~trial_pair)
-
-
-#plot average Diff by trial_pair with standard error bars
-ggplot(agg_by_subj_paired_preference,aes(x=trial_pair,y=Diff))+
-  stat_summary(fun=mean,geom="point",size=3)+
-  stat_summary(fun=mean,geom="line")+
-  stat_summary(fun.data=mean_se,geom="errorbar")+
-  xlab("Trial pair")+
-  ylab("Average IDS preference (Diff)")+
-  theme_cowplot()+
-  facet_wrap(~Session)
-
-
-```
-
-Later trials less meaningful?
-
-i.e. what if we don't sample from later trials/ cut out some later ones.
 
 \newpage
 
@@ -1472,7 +1412,7 @@ item_pref <- lmer(Diff_2~Diff_1+(1|Subject_Unique)+(1|Lab),data=agg_by_subj_item
 apa_lm_item_pref <- apa_print(item_pref)
 ```
 
-Finally, we inspected on a more fine-grained item level whether IDS preference in Session 1 was related to IDS preference in Session 2.
+We also inspected on a more fine-grained item level whether IDS preference in Session 1 was related to IDS preference in Session 2.
 To do so, we exploited the fact the specific IDS and ADS stimuli were paired together in test orders in both sessions, such that one IDS stimulus (e.g., IDS1) always occurred adjacently to a specific ADS stimulus (e.g., ADS1).
 We therefore computed stimulus-specific IDS preference scores by calculating the difference in raw looking time for each of the eight IDS-ADS stimulus pairs for each participant (whenever both trials in a given pair were available).
 We then fit a linear mixed-effects model predicting stimulus-specific IDS preference in Session 2 from stimulus-specific IDS preference in Session 1, including by-participant and by-lab random intercepts (models with more complex random effects structure, including by-item random effects, failed to converge).
@@ -1571,6 +1511,157 @@ ggplot(all_agg_subjects_paired_retest,aes(Diff_1,Diff_2))+
   
 ```
 
+# S11. Changes in looking time and preferential looking across trials
+
+## S11.1. Changes in looking time across trials
+
+In this section, we explore how looking time changes across trials --- a major source of variation in infants' general looking behavior.
+In general, and as expected, looking time shows a steep decline across trials, both in the first and second session (Figure 13).
+
+```{r fig13, fig.cap="(A) Looking time (in s) across trials, facetted by Session (left panel: first Session; right panel: second session). The blue line represents a loess fit through the data. Error bands represent 95% CIs. Boxplots show the distribution of looking times within each trial number. (B) Looking time across trials split by condition (IDS vs. ADS) and Session (facetted). Each line represents a loess fit, with 95% CI error bands.", fig.align="center"}
+data_clean <- data_clean %>%
+  mutate(session_name = paste0("Session ",Session))
+p1 <- ggplot(data_clean,aes(trial_num,LT))+
+  geom_boxplot(aes(group=trial_num),alpha=0.1)+
+  geom_smooth(method="loess")+
+  theme_cowplot()+
+  facet_wrap(~session_name)+
+  xlab("Trial number")+
+  scale_x_continuous(breaks=seq(2,16,2))+
+  ylab("Looking time (in s)")
+p2 <- ggplot(data_clean,aes(trial_num,LT,color=Condition))+
+  geom_point(alpha=0.05)+
+  geom_smooth(method="loess")+
+  theme_cowplot()+
+  facet_wrap(~session_name)+
+  xlab("Trial number")+
+  ylab("Looking time (in s)")+
+  scale_x_continuous(breaks=seq(2,16,2))+
+  scale_color_brewer(palette="Set1",direction=-1)+
+  theme(legend.background = element_rect( fill = "white"),legend.position=c(0.8,0.7))
+plot_grid(p1,p2,labels=c("A","B"),ncol=1)
+```
+
+## S11.2. Changes in preferential looking across trials
+
+```{r warning=FALSE, message=FALSE, echo=FALSE, results= 'hide'}
+#create a data frame of paired IDS preferences for each subject
+agg_by_subj_paired_preference <- data_clean %>%
+  #fix one issue in stimulus naming
+  mutate(
+    stimulus = case_when(
+      Subject == "M328" & Session == 1 & trial_num == 5 ~ "IDS1",
+      TRUE ~ stimulus
+    )
+  ) %>%
+  #split the stimulus column into a column stimulus_name and stimulus_id based on where the numeric value appears
+  separate(stimulus, into = c("stimulus_name", "stimulus_id"), sep = "(?<=[A-Za-z])(?=[0-9])",remove=FALSE) %>%
+  ungroup() %>%
+  #combine trial numbers into pairs with 1,2 being 1, 3,4 being 2, etc.
+  mutate(trial_pair = ceiling(trial_num / 2)) %>%
+  #relocate trial_pair column after trial_num
+  relocate(trial_pair,.after = "trial_num") %>%
+  #throw out the odd stimulus trials with MB in them
+  filter(!grepl("MB",stimulus_name)) %>%
+  select(Subject,Subject_Unique,Lab,Session,Age,days_between_sessions,total_trial_n,stimulus_id,stimulus_name,trial_pair,LT,log_lt) %>%
+  group_by(Subject,Subject_Unique,Lab,Session,Age,days_between_sessions,total_trial_n,stimulus_id,trial_pair) %>%
+  #pivot wider to get IDS and ADS looking times (LT) for each trial; also get log looking times for IDS and ADS from column log_lt
+  pivot_wider(names_from = stimulus_name,values_from = c(LT,log_lt)) %>%
+  mutate(
+    Diff = LT_IDS - LT_ADS,
+    Prop = LT_IDS / (LT_IDS + LT_ADS),
+    Diff_log_lt = log_lt_IDS - log_lt_ADS,
+    Prop_log_lt = log_lt_IDS / (log_lt_IDS + log_lt_ADS)
+  ) %>%
+  mutate(session_name = paste0("Session ",Session)) %>%
+  mutate(
+    trial_pair_c = trial_pair -4.5
+  )
+
+#Does IDS preference change across trial pairs?
+# Fit linear mixed-effects model
+m_diff_trial_pair <- lmer(Diff ~ trial_pair_c + (1+trial_pair_c|Subject_Unique) + (1+trial_pair_c|Lab), data = agg_by_subj_paired_preference)
+```
+
+```{r fig14, fig.cap="IDS preference (IDS-ADS) for pairs of (adjacent) trials, for Session 1 (left panel) and Session 2 (right panel). Error bars represent +1/-1 SEs. The blue line represents a loess fit through the data with 95% confidence bands.", fig.align="center"}
+#plot average Diff by trial_pair with standard error bars
+ggplot(agg_by_subj_paired_preference,aes(x=trial_pair,y=Diff))+
+  geom_hline(yintercept=0, linetype="dashed")+
+  stat_summary(fun=mean,geom="point",size=3)+
+  #stat_summary(fun=mean,geom="line")+
+  stat_summary(fun.data=mean_se,geom="errorbar",width=0)+
+  geom_smooth(method="loess")+
+  xlab("Trial pair")+
+  ylab("Average IDS preference (Difference)")+
+  theme_cowplot()+
+  facet_wrap(~session_name)
+```
+
+The most important question for measuring IDS preference is whether infants' preferential looking to IDS shows systematic changes across the course of the experiment.
+To investigate changes in preferential looking across the experiment, we grouped IDS and ADS trials into adjacent pairs (again exploiting the fact that IDS and ADS trials always occurred on adjacent trials, see S9) and computed difference scores for each pair.
+Figure 14 depicts the change in average IDS preference across each session.
+To test whether IDS preference changed across the experiment, we fit a linear mixed-effects model predicting IDS preference (difference score per trial pair) from trial pair (centered), including by-participant and by-lab random intercepts and by-participant and by-lab random slopes for trial pair. 
+We did not find a significant effect of trial pair, `r apa_print(m_diff_trial_pair)$full_result$trial_pair_c`.
+
+# S12. Decomposing sources of variance
+
+```{r, warning=F, message=F,results='hide'}
+#preparing the data
+data_clean <- data_clean %>%
+  mutate(condition_num = ifelse(Condition=="ADS",-0.5,0.5)) %>%
+  group_by(Subject_Unique) %>%
+  #centering predictors using the average within participant
+  #because this is required by r2mlm
+  mutate(condition_c= condition_num-mean(condition_num,na.rm=TRUE),
+         trial_num_c=trial_num-mean(trial_num),
+         session_c = Session-mean(Session),
+         age_c = Age-mean(Age,na.rm=TRUE)) %>%
+  mutate(average_age=mean(Age,na.rm=TRUE)) %>%
+  mutate(
+    method_hpp_et = ifelse(Method=="Eyetracking",1,0),
+    method_hpp_cf = ifelse(Method=="central fixation",1,0)
+  ) %>%
+  mutate(
+    NAE = ifelse(Lab=="InfantCog-UBC"|Lab=="infantll-madison", 1, 0)
+  )
+
+model_formulas <- c(
+  "log_lt ~ 1+trial_num_c+(1+trial_num_c|Subject_Unique)",
+  "log_lt ~ 1+condition_c+trial_num_c+(1+condition_c+trial_num_c|Subject_Unique)",
+  "log_lt ~ 1+session_c+condition_c+trial_num_c+(1+session_c+condition_c+trial_num_c|Subject_Unique)",
+  "log_lt ~ 1+session_c+condition_c+trial_num_c+average_age+NAE+method_hpp_et+method_hpp_cf+days_between_sessions+(1+session_c+condition_c+trial_num_c|Subject_Unique)"
+)
+
+#helper function to take a formula string and fit an lmer model
+fit_model <- function(formula_string){
+  model <- lmer(formula_string,data=data_clean, REML=TRUE,control=lmerControl(optimizer="bobyqa"))
+  return(model)
+}
+
+model_data <- data.frame(model_formulas = model_formulas,formula_name=c("Trial Number","Trial Number + Condition","Trial Number + Session + Condition", "Full Model")) %>%
+  mutate(model = map(model_formulas,fit_model)) %>%
+  mutate(summary = map(model,summary)) %>%
+  mutate(r2mlm = map(model, r2mlm,bargraph=FALSE)) %>%
+  mutate(icc = map(model,performance::icc))
+
+#make sure multicollinearity is ok in the final model
+check_collinearity(model_data$model[[4]])
+```
+
+Finally, to understand the main sources of variation in infants' looking behavior in more depth, we fit successively more complex linear mixed-effects models predicting (log-transformed) looking times including the main predictors that explained substantial variance or were of primary interest.
+We fit these models on the level of individual trials, in order to explore sources of variation at the trial-, session-, and participant-level simultaneously.
+Due to limitations of the `r2mlm` package, we could only include a single random effect and so chose to include by-participant random effects (and no by-lab random effects), given our primary interest in understanding sources of variance within and between participants.
+First, we sequentially included the within-participant predictors (trial number, then condition, then session) that explained the most variation in infant looking behavior, including a by-participant random intercept and random slopes for each predictor.
+The final model included fixed effects for the within-participant predictors for trial number, condition, and session (including a by-participant random intercept and random slopes for these predictors) and fixed effects for the between-participant predictors age, method, language background, and days between test sessions.
+Table XX shows the results of this final model - note that no evidence of multi-collinearity was observed.
+We then used the R packages `r2mlm` and `performance` to decompose variance in looking behavior explained within each model.
+We show the results of variance decomposition in Figure XX and Table XX.
+In general, the model including the full set of predictors could explain a substantial amount of total variance in infants' looking behavior (Figure XX), mainly driven by variance explained by mean variation between participants and the variation explained by the slopes varying within participant (in particular trial number, as well as condition and session).
+The between-participant fixed effects in the model explained only a small proportion of additional variance.
+Table XX shows the intra-class correlation (ICC) for each mixed-effects model.
+The ICC represents the proportion of variance in looking behavior that can be attributed to participant grouping in the data.
+It can be interpreted as indicating to what extent individual measurements of looking behavior within the same participant resemble one another (i.e., how reliable they are).
+We find that ultimately about a third of the variance (~0.3) could be attributed to participant grouping in the data once including the within-participant predictors related to trial number, session, and condition.
 
 \newpage
 
