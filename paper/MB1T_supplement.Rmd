@@ -984,10 +984,9 @@ papaja::apa_table(coefs,
 
 # S6. Sensitivity of test-retest reliability to trial number inclusion criteria
 
-To conduct a more fine-grained analysis of how stricter trial inclusion criteria affect test-retest reliability, we computed correlations while gradually increasing the number of total valid trials required for inclusion.
-
 ## S6.1. Pearson Correlation with increasingly stricter trial-level inclusion criteria
 
+To conduct a more fine-grained analysis of how stricter trial inclusion criteria affect test-retest reliability, we computed correlations while gradually increasing the number of total valid trials required for inclusion.
 For this analysis, we required a minimum of one IDS and one ADS trial and gradually increased the number of total valid trials required in both sessions (irrespective of IDS and ADS condition) from two to 16 (the maximum number of total trials).
 Figure 7 depicts the Pearson correlation coefficients for increasingly stricter requirements for the overall trial numbers of a given participant in both sessions.
 Correlations only increase and reach conventional levels of significance once the number of total required trials for both sessions is greater than 12.
@@ -1042,7 +1041,10 @@ ggplot(correlation_trial_exclusion_seq,aes(x=min_trials,y=r))+
 
 ## S6.2. Simulation with subset of participants
 
-In order to further investigate sources of variance, we conducted a simulation with subsets of participants who started to show a significant correlation (see Figure 7, e.g., the 113 participants with 12 trials each), resampling increasingly larger numbers of trials for each subset and computing the average resulting test-retest correlation. sampling subsets of trials for those participants (in increments of two, i.e., 2, 4, 6, and 8 trial pairs).
+While increasing the number of trials required for inclusion, we are also drastically reducing the sample size and selecting a specific set of participants.
+One resulting question is whether the rise in reliability is driven primarily by the increasing number of trials or by the selection of a particular set of participants (e.g., with a more consistent distribution of responses), or both.
+To address this question, we conducted a simulation in which, for each subset of participants based on an increasing number of trials needed for inclusion (2-16; see Figure 7), we resampled increasingly larger numbers of trials for the given subset of participants (in increments of pairs of IDS and ADS trials, 1-8 trial pairs) and computed the average resulting test-retest correlation (Figure 8).
+
 
 
 ```{r, warning=FALSE, message=FALSE, echo=FALSE, results= 'hide', eval=RUN_SIMULATIONS}
