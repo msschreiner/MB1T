@@ -1039,7 +1039,7 @@ ggplot(correlation_trial_exclusion_seq,aes(x=min_trials,y=r))+
                   
 ```
 
-## S6.2. Simulation with subset of participants
+## S6.2. Simulating the effect of increasing trial numbers within subsets of participants
 
 ```{r, warning=FALSE, message=FALSE, echo=FALSE, results= 'hide', eval=RUN_SIMULATIONS}
 # function for random selection of trial pairs per Session and Condition of overall trials and computing correlations
@@ -1153,14 +1153,15 @@ ggplot(simulation_outcome_summarized,aes(x=num_slices,y=r_mean,color=as.factor(T
 #   facet_wrap(~Trials,nrow=3)
 ```
 
-While increasing the number of trials required for inclusion, we are also drastically reducing the sample size and selecting a specific set of participants.
-One resulting question is whether the rise in reliability is driven primarily by the increasing number of trials or by the selection of a particular set of participants (e.g., with a more consistent distribution of responses), or both.
-To address this question, we conducted a simulation in which, for each subset of participants defined based on the number of trials needed for inclusion (2-16; see Figure 7), we resampled increasingly larger numbers of trials for the given subset of participants (in increments of pairs of IDS and ADS trials, 1-8 trial pairs) and computed the average resulting test-retest correlation (Figure 8).
-We draw two conclusions from the simulation results
+When increasing the number of trials required for inclusion, we are also drastically reducing the sample size and selecting a specific sub-group of participants.
+One resulting question is whether the rise in reliability is driven primarily by the increasing number of trials, by the selection of a particular set of participants (e.g., with a more consistent distribution of responses), or both.
+To address this question, we conducted a simulation in which, for each subset of participants defined based on the number of trials needed for inclusion (2-16; cf. subsets of participants in Figure 7), we resampled increasingly larger numbers of trials for the given subset of participants (in increments of pairs of IDS and ADS trials, 1-8 trial pairs) and computed the average resulting test-retest correlation.
+For each level (participant group X number of trial pairs), we conducted 100 simulations (Figure 8).
+We draw two conclusions from the simulation results.
 First, for all subsets, test-retest correlations increase steadily (approximately linearly) with an increasing number of (resampled) trials.
 This supports the conclusion that increasing the number of observations per participant is crucial for attaining reliable measurement.
-For example, for the sample with the strictest inclusion criterion (all 16 trials present, n=24), test-retest correlations start very low when including only 2 trials (r = `r simulation_outcome_summarized %>% filter(sample_size==24 & num_slices==1) %>% pull(r_mean) %>% round(2)`) but increases steadily to its peak once resampling 16 total trials (r = `r simulation_outcome_summarized %>% filter(sample_size==24 & num_slices==8) %>% pull(r_mean) %>% round(2)`).
-This result also rules out that the increase in test-retest correlation with stricter inclusion criteria observed in Figure 7 is solely a function of selecting a set of participants with traits that support more reliable measurement --- increasing the number of trials is critical to obtaining reliable measurements within each subset of participants.
+For example, for the sample with the strictest inclusion criterion (all 16 trials present, n=24), test-retest correlations start near zero when including only 2 trials (r = `r simulation_outcome_summarized %>% filter(sample_size==24 & num_slices==1) %>% pull(r_mean) %>% round(2)`) but increase steadily to their peak once resampling all 16 total trials (r = `r simulation_outcome_summarized %>% filter(sample_size==24 & num_slices==8) %>% pull(r_mean) %>% round(2)`).
+This result rules out that the increase in test-retest correlation with stricter inclusion criteria (shown in Figure 7) is solely a function of selecting a set of participants with traits that support more reliable measurement --- increasing the number of trials is critical to increasing reliability within each subset of participants.
 Second, we also see that the slopes for each subset increase as the number of trials required for inclusion increases.
 This could be due to at least two different factors.
 The increasing slopes could be an indicator that we are to some extent selecting a subset of participants with more reliable responses from session to session.
@@ -1704,8 +1705,7 @@ model_formulas <- c(
   "log_lt ~ 1+condition_c+trial_num_c+(1+condition_c+trial_num_c|Subject_Unique)",
   "log_lt ~ 1+session_c+condition_c+trial_num_c+(1+session_c+condition_c+trial_num_c|Subject_Unique)",
   "log_lt ~ 1+session_c+condition_c+trial_num_c+LT_previous_trial_c+(1+session_c+condition_c+trial_num_c|Subject_Unique)",
-  "log_lt ~ 1+session_c+condition_c+trial_num_c+LT_previous_trial_c+average_age+NAE+method_hpp_et+method_hpp_cf+days_between_sessions+(1+session_c+condition_c+trial_num_c|Subject_Unique)",
-  "log_lt ~ 1+session_c+condition_c+trial_num_c+average_age+NAE+method_hpp_et+method_hpp_cf+days_between_sessions+(1+session_c+condition_c+trial_num_c|Subject_Unique)"
+  "log_lt ~ 1+session_c+condition_c+trial_num_c+LT_previous_trial_c+average_age+NAE+method_hpp_et+method_hpp_cf+days_between_sessions+(1+session_c+condition_c+trial_num_c|Subject_Unique)"
 )
 
 #helper function to take a formula string and fit an lmer model
@@ -1714,30 +1714,69 @@ fit_model <- function(formula_string){
   return(model)
 }
 
-model_data <- data.frame(model_formulas = model_formulas,formula_name=c("Trial Number","Trial Number + Condition","Trial Number + Session + Condition","Trial Number + Session + Condition+\nPrevious Trial Looking", "Full Model","Full Model Minus")) %>%
+model_data <- data.frame(model_formulas = model_formulas,formula_name=c("Trial Num.","Trial Num. + Condition","Trial Num. + Session + Condition","Trial Num. + Session + Condition + Prev. Trial Looking", "Full Model")) %>%
   mutate(model = map(model_formulas,fit_model)) %>%
   mutate(summary = map(model,summary)) %>%
   mutate(r2mlm = map(model, r2mlm,bargraph=FALSE)) %>%
   mutate(icc = map(model,performance::icc))
 
 #make sure multicollinearity is ok in the final model
-check_collinearity(model_data$model[[5]])
+full_model_collinearity_check <- check_collinearity(model_data$model[[5]])
 ```
+
+```{r results="asis",warning=FALSE,message=FALSE}
+# Coefficients for full linear mixed-effects model
+full_model <- model_data$model[[5]]
+#get table output
+apa_results_full_model <- apa_print(full_model)
+#rename term in table
+apa_results_full_model$table$term <- c(
+  "Intercept",
+  "Trial Number",
+  "Session",
+  "Condition (IDS vs. ADS)",
+  "Previous Trial Looking Time",
+  "Age (averaged across sessions)",
+  "NAE status",
+  "Method (HPP vs. ET)",
+  "Method (HPP vs. CF)",
+  "Days between Sessions")
+#print table
+apa_table(
+  apa_results_full_model$table
+  , caption = "Results of the final linear mixed-effects model predicting trial-by-trial log looking time from all within- and between-participant predictors of interest."
+)
+```
+
+```{r results="asis",warning=FALSE,message=FALSE}
+icc_table <- model_data %>%
+  select(formula_name,icc) %>%
+  unnest(icc) %>%
+  select(-ICC_conditional) %>%
+  rename(`Model Predictors` = formula_name, 
+         `ICC (Adjusted)` = ICC_adjusted,
+         `ICC (Unadjusted)` = ICC_unadjusted)
+
+papaja::apa_table(icc_table, 
+                  caption = "ICC results for the linear mixed-effects model predicting trial-by-trial log looking time from within- and between-participant predictors of interest.", 
+                  format.args = list(digits = 2))
+```
+
 
 Finally, to understand the main sources of variation in infants' looking behavior in more depth, we fit successively more complex linear mixed-effects models predicting (log-transformed) looking times including the main predictors that explained substantial variance or were of primary interest.
 We fit these models on the level of individual trials, in order to explore sources of variation at the trial-, session-, and participant-level simultaneously.
 Due to limitations of the `r2mlm` package, we could only include a single random effect and so chose to include by-participant random effects (and no by-lab random effects), given our primary interest in understanding sources of variance within and between participants.
 First, we sequentially included the within-participant predictors (trial number, then condition, then session) that explained the most variation in infant looking behavior, including a by-participant random intercept and random slopes for each predictor.
 The final model included fixed effects for the within-participant predictors for trial number, condition, and session (including a by-participant random intercept and random slopes for these predictors) and fixed effects for the between-participant predictors age, method, language background, and days between test sessions.
-Table XX shows the results of this final model - note that no evidence of multi-collinearity was observed.
+Table 7 shows the results of this final model - note that no evidence of multi-collinearity was observed (all VIFs < `r ceiling(max(full_model_collinearity_check$VIF))`).
 We then used the R packages `r2mlm` and `performance` to decompose variance in looking behavior explained within each model.
-We show the results of variance decomposition in Figure XX and Table XX.
-In general, the model including the full set of predictors could explain a substantial amount of total variance in infants' looking behavior (Figure XX), mainly driven by variance explained by mean variation between participants and the variation explained by the slopes varying within participant (in particular trial number, as well as condition and session).
+We show the results of variance decomposition in Figure 16 and Table 8.
+In general, the model including the full set of predictors explained a substantial amount of total variance in infants' looking behavior (Figure 16), mainly driven by variance explained by mean variation between participants and the variation explained by the slopes varying within participant (in particular trial number, as well as condition and session).
 The between-participant fixed effects in the model explained only a small proportion of additional variance.
-Table XX shows the intra-class correlation (ICC) for each mixed-effects model.
+Table 8 shows the intra-class correlation (ICC) for each mixed-effects model.
 The ICC represents the proportion of variance in looking behavior that can be attributed to participant grouping in the data.
 It can be interpreted as indicating to what extent individual measurements of looking behavior within the same participant resemble one another (i.e., how reliable they are).
-We find that ultimately about a third of the variance (~0.3) could be attributed to participant grouping in the data once including the within-participant predictors related to trial number, session, and condition.
+We find that ultimately about a third of the variance (~0.3) could be attributed to participant grouping in the data once including the within-participant predictors related to trial number, session, condition, and previous trial looking time (see the `performance` package for details on the differences between adjusted and unadjusted ICCs; in brief, the unadjusted ICC also adds the fixed-effects variances to the denominator in the ICC equation).
 
 \newpage
 

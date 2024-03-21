@@ -604,8 +604,8 @@ Correlations only increase and reach conventional levels of significance once th
 \caption{\label{fig:fig7}Pearson correlation coefficient with increasingly strict trial-level inclusion criteria. The x-axis depicts the required number of overall valid trials in both Session 1 and Session 2. Dots represent corresponding correlation coefficients, with 95\% CIs. The sample size is shown above each dot.}
 \end{figure}
 
-\hypertarget{s6.2.-simulation-with-subset-of-participants}{%
-\subsection{S6.2. Simulation with subset of participants}\label{s6.2.-simulation-with-subset-of-participants}}
+\hypertarget{s6.2.-simulating-the-effect-of-increasing-trial-numbers-within-subsets-of-participants}{%
+\subsection{S6.2. Simulating the effect of increasing trial numbers within subsets of participants}\label{s6.2.-simulating-the-effect-of-increasing-trial-numbers-within-subsets-of-participants}}
 
 \begin{figure}
 \centering
@@ -613,14 +613,15 @@ Correlations only increase and reach conventional levels of significance once th
 \caption{\label{fig:fig8}Results of the simulation showing how test-rest correlations increase with the number of trial pairs included in the analysis. The data is facetted by the number of overall trials required for inclusion (11-16 overall trials; compare Figure 7), including. The x-axis depicts the number of trial pairs (randomly resampled per participant with replacement) in the analysis, and the y-axis shows the mean Pearson correlation coefficient between test and retest IDS preference (difference score). Error bars represent 95\% CIs. The number of included participants is shown above each data point.}
 \end{figure}
 
-While increasing the number of trials required for inclusion, we are also drastically reducing the sample size and selecting a specific set of participants.
-One resulting question is whether the rise in reliability is driven primarily by the increasing number of trials or by the selection of a particular set of participants (e.g., with a more consistent distribution of responses), or both.
-To address this question, we conducted a simulation in which, for each subset of participants defined based on the number of trials needed for inclusion (2-16; see Figure 7), we resampled increasingly larger numbers of trials for the given subset of participants (in increments of pairs of IDS and ADS trials, 1-8 trial pairs) and computed the average resulting test-retest correlation (Figure 8).
-We draw two conclusions from the simulation results
+When increasing the number of trials required for inclusion, we are also drastically reducing the sample size and selecting a specific sub-group of participants.
+One resulting question is whether the rise in reliability is driven primarily by the increasing number of trials, by the selection of a particular set of participants (e.g., with a more consistent distribution of responses), or both.
+To address this question, we conducted a simulation in which, for each subset of participants defined based on the number of trials needed for inclusion (2-16; cf.~subsets of participants in Figure 7), we resampled increasingly larger numbers of trials for the given subset of participants (in increments of pairs of IDS and ADS trials, 1-8 trial pairs) and computed the average resulting test-retest correlation.
+For each level (participant group X number of trial pairs), we conducted 100 simulations (Figure 8).
+We draw two conclusions from the simulation results.
 First, for all subsets, test-retest correlations increase steadily (approximately linearly) with an increasing number of (resampled) trials.
 This supports the conclusion that increasing the number of observations per participant is crucial for attaining reliable measurement.
-For example, for the sample with the strictest inclusion criterion (all 16 trials present, n=24), test-retest correlations start very low when including only 2 trials (r = 0.04) but increases steadily to its peak once resampling 16 total trials (r = 0.34).
-This result also rules out that the increase in test-retest correlation with stricter inclusion criteria observed in Figure 7 is solely a function of selecting a set of participants with traits that support more reliable measurement --- increasing the number of trials is critical to obtaining reliable measurements within each subset of participants.
+For example, for the sample with the strictest inclusion criterion (all 16 trials present, n=24), test-retest correlations start near zero when including only 2 trials (r = 0.04) but increase steadily to their peak once resampling all 16 total trials (r = 0.34).
+This result rules out that the increase in test-retest correlation with stricter inclusion criteria (shown in Figure 7) is solely a function of selecting a set of participants with traits that support more reliable measurement --- increasing the number of trials is critical to increasing reliability within each subset of participants.
 Second, we also see that the slopes for each subset increase as the number of trials required for inclusion increases.
 This could be due to at least two different factors.
 The increasing slopes could be an indicator that we are to some extent selecting a subset of participants with more reliable responses from session to session.
@@ -810,20 +811,73 @@ We did not find a significant effect of IDS preference on the previous trial, \(
 \hypertarget{s12.-decomposing-sources-of-variance}{%
 \section{S12. Decomposing sources of variance}\label{s12.-decomposing-sources-of-variance}}
 
+\begin{table}[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:unnamed-chunk-44}Results of the final linear mixed-effects model predicting trial-by-trial log looking time from all within- and between-participant predictors of interest.}
+
+\begin{tabular}{llllll}
+\toprule
+term & \multicolumn{1}{c}{$\hat{\beta}$} & \multicolumn{1}{c}{95\% CI} & \multicolumn{1}{c}{$t$} & \multicolumn{1}{c}{$\mathit{df}$} & \multicolumn{1}{c}{$p$}\\
+\midrule
+Intercept & 2.33 & {}[2.04, 2.62] & 15.70 & 151.28 & < .001\\
+Trial Number & -0.15 & {}[-0.21, -0.10] & -5.30 & 145.58 & < .001\\
+Session & 0.15 & {}[0.11, 0.18] & 7.93 & 167.25 & < .001\\
+Condition (IDS vs. ADS) & -0.04 & {}[-0.04, -0.03] & -14.00 & 164.41 & < .001\\
+Previous Trial Looking Time & 0.00 & {}[0.00, 0.01] & 2.31 & 3872.97 & .021\\
+Age (averaged across sessions) & 0.00 & {}[0.00, 0.00] & -2.97 & 151.42 & .003\\
+NAE status & -0.16 & {}[-0.28, -0.04] & -2.62 & 152.62 & .010\\
+Method (HPP vs. ET) & 0.01 & {}[-0.12, 0.15] & 0.20 & 160.35 & .843\\
+Method (HPP vs. CF) & 0.05 & {}[-0.05, 0.16] & 1.04 & 150.72 & .298\\
+Days between Sessions & -0.01 & {}[-0.01, 0.00] & -1.97 & 151.38 & .051\\
+\bottomrule
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+
+\begin{table}[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:unnamed-chunk-45}ICC results for the linear mixed-effects model predicting trial-by-trial log looking time from within- and between-participant predictors of interest.}
+
+\begin{tabular}{lll}
+\toprule
+Model Predictors & \multicolumn{1}{c}{ICC (Adjusted)} & \multicolumn{1}{c}{ICC (Unadjusted)}\\
+\midrule
+Trial Num. & 0.22 & 0.20\\
+Trial Num. + Condition & 0.23 & 0.21\\
+Trial Num. + Session + Condition & 0.31 & 0.27\\
+Trial Num. + Session + Condition + Prev. Trial Looking & 0.30 & 0.28\\
+Full Model & 0.29 & 0.26\\
+\bottomrule
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+
 Finally, to understand the main sources of variation in infants' looking behavior in more depth, we fit successively more complex linear mixed-effects models predicting (log-transformed) looking times including the main predictors that explained substantial variance or were of primary interest.
 We fit these models on the level of individual trials, in order to explore sources of variation at the trial-, session-, and participant-level simultaneously.
 Due to limitations of the \texttt{r2mlm} package, we could only include a single random effect and so chose to include by-participant random effects (and no by-lab random effects), given our primary interest in understanding sources of variance within and between participants.
 First, we sequentially included the within-participant predictors (trial number, then condition, then session) that explained the most variation in infant looking behavior, including a by-participant random intercept and random slopes for each predictor.
 The final model included fixed effects for the within-participant predictors for trial number, condition, and session (including a by-participant random intercept and random slopes for these predictors) and fixed effects for the between-participant predictors age, method, language background, and days between test sessions.
-Table XX shows the results of this final model - note that no evidence of multi-collinearity was observed.
+Table 7 shows the results of this final model - note that no evidence of multi-collinearity was observed (all VIFs \textless{} 2).
 We then used the R packages \texttt{r2mlm} and \texttt{performance} to decompose variance in looking behavior explained within each model.
-We show the results of variance decomposition in Figure XX and Table XX.
-In general, the model including the full set of predictors could explain a substantial amount of total variance in infants' looking behavior (Figure XX), mainly driven by variance explained by mean variation between participants and the variation explained by the slopes varying within participant (in particular trial number, as well as condition and session).
+We show the results of variance decomposition in Figure 16 and Table 8.
+In general, the model including the full set of predictors explained a substantial amount of total variance in infants' looking behavior (Figure 16), mainly driven by variance explained by mean variation between participants and the variation explained by the slopes varying within participant (in particular trial number, as well as condition and session).
 The between-participant fixed effects in the model explained only a small proportion of additional variance.
-Table XX shows the intra-class correlation (ICC) for each mixed-effects model.
+Table 8 shows the intra-class correlation (ICC) for each mixed-effects model.
 The ICC represents the proportion of variance in looking behavior that can be attributed to participant grouping in the data.
 It can be interpreted as indicating to what extent individual measurements of looking behavior within the same participant resemble one another (i.e., how reliable they are).
-We find that ultimately about a third of the variance (\textasciitilde0.3) could be attributed to participant grouping in the data once including the within-participant predictors related to trial number, session, and condition.
+We find that ultimately about a third of the variance (\textasciitilde0.3) could be attributed to participant grouping in the data once including the within-participant predictors related to trial number, session, condition, and previous trial looking time.
 
 \newpage
 
