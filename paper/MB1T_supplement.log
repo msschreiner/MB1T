@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.1.30)  20 MAR 2024 11:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.1.30)  24 MAR 2024 18:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -718,27 +718,25 @@ File: MB1T_supplement_files/figure-latex/fig6-1.pdf Graphic file (type pdf)
 Package pdftex.def Info: MB1T_supplement_files/figure-latex/fig6-1.pdf  used on input line 560.
 (pdftex.def)             Requested size: 361.3491pt x 361.3491pt.
 [22 <./MB1T_supplement_files/figure-latex/fig5-1.pdf>] [23 <./MB1T_supplement_files/figure-latex/fig6-1.pdf>]
-<MB1T_supplement_files/figure-latex/fig7-1.pdf, id=460, 469.755pt x 325.215pt>
+<MB1T_supplement_files/figure-latex/fig7-1.pdf, id=460, 469.755pt x 230.8625pt>
 File: MB1T_supplement_files/figure-latex/fig7-1.pdf Graphic file (type pdf)
 <use MB1T_supplement_files/figure-latex/fig7-1.pdf>
 Package pdftex.def Info: MB1T_supplement_files/figure-latex/fig7-1.pdf  used on input line 603.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<MB1T_supplement_files/figure-latex/fig8-1.pdf, id=461, 469.755pt x 325.215pt>
+(pdftex.def)             Requested size: 469.75386pt x 230.86192pt.
+[24 <./MB1T_supplement_files/figure-latex/fig7-1.pdf>]
+<MB1T_supplement_files/figure-latex/fig8-1.pdf, id=474, 469.755pt x 325.215pt>
 File: MB1T_supplement_files/figure-latex/fig8-1.pdf Graphic file (type pdf)
 <use MB1T_supplement_files/figure-latex/fig8-1.pdf>
 Package pdftex.def Info: MB1T_supplement_files/figure-latex/fig8-1.pdf  used on input line 612.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[24]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[25 <./MB1T_supplement_files/figure-latex/fig7-1.pdf>] [26 <./MB1T_supplement_files/figure-latex/fig8-1.pdf>] [27]
-<MB1T_supplement_files/figure-latex/fig9-1.pdf, id=497, 469.755pt x 325.215pt>
+[25 <./MB1T_supplement_files/figure-latex/fig8-1.pdf>] [26]
+<MB1T_supplement_files/figure-latex/fig9-1.pdf, id=493, 469.755pt x 325.215pt>
 File: MB1T_supplement_files/figure-latex/fig9-1.pdf Graphic file (type pdf)
 <use MB1T_supplement_files/figure-latex/fig9-1.pdf>
 Package pdftex.def Info: MB1T_supplement_files/figure-latex/fig9-1.pdf  used on input line 649.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[28] [29 <./MB1T_supplement_files/figure-latex/fig9-1.pdf>] [30]
-<MB1T_supplement_files/figure-latex/fig10-1.pdf, id=523, 867.24pt x 1156.32pt>
+[27] [28 <./MB1T_supplement_files/figure-latex/fig9-1.pdf>] [29]
+<MB1T_supplement_files/figure-latex/fig10-1.pdf, id=519, 867.24pt x 1156.32pt>
 File: MB1T_supplement_files/figure-latex/fig10-1.pdf Graphic file (type pdf)
 <use MB1T_supplement_files/figure-latex/fig10-1.pdf>
 Package pdftex.def Info: MB1T_supplement_files/figure-latex/fig10-1.pdf  used on input line 675.
@@ -746,75 +744,86 @@ Package pdftex.def Info: MB1T_supplement_files/figure-latex/fig10-1.pdf  used on
 
 LaTeX Warning: Float too large for page by 9.9118pt on input line 680.
 
-[31] [32 <./MB1T_supplement_files/figure-latex/fig10-1.pdf>]
+[30] [31 <./MB1T_supplement_files/figure-latex/fig10-1.pdf>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[33]
-<MB1T_supplement_files/figure-latex/fig11-1.pdf, id=552, 469.755pt x 325.215pt>
+[32]
+<MB1T_supplement_files/figure-latex/fig11-1.pdf, id=548, 469.755pt x 325.215pt>
 File: MB1T_supplement_files/figure-latex/fig11-1.pdf Graphic file (type pdf)
 <use MB1T_supplement_files/figure-latex/fig11-1.pdf>
 Package pdftex.def Info: MB1T_supplement_files/figure-latex/fig11-1.pdf  used on input line 724.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[34 <./MB1T_supplement_files/figure-latex/fig11-1.pdf>]
-<MB1T_supplement_files/figure-latex/fig12-1.pdf, id=569, 469.755pt x 325.215pt>
+[33 <./MB1T_supplement_files/figure-latex/fig11-1.pdf>]
+<MB1T_supplement_files/figure-latex/fig12-1.pdf, id=565, 469.755pt x 289.08pt>
 File: MB1T_supplement_files/figure-latex/fig12-1.pdf Graphic file (type pdf)
 <use MB1T_supplement_files/figure-latex/fig12-1.pdf>
 Package pdftex.def Info: MB1T_supplement_files/figure-latex/fig12-1.pdf  used on input line 740.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<MB1T_supplement_files/figure-latex/fig13-1.pdf, id=570, 469.755pt x 325.215pt>
+(pdftex.def)             Requested size: 469.75386pt x 289.07928pt.
+[34 <./MB1T_supplement_files/figure-latex/fig12-1.pdf>]
+<MB1T_supplement_files/figure-latex/fig13-1.pdf, id=580, 469.755pt x 325.215pt>
 File: MB1T_supplement_files/figure-latex/fig13-1.pdf Graphic file (type pdf)
 <use MB1T_supplement_files/figure-latex/fig13-1.pdf>
 Package pdftex.def Info: MB1T_supplement_files/figure-latex/fig13-1.pdf  used on input line 758.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<MB1T_supplement_files/figure-latex/fig14-1.pdf, id=571, 469.755pt x 325.215pt>
+[35 <./MB1T_supplement_files/figure-latex/fig13-1.pdf>]
+<MB1T_supplement_files/figure-latex/fig14-1.pdf, id=601, 469.755pt x 325.215pt>
 File: MB1T_supplement_files/figure-latex/fig14-1.pdf Graphic file (type pdf)
 <use MB1T_supplement_files/figure-latex/fig14-1.pdf>
 Package pdftex.def Info: MB1T_supplement_files/figure-latex/fig14-1.pdf  used on input line 770.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[35]
-<MB1T_supplement_files/figure-latex/fig15-1.pdf, id=579, 469.755pt x 325.215pt>
+[36 <./MB1T_supplement_files/figure-latex/fig14-1.pdf>]
+<MB1T_supplement_files/figure-latex/fig15-1.pdf, id=617, 469.755pt x 325.215pt>
 File: MB1T_supplement_files/figure-latex/fig15-1.pdf Graphic file (type pdf)
 <use MB1T_supplement_files/figure-latex/fig15-1.pdf>
 Package pdftex.def Info: MB1T_supplement_files/figure-latex/fig15-1.pdf  used on input line 790.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[36 <./MB1T_supplement_files/figure-latex/fig12-1.pdf>] [37 <./MB1T_supplement_files/figure-latex/fig13-1.pdf>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[38 <./MB1T_supplement_files/figure-latex/fig14-1.pdf>] [39 <./MB1T_supplement_files/figure-latex/fig15-1.pdf>]
-Overfull \hbox (38.4394pt too wide) in paragraph at lines 847--863
- [] 
- []
-
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 869.
+[37 <./MB1T_supplement_files/figure-latex/fig15-1.pdf>]
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 845.
 (/Users/martincz/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [40]
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 847.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 847.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 847.
+[38]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[41] [42] AED endfloat: Processing end Figures and Tables [43] (./MB1T_supplement.aux)
+[39]
+Underfull \vbox (badness 4859) has occurred while \output is active []
+
+[40]
+<MB1T_supplement_files/figure-latex/fig16-1.pdf, id=656, 469.755pt x 505.89pt>
+File: MB1T_supplement_files/figure-latex/fig16-1.pdf Graphic file (type pdf)
+<use MB1T_supplement_files/figure-latex/fig16-1.pdf>
+Package pdftex.def Info: MB1T_supplement_files/figure-latex/fig16-1.pdf  used on input line 885.
+(pdftex.def)             Requested size: 469.75386pt x 505.88875pt.
+
+LaTeX Warning: Float too large for page by 33.4411pt on input line 890.
+
+[41] [42 <./MB1T_supplement_files/figure-latex/fig16-1.pdf>] AED endfloat: Processing end Figures and Tables [43] (./MB1T_supplement.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2020/03/25>
  ***********
 Package rerunfilecheck Info: File `MB1T_supplement.out' has not changed.
-(rerunfilecheck)             Checksum: 45CCB0A40F253E78A7C77E811F19333B;16316.
+(rerunfilecheck)             Checksum: 111584398CF7E8C1211E59910F5DD922;16316.
  ) 
 Here is how much of TeX's memory you used:
- 16401 strings out of 476188
- 273002 string characters out of 5794755
- 1940975 words of memory out of 5000000
- 37934 multiletter control sequences out of 15000+600000
- 611649 words of font info for 75 fonts, out of 8000000 for 9000
+ 16471 strings out of 476188
+ 274170 string characters out of 5794755
+ 1941975 words of memory out of 5000000
+ 37980 multiletter control sequences out of 15000+600000
+ 656954 words of font info for 108 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  72i,13n,79p,2254b,751s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb>
-Output written on MB1T_supplement.pdf (43 pages, 1145030 bytes).
+</Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/martincz/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb>
+Output written on MB1T_supplement.pdf (43 pages, 1202965 bytes).
 PDF statistics:
- 758 PDF objects out of 1000 (max. 8388607)
- 657 compressed objects within 7 object streams
- 179 named destinations out of 1000 (max. 500000)
- 476 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 786 PDF objects out of 1000 (max. 8388607)
+ 678 compressed objects within 7 object streams
+ 183 named destinations out of 1000 (max. 500000)
+ 481 words of extra memory for PDF output out of 10000 (max. 10000000)
 
