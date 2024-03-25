@@ -86,7 +86,7 @@ abstract: |
   
   
 keywords          : "language acquisition; speech perception; infant-directed speech; adult-directed speech; test-retest reliability"
-wordcount         : "5252"
+wordcount         : "5383"
 
 bibliography      : ["r-references.bib"]
 
@@ -878,7 +878,9 @@ However, more stringent inclusion criteria yielded larger effect sizes in MB1.
 We therefore conducted exploratory analyses assessing test-retest reliability after applying progressively stricter inclusion criteria, requiring two, four, six, and eight valid trials per condition. 
 Applying stricter criteria --- and thereby increasing the number of test trials --- increased reliability numerically from *r* = `r round(min(correlations),2)` to *r* = `r round(max(correlations),2)` (Figure 2). 
 In part due to a decrease in sample size, only one of these correlations was statistically significant (when requiring six trial pairs): two valid trial pairs, `r apa_print(correlation_2)$statistic`; four valid trial pairs, `r apa_print(correlation_4)$statistic`; six valid trial pairs, `r apa_print(correlation_6)$statistic`; eight valid trial pairs --- all trials in both sessions --- `r apa_print(correlation_8)$statistic`. 
-The analyses provide tentative evidence that stricter inclusion criteria may lead to higher test-retest reliability, but at the cost of substantial decreases in sample size (see Supplementary Materials S4 and S6 for additional analyses, including moderator analyses using a more restricted sample).
+The analyses provide tentative evidence that stricter inclusion criteria may lead to higher test-retest reliability, but at the cost of substantial decreases in sample size. 
+In Supplementary Materials S4 and S6, we provide additional exploratory analyses, including moderator analyses using a more restricted sample (S4) and a more fine-grained analysis of the increase in reliability with stricter inclusion criteria (S6). 
+In particular, in S6.2, we conduct simulations demonstrating that, holding participant groups constant, test-retest reliability rises systematically as more trials are resampled within each participant, indicating that increasing the number of observations per participant is critical to improving reliable measurement.
 
 ```{r fig.cap="IDS preferences of both sessions plotted against each other for each inclusion criterion. \\textit{n} indicates the number of included infants, \\textit{r} is the Pearson correlation coefficient as the indicator for reliability.", fig.align="center",out.width = "5in",fig.height = 10, fig.width = 8}
 
@@ -1131,6 +1133,8 @@ This only partially explains the current pattern of results, however, because ID
 In other words, the condition-specific looking time correlations are not fully explained by overall looking behavior.
 Another long-established explanation is that difference scores tend to have poor measurement reliability, because difference scores combine error from individual measurements into a composite score, increasing the ratio of error relative to the variance between participants [@hedge2018reliability;@lord_measurement_growth].
 Given the limitations of difference scores (and composite scores in general), one goal for future research will be to assess the use of trial-by-trial model-based approaches for estimating reliability [@rouder_psychometrics_2019;@haines_theoretically_2020].
+One key to building more reliable models of infant looking time will be to understand and quantify the main sources of variation in looking behavior within and across participants.
+In S11 and S12 of the Supplementary Materials, we report exploratory analyses identifying additional predictors of trial-to-trial variation in looking time and decomposing the variance explained by focal within- and between-participant predictors of interest.
 
 ## Limitations
 While we had an above-average sample size for a study in infant research, we were unable to approach the number of participants collected within the original MB1 study. 

@@ -138,13 +138,13 @@
   {\normalfont\normalsize\itshape\hspace{\parindent}{#1}\textit{\addperi}}{\relax}}
 \makeatother
 
-% \usepackage{etoolbox}
 \makeatletter
-\patchcmd{\HyOrg@maketitle}
+\usepackage{etoolbox}
+\patchcmd{\maketitle}
   {\section{\normalfont\normalsize\abstractname}}
   {\section*{\normalfont\normalsize\abstractname}}
   {}{\typeout{Failed to patch abstract.}}
-\patchcmd{\HyOrg@maketitle}
+\patchcmd{\maketitle}
   {\section{\protect\normalfont{\@title}}}
   {\section*{\protect\normalfont{\@title}}}
   {}{\typeout{Failed to patch title.}}
@@ -158,7 +158,7 @@
     {}{\InnerPatchFailed}%
   }
 {}{\PatchFailed}
-\keywords{language acquisition; speech perception; infant-directed speech; adult-directed speech; test-retest reliability\newline\indent Word count: 5252}
+\keywords{language acquisition; speech perception; infant-directed speech; adult-directed speech; test-retest reliability\newline\indent Word count: 5383}
 \DeclareDelayedFloatFlavor{ThreePartTable}{table}
 \DeclareDelayedFloatFlavor{lltable}{table}
 \DeclareDelayedFloatFlavor*{longtable}{table}
@@ -267,7 +267,7 @@ Similarly, the MB1 project reported an increase in the effect size for HPP compa
 HPP requires gross motor movements relative to other methods, such as CF and ET paradigms, for which subtle eye movements towards a monitor located in front of the child are sufficient.
 One possible explanation for the stronger effects with HPP may be a higher sensitivity to the contingency of the presentation of auditory stimuli and infants' head turns away from the typical forward-facing position.
 While these findings suggest that HPP may be a more sensitive index of infant preference, they do not necessarily imply higher reliability for individual infants' performance using HPP.
-For example, Marimon and Höhle (2022) found no evidence for test-retest reliability when testing infants' prosodic preferences using the HPP method across three testing sessions, each 7-8 days apart on average.
+For example, Marimon and Höhle (2022) found no evidence for the test-retest reliability of infants' prosodic preferences (as measured by a difference score) using the HPP method across three testing sessions, each 7-8 days apart on average.
 It remains an open question whether the same measures that produce larger effect sizes at the group-level also have higher test-retest reliability for individual infants (Byers-Heinlein et al., 2022).
 In the current study, we therefore assessed whether HPP yields higher test-retest reliability compared to CF and ET in looking-time measures of IDS preference.
 
@@ -277,8 +277,7 @@ Given that older infants have had more linguistic experience, we predicted that 
 Infants also varied with respect to their linguistic background.
 All infants were tested using a North American English (hereafter, NAE) stimulus set, which was either their native or non-native language.
 We predicted that infants for whom NAE was not their native language --- and who therefore had little or no experience with NAE --- would demonstrate more variable and less reliable looking behavior than English-learning infants.
-Finally, we assessed whether time between test and retest influenced the reliability of the preference measure.
-Specifically, we investigated whether test-retest reliability decreased for participants with longer durations between their first and second test session.
+In our final planned moderator analysis, we assessed whether time between test and retest influenced the reliability of the preference measure by investigating whether test-retest reliability decreased for participants with longer durations between their first and second test session.
 
 \hypertarget{method}{%
 \section{Method}\label{method}}
@@ -496,7 +495,9 @@ However, more stringent inclusion criteria yielded larger effect sizes in MB1.
 We therefore conducted exploratory analyses assessing test-retest reliability after applying progressively stricter inclusion criteria, requiring two, four, six, and eight valid trials per condition.
 Applying stricter criteria --- and thereby increasing the number of test trials --- increased reliability numerically from \emph{r} = 0.07 to \emph{r} = 0.34 (Figure 2).
 In part due to a decrease in sample size, only one of these correlations was statistically significant (when requiring six trial pairs): two valid trial pairs, \(t(152) = 0.90\), \(p = .367\); four valid trial pairs, \(t(143) = 1.03\), \(p = .306\); six valid trial pairs, \(t(98) = 2.23\), \(p = .028\); eight valid trial pairs --- all trials in both sessions --- \(t(22) = 1.68\), \(p = .108\).
-The analyses provide tentative evidence that stricter inclusion criteria may lead to higher test-retest reliability, but at the cost of substantial decreases in sample size (see Supplementary Materials S4 and S6 for additional analyses, including moderator analyses using a more restricted sample).
+The analyses provide tentative evidence that stricter inclusion criteria may lead to higher test-retest reliability, but at the cost of substantial decreases in sample size.
+In Supplementary Materials S4 and S6, we provide additional exploratory analyses, including moderator analyses using a more restricted sample (S4) and a more fine-grained analysis of the increase in reliability with stricter inclusion criteria (S6).
+In particular, in S6.2, we conduct simulations demonstrating that, holding participant groups constant, test-retest reliability rises systematically as more trials are resampled within each participant, indicating that increasing the number of observations per participant is critical to improving reliable measurement.
 
 \begin{figure}
 
@@ -593,6 +594,8 @@ This only partially explains the current pattern of results, however, because ID
 In other words, the condition-specific looking time correlations are not fully explained by overall looking behavior.
 Another long-established explanation is that difference scores tend to have poor measurement reliability, because difference scores combine error from individual measurements into a composite score, increasing the ratio of error relative to the variance between participants (Hedge et al., 2018; Lord, 1956).
 Given the limitations of difference scores (and composite scores in general), one goal for future research will be to assess the use of trial-by-trial model-based approaches for estimating reliability (Haines et al., 2020; Rouder \& Haaf, 2019).
+One key to building more reliable models of infant looking time will be to understand and quantify the main sources of variation in looking behavior within and across participants.
+In S11 and S12 of the Supplementary Materials, we report exploratory analyses identifying additional predictors of trial-to-trial variation in looking time and decomposing the variance explained by focal within- and between-participant predictors of interest.
 
 \hypertarget{limitations}{%
 \subsection{Limitations}\label{limitations}}
