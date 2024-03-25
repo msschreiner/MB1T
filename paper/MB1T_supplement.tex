@@ -610,7 +610,7 @@ Correlations only increase and reach conventional levels of significance once th
 \begin{figure}
 \centering
 \includegraphics{MB1T_supplement_files/figure-latex/fig8-1.pdf}
-\caption{\label{fig:fig8}Results of the simulation showing how test-rest correlations increase with the number of trial pairs included in the analysis. The data is facetted by the number of overall trials required for inclusion (11-16 overall trials; compare Figure 7). The x-axis depicts the number of trial pairs (randomly resampled per participant with replacement) in the analysis, and the y-axis shows the mean Pearson correlation coefficient between test and retest IDS preference (difference score). Error bars represent 95\% CIs. The number of included participants is shown above each data point.}
+\caption{\label{fig:fig8}Results of the simulation showing how test-rest correlations increase with the number of trial pairs included in the analysis. The data is facetted by the number of overall trials required for inclusion (2-16 overall trials; compare Figure 7). The x-axis depicts the number of trial pairs (randomly resampled per participant with replacement) in the analysis, and the y-axis shows the mean Pearson correlation coefficient between test and retest IDS preference (difference score). Error bars represent 95\% CIs. The number of included participants in each restricted sample is shown within each facet.}
 \end{figure}
 
 When increasing the number of trials required for inclusion, we are also drastically reducing the sample size and selecting a specific sub-group of participants.
@@ -751,7 +751,7 @@ We fit a linear mixed-effects model predicting IDS preference in Session 2 from 
 \subsection{S11.1. Changes in looking time across trials}\label{s11.1.-changes-in-looking-time-across-trials}}
 
 In this section, we explore how looking time changes across trials --- a major source of variation in infants' general looking behavior.
-In general, and as expected, looking time shows a steep decline across trials, both in the first and second session (Figure 13).
+As expected, looking time shows a steep decline across trials, both in the first and second session (Figure 13).
 
 \begin{figure}
 
@@ -759,7 +759,7 @@ In general, and as expected, looking time shows a steep decline across trials, b
 
 }
 
-\caption{(A) Looking time (in s) across trials, facetted by Session (left panel: first Session; right panel: second session). The blue line represents a loess fit through the data. Error bands represent 95\% CIs. Boxplots show the distribution of looking times within each trial number. (B) Looking time across trials split by condition (IDS vs. ADS) and Session (facetted). Each line represents a loess fit, with 95\% CI error bands.}\label{fig:fig13}
+\caption{(A) Looking time (in s) across trials, facetted by Session (left panel: first session; right panel: second session). The blue line represents a loess fit through the data. Error bands represent 95\% CIs. Boxplots show the distribution of looking times within each trial number. (B) Looking time across trials split by condition (IDS vs. ADS) and Session (facetted). Each line represents a loess fit, with 95\% CI error bands.}\label{fig:fig13}
 \end{figure}
 
 \hypertarget{s11.2.-does-looking-time-on-the-previous-trial-predict-looking-time-on-the-next-trial}{%
@@ -806,7 +806,7 @@ In other words, we did not find evidence that IDS preference changed systematica
 
 We also investigated whether IDS preference on the previous trial pair predicted the (magnitude of) IDS preference on the current trial pair.
 We fit a linear mixed-effects model predicting IDS preference (difference score) for each trial pair from the magnitude of IDS preference on the previous trial pair (centered within participant), including by-lab and by-participant random intercepts and a by-participant random slope for IDS preference on the previous trial.
-We did not find a significant effect of IDS preference on the previous trial, \(\hat{\beta} = -0.05\), 95\% CI \([-0.11, 0.01]\), \(t(114.15) = -1.49\), \(p = .140\).
+We did not find a significant effect of IDS preference on the previous trial pair, \(\hat{\beta} = -0.05\), 95\% CI \([-0.11, 0.01]\), \(t(114.15) = -1.49\), \(p = .140\).
 
 \hypertarget{s12.-decomposing-sources-of-variance}{%
 \section{S12. Decomposing sources of variance}\label{s12.-decomposing-sources-of-variance}}
@@ -839,7 +839,7 @@ Days between Sessions & -0.01 & {}[-0.01, 0.00] & -2.09 & 150.88 & .038\\
 
 \end{table}
 
-Finally, to understand the main sources of variation in infants' looking behavior in more depth, we fit successively more complex linear mixed-effects models predicting (log-transformed) looking times including the main predictors that explained substantial variance or were of primary interest.
+Finally, to understand the main sources of variation in infants' looking behavior in more depth, we fit successively more complex linear mixed-effects models predicting (log-transformed) looking times, including the main predictors that explained substantial variance or were of primary interest.
 We fit these models on the level of individual trials, in order to explore sources of variation at the trial-, session-, and participant-level simultaneously.
 Note that we focus on predicting looking time, rather than preferential looking per se, in order to understand the main drivers of infants' looking behavior in general, as a first step towards understanding individual differences in preferential looking behavior.
 Due to limitations of the \texttt{r2mlm} package, we could only include a single random effect and so chose to include by-participant random effects (and no by-lab random effects), given our primary interest in understanding sources of variance within and between participants.
@@ -854,7 +854,7 @@ The between-participant fixed effects in the model explained only a small propor
 Table 8 shows the intra-class correlation (ICC) for each mixed-effects model.
 The ICC represents the proportion of variance in looking behavior that can be attributed to participant grouping in the data.
 It can be interpreted as indicating to what extent individual measurements of looking time within the same participant resemble one another (i.e., how reliable looking times are).
-We find that ultimately about a third of the variance (\textasciitilde0.3) could be attributed to participant grouping in the data once including the within-participant predictors related to trial number, session, condition, and previous trial looking time (see the \texttt{performance} package for details on the differences between adjusted and unadjusted ICCs; in brief, the unadjusted ICC also adds the fixed-effects variances to the denominator in the ICC equation).
+We find that ultimately about a third of the variance (\textasciitilde0.3) could be attributed to participant grouping in the data once including the within-participant predictors related to trial number, condition, and session (see the \texttt{performance} package for details on the differences between adjusted and unadjusted ICCs; in brief, the unadjusted ICC also adds the fixed-effects variances to the denominator in the ICC equation).
 
 \begin{table}[tbp]
 

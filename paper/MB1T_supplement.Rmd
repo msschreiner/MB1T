@@ -1101,7 +1101,7 @@ simulation_outcome <-expand.grid(N = N,Trials = Trials,num_slices = num_slices) 
 write_csv(simulation_outcome, here("data","processed", "resampling_retest_correlation_simulation_outcome.csv"))
 ```
 
-```{r fig8, fig.cap = "Results of the simulation showing how test-rest correlations increase with the number of trial pairs included in the analysis. The data is facetted by the number of overall trials required for inclusion (11-16 overall trials; compare Figure 7). The x-axis depicts the number of trial pairs (randomly resampled per participant with replacement) in the analysis, and the y-axis shows the mean Pearson correlation coefficient between test and retest IDS preference (difference score). Error bars represent 95% CIs. The number of included participants is shown above each data point."}
+```{r fig8, fig.cap = "Results of the simulation showing how test-rest correlations increase with the number of trial pairs included in the analysis. The data is facetted by the number of overall trials required for inclusion (2-16 overall trials; compare Figure 7). The x-axis depicts the number of trial pairs (randomly resampled per participant with replacement) in the analysis, and the y-axis shows the mean Pearson correlation coefficient between test and retest IDS preference (difference score). Error bars represent 95% CIs. The number of included participants in each restricted sample is shown within each facet."}
 
 #read in simulation data
 simulation_outcome <- read_csv(here("data","processed", "resampling_retest_correlation_simulation_outcome.csv"))
@@ -1526,9 +1526,9 @@ ggplot(all_agg_subjects_paired_retest,aes(Diff_1,Diff_2))+
 ## S11.1. Changes in looking time across trials
 
 In this section, we explore how looking time changes across trials --- a major source of variation in infants' general looking behavior.
-In general, and as expected, looking time shows a steep decline across trials, both in the first and second session (Figure 13).
+As expected, looking time shows a steep decline across trials, both in the first and second session (Figure 13).
 
-```{r fig13, fig.cap="(A) Looking time (in s) across trials, facetted by Session (left panel: first Session; right panel: second session). The blue line represents a loess fit through the data. Error bands represent 95% CIs. Boxplots show the distribution of looking times within each trial number. (B) Looking time across trials split by condition (IDS vs. ADS) and Session (facetted). Each line represents a loess fit, with 95% CI error bands.", fig.align="center"}
+```{r fig13, fig.cap="(A) Looking time (in s) across trials, facetted by Session (left panel: first session; right panel: second session). The blue line represents a loess fit through the data. Error bands represent 95% CIs. Boxplots show the distribution of looking times within each trial number. (B) Looking time across trials split by condition (IDS vs. ADS) and Session (facetted). Each line represents a loess fit, with 95% CI error bands.", fig.align="center"}
 data_clean <- data_clean %>%
   mutate(session_name = paste0("Session ",Session))
 p1 <- ggplot(data_clean,aes(trial_num,LT))+
@@ -1677,7 +1677,7 @@ previous_trial_diff_model <- lmer(Diff ~ Diff_previous_trial_pair_c+(1+Diff_prev
 
 We also investigated whether IDS preference on the previous trial pair predicted the (magnitude of) IDS preference on the current trial pair.
 We fit a linear mixed-effects model predicting IDS preference (difference score) for each trial pair from the magnitude of IDS preference on the previous trial pair (centered within participant), including by-lab and by-participant random intercepts and a by-participant random slope for IDS preference on the previous trial.
-We did not find a significant effect of IDS preference on the previous trial, `r apa_print(previous_trial_diff_model)$full_result$Diff_previous_trial_pair_c`.
+We did not find a significant effect of IDS preference on the previous trial pair, `r apa_print(previous_trial_diff_model)$full_result$Diff_previous_trial_pair_c`.
 
 # S12. Decomposing sources of variance
 
@@ -1756,7 +1756,7 @@ apa_table(
 )
 ```
 
-Finally, to understand the main sources of variation in infants' looking behavior in more depth, we fit successively more complex linear mixed-effects models predicting (log-transformed) looking times including the main predictors that explained substantial variance or were of primary interest.
+Finally, to understand the main sources of variation in infants' looking behavior in more depth, we fit successively more complex linear mixed-effects models predicting (log-transformed) looking times, including the main predictors that explained substantial variance or were of primary interest.
 We fit these models on the level of individual trials, in order to explore sources of variation at the trial-, session-, and participant-level simultaneously.
 Note that we focus on predicting looking time, rather than preferential looking per se, in order to understand the main drivers of infants' looking behavior in general, as a first step towards understanding individual differences in preferential looking behavior.
 Due to limitations of the `r2mlm` package, we could only include a single random effect and so chose to include by-participant random effects (and no by-lab random effects), given our primary interest in understanding sources of variance within and between participants.
@@ -1771,7 +1771,7 @@ The between-participant fixed effects in the model explained only a small propor
 Table 8 shows the intra-class correlation (ICC) for each mixed-effects model.
 The ICC represents the proportion of variance in looking behavior that can be attributed to participant grouping in the data.
 It can be interpreted as indicating to what extent individual measurements of looking time within the same participant resemble one another (i.e., how reliable looking times are).
-We find that ultimately about a third of the variance (~0.3) could be attributed to participant grouping in the data once including the within-participant predictors related to trial number, session, condition, and previous trial looking time (see the `performance` package for details on the differences between adjusted and unadjusted ICCs; in brief, the unadjusted ICC also adds the fixed-effects variances to the denominator in the ICC equation).
+We find that ultimately about a third of the variance (~0.3) could be attributed to participant grouping in the data once including the within-participant predictors related to trial number, condition, and session (see the `performance` package for details on the differences between adjusted and unadjusted ICCs; in brief, the unadjusted ICC also adds the fixed-effects variances to the denominator in the ICC equation).
 
 ```{r results="asis",warning=FALSE,message=FALSE}
 icc_table <- model_data %>%
