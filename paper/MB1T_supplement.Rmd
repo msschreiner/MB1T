@@ -1086,7 +1086,7 @@ N = seq(1,100) # Number of iterations
 
 Trials = seq(2,16) # Select the number of required trials
 
-num_slices = c(1,2,3,4,5,6,7,8) # Select the number of needed trial pairs for inclusion
+num_slices = c(1,2,3,4,5,6,7,8) # Select the number of resampled trial pairs
 
 #run sumpulations
 simulation_outcome <-expand.grid(N = N,Trials = Trials,num_slices = num_slices) %>%
@@ -1095,10 +1095,11 @@ simulation_outcome <-expand.grid(N = N,Trials = Trials,num_slices = num_slices) 
     correlation = map_dbl(results,'correlation'),
     sample_size = map_dbl(results,'N')
   ) %>%
+  rename(run_number=N) %>%
   select(-results)
 
 #save the resulting data frame
-write_csv(simulation_outcome, here("data","processed", "resampling_retest_correlation_simulation_outcome.csv"))
+write.csv(simulation_outcome, here("data","processed", "resampling_retest_correlation_simulation_outcome.csv"),row.names=FALSE)
 ```
 
 ```{r fig8, fig.cap = "Results of the simulation showing how test-rest correlations increase with the number of trial pairs included in the analysis. The data is facetted by the number of overall trials required for inclusion (2-16 overall trials; compare Figure 7). The x-axis depicts the number of trial pairs (randomly resampled per participant with replacement) in the analysis, and the y-axis shows the mean Pearson correlation coefficient between test and retest IDS preference (difference score). Error bars represent 95% CIs. The number of included participants in each restricted sample is shown within each facet."}
