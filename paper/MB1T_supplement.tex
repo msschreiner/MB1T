@@ -3,23 +3,21 @@
 \PassOptionsToPackage{hyphens}{url}
 %
 \documentclass[
-  english,
   man, donotrepeattitle,floatsintext]{apa6}
-\title{ManyBabies1 Test-Retest Supplementary Materials}
-\author{\phantom{0}}
-\date{}
-
 \usepackage{amsmath,amssymb}
-\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -38,14 +36,6 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  pdftitle={ManyBabies1 Test-Retest Supplementary Materials},
-  pdflang={en-EN},
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
 \usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -95,6 +85,15 @@
 \newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{english}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
 % Manuscript styling
 \usepackage{upgreek}
 \captionsetup{font=singlespacing,justification=justified}
@@ -139,13 +138,13 @@
   {\normalfont\normalsize\itshape\hspace{\parindent}{#1}\textit{\addperi}}{\relax}}
 \makeatother
 
-% \usepackage{etoolbox}
 \makeatletter
-\patchcmd{\HyOrg@maketitle}
+\usepackage{etoolbox}
+\patchcmd{\maketitle}
   {\section{\normalfont\normalsize\abstractname}}
   {\section*{\normalfont\normalsize\abstractname}}
   {}{\typeout{Failed to patch abstract.}}
-\patchcmd{\HyOrg@maketitle}
+\patchcmd{\maketitle}
   {\section{\protect\normalfont{\@title}}}
   {\section*{\protect\normalfont{\@title}}}
   {}{\typeout{Failed to patch title.}}
@@ -169,19 +168,21 @@
 
 \linenumbers
 \usepackage{csquotes}
-\ifXeTeX
-  % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
-  \usepackage{polyglossia}
-  \setmainlanguage[]{english}
-\else
-  \usepackage[main=english]{babel}
-% get rid of language-specific shorthands (see #6817):
-\let\LanguageShortHands\languageshorthands
-\def\languageshorthands#1{}
-\fi
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={ManyBabies1 Test-Retest Supplementary Materials},
+  pdflang={en-EN},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{ManyBabies1 Test-Retest Supplementary Materials}
+\author{\phantom{0}}
+\date{}
 
 
 \shorttitle{MB1T supplementary}
@@ -667,7 +668,7 @@ We fit a linear mixed-effects model predicting item-level looking time in Sessio
 Item-level looking in Session 2 was related to item-level looking in Session 1, \(\hat{\beta} = 0.17\), 95\% CI \([0.07, 0.27]\), \(t(5.52) = 3.38\), \(p = .017\) (Figure 10).
 Similar results hold if looking times are log-transformed.
 
-In MB1, the ordering of stimuli was counterbalanced, but some stimuli still appeared earlier in the experiment than others. For example, the IDS1 and ADS1 speech stimuli appeared on trials 1, 2, 5, or 6, while the IDS8 and ADS8 speech stimuli always occurred on the final two trials (trial number 15 or 16). This means that the interpretation of the correlations between individual speech stimuli must also take into account that these stimuli tend to be occurring in earlier or later portions of the experiment (when infants are more or less attentive and show longer looking times in general). To further investigate the impact of trial number on by-item correlations in looking time, we fit an interaction model testing whether the magnitude of the item-level correlation depended on the trial number for a given session. We fit a linear mixed-effects model predicting item-level looking time in Session 2 from the interaction between item-level looking time in Session 1 and trial number in Session 1 (trial numbers across sessions are almost always identical). The model included random intercepts for participant, item, and lab, as well as random slopes for item-level looking time and trial number in Session 1 for participant and lab. We indeed found that the magnitude of the item-level correlations in looking time between sessions depended on trial number, \(\hat{\beta} = -0.01\), 95\% CI \([-0.02, 0.00]\), \(t(1,200.31) = -2.53\), \(p = .012\), with the strength of the relation between sessions declining as trial number increased. While trial number was a strong predictor of Session 2 looking time, \(\hat{\beta} = -0.28\), 95\% CI \([-0.36, -0.20]\), \(t(8.67) = -6.85\), \(p < .001\), item-level looking in Session 1 only marginally predicted Session 2 looking when controlling for trial number, \(\hat{\beta} = 0.10\), 95\% CI \([0.01, 0.20]\), \(t(6.47) = 2.12\), \(p = .075\). Variation in item-level correlations is therefore at least partially due to the ordering of the stimuli in the experiment, rather than a sole function of differences between the stimuli \emph{per se}.
+In MB1, the ordering of stimuli was counterbalanced, but some stimuli still appeared earlier in the experiment than others. For example, the IDS1 and ADS1 speech stimuli appeared on trials 1, 2, 5, or 6, while the IDS8 and ADS8 speech stimuli always occurred on the final two trials (trial number 15 or 16). This means that the interpretation of the correlations between individual speech stimuli must also take into account that these stimuli tend to be occurring in earlier or later portions of the experiment (when infants are more or less attentive and show longer looking times in general). To further investigate the impact of trial number on by-item correlations in looking time, we fit an interaction model testing whether the magnitude of the item-level correlation depended on the trial number for a given session. We fit a linear mixed-effects model predicting item-level looking time in Session 2 from the interaction between item-level looking time in Session 1 and trial number in Session 1 (trial numbers across sessions are almost always identical). The model included random intercepts for participant, item, and lab, as well as random slopes for item-level looking time and trial number in Session 1 for participant and lab. We indeed found that the magnitude of the item-level correlations in looking time between sessions depended on trial number, \(\hat{\beta} = -0.01\), 95\% CI \([-0.02, 0.00]\), \(t(1200.31) = -2.53\), \(p = .012\), with the strength of the relation between sessions declining as trial number increased. While trial number was a strong predictor of Session 2 looking time, \(\hat{\beta} = -0.28\), 95\% CI \([-0.36, -0.20]\), \(t(8.67) = -6.85\), \(p < .001\), item-level looking in Session 1 only marginally predicted Session 2 looking when controlling for trial number, \(\hat{\beta} = 0.10\), 95\% CI \([0.01, 0.20]\), \(t(6.47) = 2.12\), \(p = .075\). Variation in item-level correlations is therefore at least partially due to the ordering of the stimuli in the experiment, rather than a sole function of differences between the stimuli \emph{per se}.
 
 \begin{figure}
 
@@ -752,46 +753,46 @@ We fit a linear mixed-effects model predicting IDS preference in Session 2 from 
 In this section, we explore how looking time changes across trials --- a major source of variation in infants' general looking behavior.
 As expected, looking time shows a steep decline across trials, both in the first and second session (Figure 13).
 
-\textbackslash begin\{figure\}
+\begin{figure}
 
-\{\centering \includegraphics{MB1T_supplement_files/figure-latex/fig13-1}
+{\centering \includegraphics{MB1T_supplement_files/figure-latex/fig13-1} 
 
-\}
+}
 
-\textbackslash caption\{(A) Looking time (in s) across trials, facetted by Session (left panel: first session; right panel: second session). The blue line represents a loess fit through the data. Error bands represent 95\% CIs. Boxplots show the distribution of looking times within each trial number. (B) Looking time across trials split by condition (IDS vs.~ADS) and Session (facetted). Each line represents a loess fit, with 95\% CI error bands.\}\label{fig:fig13}
-\textbackslash end\{figure\}
+\caption{(A) Looking time (in s) across trials, facetted by Session (left panel: first session; right panel: second session). The blue line represents a loess fit through the data. Error bands represent 95\% CIs. Boxplots show the distribution of looking times within each trial number. (B) Looking time across trials split by condition (IDS vs. ADS) and Session (facetted). Each line represents a loess fit, with 95\% CI error bands.}\label{fig:fig13}
+\end{figure}
 
 \hypertarget{s11.2.-does-looking-time-on-the-previous-trial-predict-looking-time-on-the-next-trial}{%
 \subsection{S11.2. Does looking time on the previous trial predict looking time on the next trial?}\label{s11.2.-does-looking-time-on-the-previous-trial-predict-looking-time-on-the-next-trial}}
 
-\textbackslash begin\{figure\}
+\begin{figure}
 
-\{\centering \includegraphics{MB1T_supplement_files/figure-latex/fig14-1}
+{\centering \includegraphics{MB1T_supplement_files/figure-latex/fig14-1} 
 
-\}
+}
 
-\textbackslash caption\{Relation between (log-based) looking time and (log-based) looking time on the previous trial. Each panel represents one of the trial numbers of the experiment (starting from the 2nd trial). The blue line represents a linear fit with 95\% CI error bands.\}\label{fig:fig14}
-\textbackslash end\{figure\}
+\caption{Relation between (log-based) looking time and (log-based) looking time on the previous trial. Each panel represents one of the trial numbers of the experiment (starting from the 2nd trial). The blue line represents a linear fit with 95\% CI error bands.}\label{fig:fig14}
+\end{figure}
 
 We also investigated the extent to which looking on the previous trial predicted looking on the subsequent trial.
 Characterizing ``carryover'' in infant looking behavior from one trial to the next is important because it could be one source of non-independence between trials.
 To explore this question, we fit a linear mixed-effects model predicting looking time from looking time on the previous trial (centered within participant) while controlling for trial number (a potential confound; also centered within participant).
 We included the maximal random effects structure that allowed the model to converge, including by-participant and by-lab random intercepts, and a by-participant random intercept for trial number.
 We found a robust effect of looking time on the previous trial, even after controlling for trial number,
-\(\hat{\beta} = 0.12\), 95\% CI \([0.09, 0.15]\), \(t(3,893.65) = 7.58\), \(p < .001\) (see Figure 14).
+\(\hat{\beta} = 0.12\), 95\% CI \([0.09, 0.15]\), \(t(3893.65) = 7.58\), \(p < .001\) (see Figure 14).
 Thus, we find that looking time from trial to trial is not independent --- looking behavior on two consecutive trials is more similar than looking behavior on any two randomly selected trials.
 
 \hypertarget{s11.3.-changes-in-preferential-looking-across-trials}{%
 \subsection{S11.3. Changes in preferential looking across trials}\label{s11.3.-changes-in-preferential-looking-across-trials}}
 
-\textbackslash begin\{figure\}
+\begin{figure}
 
-\{\centering \includegraphics{MB1T_supplement_files/figure-latex/fig15-1}
+{\centering \includegraphics{MB1T_supplement_files/figure-latex/fig15-1} 
 
-\}
+}
 
-\textbackslash caption\{IDS preference (IDS-ADS) for pairs of (adjacent) trials, for Session 1 (left panel) and Session 2 (right panel). Error bars represent +1/-1 SEs. The blue line represents a loess fit through the data with 95\% confidence bands.\}\label{fig:fig15}
-\textbackslash end\{figure\}
+\caption{IDS preference (IDS-ADS) for pairs of (adjacent) trials, for Session 1 (left panel) and Session 2 (right panel). Error bars represent +1/-1 SEs. The blue line represents a loess fit through the data with 95\% confidence bands.}\label{fig:fig15}
+\end{figure}
 
 The most important question for measuring IDS preference is whether infants' preferential looking to IDS shows systematic changes across the course of the experiment.
 To investigate changes in preferential looking across the experiment, we grouped IDS and ADS trials into adjacent pairs (again exploiting the fact that IDS and ADS trials always occurred on adjacent trials, see S9) and computed difference scores for each pair.
