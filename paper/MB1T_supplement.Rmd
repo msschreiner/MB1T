@@ -1577,15 +1577,15 @@ previous_trial_lt_model <- lmer(LT ~ LT_previous_trial_c+trial_num_c+(1+trial_nu
 # summary(previous_trial_log_lt_model)
 ```
 
-```{r fig14, fig.cap="Relation between (log-based) looking time and (log-based) looking time on the previous trial. Each panel represents one of the trial numbers of the experiment (starting from the 2nd trial). The blue line represents a linear fit with 95% CI error bands.", fig.align="center"}
-ggplot(filter(data_clean,trial_num>1),aes(log_lt_previous_trial,log_lt))+
+```{r fig14, fig.cap="Relation between looking time (on the current trial, in s) and looking time on the previous trial. Each panel represents one of the trial numbers of the experiment (starting from the 2nd trial). The blue line represents a linear fit with 95% CI error bands.", fig.align="center"}
+ggplot(filter(data_clean,trial_num>1),aes(LT_previous_trial,LT))+
   geom_point(alpha=0.3)+
   geom_smooth(method="lm")+
   facet_wrap(~trial_num,nrow=3)+
   theme_cowplot()+
   theme(axis.text = element_text(size=10))+
-  xlab("Log Looking Time on Previous Trial")+
-  ylab("Log Looking Time")
+  xlab("Looking Time on Previous Trial (in s)")+
+  ylab("Looking Time (in s)")
 ```
 
 We also investigated the extent to which looking on the previous trial predicted looking on the subsequent trial.
