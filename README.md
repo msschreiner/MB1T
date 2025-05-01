@@ -7,7 +7,7 @@ https://manybabies.github.io/MB1T/
 
 ## Paper
 
-Schreiner, M., Zettersten, M., Bergmann, C., Frank, Michael C., Fritzsche, T., Gonzalez-Gomez, N., Hamlin, K., Kartushina, N., Kellier, D.J., Mani, N., Mayor, J., Saffran, J., Shukla, M., Silverstein, P., Soderstrom, M., & Lippold, M. (submitted). Limited evidence of test-retest reliability in infant-directed speech preference in a large pre-registered infant sample.
+Schreiner, M. S., Zettersten, M., Bergmann, C., Frank, M. C., Fritzsche, T., Gonzalez-Gomez, N., ... Lippold, M. (2024). Limited evidence of test-retest reliability in infant-directed speech preference in a large pre-registered infant sample. Developmental Science, 27, e13551. https://dx.doi.org/10.1111/desc.13551.
 
 ## Abstract
 
